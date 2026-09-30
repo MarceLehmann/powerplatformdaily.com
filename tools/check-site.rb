@@ -10,21 +10,21 @@ site_dir = ARGV.fetch(0, '_site')
 profile = JSON.parse(File.read(File.expand_path('../_data/profile.json', __dir__), encoding: 'UTF-8'))
 site_url = "https://#{profile.dig('site', 'domain')}/"
 # JEKYLL_CONFIG mirrors the --config list of the build (comma separated); default is the plain _config.yml.
-configuration = (ENV['JEKYLL_CONFIG'] || '_config.yml').split(',').map { |file| YAML.safe_load(File.read(file), permitted_classes: [Date, Time]) || {} }.reduce({}) { |merged, part| merged.merge(part) }
+configuration = (ENV['JEKYLL_CONFIG'] || '_config.yml').split(',').map { |file| YAML.safe_load(File.read(file, encoding: 'UTF-8'), permitted_classes: [Date, Time]) || {} }.reduce({}) { |merged, part| merged.merge(part) }
 launched = configuration['launch'] == true
 required_pages = %w[index.html submit/index.html about/index.html privacy/index.html tags/index.html archives/index.html sources/index.html]
 required_pages.each do |path|
   raise "Missing page: #{path}" unless File.file?(File.join(site_dir, path))
 end
 
-css = File.read(File.join(site_dir, 'assets/css/jekyll-theme-chirpy.css'))
+css = File.read(File.join(site_dir, 'assets/css/jekyll-theme-chirpy.css'), encoding: 'UTF-8')
 %w[.d-flex .row .col- #sidebar #panel-wrapper].each do |selector|
   raise "Missing production CSS: #{selector}" unless css.include?(selector)
 end
 
 pages = required_pages + Dir.glob(File.join(site_dir, '**/posts/*/index.html')).map { |path| path.delete_prefix("#{site_dir}/") }
 pages.each do |path|
-  document = Nokogiri::HTML(File.read(File.join(site_dir, path)))
+  document = Nokogiri::HTML(File.read(File.join(site_dir, path), encoding: 'UTF-8'))
   title = document.at_css('title')&.text.to_s.strip
   raise "Empty page title: #{path}" if title.empty? || title.start_with?('|')
   ids = document.css('[id]').map { |node| node['id'] }
@@ -69,7 +69,7 @@ pages.each do |path|
   end
 end
 
-home = Nokogiri::HTML(File.read(File.join(site_dir, 'index.html')))
+home = Nokogiri::HTML(File.read(File.join(site_dir, 'index.html'), encoding: 'UTF-8'))
 raise 'Missing home section: #sidebar' unless home.at_css('#sidebar')
 has_posts = pages.size > required_pages.size
 if has_posts
@@ -77,7 +77,7 @@ if has_posts
   raise 'Missing home section: #panel-wrapper .post-tag' unless home.at_css('#panel-wrapper .post-tag')
 end
 
-submit = Nokogiri::HTML(File.read(File.join(site_dir, 'submit/index.html')))
+submit = Nokogiri::HTML(File.read(File.join(site_dir, 'submit/index.html'), encoding: 'UTF-8'))
 raise 'Expected one submission form' unless submit.css('form').size == 1
 required_fields = submit.css('form [required]').map { |node| node['name'] }
 raise 'Only the content URL should be required' unless required_fields == ['content_url']
@@ -104,14 +104,14 @@ raise 'Duplicate signature accepted' if SubmissionEndpoint.public_endpoint?(dire
 raise 'Rendered endpoint is invalid' unless SubmissionEndpoint.public_endpoint?(submit.at_css('form')['action'].to_s, direct_webhook: submit.at_css('form')['data-direct-webhook'] == 'true')
 
 # Third-party hosts that every page loads without asking must be named in the privacy policy.
-privacy_text = Nokogiri::HTML(File.read(File.join(site_dir, 'privacy/index.html'))).text
-home_html = File.read(File.join(site_dir, 'index.html'))
+privacy_text = Nokogiri::HTML(File.read(File.join(site_dir, 'privacy/index.html'), encoding: 'UTF-8')).text
+all_html = pages.map { |path| File.read(File.join(site_dir, path), encoding: 'UTF-8') }.join("\n")
 { 'fonts.googleapis.com' => 'Google Fonts', 'fonts.gstatic.com' => 'Google Fonts', 'cdn.jsdelivr.net' => 'jsDelivr' }.each do |host, name|
-  next unless home_html.include?(host)
+  next unless all_html.include?(host)
   raise "The privacy policy must name #{name}: pages load #{host}" unless privacy_text.include?(name)
 end
 
-sources = Nokogiri::HTML(File.read(File.join(site_dir, 'sources/index.html')))
+sources = Nokogiri::HTML(File.read(File.join(site_dir, 'sources/index.html'), encoding: 'UTF-8'))
 domains = sources.css('[data-source-domain]').map { |node| node['data-source-domain'] }
 raise 'Duplicate source domains' unless domains.uniq == domains
 
@@ -137,7 +137,7 @@ raise 'Source URL normalization failed' unless groups.map { |group| group['domai
 raise 'Source grouping failed' unless groups.last['posts'].size == 2
 raise 'HTTPS source origin lost' unless groups.last['url'] == 'https://www.powerplatformtip.com/'
 
-attribution = Liquid::Template.parse(File.read('_includes/curated-attribution.html'))
+attribution = Liquid::Template.parse(File.read('_includes/curated-attribution.html', encoding: 'UTF-8'))
 [true, false, nil, 'false', 'true'].each do |permission|
   rendered = attribution.render!('page' => {
     'source_url' => 'https://example.org/article', 'source_site_url' => 'https://example.org/', 'source_name' => 'Example',
@@ -163,7 +163,7 @@ raise 'An unchanged source date must not be presented as an update' if unchanged
 raise 'Source dates must not appear when unknown' if attribution.render!('page' => dated).match?(/Original published|Originalbeitrag vom/)
 
 Dir.glob('_posts/*.md').each do |path|
-  frontmatter = File.read(path).match(/\A---\s*\n(.*?)\n---/m)
+  frontmatter = File.read(path, encoding: 'UTF-8').match(/\A---\s*\n(.*?)\n---/m)
   next unless frontmatter
 
   data = YAML.safe_load(frontmatter[1], permitted_classes: [Date, Time])

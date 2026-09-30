@@ -2,7 +2,7 @@
 
 Kuratierte, quellenbasierte Kurzmeldungen zu **Power Apps, Power Automate und Copilot Studio** für [powerplatformnews.com](https://powerplatformnews.com). Power BI und Microsoft Fabric sind als Schalter vorbereitet und derzeit aus. „Copilot“ allgemein (Microsoft 365 Copilot, GitHub Copilot) gehört ausdrücklich nicht zum Scope.
 
-> **Status: nicht live.** Die Seite ist absichtlich auf `noindex` (`launch: false` in `_config.yml`), kein Flow ist aktiv, IndexNow und Digest sind hinter der Repository-Variable `SITE_LIVE` gesperrt, die öffentliche Einreichung ist nicht freigegeben. Das Repository enthält keine Beiträge und keine Quellendaten, und im Tenant wurde nichts angelegt.
+> **Status: nicht live.** Die Seite ist absichtlich auf `noindex` (`launch: false` in `_config.yml`), kein Flow ist aktiv, IndexNow und Digest sind hinter der Repository-Variable `SITE_LIVE` gesperrt, die öffentliche Einreichung ist nicht freigegeben. Das Repository enthält keine Beiträge und keine Datensätze, und im Tenant wurde nichts angelegt.
 >
 > - Was entschieden werden muss und wie die Lösung aufgebaut ist: [docs/2026-09-30_spezifikation_power-platform-news.md](docs/2026-09-30_spezifikation_power-platform-news.md)
 > - Wie es Schritt für Schritt live geht (mit Freigabe-Toren): [docs/2026-09-30_go-live-runbook.md](docs/2026-09-30_go-live-runbook.md)

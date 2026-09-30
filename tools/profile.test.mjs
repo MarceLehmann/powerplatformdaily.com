@@ -95,11 +95,19 @@ test('both prompts name the site, treat content as untrusted and keep the guardr
 
 test('freshness is part of the news scope and can be switched off', () => {
   assert.ok(profile.scope.freshnessMonths > 0);
-  assert.match(extractionPrompt, new RegExp(`more than ${profile.scope.freshnessMonths} months ago`));
-  assert.match(submissionGatePrompt, new RegExp(`last ${profile.scope.freshnessMonths} months`));
+  assert.match(extractionPrompt, new RegExp(`more than ${profile.scope.freshnessMonths} months before today`));
+  assert.match(submissionGatePrompt, new RegExp(`last ${profile.scope.freshnessMonths} months before today`));
   const off = deriveScope({ ...profile, scope: { ...profile.scope, freshnessMonths: null } });
   assert.equal(off.freshnessRule, '');
   assert.equal(off.freshnessCriterion, '');
+});
+
+test('both model calls receive today\'s date, which the freshness rule refers to', () => {
+  const definition = JSON.stringify(flowDefinition());
+  assert.equal(definition.split("'today', utcNow('yyyy-MM-dd')").length - 1, 2, 'gate and extraction both send today');
+  for (const prompt of [extractionPrompt, submissionGatePrompt]) assert.match(prompt, /today/);
+  const off = deriveScope({ ...profile, scope: { ...profile.scope, freshnessMonths: null } });
+  assert.doesNotMatch(`${off.freshnessRule} ${off.freshnessCriterion}`, /today/, 'without a freshness rule the prompts do not mention today');
 });
 
 test('table, flows and connection references follow the profile naming', () => {

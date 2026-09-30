@@ -8,7 +8,7 @@ Key facts for orientation:
 
 - Site: Power Platform News (https://powerplatformnews.com)
 - Maintainer: Marcel Lehmann, Microsoft MVP (Switzerland)
-- Content type: curated third-party summaries, not original reporting; every entry credits its source author, source site and original URL
+- Content type: curated third-party summaries, not original reporting; every entry credits its source site and original URL and names the author where the source states one
 - Language: English and German (bilingual, /en/ and /de/ paths)
 - Scope: Power Apps, Power Automate and Copilot Studio (building, extending and managing agents), plus Dataverse, Power Pages and platform-wide changes in administration, licensing, ALM and security that affect them
 - Out of scope: Microsoft 365 Copilot, GitHub Copilot and other Copilot products, unless the item is about building agents with Copilot Studio; Power BI and Microsoft Fabric are not covered for now

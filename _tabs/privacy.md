@@ -149,4 +149,4 @@ Website: [powerplatformnews.com](https://powerplatformnews.com)
 
 ---
 
-*This Privacy Policy is designed to comply with the GDPR and the Swiss Federal Act on Data Protection (FADP/revDSG). It applies to all visitors of powerplatformnews.com.*
+*This Privacy Policy is written with the GDPR and the Swiss Federal Act on Data Protection (FADP/revDSG) in mind. It applies to all visitors of powerplatformnews.com.*

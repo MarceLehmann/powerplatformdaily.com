@@ -36,10 +36,10 @@ export function deriveScope(source) {
     inScopeAddition,
     scopeText: [...exclusions, inScopeAddition].filter(Boolean).join(' '),
     freshnessRule: months
-      ? `If the page shows that it was published more than ${months} months ago, or presents long-past events as upcoming, set publishable=false: this site publishes news, not an archive.`
+      ? `The input contains today (YYYY-MM-DD, UTC). If the page shows that it was published more than ${months} months before today, or presents events that are already over as upcoming, set publishable=false: this site publishes news, not an archive.`
       : '',
     freshnessCriterion: months
-      ? `It is recent enough to count as news for this site: published within roughly the last ${months} months, or clearly still current.`
+      ? `It is recent enough to count as news for this site: published within roughly the last ${months} months before today (the input contains today), or clearly still current.`
       : '',
   };
 }

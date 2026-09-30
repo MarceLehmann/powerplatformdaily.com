@@ -223,7 +223,7 @@ export function flowDefinition() {
               Foundry_extract: connector('foundry', 'ChatCompletion', {
                 deploymentId: 'model-router', 'api-version': '2024-08-01-preview', body: { messages: [
                   { role: 'system', content: extractionPrompt },
-                  { role: 'user', content: "@string(addProperty(addProperty(addProperty(json('{}'), 'url', outputs('Article_URL')), 'feed', items('For_each_article')), 'page_text', take(variables('ExtractedText'), 30000)))" },
+                  { role: 'user', content: "@string(addProperty(addProperty(addProperty(addProperty(json('{}'), 'today', utcNow('yyyy-MM-dd')), 'url', outputs('Article_URL')), 'feed', items('For_each_article')), 'page_text', take(variables('ExtractedText'), 30000)))" },
                 ], response_format: { type: 'json_object' } },
               }, 'Content_kind_router'),
               Parse_assessment: { type: 'ParseJson', runAfter: after('Foundry_extract'), inputs: {
@@ -279,7 +279,7 @@ export function flowDefinition() {
       Foundry_gate: connector('foundry', 'ChatCompletion', {
         deploymentId: 'model-router', 'api-version': '2024-08-01-preview', body: { messages: [
           { role: 'system', content: submissionGatePrompt },
-          { role: 'user', content: "@string(addProperty(addProperty(json('{}'), 'url', outputs('Pending_URL')), 'page_text', take(body('Pending_to_text'), 30000)))" },
+          { role: 'user', content: "@string(addProperty(addProperty(addProperty(json('{}'), 'today', utcNow('yyyy-MM-dd')), 'url', outputs('Pending_URL')), 'page_text', take(body('Pending_to_text'), 30000)))" },
         ], response_format: { type: 'json_object' } },
       }, 'Pending_to_text'),
       Parse_gate: { type: 'ParseJson', runAfter: after('Foundry_gate'), inputs: {

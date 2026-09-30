@@ -18,8 +18,9 @@
 //
 // A new source starts at its creation time: only entries published afterwards are read. --feed-from <date> sets
 // "Process RSS articles published from" on the new records to read the older entries of a feed as well (for the pilot
-// evaluation). Only use it for feeds that have at most 30 entries since that date: the flow processes 30 entries
-// per poll and marks the rest as seen without reading them (finding F1 in the specification).
+// evaluation). Only use it for feeds that have at most 15 entries since that date: the flow processes 30 entries
+// per poll and marks the rest as seen without reading them (finding F1 in the specification), and a hand-over of
+// more than about 16 to 19 articles at once may be refused by GitHub (finding F20).
 //
 // Usage (--apply needs an active `az login` against the tenant that owns the Dataverse environment - see profile.json;
 // without a login the dry run still lists every source and only skips the check for existing records):
@@ -113,6 +114,9 @@ export async function seed({ records, options, api, log = console.log }) {
     log(`${tag} Existing records could not be read (${error.message}). Every source is listed as new; a real run skips what is already there.`);
   }
 
+  if (options.feedFrom) {
+    log(`${tag} Start date ${options.feedFrom.slice(0, 10)}: only safe for feeds with at most 15 entries since then (flow cap of 30 per poll, size of the hand-over to GitHub; see F1 and F20 in the specification).`);
+  }
   let created = 0;
   let skipped = 0;
   for (const record of records) {

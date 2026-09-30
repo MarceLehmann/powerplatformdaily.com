@@ -113,6 +113,16 @@ test('a dry run reads but never creates; --apply creates only what is missing an
   assert.ok(live.calls.created.every(record => record.new_enabled === false && record.new_approval === approval.approved));
 });
 
+test('a back-dated start is announced together with the limit that makes it safe', async () => {
+  const records = buildRecords({ extras }, parseOptions(['--feed-from', '2026-09-01']));
+  const lines = [];
+  await seed({ records, options: parseOptions(['--feed-from', '2026-09-01']), api: fakeApi(), log: line => lines.push(line) });
+  assert.ok(lines.some(line => /at most 15 entries/.test(line) && /2026-09-01/.test(line)));
+  const plain = [];
+  await seed({ records: buildRecords({ extras }, parseOptions([])), options: parseOptions([]), api: fakeApi(), log: line => plain.push(line) });
+  assert.ok(!plain.some(line => /at most 15 entries/.test(line)));
+});
+
 test('without access a dry run still lists the sources, but --apply stops', async () => {
   const records = buildRecords({ extras }, parseOptions([]));
   const lines = [];

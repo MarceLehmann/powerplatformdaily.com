@@ -202,6 +202,9 @@ export async function run({ api, options = {}, log = console.log }) {
   const tableExisted = Boolean(table);
   if (table) await verifyTable(api);
   const bindings = options.bindFrom ? await loadBindings(api, options.bindFrom) : {};
+  if (options.bindFrom && !referenceDefinitions().some(reference => bindings[reference.key])) {
+    throw new Error(`No connection reference starting with "${options.bindFrom}" is bound to a connection under one of the names ${referenceDefinitions().map(reference => reference.key).join(', ')}. Check the prefix, it normally ends with an underscore (for example new_other_).`);
+  }
 
   // Phase 2 writes (only with --apply) and reports.
   if (solution) alreadyThere(`solution ${SOLUTION} already exists`, `solution ${SOLUTION}`);
@@ -302,7 +305,8 @@ export function createApi(token) {
     const text = await response.text();
     return text ? JSON.parse(text) : {};
   }
-  const inSolution = (solution) => (solution ? { 'MSCRM.SolutionUniqueName': solution } : {});
+  // Lower case, as the deploy scripts send it (that spelling has been used against the governance tenant).
+  const inSolution = (solution) => (solution ? { 'MSCRM.SolutionUniqueName': solution.toLowerCase() } : {});
   return {
     whoAmI: () => call('GET', 'WhoAmI'),
     async list(set, { select, filter, startswith } = {}) {

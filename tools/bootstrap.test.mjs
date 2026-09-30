@@ -193,6 +193,16 @@ test('an unbound connection is bound afterwards and never duplicated', async () 
   assert.ok(state.writes.some(write => write.kind === 'update' && write.id === 'mine-1'));
 });
 
+test('a binding prefix that matches no connection under the expected names stops the run before anything is written', async () => {
+  const { state, api } = createFake({ references: otherReferences });
+  await assert.rejects(run({ api, options: { apply: true, bindFrom: 'new_other' }, log: quiet }), /Check the prefix, it normally ends with an underscore/);
+  assert.equal(state.writes.length, 0);
+  const unbound = otherReferences.map(row => ({ ...row, connectionid: null }));
+  const second = createFake({ references: unbound });
+  await assert.rejects(run({ api: second.api, options: { apply: true, bindFrom: 'new_other_' }, log: quiet }), /is bound to a connection/);
+  assert.equal(second.state.writes.length, 0);
+});
+
 test('without a binding source the references are created unbound and reported', async () => {
   const { state, api } = createFake();
   const summary = await run({ api, options: { apply: true }, log: quiet });
@@ -300,7 +310,7 @@ test('the Web API adapter builds safe requests', async () => {
     await api.list('connectionreferences', { startswith: ['connectionreferencelogicalname', 'new_x_'] });
     assert.ok(decodeURIComponent(calls[1].url).includes("startswith(connectionreferencelogicalname,'new_x_')"));
     const created = await api.create('connectionreferences', { a: 1 }, { solution: config.solution });
-    assert.equal(calls[2].init.headers['MSCRM.SolutionUniqueName'], config.solution);
+    assert.equal(calls[2].init.headers['MSCRM.SolutionUniqueName'], config.solution.toLowerCase());
     assert.equal(calls[2].init.method, 'POST');
     assert.equal(created.id, '11111111-2222-3333-4444-555555555555');
     await api.create('solutions', { a: 1 });
