@@ -1,0 +1,81 @@
+name: Publish Curated Articles
+run-name: Curate ${{ github.event.client_payload.request_id }}
+on:
+  repository_dispatch:
+    types: [curated-publication]
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the authorised publisher
+        run: test "$GITHUB_ACTOR" = 'MarceLehmann'
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - name: Validate publisher
+        run: bundle exec ruby tools/test-publish-curation.rb
+      - name: Validate and render approved summaries
+        run: bundle exec ruby tools/publish-curation.rb
+      - uses: actions/setup-python@v5
+        if: hashFiles('tools/pending-cards.json') != ''
+        with:
+          python-version: '3.12'
+      - name: Render governance card images
+        if: hashFiles('tools/pending-cards.json') != ''
+        run: |
+          set -euo pipefail
+          mkdir -p tools/render-assets/fonts
+          curl -fsSL -o tools/render-assets/fonts/Kalam-Bold.ttf \
+            https://raw.githubusercontent.com/google/fonts/main/ofl/kalam/Kalam-Bold.ttf
+          curl -fsSL -o tools/render-assets/fonts/Kalam-Regular.ttf \
+            https://raw.githubusercontent.com/google/fonts/main/ofl/kalam/Kalam-Regular.ttf
+          pip install pillow
+          python tools/render_card.py
+          rm -f tools/pending-cards.json
+      - name: Build and check generated posts
+        env:
+          JEKYLL_ENV: production
+        run: |
+          bundle exec jekyll build
+          bundle exec ruby tools/check-site.rb
+          bundle exec htmlproofer _site --disable-external
+      - name: Commit both languages and deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add -- _posts assets/img/curated
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Publish approved governance summaries'
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [ "$attempt" = 3 ]; then
+                exit 1
+              fi
+              git pull --rebase origin main
+            done
+            gh workflow run pages-deploy.yml --ref main
+          fi
+      - name: Record successful publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUEST_ID: ${{ github.event.client_payload.request_id }}
+        run: |
+          [[ "$REQUEST_ID" =~ ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$ ]]
+          if ! gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/curation-results/$REQUEST_ID" --silent; then
+            gh api "repos/$GITHUB_REPOSITORY/git/refs" --method POST \
+              -f "ref=refs/tags/curation-results/$REQUEST_ID" -f "sha=$(git rev-parse HEAD)" --silent
+          fi
