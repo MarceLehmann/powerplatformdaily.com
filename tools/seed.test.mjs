@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { approval, kind, processing } from './automation.mjs';
 import { buildRecords, createApi, matchesScope, parseOptions, seed } from './seed-mvp-sources.mjs';
 
@@ -143,4 +146,21 @@ test('the Web API adapter reads every page and reports a missing table', async (
   } finally {
     globalThis.fetch = original;
   }
+});
+
+// The real entry point, with no Azure CLI on the PATH.
+const runCli = (args) => spawnSync(process.execPath, [new URL('./seed-mvp-sources.mjs', import.meta.url).pathname, ...args], {
+  encoding: 'utf8', env: { ...process.env, PATH: mkdtempSync(join(tmpdir(), 'no-az-')) },
+});
+
+test('on the command line a dry run works without a login and an apply stops with a message', { skip: process.platform === 'win32' }, () => {
+  const dry = runCli(['--only', 'copilot studio', '--limit', '2']);
+  assert.equal(dry.status, 0);
+  assert.match(dry.stdout, /Would create 2 record\(s\), skipped 0 already present \(not checked\)/);
+  assert.match(dry.stdout, /Nothing was written/);
+  const apply = runCli(['--apply', '--limit', '1']);
+  assert.equal(apply.status, 1);
+  assert.match(apply.stderr, /Could not acquire a Dataverse token/);
+  assert.doesNotMatch(apply.stderr, /\n\s+at /, 'no stack trace');
+  assert.doesNotMatch(apply.stdout, /created:/, 'nothing is created without a login');
 });

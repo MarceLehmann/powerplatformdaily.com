@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { approval, config, kind, primaryKey, processing, profile, tableDefinition } from './automation.mjs';
 import { createApi, formSections, formXml, parseOptions, referenceDefinitions, referencePayload, run, solutionPayload, viewDefinitions } from './bootstrap-solution.mjs';
 
@@ -321,4 +324,20 @@ test('command line options are parsed strictly', () => {
     { apply: true, bindFrom: 'new_other_', publisher: 'p', skipViews: true, skipForm: true, replaceForm: true });
   assert.throws(() => parseOptions(['--bind-from']), /needs a value/);
   assert.throws(() => parseOptions(['--bind-from', '--apply']), /needs a value/);
+});
+
+// The real entry point, with no Azure CLI on the PATH: it must end with a readable message, not a stack trace.
+const runCli = (script, args) => spawnSync(process.execPath, [new URL(`./${script}`, import.meta.url).pathname, ...args], {
+  encoding: 'utf8', env: { ...process.env, PATH: mkdtempSync(join(tmpdir(), 'no-az-')) },
+});
+
+test('without an Azure login the command line ends with a message and no stack trace', { skip: process.platform === 'win32' }, () => {
+  const result = runCli('bootstrap-solution.mjs', []);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Stopped: Could not acquire a Dataverse token/);
+  assert.doesNotMatch(result.stderr, /\n\s+at /, 'no stack trace');
+  const bad = runCli('bootstrap-solution.mjs', ['--bind-from']);
+  assert.equal(bad.status, 1);
+  assert.match(bad.stderr, /Stopped: --bind-from needs a value/);
+  assert.doesNotMatch(bad.stderr, /\n\s+at /, 'no stack trace');
 });

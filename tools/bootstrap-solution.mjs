@@ -365,7 +365,11 @@ function getToken() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  run({ api: createApi(getToken()), options: parseOptions(process.argv.slice(2)) }).catch(error => {
+  // Everything that can throw (unknown options, no Azure login) runs inside the promise, so it ends as a message.
+  (async () => {
+    const options = parseOptions(process.argv.slice(2));
+    await run({ api: createApi(getToken()), options });
+  })().catch(error => {
     console.error(`\nStopped: ${error.message}`);
     process.exitCode = 1;
   });

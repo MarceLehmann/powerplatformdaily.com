@@ -28,7 +28,7 @@ Das Go-Live selbst steht im [Runbook](2026-09-30_go-live-runbook.md).
 
 ### 2.1 Vorgehen
 
-- **Commit 1** (`d284fd2`) ist ein unveränderter Snapshot von Engine und Site-Skelett (71 Dateien im Baum, davon bestand `README.md` schon im ersten Commit). **Commit 2** enthält die Anpassungen für News, **Commit 3** die erste Fassung dieser Doku, **Commit 4** das Bootstrap-Skript, die Seitentexte nach der Gegenprüfung und weitere Korrekturen, **Commit 5** diese Fassung der Doku. So zeigt `git diff d284fd2..HEAD` exakt, was sich geändert hat.
+- **Commit 1** (`d284fd2`) ist ein unveränderter Snapshot von Engine und Site-Skelett (71 Dateien im Baum, davon bestand `README.md` schon im ersten Commit). **Commit 2** enthält die Anpassungen für News, **Commit 3** die erste Fassung dieser Doku. Die folgenden Commits enthalten das Bootstrap-Skript, die korrigierten Seitentexte und die überarbeitete Doku nach den Gegenprüfungen. So zeigt `git diff d284fd2..HEAD` exakt, was sich geändert hat.
 - Von den 71 Dateien des Snapshots blieben **32 unverändert**, 38 wurden angepasst, 1 verschoben (`robots.txt` nach `assets/robots.txt`). Dazu kommen 13 neue Dateien (u. a. Profil, drei Test-Dateien, Bootstrap-Skript, diese Doku). Der Baum hat damit 84 Dateien.
 - Die generierten Flow-Definitionen wurden gegen das Governance-Original verglichen. Verarbeitung: 52 von 1.217 Zeilen weichen ab, alles Werte (Tabellen- und Schlüsselnamen, Repository, User-Agent, Prompt-Text). Einreichung: nur Tabellen- und Schlüsselnamen. Die Aktionsstruktur ist identisch.
 
@@ -52,9 +52,9 @@ Es gab weder `az`- noch `pac`-Zugriff, und die Sandbox blockiert Dataverse, die 
 
 - schreibt nur mit `--apply` und ergänzt nur, es löscht nichts und überschreibt kein von Hand geändertes Formular (ausser mit `--replace-form`),
 - liest zuerst alles, was vom Tenant abhängt (Herausgeber, vorhandene Tabelle samt Auswahlwerten, Bindungsquelle), und bricht vor dem ersten Schreiben ab, wenn etwas nicht passt,
-- wurde ausschliesslich gegen einen simulierten Dataverse getestet (17 Tests).
+- wurde ausschliesslich gegen einen simulierten Dataverse getestet (18 Tests, darunter der Aufruf ohne Azure-Anmeldung).
 
-Nicht als Code vorhanden und im Tenant wiederzuverwenden: der Custom Connector `AzureAIFoundry-Privat` und die Foundry-Bereitstellungen `model-router` und `whisper`. Die Laufhistorie des Bestands (F7) lässt sich nicht klonen. Siehe WP-01 und WP-18.
+Nicht als Code vorhanden und im Tenant wiederzuverwenden: der Custom Connector `AzureAIFoundry-Privat` und die Foundry-Bereitstellungen `model-router` und `whisper`. Die Laufhistorie des Bestands lässt sich nicht klonen. Siehe WP-01 und WP-18.
 
 ## 3. Zielbild und Scope
 
@@ -194,7 +194,7 @@ Nur HTTPS, Port 443, keine Zugangsdaten in URLs, keine IP-Ziele (geprüft wird d
 | Seed-Skript und MVP-Listen | ja, aktiv | übernommen, **Trockenlauf als Standard**, deaktiviert, `--limit`, `--feed-from`, Scope-Filter, YouTube nur per Option | doppelte Kanäle werden entfernt |
 | Bootstrap der Dataverse-Seite | nein (F7) | **neu**, nur Trockenlauf und simulierte Tests | `tools/bootstrap-solution.mjs` |
 | Deploy-Skripte | ja | übernommen, parametrisiert | nur geparst, nicht gegen einen Tenant ausgeführt |
-| Tests und CI | ja | übernommen, plus 43 neue Tests | 60 Node-Tests, Publisher- und Seitenprüfungen |
+| Tests und CI | ja | übernommen, plus 45 neue Tests | 62 Node-Tests, Publisher- und Seitenprüfungen |
 | Admin-Flows-Seite, Altbeiträge | ja | **nicht übernommen** | siehe 2.3 |
 | Profil, Launch-Schalter, KI-Hinweis je Beitrag | nein | **neu** | |
 
@@ -278,7 +278,7 @@ Aufwand ist eine grobe Schätzung. „M“ = Marcel erforderlich (Tenant, Konten
 
 | WP | Inhalt | Aufwand | Akzeptanzkriterium | Tor |
 |---|---|---|---|---|
-| 00 | Klon, Profil, Launch-Schalter, Bootstrap-Skript, Tests, Doku (**erledigt** in diesem Branch; Tenant-Teile nie gegen einen Tenant gelaufen) | – | 60 Node-Tests, Publisher-Tests, Build in beiden Launch-Zuständen, `check-site`, `htmlproofer` grün | – |
+| 00 | Klon, Profil, Launch-Schalter, Bootstrap-Skript, Tests, Doku (**erledigt** in diesem Branch; Tenant-Teile nie gegen einen Tenant gelaufen) | – | 62 Node-Tests, Publisher-Tests, Build in beiden Launch-Zuständen, `check-site`, `htmlproofer` grün | – |
 | 01 | **Dataverse-Bereitstellung (M):** `node tools/bootstrap-solution.mjs` (Trockenlauf lesen, dann `--apply`), Verbindungen kontrollieren, danach `deploy-intake.ps1` und `deploy-automation.ps1` (beide Flows bleiben aus) | 2–4 h | Ein zweiter Bootstrap-Lauf meldet alles als vorhanden, beide Deploy-Skripte melden `DefinitionVerified = True`, beide Flows existieren und sind aus | 2 |
 | 02 | **Seite und Domain (M):** Pages-Quelle „GitHub Actions“, Custom Domain, DNS, HTTPS, Domain-Verifizierung, Merge Branch → `main` | 1–2 h plus DNS-Wartezeit | Build grün, Seite erreichbar, `robots.txt` = `Disallow: /`, `noindex` auf jeder Seite | 1 |
 | 03 | **Quellen:** offizielle Microsoft-Feeds recherchieren und **einzeln verifizieren**, in `tools/extra-sources.json`. Pilot-Set 10–15 festlegen | 2–4 h | Jede URL liefert HTTP 200 und gültiges XML, und die Beitragslinks der Einträge haben denselben Host wie die Feed-Adresse (Host-Regel, F18). Bei abweichendem Host entscheiden, ob die Regel erweitert werden muss | 3 |
@@ -384,13 +384,13 @@ Drei Dinge hängen am Vertrag und sind getestet: Der Test *no identifiers of ano
 | Prüfung | Ergebnis |
 |---|---|
 | Baseline im Governance-Bestand (Kopie): Node-Tests (17), Publisher-Tests, Build, `check-site` (158 Seiten), `htmlproofer` (355 Links) | grün |
-| Node-Tests im Klon | 60 von 60 (17 Bestand, 43 neu) |
+| Node-Tests im Klon | 62 von 62 (17 Bestand, 45 neu) |
 | Publisher-Tests im Klon, inkl. Profil-Vertrag und Quelldatum | grün |
 | Vergleich erzeugter Flow-Definitionen mit Governance | nur Werte weichen ab (52 von 1.217 Zeilen bzw. Tabellen- und Schlüsselnamen), Aktionsstruktur gleich |
 | Durchlauf mit dem echten Publisher: 3 erfundene Beispielartikel, je DE/EN, Karten (mit Ersatzschrift), Build, `check-site` (13 Seiten), `htmlproofer`. Die Beispielartikel lagen nur in einer Wegwerfkopie, nicht im Repo | grün, `launch: false` und `launch: true` |
 | Negativkontrollen (von Hand): gestarteter Build besteht die „nicht gestartet“-Prüfung nicht. Datenschutzseite ohne Google Fonts bzw. jsDelivr fällt durch | schlagen wie vorgesehen fehl |
 | Cookie-Banner und Datenschutztext mit gesetzten und ohne Analytics-IDs | verhalten sich wie beschrieben |
-| Bootstrap-Skript gegen einen simulierten Dataverse: Trockenlauf schreibt nichts, Wiederholung ändert nichts, Fehler vor dem ersten Schreiben, keine Löschoperation, fremdes Formular bleibt unberührt | 17 Tests grün. Nie gegen einen Tenant |
+| Bootstrap-Skript gegen einen simulierten Dataverse: Trockenlauf schreibt nichts, Wiederholung ändert nichts, Fehler vor dem ersten Schreiben, keine Löschoperation, fremdes Formular bleibt unberührt, Aufruf ohne Azure-Anmeldung endet mit einer Meldung statt einem Stacktrace | 18 Tests grün. Nie gegen einen Tenant |
 | PowerShell: Parser auf alle drei Skripte, Vergleichslogik von `deploy-intake.ps1` mit Beispieldaten | fehlerfrei, nicht gegen einen Tenant ausgeführt |
 | Workflow-YAML | syntaktisch gültig |
 | Unabhängige Gegenprüfung dieser Spezifikation und der Governance-Doku durch je einen zweiten Prüfer, der Code und Repos las und Scratch-Kopien baute | Befunde sind eingearbeitet |
