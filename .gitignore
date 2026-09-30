@@ -1,0 +1,39 @@
+# Bundler cache
+.bundle
+vendor
+Gemfile.lock
+
+# Jekyll cache
+.jekyll-cache
+.jekyll-metadata
+_site
+
+# RubyGems
+*.gem
+
+# NPM dependencies
+node_modules
+package-lock.json
+
+# IDE configurations
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+
+# Misc
+_sass/vendors
+assets/js/dist
+
+# Hidden system files
+*~
+.DS_Store
+Thumbs.db
+__pycache__/
+
+# News card renderer: fonts are fetched fresh each CI run (Google
+# Fonts) and the manifest is a transient handoff file - neither belongs
+# in git.
+/tools/render-assets/fonts/
+/tools/pending-cards.json
