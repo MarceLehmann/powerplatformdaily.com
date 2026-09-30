@@ -1,34 +1,36 @@
-# Power Platform Governance
+# Power Platform News
 
-> A curated collection of Microsoft Power Platform governance articles: short, source-credited summaries with a clear governance takeaway and a direct link to the original article. Maintained by Marcel Lehmann, Microsoft MVP, from Switzerland.
+> Independent news on Power Apps, Power Automate and Copilot Studio: short, source-credited summaries with a note on what each item means and a direct link to the original article. Maintained by Marcel Lehmann, Microsoft MVP, from Switzerland.
 
-Power Platform Governance brings useful governance articles from different blogs into one place, so readers do not have to check a dozen feeds by hand. Each curated entry offers a short TL;DR, a governance takeaway and full credit plus a direct link to the original source and author. Content is published bilingually in English and German.
+Power Platform News watches a curated list of blogs, community channels and Microsoft sources, so readers do not have to check dozens of feeds by hand. Each entry offers a short TL;DR, a note on what it means for makers, developers, admins and business owners, and full credit plus a direct link to the original source and author. The summaries are written with AI assistance and are our own short summaries, not republications. Content is published bilingually in English and German.
 
 Key facts for orientation:
 
-- Site: Power Platform Governance (https://powerplatformgovernance.com)
+- Site: Power Platform News (https://powerplatformnews.com)
 - Maintainer: Marcel Lehmann, Microsoft MVP (Switzerland)
 - Content type: curated third-party summaries, not original reporting; every entry credits its source author, source site and original URL
 - Language: English and German (bilingual, /en/ and /de/ paths)
-- Topics: environment strategy and platform ownership, data policies/connectors/security, solutions/ALM/production operations, Dataverse, Power Apps, Power Automate and Copilot Studio governance
+- Scope: Power Apps, Power Automate and Copilot Studio (building, extending and managing agents), plus Dataverse, Power Pages and platform-wide changes in administration, licensing, ALM and security that affect them
+- Out of scope: Microsoft 365 Copilot, GitHub Copilot and other Copilot products, unless the item is about building agents with Copilot Studio; Power BI and Microsoft Fabric are not covered for now
+- Independent publication, not affiliated with or endorsed by Microsoft
+- Related site: Power Platform Governance (https://powerplatformgovernance.com), the governance-focused sibling
 - Related brand: KMUpower (consulting, coaching, workshops) – https://kmupower.com
 - Related brand: Power Platform Academy (live Power Platform workshops by Marcel Lehmann) – https://www.powerplatformacademy.online
 - Related brand: PowerPlatformTip (field-tested Power Platform tips) – https://www.powerplatformtip.com
 
 ## Main pages
 
-- [About](https://powerplatformgovernance.com/about/): What this site is, why it exists, and what it covers.
-- [Sources](https://powerplatformgovernance.com/sources/): The original blogs and authors behind the curated summaries, with credit and direct links.
-- [Admin Flows](https://powerplatformgovernance.com/flows/): Ten free, fully specified Power Automate flows for Power Platform admins (environment/app/flow/Copilot Studio agent inventories, DLP visibility, orphaned-resource reassignment, capacity monitoring).
-- [Archives](https://powerplatformgovernance.com/archives/): All curated posts by date.
-- [Tags](https://powerplatformgovernance.com/tags/): Browse curated summaries by topic.
-- [Submit content](https://powerplatformgovernance.com/submit/): Suggest a governance blog or article for curation.
+- [About](https://powerplatformnews.com/about/): What this site is, how it works, what it covers and what it does not.
+- [Sources](https://powerplatformnews.com/sources/): The original blogs and authors behind the summaries, with credit and direct links.
+- [Archives](https://powerplatformnews.com/archives/): All summaries by date.
+- [Tags](https://powerplatformnews.com/tags/): Browse summaries by product and topic.
+- [Submit content](https://powerplatformnews.com/submit/): Suggest a blog, article or feed for curation.
 
 ## Topics covered
 
-- Governance, ownership and platform strategy
-- Security and Data Loss Prevention (DLP)
-- Environment strategy and Centers of Excellence (CoE)
-- Application Lifecycle Management (ALM)
-- Copilot Studio governance and compliance
-- Shadow IT, monitoring and documentation
+- Power Apps (canvas, model-driven, code apps, maker experience)
+- Power Automate (cloud and desktop flows, agent flows, connectors)
+- Copilot Studio (agents, tools, knowledge, channels, licensing)
+- Dataverse and Power Pages as they relate to the above
+- Announcements, previews and general availability, deprecations, licensing and pricing changes
+- Security, governance and application lifecycle management (ALM) changes that affect makers and admins

@@ -1,4 +1,13 @@
-<!-- Cookie Consent Banner (GDPR/FADP) - gates Google Analytics in analytics/google.html -->
+{%- comment -%}
+  Cookie consent banner (GDPR/FADP). It gates every analytics provider in analytics/*.html and is rendered
+  only when at least one provider has an ID in _config.yml, so a site without analytics shows no banner and
+  a site with analytics names exactly the providers it loads.
+{%- endcomment -%}
+{%- assign consent_providers = '' | split: '' -%}
+{%- if site.analytics.google.id and site.analytics.google.id != empty -%}{%- assign consent_providers = consent_providers | push: 'Google Analytics' -%}{%- endif -%}
+{%- if site.analytics.clarity.id and site.analytics.clarity.id != empty -%}{%- assign consent_providers = consent_providers | push: 'Microsoft Clarity' -%}{%- endif -%}
+{%- if consent_providers.size > 0 -%}
+<!-- Cookie Consent Banner (GDPR/FADP) - gates the analytics providers in analytics/*.html -->
 <style>
   .cookie-consent {
     position: fixed;
@@ -96,13 +105,19 @@
         '<div class="cookie-consent__content">' +
           '<div class="cookie-consent__text">' +
             '<i class="fas fa-cookie-bite"></i>' +
-            '<p>This site uses Google Analytics to understand how visitors use it. ' +
-            'By continuing to use this site, you consent to our use of cookies. ' +
+            {% if page.lang == 'de' -%}
+            '<p>Diese Website möchte {{ consent_providers | join: " und " }} verwenden, um zu verstehen, wie Besucher sie nutzen. ' +
+            'Diese Dienste werden nur geladen, wenn Sie zustimmen. ' +
+            '<a href="/privacy/" target="_blank">Mehr erfahren</a></p>' +
+            {%- else -%}
+            '<p>This site would like to use {{ consent_providers | join: " and " }} to understand how visitors use it. ' +
+            'These services only load if you accept. ' +
             '<a href="/privacy/" target="_blank">Learn more</a></p>' +
+            {%- endif %}
           '</div>' +
           '<div class="cookie-consent__actions">' +
-            '<button class="cookie-consent__button cookie-consent__button--accept" id="cookie-accept">Accept</button>' +
-            '<button class="cookie-consent__button cookie-consent__button--decline" id="cookie-decline">Decline</button>' +
+            '<button class="cookie-consent__button cookie-consent__button--accept" id="cookie-accept">{% if page.lang == 'de' %}Akzeptieren{% else %}Accept{% endif %}</button>' +
+            '<button class="cookie-consent__button cookie-consent__button--decline" id="cookie-decline">{% if page.lang == 'de' %}Ablehnen{% else %}Decline{% endif %}</button>' +
           '</div>' +
         '</div>' +
       '</div>'
@@ -117,3 +132,4 @@
   });
 })();
 </script>
+{%- endif -%}

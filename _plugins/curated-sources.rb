@@ -1,6 +1,6 @@
 require 'uri'
 
-module GovernanceSources
+module CuratedSources
   def self.origin(value)
     uri = URI.parse(value.to_s.strip)
     return unless uri.is_a?(URI::HTTP) && uri.host && !uri.host.empty? && uri.userinfo.nil?
@@ -35,5 +35,5 @@ module GovernanceSources
 end
 
 Jekyll::Hooks.register :site, :pre_render do |site|
-  site.data['curated_sources'] = GovernanceSources.collect(site.posts.docs)
+  site.data['curated_sources'] = CuratedSources.collect(site.posts.docs)
 end

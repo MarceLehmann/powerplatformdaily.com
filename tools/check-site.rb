@@ -7,6 +7,11 @@ require_relative '../_plugins/curated-sources'
 require_relative '../_plugins/submission-endpoint'
 
 site_dir = ARGV.fetch(0, '_site')
+profile = JSON.parse(File.read(File.expand_path('../_data/profile.json', __dir__), encoding: 'UTF-8'))
+site_url = "https://#{profile.dig('site', 'domain')}/"
+# JEKYLL_CONFIG mirrors the --config list of the build (comma separated); default is the plain _config.yml.
+configuration = (ENV['JEKYLL_CONFIG'] || '_config.yml').split(',').map { |file| YAML.safe_load(File.read(file), permitted_classes: [Date, Time]) || {} }.reduce({}) { |merged, part| merged.merge(part) }
+launched = configuration['launch'] == true
 required_pages = %w[index.html submit/index.html about/index.html tags/index.html archives/index.html sources/index.html]
 required_pages.each do |path|
   raise "Missing page: #{path}" unless File.file?(File.join(site_dir, path))
@@ -25,8 +30,14 @@ pages.each do |path|
   ids = document.css('[id]').map { |node| node['id'] }
   raise "Duplicate IDs: #{path}" unless ids.uniq == ids
   canonical = document.at_css('link[rel="canonical"]')
-  raise "Missing canonical: #{path}" unless canonical && canonical['href'].start_with?('https://powerplatformgovernance.com/')
+  raise "Missing canonical: #{path}" unless canonical && canonical['href'].start_with?(site_url)
   raise "Missing description: #{path}" unless document.at_css('meta[name="description"]')
+  robots_meta = document.at_css('meta[name="robots"]')&.[]('content').to_s
+  if launched
+    raise "Launched site must not be noindex: #{path}" if robots_meta.include?('noindex')
+  else
+    raise "Site is not launched yet, so every page must be noindex: #{path}" unless robots_meta.include?('noindex')
+  end
   schema = document.css('script[type="application/ld+json"]')
   raise "Missing structured data: #{path}" if schema.empty?
   schema.each { |node| JSON.parse(node.text) }
@@ -36,8 +47,14 @@ pages.each do |path|
   if document.at_css('[data-curated-entry]')
     original = document.at_css('a.original-link')
     raise "Missing direct original link: #{path}" unless original && !original['href'].to_s.empty?
-    raise "Source must be external: #{path}" if original['href'].start_with?('https://powerplatformgovernance.com/')
+    raise "Source must be external: #{path}" if original['href'].start_with?(site_url)
     raise "Missing TL;DR: #{path}" unless document.css('h2').any? { |node| node.text.include?('TL;DR') }
+    # Sites that configure an AI disclosure (site.attributionNote) must show it on every curated entry.
+    disclosure = profile.dig('site', 'attributionNote', document.at_css('html')['lang'].to_s)
+    if disclosure
+      shown = document.at_css('.curated-attribution').text.gsub(/\s+/, ' ')
+      raise "Missing AI disclosure: #{path}" unless shown.include?(disclosure)
+    end
     contributor = document.at_css('.contributor-credit')
     if contributor
       raise "Invalid LinkedIn credit: #{path}" unless contributor['href'].match?(%r{\Ahttps://(?:www\.)?linkedin\.com/in/[^\s]+\z})
@@ -75,16 +92,16 @@ raise 'False submission confirmation' if submit.text.include?('Your suggestion h
 raise 'Missing JSON submission handler' unless submit.at_css('script[src="/assets/js/submission.js"][defer]')
 raise 'Missing submission honeypot' unless submit.at_css('input[name="website"][tabindex="-1"]')
 ['', 'https://intake.example.org/submissions'].each do |endpoint|
-  raise 'Public proxy rejected' unless GovernanceSubmission.public_endpoint?(endpoint)
+  raise 'Public proxy rejected' unless SubmissionEndpoint.public_endpoint?(endpoint)
 end
 ['http://intake.example.org/', 'https://intake.example.org/?sig=example', 'https://user:example@intake.example.org/', 'https://tenant.logic.azure.com/workflows/example', 'https://env.api.powerplatform.com/automate/flows/example'].each do |endpoint|
-  raise 'Unsafe submission endpoint accepted' if GovernanceSubmission.public_endpoint?(endpoint)
+  raise 'Unsafe submission endpoint accepted' if SubmissionEndpoint.public_endpoint?(endpoint)
 end
 direct_endpoint = 'https://env.environment.api.powerplatform.com/powerautomate/automations/direct/cu/26/workflows/0123456789abcdef0123456789abcdef/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nonsecret-test-value-only'
-raise 'Direct callback accepted without approval' if GovernanceSubmission.public_endpoint?(direct_endpoint)
-raise 'Approved direct callback rejected' unless GovernanceSubmission.public_endpoint?(direct_endpoint, direct_webhook: true)
-raise 'Duplicate signature accepted' if GovernanceSubmission.public_endpoint?(direct_endpoint + '&sig=duplicate', direct_webhook: true)
-raise 'Rendered endpoint is invalid' unless GovernanceSubmission.public_endpoint?(submit.at_css('form')['action'].to_s, direct_webhook: submit.at_css('form')['data-direct-webhook'] == 'true')
+raise 'Direct callback accepted without approval' if SubmissionEndpoint.public_endpoint?(direct_endpoint)
+raise 'Approved direct callback rejected' unless SubmissionEndpoint.public_endpoint?(direct_endpoint, direct_webhook: true)
+raise 'Duplicate signature accepted' if SubmissionEndpoint.public_endpoint?(direct_endpoint + '&sig=duplicate', direct_webhook: true)
+raise 'Rendered endpoint is invalid' unless SubmissionEndpoint.public_endpoint?(submit.at_css('form')['action'].to_s, direct_webhook: submit.at_css('form')['data-direct-webhook'] == 'true')
 
 sources = Nokogiri::HTML(File.read(File.join(site_dir, 'sources/index.html')))
 domains = sources.css('[data-source-domain]').map { |node| node['data-source-domain'] }
@@ -107,7 +124,7 @@ samples = [
 ].map do |url, path, publishable|
   test_post.new({ 'source_url' => url, 'title' => 'Example' }, path, Time.utc(2026, 9, 18), publishable)
 end
-groups = GovernanceSources.collect(samples)
+groups = CuratedSources.collect(samples)
 raise 'Source URL normalization failed' unless groups.map { |group| group['domain'] } == %w[blog.example.org powerplatformtip.com]
 raise 'Source grouping failed' unless groups.last['posts'].size == 2
 raise 'HTTPS source origin lost' unless groups.last['url'] == 'https://www.powerplatformtip.com/'
@@ -141,6 +158,13 @@ end
 
 raise 'Internal architecture published' unless Dir.glob(File.join(site_dir, '*architektur*')).empty?
 raise 'Internal README published' if File.exist?(File.join(site_dir, 'README_CUSTOM.md'))
+raise 'Internal docs published' if File.exist?(File.join(site_dir, 'docs'))
 raise 'Missing sitemap' unless File.file?(File.join(site_dir, 'sitemap.xml'))
 raise 'Missing robots.txt' unless File.file?(File.join(site_dir, 'robots.txt'))
+robots = File.read(File.join(site_dir, 'robots.txt'), encoding: 'UTF-8')
+if launched
+  raise 'Launched site must allow crawling and advertise the sitemap' unless robots.match?(%r{^Allow: /$}) && robots.include?("Sitemap: #{site_url}sitemap.xml")
+else
+  raise 'Site is not launched yet, so robots.txt must disallow everything and advertise no sitemap' unless robots.match?(%r{^Disallow: /\s*$}) && !robots.include?('Sitemap:') && !robots.match?(%r{^Allow:}i)
+end
 puts "Site checks passed: #{pages.size} pages, production CSS, form, metadata and private-document exclusions."

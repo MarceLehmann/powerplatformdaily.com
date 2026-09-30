@@ -32,7 +32,7 @@ assets/js/dist
 Thumbs.db
 __pycache__/
 
-# Governance card renderer: fonts are fetched fresh each CI run (Google
+# Card renderer: fonts are fetched fresh each CI run (Google
 # Fonts) and the manifest is a transient handoff file - neither belongs
 # in git.
 /tools/render-assets/fonts/

@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Send a daily digest email (via Brevo) for newly published curated posts.
 
+Everything site-specific (domain, name, Brevo list, sender, wording) comes from
+_data/profile.json. The digest stays off until digest.enabled is true and a list
+and sender are configured there; while it is off this script sends nothing.
+
 Reads _posts/*-de.md / *-en.md pairs (matched by curation_id), skips any
 curation_id already recorded in tools/digest-sent.json, builds one digest
 email per new batch (DE + EN TL;DR per article), sends it as a Brevo email
-campaign to the PowerPlatformGovernance list, then updates the state file.
+campaign to the configured Brevo list, then updates the state file.
 
 Exits 0 with no API call if there is nothing new to send.
 """
@@ -20,10 +24,13 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 POSTS_DIR = REPO_ROOT / "_posts"
 STATE_FILE = REPO_ROOT / "tools" / "digest-sent.json"
-SITE_URL = "https://powerplatformgovernance.com"
-LIST_ID = 22
-SENDER_NAME = "Power Platform Governance"
-SENDER_EMAIL = "governance@powerplatformtip.com"
+PROFILE = json.loads((REPO_ROOT / "_data" / "profile.json").read_text(encoding="utf-8"))
+SITE_NAME = PROFILE["site"]["name"]
+SITE_URL = f"https://{PROFILE['site']['domain']}"
+DIGEST = PROFILE["digest"]
+LIST_ID = DIGEST.get("brevoListId")
+SENDER_NAME = DIGEST.get("senderName") or SITE_NAME
+SENDER_EMAIL = DIGEST.get("senderEmail")
 
 FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n(.*)$", re.DOTALL)
 TLDR_RE = re.compile(r"##\s*TL;DR\s*\n+(.*?)(?=\n##|\n\{%|\Z)", re.DOTALL)
@@ -96,8 +103,8 @@ def build_html(articles):
 <html><body style="margin:0;padding:0;background:#f7f7f7;font-family:Arial,Helvetica,sans-serif;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;margin:0 auto;background:#fff;">
   <tr><td style="padding:32px 24px 16px;">
-    <p style="margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#25c1bf;font-weight:bold;">Power Platform Governance</p>
-    <h1 style="margin:8px 0 0;font-size:22px;color:#0a2050;">Neue Governance-Artikel heute / New governance articles today</h1>
+    <p style="margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#25c1bf;font-weight:bold;">{SITE_NAME}</p>
+    <h1 style="margin:8px 0 0;font-size:22px;color:#0a2050;">{DIGEST["heading"]}</h1>
   </td></tr>
   <tr><td style="padding:0 24px;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">{''.join(rows)}</table>
@@ -110,6 +117,12 @@ def build_html(articles):
 
 
 def main():
+    if not DIGEST.get("enabled"):
+        print("Digest is disabled in _data/profile.json - nothing sent.")
+        return
+    if not LIST_ID or not SENDER_EMAIL:
+        print("Digest is enabled but digest.brevoListId or digest.senderEmail is missing in _data/profile.json.", file=sys.stderr)
+        sys.exit(1)
     api_key = os.environ.get("BREVO_API_KEY")
     if not api_key:
         print("BREVO_API_KEY missing", file=sys.stderr)
@@ -138,8 +151,8 @@ def main():
 
     today = datetime.date.today().isoformat()
     payload = {
-        "name": f"Governance Digest {today}",
-        "subject": f"Power Platform Governance: {len(new_articles)} neue Artikel / new articles ({today})",
+        "name": f"{SITE_NAME} Digest {today}",
+        "subject": DIGEST["subject"].format(count=len(new_articles), date=today),
         "sender": {"name": SENDER_NAME, "email": SENDER_EMAIL},
         "type": "classic",
         "htmlContent": html,

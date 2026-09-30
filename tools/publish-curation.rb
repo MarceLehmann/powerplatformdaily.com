@@ -8,7 +8,10 @@ require 'cgi'
 require 'fileutils'
 
 module CurationPublisher
-  TAGS = %w[governance security compliance dlp environments alm ownership coe dataverse power-apps power-automate copilot-studio].freeze
+  # Everything that differs between sites comes from _data/profile.json (shared with the Node tooling).
+  PROFILE = JSON.parse(File.read(File.expand_path('../_data/profile.json', __dir__), encoding: 'UTF-8')).freeze
+  TAGS = (PROFILE.dig('tags', 'core') + PROFILE.dig('tags', 'optional').select { |_, product| product['enabled'] }.keys).freeze
+  DISCLOSURE_HOSTS = PROFILE.dig('site', 'disclosure', 'hosts').freeze
   TRACKING = /\A(?:utm_.+|fbclid|gclid|msclkid)\z/i
   SOURCE_TYPES = %w[article youtube podcast].freeze
   YOUTUBE_ID = /\A[A-Za-z0-9_-]{11}\z/
@@ -113,7 +116,7 @@ module CurationPublisher
     parsed = URI.parse(source_url)
     tags = article['tags']
     unless tags.is_a?(Array) && tags.length.between?(1, 5) && tags.uniq == tags && (tags - TAGS).empty?
-      raise ArgumentError, 'Invalid governance tags'
+      raise ArgumentError, 'Invalid tags'
     end
     language = text(article['source_language'], 10)
     raise ArgumentError, 'Invalid source language' unless language.match?(/\A[a-z]{2,3}(?:-[A-Z]{2})?\z/)
@@ -154,17 +157,17 @@ module CurationPublisher
       summary = text(version['tldr'], 600)
       takeaway = bulleted_text(version['takeaway'], 900)
       alternate = locale == 'en' ? 'de' : 'en'
-      alt_prefix = locale == 'de' ? 'Governance-Karte' : 'Governance card'
+      alt_prefix = PROFILE.dig('site', 'cardAltPrefix', locale)
       frontmatter = {
         'title' => title, 'description' => description, 'date' => now.utc.iso8601,
-        'author' => 'governance_editorial', 'lang' => locale, 'toc' => false, 'tags' => tags,
+        'author' => PROFILE.dig('site', 'editorialAuthorId'), 'lang' => locale, 'toc' => false, 'tags' => tags,
         'content_type' => 'curated_summary', 'curation_id' => identifier,
         'image' => image.merge('alt' => "#{alt_prefix}: #{card_data['quote']}"),
         'permalink' => "/#{locale}/posts/#{url_slug}/", 'translation_url' => "/#{alternate}/posts/#{url_slug}/",
       }.merge(source)
       frontmatter['submitted_by'] = public_credit if public_credit
-      frontmatter['publisher_disclosure'] = locale == 'de' ? 'Beide Publikationen werden von Marcel Lehmann herausgegeben.' : 'Both publications are edited by Marcel Lehmann.' if parsed.host.delete_prefix('www.') == 'powerplatformtip.com'
-      heading = locale == 'de' ? 'Bedeutung für Governance' : 'Governance takeaway'
+      frontmatter['publisher_disclosure'] = PROFILE.dig('site', 'disclosure', 'text', locale) if DISCLOSURE_HOSTS.include?(parsed.host.delete_prefix('www.'))
+      heading = PROFILE.dig('site', 'takeawayHeading', locale)
       video_embed = source_type == 'youtube' ? "\n{% include source-video-embed.html %}\n" : ''
       content = "#{YAML.dump(frontmatter)}---\n\n## TL;DR\n\n#{body_text(summary)}\n\n{% include curated-attribution.html %}\n#{video_embed}\n## #{heading}\n\n#{body_text(takeaway)}\n"
       ["#{now.utc.strftime('%Y-%m-%d')}-#{url_slug}-#{locale}.md", content]

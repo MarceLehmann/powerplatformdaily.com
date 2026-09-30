@@ -7,6 +7,14 @@
     content="width=device-width, user-scalable=no, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
   >
 
+  {%- comment -%}
+    Launch switch (_config.yml: launch). Until it is true every page asks search engines not to index it;
+    assets/robots.txt disallows crawling as well. Both flip together at go-live.
+  {%- endcomment -%}
+  {%- unless site.launch == true %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- endunless %}
+
   {%- capture seo_tags -%}
     {% seo title=false %}
   {%- endcapture -%}

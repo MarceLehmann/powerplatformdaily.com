@@ -1,5 +1,13 @@
 # The Site Configuration
 
+# Launch switch. While false the whole site is noindex, robots.txt disallows everything and no sitemap is
+# advertised, so the site can be deployed and piloted without being indexed. Set it to true only at go-live
+# (see docs/2026-09-30_go-live-runbook.md) and flip the repository variable SITE_LIVE at the same time.
+launch: false
+
+# Everything that differs between sites (name, domain, tags, scope, palette, ...) lives in _data/profile.json.
+# title, url and description below must stay consistent with it; tools/profile.test.mjs checks this.
+
 # Import the theme
 theme: jekyll-theme-chirpy
 
@@ -14,16 +22,16 @@ timezone: Europe/Zurich
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Power Platform Governance # the main title
+title: Power Platform News # the main title
 
-tagline: Governance, standards, and practical guidance # it will display as the subtitle
+tagline: News on Power Apps, Power Automate and Copilot Studio # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  Power Platform governance guidance for secure, scalable, and well-managed solutions.
+  Independent news on Power Apps, Power Automate and Copilot Studio: short, source-credited summaries with a direct link to the original article.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://powerplatformgovernance.com"
+url: "https://powerplatformnews.com"
 
 github:
   username: # left empty on purpose: the automation repo behind this site is private
@@ -56,11 +64,14 @@ webmaster_verifications:
 # The end of `jekyll-seo-tag` settings
 
 # Web Analytics Settings
+# Analytics stay off until an ID is entered. The cookie banner only appears when at least one provider is
+# configured, and its text names exactly the configured providers. Use IDs created for this site, not the
+# ones of another site.
 analytics:
   google:
-    id: G-FDJ0NBT92J
+    id: # fill in a Google Analytics 4 measurement ID (G-XXXXXXXXXX) at go-live
   clarity:
-    id: ynscoepp3a
+    id: # fill in a Microsoft Clarity project ID at go-live
   goatcounter:
     id: # fill in your GoatCounter ID
   umami:

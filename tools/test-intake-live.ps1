@@ -1,9 +1,21 @@
-param([string]$FlowId = 'b8c08dea-43e2-43e2-90ce-e5c8e3fe3671')
+param([string]$FlowId)
 
 $ErrorActionPreference = 'Stop'
-$tenant = '25561124-bd58-4eba-99ac-9e8b9cd32b13'
-$root = 'https://kmupower.crm17.dynamics.com/api/data/v9.2'
-$flowRoot = 'https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/7bf06bc7-6b19-e10e-ade3-9337f010d45e/flows/' + $FlowId
+Push-Location (Split-Path $PSScriptRoot -Parent)
+try {
+    $generated = node --input-type=module -e "import {config, primaryKey} from './tools/automation.mjs'; console.log(JSON.stringify({config, primaryKey}))"
+    if ($LASTEXITCODE -ne 0) { throw 'Cannot read the site configuration.' }
+} finally {
+    Pop-Location
+}
+$manifest = $generated | ConvertFrom-Json -Depth 100
+$config = $manifest.config
+if (!$FlowId) { $FlowId = $config.flows.intake.id }
+$tenant = $config.tenant
+$root = $config.organization + '/api/data/v9.2'
+$entitySet = $config.entitySet
+$key = $manifest.primaryKey
+$flowRoot = 'https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/' + $config.environment + '/flows/' + $FlowId
 $testBase = 'https://www.powerplatformtip.com/article/powerplatformtip/powerplatformtip-56-empowering-tools-in-coe/?intake_check=' + [guid]::NewGuid().ToString()
 $records = @()
 $initialState = $null
@@ -23,7 +35,7 @@ function Send-Submission($Payload, [int]$ExpectedStatus) {
 }
 
 try {
-    $dataverseToken = az account get-access-token --resource https://kmupower.crm17.dynamics.com --tenant $tenant --query accessToken -o tsv
+    $dataverseToken = az account get-access-token --resource $config.organization --tenant $tenant --query accessToken -o tsv
     if ($LASTEXITCODE -ne 0) { throw 'Dataverse login required.' }
     $flowToken = az account get-access-token --resource https://service.flow.microsoft.com/ --tenant $tenant --query accessToken -o tsv
     if ($LASTEXITCODE -ne 0) { throw 'Power Automate login required.' }
@@ -41,8 +53,8 @@ try {
 
     Send-Submission @{ content_url = $testBase; submitter_name = 'PRIVATE INTAKE TEST'; publish_credit = '' } 202
     Send-Submission @{ content_url = $testBase + '#duplicate'; submitter_name = 'SHOULD NOT REPLACE'; publish_credit = 'yes' } 202
-    $stored = Invoke-RestMethod -Uri ($root + '/new_governancesources?$filter=' + [uri]::EscapeDataString("new_contenturl eq '$testBase'")) -Headers $headers
-    $records += $stored.value.new_governancesourceid
+    $stored = Invoke-RestMethod -Uri ($root + '/' + $entitySet + '?$filter=' + [uri]::EscapeDataString("new_contenturl eq '$testBase'")) -Headers $headers
+    $records += $stored.value.$key
     if ($stored.value.Count -ne 1) { throw 'Duplicate submission created more than one source.' }
     $record = $stored.value[0]
     if ($record.new_enabled -ne $false -or $record.new_approval -ne 100000000 -or $record.new_processing -ne 100000002) { throw 'Submission escaped approval gates.' }
@@ -50,8 +62,8 @@ try {
 
     $creditUrl = $testBase + '-credit'
     Send-Submission @{ content_url = $creditUrl; submitter_name = 'Marcel Lehmann'; submitter_linkedin = 'https://www.linkedin.com/in/marcelehmann/'; publish_credit = 'yes' } 202
-    $credit = Invoke-RestMethod -Uri ($root + '/new_governancesources?$filter=' + [uri]::EscapeDataString("new_contenturl eq '$creditUrl'")) -Headers $headers
-    $records += $credit.value.new_governancesourceid
+    $credit = Invoke-RestMethod -Uri ($root + '/' + $entitySet + '?$filter=' + [uri]::EscapeDataString("new_contenturl eq '$creditUrl'")) -Headers $headers
+    $records += $credit.value.$key
     if ($credit.value.Count -ne 1 -or $credit.value[0].new_publishcredit -ne $true -or $credit.value[0].new_submittername -ne 'Marcel Lehmann') { throw 'Explicit credit was not stored correctly.' }
 
     foreach ($invalid in @(
@@ -70,10 +82,10 @@ try {
         if ($activated) {
             Invoke-RestMethod -Uri ($root + '/workflows(' + $FlowId + ')') -Headers $headers -Method Patch -ContentType 'application/json' -Body '{"statecode":0,"statuscode":1}' | Out-Null
         }
-        $remaining = Invoke-RestMethod -Uri ($root + '/new_governancesources?$select=new_governancesourceid&$filter=' + [uri]::EscapeDataString("startswith(new_contenturl,'$testBase')")) -Headers $headers
-        $records += $remaining.value.new_governancesourceid
+        $remaining = Invoke-RestMethod -Uri ($root + '/' + $entitySet + '?$select=' + $key + '&$filter=' + [uri]::EscapeDataString("startswith(new_contenturl,'$testBase')")) -Headers $headers
+        $records += $remaining.value.$key
         foreach ($recordId in @($records | Where-Object { $_ } | Select-Object -Unique)) {
-            Invoke-RestMethod -Uri ($root + '/new_governancesources(' + $recordId + ')') -Headers $headers -Method Delete | Out-Null
+            Invoke-RestMethod -Uri ($root + '/' + $entitySet + '(' + $recordId + ')') -Headers $headers -Method Delete | Out-Null
         }
     }
     $callback = $null

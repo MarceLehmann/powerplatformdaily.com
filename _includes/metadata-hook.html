@@ -5,33 +5,30 @@
 {% endif %}
 
 {% if page.url == '/' or page.url == '/about/' %}
-<!-- Organization + Person entity schema (GEO: links Marcel Lehmann / Power Platform Governance
-     to the sameAs profiles already emitted by jekyll-seo-tag on the WebSite object). -->
+<!-- Organization + Person entity schema (GEO: links Marcel Lehmann / the site
+     to the sameAs profiles). Name, URL and description come from _config.yml, the sameAs list from
+     _data/profile.json, so the same include serves every site built on this engine. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://powerplatformgovernance.com/#organization",
-      "name": "Power Platform Governance",
-      "url": "https://powerplatformgovernance.com/",
-      "description": "A curated collection of Microsoft Power Platform governance articles: short, source-credited summaries with a clear governance takeaway and a direct link to the original article.",
-      "sameAs": [
-        "https://kmupower.com",
-        "https://www.powerplatformacademy.online",
-        "https://www.powerplatformtip.com"
-      ]
+      "@id": {{ site.url | append: '/#organization' | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "url": {{ site.url | append: '/' | jsonify }},
+      "description": {{ site.description | strip | jsonify }},
+      "sameAs": {{ site.data.profile.site.organizationSameAs | jsonify }}
     },
     {
       "@type": "Person",
-      "@id": "https://powerplatformgovernance.com/about/#person",
+      "@id": {{ site.url | append: '/about/#person' | jsonify }},
       "name": "Marcel Lehmann",
-      "url": "https://powerplatformgovernance.com/about/",
+      "url": {{ site.url | append: '/about/' | jsonify }},
       "jobTitle": "Microsoft MVP",
-      "worksFor": { "@id": "https://powerplatformgovernance.com/#organization" },
+      "worksFor": { "@id": {{ site.url | append: '/#organization' | jsonify }} },
       "sameAs": ["https://www.linkedin.com/in/marcelehmann/", "https://www.youtube.com/@marcelehmann", "https://www.wikidata.org/wiki/Q141568800"],
-      "knowsAbout": ["Power Platform Governance", "Power Automate", "Copilot Studio", "Dataverse"]
+      "knowsAbout": ["Power Apps", "Power Automate", "Copilot Studio", "Dataverse", "Power Platform Governance"]
     }
   ]
 }
@@ -46,9 +43,12 @@
   Person; curated_summary posts credit the Organization (matches the existing
   authors.yml-driven behaviour, now with a proper @id link). isBasedOn added for
   curated posts as a direct, honest source credit (data already in front matter).
+  Image URLs are made absolute because structured data should not carry relative URLs.
 {%- endcomment -%}
 {%- assign is_original = false -%}
 {%- if page.content_type == 'original_article' -%}{%- assign is_original = true -%}{%- endif -%}
+{%- assign author_anchor = '#organization' -%}
+{%- if is_original -%}{%- assign author_anchor = 'about/#person' -%}{%- endif -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,11 +61,11 @@
   "inLanguage": {{ page.lang | jsonify }},
   "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }} },
   {% if page.image -%}
-  "image": { "@type": "ImageObject", "url": {{ page.image.path | jsonify }}, "caption": {{ page.image.alt | jsonify }} },
+  "image": { "@type": "ImageObject", "url": {{ page.image.path | absolute_url | jsonify }}, "caption": {{ page.image.alt | jsonify }} },
   {%- endif %}
   {% unless is_original %}{% if page.source_url %}"isBasedOn": {{ page.source_url | jsonify }},{% endif %}{% endunless %}
-  "author": { "@id": "https://powerplatformgovernance.com/{% if is_original %}about/#person{% else %}#organization{% endif %}" },
-  "publisher": { "@id": "https://powerplatformgovernance.com/#organization" }
+  "author": { "@id": {{ site.url | append: '/' | append: author_anchor | jsonify }} },
+  "publisher": { "@id": {{ site.url | append: '/#organization' | jsonify }} }
 }
 </script>
 {%- endif -%}

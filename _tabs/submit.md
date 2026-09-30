@@ -4,10 +4,10 @@ title: Submit content
 icon: fas fa-paper-plane
 order: 6
 permalink: /submit/
-description: "Suggest a Power Platform governance blog or article for review and possible publication."
+description: "Suggest a Power Apps, Power Automate or Copilot Studio blog, article, video or podcast for a short, source-credited summary."
 ---
 
-Suggest an article, blog, YouTube video or podcast episode about Power Platform governance. We publish short summaries after review, credit the original author and link back to the original.
+Suggest an article, blog, RSS feed, YouTube video or podcast episode about Power Apps, Power Automate or Copilot Studio. Relevant items are checked automatically; we publish short summaries, credit the original author and link back to the original.
 
 {% assign submission_endpoint = site.data.submission.endpoint | default: '' | strip %}
 {% if submission_endpoint == '' %}

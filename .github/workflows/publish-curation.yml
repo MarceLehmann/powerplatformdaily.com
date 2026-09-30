@@ -30,7 +30,7 @@ jobs:
         if: hashFiles('tools/pending-cards.json') != ''
         with:
           python-version: '3.12'
-      - name: Render governance card images
+      - name: Render card images
         if: hashFiles('tools/pending-cards.json') != ''
         run: |
           set -euo pipefail
@@ -57,7 +57,7 @@ jobs:
           if ! git diff --cached --quiet; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git commit -m 'Publish approved governance summaries'
+            git commit -m 'Publish approved summaries'
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break

@@ -1,6 +1,6 @@
-import { approval, config, kind, processing } from './automation.mjs';
+import { approval, config, kind, primaryKey, processing, profile } from './automation.mjs';
 
-export const intakeName = 'Power Platform Governance - Website submissions - Webhook';
+export const intakeName = profile.dataverse.flows.intake.name;
 export const intakeSchema = {
   type: 'object', additionalProperties: false, required: ['content_url'],
   properties: {
@@ -57,7 +57,7 @@ export function intakeDefinition() {
       Store: {
         type: 'Scope', runAfter: after('Validate'), actions: {
           Find_existing: dataverse('ListRecords', {
-            entityName: config.entitySet, $select: 'new_governancesourceid', $top: 1,
+            entityName: config.entitySet, $select: primaryKey, $top: 1,
             $filter: "@concat('new_contenturl eq ', decodeUriComponent('%27'), replace(outputs('Content_URL'), decodeUriComponent('%27'), decodeUriComponent('%27%27')), decodeUriComponent('%27'))",
           }),
           Create_if_new: {

@@ -1,4 +1,4 @@
-name: Daily Governance Digest
+name: Daily Digest
 
 on:
   schedule:
@@ -11,6 +11,8 @@ permissions:
 
 jobs:
   send-digest:
+    # Only after go-live: the repository variable SITE_LIVE is set to 'true' (see docs/2026-09-30_go-live-runbook.md).
+    if: ${{ vars.SITE_LIVE == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

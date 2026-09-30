@@ -1,12 +1,14 @@
 name: IndexNow Ping
 
-# Meldet alle Sitemap-URLs nach jedem Content-Push an IndexNow (Bing, Copilot,
-# Yandex u. a.), damit neue oder geaenderte Seiten schneller gecrawlt werden.
-# Liest die URL-Liste direkt aus dem live sitemap.xml, damit neue Artikel aus
-# der Curation-Pipeline automatisch mit erfasst werden.
-# Ergaenzt die normale Sitemap-Erfassung; ersetzt sie nicht.
-# Hinweis: IndexNow wird von Bing/Yandex konsumiert, NICHT von Google -
-# fuer Google bleiben sitemap.xml und interne Verlinkung die massgeblichen Signale.
+# Reports all sitemap URLs to IndexNow (Bing, Copilot, Yandex and others) after every content push, so new or
+# changed pages are crawled faster. Reads the URL list from the live sitemap.xml, so articles from the curation
+# pipeline are included automatically. Complements the normal sitemap discovery; does not replace it.
+# Note: IndexNow is consumed by Bing/Yandex, NOT by Google - for Google the sitemap and internal linking remain
+# the decisive signals.
+#
+# Domain and key come from _data/profile.json (the key file <key>.txt must exist at the site root).
+# The job only runs when the repository variable SITE_LIVE is 'true' (set at go-live, see
+# docs/2026-09-30_go-live-runbook.md), so an unlaunched, noindex site never pings anyone.
 
 on:
   push:
@@ -29,24 +31,30 @@ concurrency:
 
 jobs:
   ping:
+    if: ${{ vars.SITE_LIVE == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Submit alle Sitemap-URLs an IndexNow
+      - uses: actions/checkout@v7
+      - name: Submit all sitemap URLs to IndexNow
         run: |
-          curl -sS https://powerplatformgovernance.com/sitemap.xml -o sitemap.xml
+          DOMAIN=$(node -p "require('./_data/profile.json').site.domain")
+          curl -sS --fail "https://${DOMAIN}/sitemap.xml" -o sitemap.xml
           node -e "
             const fs = require('fs');
+            const profile = JSON.parse(fs.readFileSync('_data/profile.json', 'utf8'));
+            const host = profile.site.domain;
+            const key = profile.indexNow.key;
             const xml = fs.readFileSync('sitemap.xml', 'utf8');
             const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
-            if (urls.length === 0) { throw new Error('Keine URLs in sitemap.xml gefunden'); }
+            if (urls.length === 0) { throw new Error('No URLs found in sitemap.xml'); }
             fs.writeFileSync('indexnow-payload.json', JSON.stringify({
-              host: 'powerplatformgovernance.com',
-              key: 'bc2d7106a7e3443f761906c6b7b7f5b0',
-              keyLocation: 'https://powerplatformgovernance.com/bc2d7106a7e3443f761906c6b7b7f5b0.txt',
+              host,
+              key,
+              keyLocation: 'https://' + host + '/' + key + '.txt',
               urlList: urls,
             }));
-            console.log(urls.length + ' URLs aus sitemap.xml an IndexNow uebermittelt');
+            console.log(urls.length + ' URLs from sitemap.xml submitted to IndexNow');
           "
           curl -sS --fail-with-body -X POST https://api.indexnow.org/indexnow \
             -H 'Content-Type: application/json; charset=utf-8' \

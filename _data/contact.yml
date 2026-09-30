@@ -11,9 +11,9 @@
   icon: "fas fa-rss"
   noblank: true
 
-- type: linkedin
-  icon: "fab fa-linkedin"
-  url: "https://www.linkedin.com/company/111059078" # Power Platform Governance Daily
+# - type: linkedin
+#   icon: "fab fa-linkedin"
+#   url: ""  # add a LinkedIn page for the news site here once it exists
 # Uncomment and complete the url below to enable more contact options
 #
 # - type: mastodon

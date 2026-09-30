@@ -1,6 +1,6 @@
 require 'uri'
 
-module GovernanceSubmission
+module SubmissionEndpoint
   def self.public_endpoint?(endpoint, direct_webhook: false)
     return true if endpoint.empty?
 
@@ -20,8 +20,8 @@ end
 
 Jekyll::Hooks.register :site, :post_read do |site|
   settings = site.data['submission'] ||= {}
-  endpoint = ENV.fetch('GOVERNANCE_SUBMISSION_ENDPOINT', settings['endpoint'].to_s).strip
-  unless GovernanceSubmission.public_endpoint?(endpoint, direct_webhook: settings['direct_webhook'])
+  endpoint = ENV.fetch('SUBMISSION_ENDPOINT', settings['endpoint'].to_s).strip
+  unless SubmissionEndpoint.public_endpoint?(endpoint, direct_webhook: settings['direct_webhook'])
     raise 'Invalid submission endpoint. Signed Power Automate callbacks require explicit direct_webhook approval.'
   end
   settings['endpoint'] = endpoint

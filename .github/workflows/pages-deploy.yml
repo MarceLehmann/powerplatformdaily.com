@@ -45,15 +45,26 @@ jobs:
           ruby-version: 3.4
           bundler-cache: true
 
+      - name: Launch switch consistency
+        run: |
+          launch=$(grep -E '^launch:' _config.yml | awk '{print $2}')
+          if [ "${{ vars.SITE_LIVE }}" = "true" ] && [ "$launch" != "true" ]; then
+            echo "::warning::SITE_LIVE is true but launch is $launch in _config.yml. Flip both switches together (docs/2026-09-30_go-live-runbook.md)."
+          fi
+          if [ "${{ vars.SITE_LIVE }}" != "true" ] && [ "$launch" = "true" ]; then
+            echo "::warning::launch is true but the variable SITE_LIVE is not set, so IndexNow and the digest stay off."
+          fi
+
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
-          GOVERNANCE_SUBMISSION_ENDPOINT: ${{ secrets.GOVERNANCE_SUBMISSION_ENDPOINT }}
+          SUBMISSION_ENDPOINT: ${{ secrets.SUBMISSION_ENDPOINT }}
 
       - name: Test automation contracts
         run: |
           node --test tools/*.test.mjs
+          python3 -m py_compile tools/render_card.py tools/send_digest.py
           bundle exec ruby tools/test-publish-curation.rb
         env:
           JEKYLL_ENV: "production"

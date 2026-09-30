@@ -10,7 +10,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Cannot generate automation definition.' }
     $manifest = $generated | ConvertFrom-Json -Depth 100
     $config = $manifest.config
-    $tenant = '25561124-bd58-4eba-99ac-9e8b9cd32b13'
+    $tenant = $config.tenant
     $dataverseToken = az account get-access-token --resource $config.organization --tenant $tenant --query accessToken -o tsv
     if ($LASTEXITCODE -ne 0) { throw 'Dataverse login required.' }
     $powerAppsToken = az account get-access-token --resource https://service.powerapps.com/ --tenant $tenant --query accessToken -o tsv
@@ -33,9 +33,10 @@ try {
     if ($github.Count -ne 1) {
         throw 'Exactly one connected GitHub connection is required. Sign in in Power Automate, or select it with -GitHubConnection. No flow changes were made.'
     }
-    $references = Invoke-RestMethod -Uri ($root + '/connectionreferences?$select=connectionreferenceid,connectionreferencelogicalname,connectionid&$filter=startswith(connectionreferencelogicalname,''new_governance_'')') -Headers $dataverseHeaders
-    $githubReference = $references.value | Where-Object connectionreferencelogicalname -eq 'new_governance_github'
-    if (!$githubReference) { throw 'Governance solution connection references are missing.' }
+    $prefix = $config.connectionReferencePrefix
+    $references = Invoke-RestMethod -Uri ($root + '/connectionreferences?$select=connectionreferenceid,connectionreferencelogicalname,connectionid&$filter=startswith(connectionreferencelogicalname,''' + $prefix + ''')') -Headers $dataverseHeaders
+    $githubReference = $references.value | Where-Object connectionreferencelogicalname -eq ($prefix + 'github')
+    if (!$githubReference) { throw "Connection references with prefix '$prefix' are missing. Create the solution's connection references first (docs/2026-09-30_go-live-runbook.md, step 'Dataverse solution')." }
     $workflowReferences = @{}
     foreach ($property in $manifest.references.PSObject.Properties) {
         $reference = $references.value | Where-Object connectionreferencelogicalname -eq $property.Value.connectionReferenceLogicalName
@@ -47,30 +48,46 @@ try {
             api = @{ name = ($property.Value.id -split '/')[-1] }
         }
     }
-    $flowId = 'fbbf117b-3bb3-f111-aaac-70a8a505a30e'
-    $existing = Invoke-RestMethod -Uri ($root + '/workflows(' + $flowId + ')?$select=statecode') -Headers $dataverseHeaders
-    if ($existing.statecode -ne 0) { throw 'Stop the flow before deploying a new definition.' }
+    $flowId = $config.flows.processing.id
+    $flowName = $config.flows.processing.name
+    $exists = $true
+    try {
+        $existing = Invoke-RestMethod -Uri ($root + '/workflows(' + $flowId + ')?$select=statecode') -Headers $dataverseHeaders
+    } catch {
+        if ([int]$_.Exception.Response.StatusCode -ne 404) { throw }
+        $exists = $false
+    }
+    if ($exists -and $existing.statecode -ne 0) { throw 'Stop the flow before deploying a new definition.' }
 
-    # Stopping the flow does not touch a run that was already in progress at that moment - it's
-    # left stranded in Running with no end time. Since the trigger's concurrency is capped at 1,
-    # a stranded run silently blocks every future scheduled trigger from starting at all, with no
-    # error anywhere, until someone notices and cancels it by hand (this happened for real during
-    # this project's first deployment). Cancel any such leftover run automatically, every time,
-    # so a deployment can never reintroduce that problem.
-    $flowToken = az account get-access-token --resource https://service.flow.microsoft.com/ --tenant $tenant --query accessToken -o tsv
-    if ($LASTEXITCODE -ne 0) { throw 'Power Automate (Flow) login required.' }
-    $flowHeaders = @{ Authorization = "Bearer $flowToken"; Accept = 'application/json' }
-    $runsUri = "https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/$($config.environment)/flows/$flowId/runs?api-version=2016-11-01&`$top=10"
-    $recentRuns = Invoke-RestMethod -Uri $runsUri -Headers $flowHeaders
-    $stranded = @($recentRuns.value | Where-Object { $_.properties.status -in @('Running', 'Waiting') })
-    foreach ($run in $stranded) {
-        Write-Warning "Cancelling a run left stranded by the previous stop: $($run.name)"
-        Invoke-RestMethod -Uri "https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/$($config.environment)/flows/$flowId/runs/$($run.name)/cancel?api-version=2016-11-01" -Headers $flowHeaders -Method Post | Out-Null
+    if ($exists) {
+        # Stopping the flow does not touch a run that was already in progress at that moment - it's
+        # left stranded in Running with no end time. Since the trigger's concurrency is capped at 1,
+        # a stranded run silently blocks every future scheduled trigger from starting at all, with no
+        # error anywhere, until someone notices and cancels it by hand (this happened for real during
+        # this project's first deployment). Cancel any such leftover run automatically, every time,
+        # so a deployment can never reintroduce that problem.
+        $flowToken = az account get-access-token --resource https://service.flow.microsoft.com/ --tenant $tenant --query accessToken -o tsv
+        if ($LASTEXITCODE -ne 0) { throw 'Power Automate (Flow) login required.' }
+        $flowHeaders = @{ Authorization = "Bearer $flowToken"; Accept = 'application/json' }
+        $runsUri = "https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/$($config.environment)/flows/$flowId/runs?api-version=2016-11-01&`$top=10"
+        $recentRuns = Invoke-RestMethod -Uri $runsUri -Headers $flowHeaders
+        $stranded = @($recentRuns.value | Where-Object { $_.properties.status -in @('Running', 'Waiting') })
+        foreach ($run in $stranded) {
+            Write-Warning "Cancelling a run left stranded by the previous stop: $($run.name)"
+            Invoke-RestMethod -Uri "https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/$($config.environment)/flows/$flowId/runs/$($run.name)/cancel?api-version=2016-11-01" -Headers $flowHeaders -Method Post | Out-Null
+        }
     }
 
     Invoke-RestMethod -Uri ($root + '/connectionreferences(' + $githubReference.connectionreferenceid + ')') -Headers $dataverseHeaders -Method Patch -ContentType 'application/json' -Body (@{ connectionid = $github[0].name } | ConvertTo-Json) | Out-Null
     $clientData = @{ properties = @{ connectionReferences = $workflowReferences; definition = $manifest.definition }; schemaVersion = '1.0.0.0' } | ConvertTo-Json -Depth 100 -Compress
-    Invoke-RestMethod -Uri ($root + '/workflows(' + $flowId + ')') -Headers $dataverseHeaders -Method Patch -ContentType 'application/json' -Body (@{ clientdata = $clientData } | ConvertTo-Json -Depth 100) | Out-Null
+    if ($exists) {
+        Invoke-RestMethod -Uri ($root + '/workflows(' + $flowId + ')') -Headers $dataverseHeaders -Method Patch -ContentType 'application/json' -Body (@{ clientdata = $clientData } | ConvertTo-Json -Depth 100) | Out-Null
+    } else {
+        # First deployment for this site: create the cloud flow inside the solution (category 5 = modern flow).
+        $createHeaders = $dataverseHeaders.Clone()
+        $createHeaders['MSCRM.SolutionUniqueName'] = $config.solution.ToLowerInvariant()
+        Invoke-RestMethod -Uri ($root + '/workflows') -Headers $createHeaders -Method Post -ContentType 'application/json' -Body (@{ workflowid = $flowId; name = $flowName; category = 5; type = 1; primaryentity = 'none'; clientdata = $clientData } | ConvertTo-Json -Depth 100) | Out-Null
+    }
     $stored = Invoke-RestMethod -Uri ($root + '/workflows(' + $flowId + ')?$select=clientdata,statecode') -Headers $dataverseHeaders
     $actual = ($stored.clientdata | ConvertFrom-Json -Depth 100).properties.definition | ConvertTo-Json -Depth 100 -Compress
     $expected = $manifest.definition | ConvertTo-Json -Depth 100 -Compress

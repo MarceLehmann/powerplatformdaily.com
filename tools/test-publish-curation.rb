@@ -17,12 +17,12 @@ end
 
 article = {
   'publishable' => true, 'source_url' => 'https://www.powerplatformtip.com/article/powerplatformtip/powerplatformtip-56-empowering-tools-in-coe/',
-  'source_title' => '#PowerPlatformTip 56', 'source_name' => 'PowerPlatformTip', 'source_author' => 'Marcel Lehmann',
-  'source_language' => 'en', 'source_published_at' => '2023-05-30', 'tags' => %w[governance ownership],
-  'card_topic' => 'Ownership', 'card_quote' => 'Ownership is a chain. Check the links before one breaks.',
-  'card_take' => 'The owner leaves. The solution stays.', 'card_state' => 'Owned',
-  'en' => { 'title' => 'CoE ownership reviews', 'description' => 'CoE tools support ownership reviews.', 'tldr' => 'CoE tools support reviews of permissions and orphaned resources.', 'takeaway' => "- Admins/CoE: include resource ownership in offboarding checks.\n- Security/Compliance: review orphaned resources on a fixed schedule." },
-  'de' => { 'title' => 'CoE: Verantwortlichkeiten prüfen', 'description' => 'CoE-Werkzeuge unterstützen die Prüfung.', 'tldr' => 'CoE-Werkzeuge helfen bei der Prüfung von Berechtigungen und verwaisten Ressourcen.', 'takeaway' => "- Admins/CoE: Ressourcenverantwortung in Offboarding-Checks aufnehmen.\n- Security/Compliance: verwaiste Ressourcen nach festem Plan prüfen." },
+  'source_title' => 'Example agent settings update', 'source_name' => 'PowerPlatformTip', 'source_author' => 'Marcel Lehmann',
+  'source_language' => 'en', 'source_published_at' => '2023-05-30', 'tags' => %w[copilot-studio announcement],
+  'card_topic' => 'Copilot Studio', 'card_quote' => 'One new setting. Check it before your users find it.',
+  'card_take' => 'Small switch, big difference.', 'card_state' => 'In preview',
+  'en' => { 'title' => 'Example agent settings update', 'description' => 'A short example description of the agent settings update.', 'tldr' => 'An example summary that names the setting and what changes for makers.', 'takeaway' => "- Makers: review the new agent setting before publishing.\n- Admins/CoE: check the tenant default for the setting." },
+  'de' => { 'title' => 'Beispiel: Update der Agent-Einstellungen', 'description' => 'Eine kurze Beispielbeschreibung des Updates.', 'tldr' => 'Eine Beispielzusammenfassung, die die Einstellung und die Folgen für Ersteller benennt.', 'takeaway' => "- Ersteller: die neue Agent-Einstellung vor der Veröffentlichung prüfen.\n- Admins/CoE: den Standardwert im Mandanten prüfen." },
 }
 event = { 'action' => 'curated-publication', 'client_payload' => { 'request_id' => '00000000-0000-4000-8000-000000000001', 'articles' => [article], 'credit' => { 'name' => 'PRIVATE TEST NAME', 'publish_credit' => false } } }
 Dir.mktmpdir do |root|
@@ -37,17 +37,15 @@ Dir.mktmpdir do |root|
     check(content.include?("/assets/img/curated/#{identifier}.png"), 'Missing card image path')
     # The URL/filename must be a readable slug from the title, not the bare hash - the hash still
     # backs the image path and curation_id (checked above/below), just not what readers see.
-    check(name.include?('coe-ownership-reviews'), "Filename is not a readable slug: #{name}")
+    check(name.include?('example-agent-settings-update'), "Filename is not a readable slug: #{name}")
     check(!name.include?(identifier), 'Filename must not be the raw hash')
-    check(content.match?(%r{permalink: "/[a-z]{2}/posts/coe-ownership-reviews-[0-9a-f]{8}/"}), 'Permalink is not a readable slug')
+    check(content.match?(%r{permalink: "/[a-z]{2}/posts/example-agent-settings-update-[0-9a-f]{8}/"}), 'Permalink is not a readable slug')
   end
   manifest = JSON.parse(File.read(File.join(root, 'tools', 'pending-cards.json')))
   check(manifest.length == 1 && manifest.first['id'] == identifier && manifest.first['quote'] == article['card_quote'], 'Bad pending-cards.json entry')
   repository = File.expand_path('..', __dir__)
   FileUtils.cp_r(File.join(repository, '_includes'), root)
-  FileUtils.mkdir_p(File.join(root, '_data'))
-  FileUtils.cp(File.join(repository, '_data', 'authors.yml'), File.join(root, '_data'))
-  FileUtils.cp_r(File.join(repository, '_data', 'locales'), File.join(root, '_data'))
+  FileUtils.cp_r(File.join(repository, '_data'), root)
   configuration = Jekyll.configuration('config' => File.join(repository, '_config.yml'), 'source' => root, 'destination' => File.join(root, '_site'), 'quiet' => true)
   Jekyll::Site.new(configuration).process
   %w[en de].each do |locale|
@@ -87,9 +85,7 @@ Dir.mktmpdir do |root|
   end
   repository = File.expand_path('..', __dir__)
   FileUtils.cp_r(File.join(repository, '_includes'), root)
-  FileUtils.mkdir_p(File.join(root, '_data'))
-  FileUtils.cp(File.join(repository, '_data', 'authors.yml'), File.join(root, '_data'))
-  FileUtils.cp_r(File.join(repository, '_data', 'locales'), File.join(root, '_data'))
+  FileUtils.cp_r(File.join(repository, '_data'), root)
   configuration = Jekyll.configuration('config' => File.join(repository, '_config.yml'), 'source' => root, 'destination' => File.join(root, '_site'), 'quiet' => true)
   Jekyll::Site.new(configuration).process
   rendered = Dir.glob(File.join(root, '_site', 'en', 'posts', '*', 'index.html')).first
@@ -120,4 +116,27 @@ rejects { CurationPublisher.render(article.merge('card_topic' => 'A topic label 
 check(CurationPublisher.credit({ 'publish_credit' => 'true', 'name' => 'private' }).nil?, 'String consent accepted')
 check(!CurationPublisher.body_text('{% include secret %}<script>[click](https://evil.org)').include?('{%'), 'Liquid injection')
 check(!CurationPublisher.body_text('<script>').include?('<script>'), 'HTML injection')
-puts 'Publisher checks passed: rendered languages and hreflang, attribution, URL deduplication, consent, limits and escaping.'
+# The site profile is the contract: allowed tags, scope switches, headings, author and disclosure.
+profile = CurationPublisher::PROFILE
+expected_tags = profile['tags']['core'] + profile['tags']['optional'].select { |_, product| product['enabled'] }.keys
+check(CurationPublisher::TAGS == expected_tags, 'Tag allowlist must equal the active profile tags')
+profile['tags']['optional'].reject { |_, product| product['enabled'] }.each_key do |tag|
+  rejects { CurationPublisher.render(article.merge('tags' => [tag]), {}, Time.now) }
+end
+Dir.mktmpdir do |root|
+  disclosed = article.merge('source_url' => 'https://www.powerplatformtip.com/article/profile-check/')
+  plain = article.merge('source_url' => 'https://blog.example.org/profile-check/')
+  event = { 'action' => 'curated-publication', 'client_payload' => { 'request_id' => '00000000-0000-4000-8000-000000000005', 'articles' => [disclosed, plain], 'credit' => {} } }
+  files = CurationPublisher.publish(event, root, now: Time.utc(2026, 9, 18))
+  check(files.length == 4, 'Expected two articles in both languages')
+  files.each do |name|
+    locale = name[/-(en|de)\.md\z/, 1]
+    content = File.read(File.join(root, '_posts', name))
+    check(content.include?("## #{profile['site']['takeawayHeading'][locale]}"), "Missing profile takeaway heading (#{locale})")
+    check(content.include?("author: #{profile['site']['editorialAuthorId']}"), 'Editorial author must come from the profile')
+    check(content.include?(profile['site']['cardAltPrefix'][locale]), 'Card alt text must use the profile prefix')
+    from_disclosed_host = content.include?('source_url: https://www.powerplatformtip.com/')
+    check(content.include?('publisher_disclosure:') == from_disclosed_host, 'Publisher disclosure must appear exactly for the configured hosts')
+  end
+end
+puts 'Publisher checks passed: rendered languages and hreflang, attribution, URL deduplication, consent, limits, escaping and the site profile contract.'

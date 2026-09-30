@@ -1,4 +1,6 @@
-# Callback supplied by GOVERNANCE_SUBMISSION_ENDPOINT during the Pages build.
-# Direct public intake approved on 2026-09-18; the rendered URL is public.
+# Callback supplied by the SUBMISSION_ENDPOINT Actions secret during the Pages build.
+# Public intake is NOT approved for this site yet: while direct_webhook is false the build rejects a signed
+# Power Automate callback and the form stays disabled. Set it to true only after the decision recorded in
+# docs/2026-09-30_spezifikation_power-platform-news.md (open decision E4). The rendered URL is public.
 endpoint: ""
-direct_webhook: true
+direct_webhook: false

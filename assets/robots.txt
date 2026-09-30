@@ -1,4 +1,10 @@
-# Power Platform Governance – robots.txt
+---
+permalink: /robots.txt
+# Site-owned override of the theme's assets/robots.txt. Because it has the same path, Jekyll uses this file
+# instead of emitting two files for /robots.txt. What it says depends on the launch switch in _config.yml.
+---
+{% if site.launch == true -%}
+# {{ site.title }} - robots.txt
 
 User-agent: *
 Allow: /
@@ -41,4 +47,10 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://powerplatformgovernance.com/sitemap.xml
+Sitemap: {{ '/sitemap.xml' | absolute_url }}
+{%- else -%}
+# {{ site.title }} - not launched yet: nothing may be crawled or indexed (launch: false in _config.yml).
+
+User-agent: *
+Disallow: /
+{%- endif %}

@@ -4,7 +4,7 @@ title: Sources
 icon: fas fa-globe
 order: 1
 permalink: /sources/
-description: "Original blogs and websites behind our Power Platform governance summaries, with direct links and related reading."
+description: "Original blogs and websites behind our Power Platform News summaries, with direct links and related reading."
 ---
 
 Credit belongs to the original authors. These are the publications featured in our curated summaries.

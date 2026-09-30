@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Render one Power Platform Governance Daily-style card PNG per pending
-curated article.
+"""Render one statement-card PNG per pending curated article.
 
 Ported from MarceLehmann/Copilot_LinkedIn render/govcard.py + hand.py
 (statement layout only, English text only - card copy always stays
-English regardless of the post's language, matching the existing brand
-cards). Unlike the source templates, this card carries no personal
-portrait or signature - this site publishes as governance_editorial,
-independent of any one person. Reads tools/pending-cards.json (written
-by publish-curation.rb), writes assets/img/curated/<id>.png per entry.
+English regardless of the post's language). The card carries no personal
+portrait or signature: the site publishes under its editorial identity,
+independent of any one person. Kicker, hashtag, domain and the state icon
+come from _data/profile.json (site.card / site.domain), so the same script
+serves every site built on this engine. Reads tools/pending-cards.json
+(written by publish-curation.rb), writes assets/img/curated/<id>.png per entry.
 """
 import json
 import math
@@ -20,8 +20,13 @@ from PIL import Image, ImageDraw, ImageFont
 W, H = 1080, 1350
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-FONT_DIR = os.path.join(HERE, 'render-assets', 'fonts')
+# CARD_FONT_DIR lets a local preview use other fonts; CI downloads Kalam into tools/render-assets/fonts.
+FONT_DIR = os.environ.get('CARD_FONT_DIR') or os.path.join(HERE, 'render-assets', 'fonts')
 MANIFEST_PATH = os.path.join(HERE, 'pending-cards.json')
+with open(os.path.join(ROOT, '_data', 'profile.json'), encoding='utf-8') as _profile_file:
+    PROFILE = json.load(_profile_file)
+SITE = PROFILE['site']
+CARD = SITE['card']
 OUT_DIR = os.path.join(ROOT, 'assets', 'img', 'curated')
 
 NAVY = (16, 34, 62)
@@ -112,16 +117,17 @@ class Card:
     def kicker(self):
         wobbly_line(self.d, [(0, 12), (W, 12)], GOLD, width=10, rng=self.rng, amp=1.6, seg=44)
         f = font(26)
-        t = 'POWER PLATFORM GOVERNANCE'
+        t = CARD['kicker']
         self.text((70, 62), t, font=f, fill=NAVY)
         tw = self.tl(t, f)
-        self.text((70 + tw + 18, 62), 'DAILY', font=f, fill=GOLD)
+        if CARD.get('kickerAccent'):
+            self.text((70 + tw + 18, 62), CARD['kickerAccent'], font=f, fill=GOLD)
         wobbly_line(self.d, [(70, 112), (W - 70, 112)], LGRAY, width=2, rng=self.rng)
 
     def footer(self):
         wobbly_line(self.d, [(70, H - 118), (W - 70, H - 118)], LGRAY, width=2, rng=self.rng)
-        self.text((70, H - 92), '#PowerPlatformGovernanceDaily', font=font(24, bold=False), fill=GRAY)
-        t = 'powerplatformgovernance.com'
+        self.text((70, H - 92), CARD['hashtag'], font=font(24, bold=False), fill=GRAY)
+        t = SITE['domain']
         f = font(24)
         self.text((W - 70 - self.tl(t, f), H - 92), t, font=f, fill=TEAL)
 
@@ -144,8 +150,13 @@ def render_statement(entry):
     wobbly_line(c.d, [(90, y), (330, y)], GOLD, width=5, rng=c.rng, amp=2.0)
     y += 50
     y = c.block(90, y, entry['take'], font(36, bold=False), GRAY, W - 180, 52)
-    c.tag(90, H - 220, '     ' + entry['state'], NAVY, (222, 232, 244))
-    check_mark(c.d, (108, H - 210, 134, H - 184), GREEN, width=4, rng=c.rng)
+    # stateIcon: "check" (positive outcome label), "dot" (neutral status label) or "none".
+    icon = CARD.get('stateIcon', 'check')
+    c.tag(90, H - 220, entry['state'] if icon == 'none' else '     ' + entry['state'], NAVY, (222, 232, 244))
+    if icon == 'check':
+        check_mark(c.d, (108, H - 210, 134, H - 184), GREEN, width=4, rng=c.rng)
+    elif icon == 'dot':
+        c.d.ellipse([113, H - 205, 129, H - 189], fill=TEAL)
     c.footer()
     return c.img
 
