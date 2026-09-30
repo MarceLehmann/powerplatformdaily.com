@@ -1,7 +1,7 @@
 # Spezifikation: Power Platform News
 
 Stand: 30.09.2026, überarbeitet nach zwei unabhängigen Gegenprüfungen · Status: **Entwurf zur Freigabe, nichts ist live** · Branch `ccr-453447c5-qyg2zo` (nicht gemerged)
-Bezug: Governance-Repo `powerplatformgovernance` @ `4f34575`. Verweise der Form `gov:datei:zeile` meinen dieses Repo. Die Dokumentation dort wurde am 30.09.2026 an den Code angepasst (Branch `ccr-453447c5-qyg2zo`, Commit `77912f0`, ebenfalls nicht gemerged). Die Befunde aus Anhang A stehen dort gekürzt unter „Bekannte Lücken“.
+Bezug: Governance-Repo `powerplatformgovernance` @ `4f34575`. Verweise der Form `gov:datei:zeile` meinen dieses Repo. Die Dokumentation dort wurde am 30.09.2026 an den Code angepasst (Branch `ccr-453447c5-qyg2zo`, Commits `77912f0` und `5a12a2f`, ebenfalls nicht gemerged). Die Befunde aus Anhang A stehen dort gekürzt unter „Bekannte Lücken“.
 Das Go-Live selbst steht im [Runbook](2026-09-30_go-live-runbook.md).
 
 ## 1. Kurzfassung und Empfehlung
