@@ -2,7 +2,7 @@
 
 Kuratierte, quellenbasierte Kurzmeldungen zu **Power Apps, Power Automate und Copilot Studio** für [powerplatformnews.com](https://powerplatformnews.com). Power BI und Microsoft Fabric sind als Schalter vorbereitet und derzeit aus. „Copilot“ allgemein (Microsoft 365 Copilot, GitHub Copilot) gehört ausdrücklich nicht zum Scope.
 
-> **Status: nicht live.** Die Seite ist absichtlich auf `noindex` (`launch: false` in `_config.yml`), kein Flow ist aktiv, IndexNow und Digest sind hinter der Repository-Variable `SITE_LIVE` gesperrt, die öffentliche Einreichung ist nicht freigegeben.
+> **Status: nicht live.** Die Seite ist absichtlich auf `noindex` (`launch: false` in `_config.yml`), kein Flow ist aktiv, IndexNow und Digest sind hinter der Repository-Variable `SITE_LIVE` gesperrt, die öffentliche Einreichung ist nicht freigegeben. Das Repository enthält keine Beiträge und keine Quellendaten, und im Tenant wurde nichts angelegt.
 >
 > - Was entschieden werden muss und wie die Lösung aufgebaut ist: [docs/2026-09-30_spezifikation_power-platform-news.md](docs/2026-09-30_spezifikation_power-platform-news.md)
 > - Wie es Schritt für Schritt live geht (mit Freigabe-Toren): [docs/2026-09-30_go-live-runbook.md](docs/2026-09-30_go-live-runbook.md)
@@ -36,8 +36,9 @@ Alles, was diese Seite von der Schwesterseite [Power Platform Governance](https:
 | `_tabs/` | About, Datenschutz, Einreichung, Quellen, Archiv, Tags |
 | `tools/automation.mjs`, `tools/intake.mjs` | Generatoren der beiden Power-Automate-Flows |
 | `tools/publish-curation.rb` | Publisher: validiert und schreibt DE/EN-Posts |
-| `tools/deploy-*.ps1`, `tools/test-intake-live.ps1` | Bereitstellung und Live-Test (brauchen `az login`) |
-| `tools/seed-mvp-sources.mjs` | Legt Quellen in Dataverse an (standardmäßig deaktiviert) |
+| `tools/bootstrap-solution.mjs` | Legt Lösung, eigene Tabelle, Connection References, Ansichten und Formular in Dataverse an (Trockenlauf als Standard, `--apply` schreibt, nur Ergänzungen) |
+| `tools/deploy-*.ps1`, `tools/test-intake-live.ps1` | Bereitstellung der beiden Flows und Live-Test (brauchen `az login`) |
+| `tools/seed-mvp-sources.mjs` | Legt Quellen in Dataverse an (Trockenlauf als Standard, `--apply` schreibt, Quellen standardmässig deaktiviert) |
 | `tools/render_card.py`, `tools/send_digest.py` | Karten-Bilder, Digest-Mail |
 | `.github/workflows/` | Build und Deploy, Publisher, IndexNow, Digest |
 | `docs/` | Spezifikation und Go-Live-Runbook (nicht Teil der Website) |
