@@ -1,0 +1,291 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "$authentication": {
+      "type": "SecureObject",
+      "defaultValue": {}
+    },
+    "$connections": {
+      "type": "Object",
+      "defaultValue": {}
+    }
+  },
+  "triggers": {
+    "manual": {
+      "type": "Request",
+      "kind": "Http",
+      "inputs": {
+        "method": "POST",
+        "schema": {}
+      },
+      "runtimeConfiguration": {
+        "secureData": {
+          "properties": [
+            "outputs"
+          ]
+        }
+      }
+    }
+  },
+  "actions": {
+    "Validate": {
+      "type": "Scope",
+      "runAfter": {},
+      "actions": {
+        "Validate_payload": {
+          "type": "ParseJson",
+          "runAfter": {},
+          "inputs": {
+            "content": "@triggerBody()",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "content_url"
+              ],
+              "properties": {
+                "content_url": {
+                  "type": "string",
+                  "minLength": 10,
+                  "maxLength": 2048
+                },
+                "submitter_name": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "submitter_linkedin": {
+                  "type": "string",
+                  "maxLength": 2048
+                },
+                "publish_credit": {
+                  "type": "string",
+                  "enum": [
+                    "",
+                    "yes"
+                  ]
+                },
+                "website": {
+                  "type": "string",
+                  "maxLength": 0
+                }
+              }
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "inputs"
+              ]
+            }
+          }
+        },
+        "Content_URL": {
+          "type": "Compose",
+          "inputs": "@first(split(body('Validate_payload')?['content_url'], '#'))",
+          "runAfter": {
+            "Validate_payload": [
+              "Succeeded"
+            ]
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "inputs"
+              ]
+            }
+          }
+        },
+        "Validate_host": {
+          "type": "ParseJson",
+          "runAfter": {
+            "Content_URL": [
+              "Succeeded"
+            ]
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "inputs"
+              ]
+            }
+          },
+          "inputs": {
+            "content": {
+              "content_url_valid": "@and(equals(uriScheme(outputs('Content_URL')), 'https'), equals(uriPort(outputs('Content_URL')), 443), contains(uriHost(outputs('Content_URL')), '.'), not(isInt(last(split(uriHost(outputs('Content_URL')), '.')))), not(contains(uriHost(outputs('Content_URL')), ':')), not(contains(outputs('Content_URL'), '@')), not(contains(outputs('Content_URL'), decodeUriComponent('%5C'))), not(contains(outputs('Content_URL'), ' ')), not(contains(outputs('Content_URL'), decodeUriComponent('%0A'))), not(contains(outputs('Content_URL'), decodeUriComponent('%0D'))), not(contains(createArray('local', 'localhost', 'internal', 'test', 'invalid', 'example', 'onion'), last(split(toLower(uriHost(outputs('Content_URL'))), '.')))))",
+              "linkedin_valid": "@if(empty(body('Validate_payload')?['submitter_linkedin']), true, and(equals(uriScheme(body('Validate_payload')?['submitter_linkedin']), 'https'), equals(uriPort(body('Validate_payload')?['submitter_linkedin']), 443), contains(createArray('linkedin.com', 'www.linkedin.com'), toLower(uriHost(body('Validate_payload')?['submitter_linkedin']))), startsWith(uriPath(body('Validate_payload')?['submitter_linkedin']), '/in/'), greater(length(uriPath(body('Validate_payload')?['submitter_linkedin'])), 4), not(contains(body('Validate_payload')?['submitter_linkedin'], '@')), not(contains(body('Validate_payload')?['submitter_linkedin'], '?')), not(contains(body('Validate_payload')?['submitter_linkedin'], '#')), not(contains(body('Validate_payload')?['submitter_linkedin'], decodeUriComponent('%5C')))))"
+            },
+            "schema": {
+              "type": "object",
+              "required": [
+                "content_url_valid",
+                "linkedin_valid"
+              ],
+              "properties": {
+                "content_url_valid": {
+                  "type": "boolean",
+                  "enum": [
+                    true
+                  ]
+                },
+                "linkedin_valid": {
+                  "type": "boolean",
+                  "enum": [
+                    true
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Invalid_request": {
+      "type": "Response",
+      "kind": "Http",
+      "runAfter": {
+        "Validate": [
+          "Failed",
+          "TimedOut"
+        ]
+      },
+      "inputs": {
+        "statusCode": 400,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store"
+        },
+        "body": {
+          "accepted": false,
+          "error": "invalid_submission"
+        }
+      }
+    },
+    "Store": {
+      "type": "Scope",
+      "runAfter": {
+        "Validate": [
+          "Succeeded"
+        ]
+      },
+      "actions": {
+        "Find_existing": {
+          "type": "OpenApiConnection",
+          "runAfter": {},
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "inputs",
+                "outputs"
+              ]
+            }
+          },
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "dataverse",
+              "operationId": "ListRecords"
+            },
+            "parameters": {
+              "entityName": "new_newssources",
+              "$select": "new_newssourceid",
+              "$top": 1,
+              "$filter": "@concat('new_contenturl eq ', decodeUriComponent('%27'), replace(outputs('Content_URL'), decodeUriComponent('%27'), decodeUriComponent('%27%27')), decodeUriComponent('%27'))"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Create_if_new": {
+          "type": "If",
+          "expression": "@empty(body('Find_existing')?['value'])",
+          "runAfter": {
+            "Find_existing": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {}
+          },
+          "actions": {
+            "Create_submission": {
+              "type": "OpenApiConnection",
+              "runAfter": {},
+              "runtimeConfiguration": {
+                "secureData": {
+                  "properties": [
+                    "inputs",
+                    "outputs"
+                  ]
+                }
+              },
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "dataverse",
+                  "operationId": "CreateRecord"
+                },
+                "parameters": {
+                  "entityName": "new_newssources",
+                  "item/new_name": "@take(outputs('Content_URL'), 200)",
+                  "item/new_contenturl": "@outputs('Content_URL')",
+                  "item/new_kind": 100000000,
+                  "item/new_approval": 100000000,
+                  "item/new_enabled": false,
+                  "item/new_processing": 100000002,
+                  "item/new_failures": 0,
+                  "item/new_publishcredit": "@equals(body('Validate_payload')?['publish_credit'], 'yes')",
+                  "item/new_submittername": "@if(equals(body('Validate_payload')?['publish_credit'], 'yes'), trim(coalesce(body('Validate_payload')?['submitter_name'], '')), '')",
+                  "item/new_submitterlinkedin": "@if(equals(body('Validate_payload')?['publish_credit'], 'yes'), coalesce(body('Validate_payload')?['submitter_linkedin'], ''), '')",
+                  "item/new_lastmessage": "Website submission received. The AI Foundry quality gate will fetch and assess it within a few minutes and autonomously approve or reject it; no content was fetched by this webhook."
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Accepted": {
+      "type": "Response",
+      "kind": "Http",
+      "runAfter": {
+        "Store": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "statusCode": 202,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store"
+        },
+        "body": {
+          "accepted": true,
+          "status": "awaiting_review"
+        }
+      }
+    },
+    "Storage_failed": {
+      "type": "Response",
+      "kind": "Http",
+      "runAfter": {
+        "Store": [
+          "Failed",
+          "TimedOut"
+        ]
+      },
+      "inputs": {
+        "statusCode": 503,
+        "headers": {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store"
+        },
+        "body": {
+          "accepted": false,
+          "error": "temporarily_unavailable"
+        }
+      }
+    }
+  },
+  "outputs": {}
+}

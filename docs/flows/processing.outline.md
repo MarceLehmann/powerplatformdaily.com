@@ -1,0 +1,106 @@
+# Power Platform News - RSS and articles - Every 5 minutes: Gliederung
+
+Erzeugt mit `node tools/export-flows.mjs`, nicht von Hand ändern. Die vollständige Definition steht in der gleichnamigen Datei `*.definition.json`; hier ist nur die Struktur mit den wichtigsten Angaben je Aktion (lange Ausdrücke sind gekürzt).
+
+- **Flow:** Power Platform News - RSS and articles - Every 5 minutes
+- **Vorgesehene Flow-ID:** `2065cd53-1f90-4ab6-aaa9-4d9727401363` (wird beim Anlegen durch `tools/deploy-automation.ps1` verwendet)
+- **Auslöser:** `Every_5_minutes`, Wiederholung alle 5 Minuten, höchstens 1 Lauf gleichzeitig
+- **Verbindungen (Connection References):** `new_news_dataverse`, `new_news_rss`, `new_news_conversion`, `new_news_foundry`, `new_news_github`
+- **Aktionen:** 71
+- **Zustand nach der Bereitstellung:** ausgeschaltet, bis das Deploy-Skript mit `-Enable` läuft
+
+## Aktionen
+
+- `Initialize_arrays` (InitializeVariable): Candidates (array), Publications (array), SeenIDs (array), ExtractedText (string)
+- `List_sources` (OpenApiConnection): dataverse / ListRecords auf new_newssources, Filter `(statecode eq 0 and new_enabled eq true and new_approval eq 100000001 and (new_kind eq 100000000 or new_kind eq 100000001 or new_kind eq 100000002 or new_kind eq 1000000…`
+- `For_each_source` (Foreach): über `@body('List_sources')?['value']`
+  - `Try_source` (Scope)
+    - `Is_waiting_for_GitHub` (Switch): nach `@if(equals(items('For_each_source')?['new_processing'], 100000004), 'queued', if(equals(items('For_each_source')?['new_approval'], 100000000), 'pending', 'ready'))`
+      - Fall `queued`:
+        - `Read_publication_receipt` (OpenApiConnection): github / GetReference
+        - `Confirm_publication` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+        - `Receipt_not_available` (Scope), läuft nur nach Fehler von `Read_publication_receipt` (Failed, TimedOut)
+          - `Request_expired` (If): wenn `@less(ticks(items('For_each_source')?['new_pendingwatermark']), ticks(addHours(utcNow(), -24)))`
+            - dann:
+              - `Missing_receipt_review` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+      - Fall `pending`:
+        - `Pending_URL` (Compose): `@trim(items('For_each_source')?['new_contenturl'])`
+        - `Validate_pending_URL` (ParseJson): liest `{"scheme":"@uriScheme(outputs('Pending_URL'))","public_host":"@and(contains(uriHost(outputs('Pending_URL')), '.'), not(isInt(last(split(uriHost(outputs('Pending_URL')), …`
+        - `Fetch_pending` (Http): GET `@outputs('Pending_URL')`
+        - `Is_feed` (If): wenn `@or(contains(toLower(coalesce(outputs('Fetch_pending')?['headers']?['Content-Type'], '')), 'xml'), contains(toLower(coalesce(outputs('Fetch_pending')?['headers']?['Conte…`
+          - dann:
+            - `Approve_feed_source` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+          - sonst:
+            - `Pending_to_text` (OpenApiConnection): conversion / HtmlToText
+            - `Foundry_gate` (OpenApiConnection): foundry / ChatCompletion
+            - `Parse_gate` (ParseJson): liest `@body('Foundry_gate')?['choices']?[0]?['message']?['content']`
+            - `Apply_gate` (If): wenn `@equals(body('Parse_gate')?['meets_criteria'], true)`
+              - dann:
+                - `Approve_source` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+              - sonst:
+                - `Reject_source` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+      - Standard:
+        - `Reset_candidates` (SetVariable): Candidates = `[]`
+        - `Reset_publications` (SetVariable): Publications = `[]`
+        - `Reset_feed_IDs` (SetVariable): SeenIDs = `[]`
+        - `Cutoff` (Compose): `@utcNow()`
+        - `Source_URL` (Compose): `@trim(items('For_each_source')?['new_contenturl'])`
+        - `Validate_source_URL` (ParseJson): liest `{"scheme":"@uriScheme(outputs('Source_URL'))","public_host":"@and(contains(uriHost(outputs('Source_URL')), '.'), not(isInt(last(split(uriHost(outputs('Source_URL')), '.'…`
+        - `Is_RSS` (If): wenn `@equals(items('For_each_source')?['new_kind'], 100000001)`
+          - dann:
+            - `Read_RSS` (OpenApiConnection): rss / ListFeedItems
+            - `Current_feed_IDs` (Select): aus `@body('Read_RSS')`
+            - `Unseen_RSS_items` (Query): aus `@body('Read_RSS')`
+            - `Set_RSS_candidates` (SetVariable): Candidates = `@body('Unseen_RSS_items')`
+            - `Set_feed_IDs` (SetVariable): SeenIDs = `@union(json(coalesce(items('For_each_source')?['new_seenids'], '[]')), body('Current_feed_IDs'))`
+          - sonst:
+            - `Set_article_candidate` (SetVariable): Candidates = `@createArray(addProperty(json('{}'), 'primaryLink', outputs('Source_URL')))`
+        - `Compose_capped` (Compose): `@take(variables('Candidates'), 30)`
+        - `Cap_candidates` (SetVariable): Candidates = `@outputs('Compose_capped')`
+        - `For_each_article` (Foreach): über `@variables('Candidates')`
+          - `Article_URL` (Compose): `@if(startsWith(toLower(trim(items('For_each_article')?['primaryLink'])), 'http'), trim(items('For_each_article')?['primaryLink']), concat(uriScheme(outputs('Source_URL')…`
+          - `Video_ID` (Compose): `@if(contains(outputs('Article_URL'), 'v='), first(split(last(split(outputs('Article_URL'), 'v=')), '&')), if(contains(outputs('Article_URL'), 'youtu.be/'), first(split(l…`
+          - `Try_article` (Scope)
+            - `Same_approved_host` (If): wenn `@and(equals(toLower(uriHost(outputs('Article_URL'))), toLower(uriHost(outputs('Source_URL')))), equals(uriScheme(outputs('Article_URL')), 'https'), equals(uriPort(output…`
+              - dann:
+                - `Content_kind_router` (Switch): nach `@if(not(empty(outputs('Video_ID'))), 'youtube', if(equals(items('For_each_source')?['new_kind'], 100000003), 'podcast', 'text'))`
+                  - Fall `youtube`:
+                    - `Fetch_transcript` (Http): GET `@concat('https://www.youtube.com/api/timedtext?fmt=json3&lang=en&v=', outputs('Video_ID'))`
+                    - `Transcript_segments` (Select): aus `@coalesce(body('Fetch_transcript')?['events'], createArray())`
+                    - `Set_extracted_text_youtube` (SetVariable): ExtractedText = `@join(body('Transcript_segments'), ' ')`
+                  - Fall `podcast`:
+                    - `Fetch_audio` (Http): GET `@outputs('Article_URL')`
+                    - `Transcribe_audio` (OpenApiConnection): foundry / TranscribeAudio
+                    - `Set_extracted_text_podcast` (SetVariable): ExtractedText = `@coalesce(body('Transcribe_audio')?['text'], '')`
+                  - Standard:
+                    - `Fetch_article` (Http): GET `@outputs('Article_URL')`
+                    - `HTML_to_text` (OpenApiConnection): conversion / HtmlToText
+                    - `Set_extracted_text_article` (SetVariable): ExtractedText = `@body('HTML_to_text')`
+                - `Foundry_extract` (OpenApiConnection): foundry / ChatCompletion
+                - `Parse_assessment` (ParseJson): liest `@body('Foundry_extract')?['choices']?[0]?['message']?['content']`
+                - `Relevant_article` (If): wenn `@equals(body('Parse_assessment')?['publishable'], true)`
+                  - dann:
+                    - `Add_publication` (AppendToArrayVariable): Publications += `@addProperty(addProperty(addProperty(body('Parse_assessment'), 'source_url', outputs('Article_URL')), 'source_type', if(not(empty(outputs('Video_ID'))), 'youtube', if(eq…`
+              - sonst:
+                - `Require_approved_host` (ParseJson): liest `{"approved":false}`
+          - `Catch_article` (Scope), läuft nur nach Fehler von `Try_article` (Failed, TimedOut)
+            - `Skipped_article` (Compose): `@concat('Article could not be processed, skipped without affecting the rest of the batch: ', outputs('Article_URL'))`
+        - `Recheck_source` (OpenApiConnection): dataverse / GetItem auf new_newssources
+        - `Still_approved` (If): wenn `@and(equals(body('Recheck_source')?['new_approval'], 100000001), equals(body('Recheck_source')?['new_enabled'], true), equals(body('Recheck_source')?['statecode'], 0), e…`
+          - dann:
+            - `Has_publications` (If): wenn `@greater(length(variables('Publications')), 0)`
+              - dann:
+                - `Request_id` (Compose): `@guid()`
+                - `Public_credit` (Compose): `@if(equals(body('Recheck_source')?['new_publishcredit'], true), addProperty(addProperty(addProperty(json('{}'), 'name', coalesce(body('Recheck_source')?['new_submitterna…`
+                - `Mark_queued` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+                - `Dispatch_to_GitHub` (OpenApiConnection): github / CreateRepositoryDispatchEvent
+              - sonst:
+                - `No_relevant_articles` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+          - sonst:
+            - `Changed_during_run` (Compose): `Source changed or approval withdrawn; no publication requested.`
+  - `Catch_source` (Scope), läuft nur nach Fehler von `Try_source` (Failed, TimedOut)
+    - `Processing_not_queued` (If): wenn `@not(equals(items('For_each_source')?['new_processing'], 100000004))`
+      - dann:
+        - `Record_failure` (OpenApiConnection): dataverse / UpdateRecord auf new_newssources
+      - sonst:
+        - `Preserve_receipt_state` (Compose): `Receipt lookup or confirmation failed; preserve queued or expired-review state. Never redispatch a waiting request.`

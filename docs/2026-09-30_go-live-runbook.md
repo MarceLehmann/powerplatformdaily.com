@@ -40,7 +40,7 @@ curl -s https://powerplatformnews.com/ | grep -o '<meta name="robots"[^>]*>'
 
 ## Stufe 2: Flows bereit, aber aus (WP-01, WP-20)
 
-Voraussetzungen: PowerShell 7.4 oder neuer, Azure CLI, Node 20 oder neuer. Alle Namen und Kennungen stehen in `_data/profile.json`. Die Schritte 2.1 bis 2.4 sind nur im Tenant möglich und wurden bisher nicht ausgeführt.
+Voraussetzungen: PowerShell 7.4 oder neuer, Azure CLI, Node 20 oder neuer. Alle Namen und Kennungen stehen in `_data/profile.json`. Die Schritte 2.1 bis 2.4 sind nur im Tenant möglich und wurden bisher nicht ausgeführt. Was die Deploy-Skripte anlegen werden, lässt sich vorab in `docs/flows/` ansehen: die Gliederung (`*.outline.md`) und die vollständige Definition (`*.definition.json`) beider Flows.
 
 **2.1 Lizenz klären (WP-20) [M].** Zuerst, weil sie über den Pilotumfang entscheidet: Welche Lizenz deckt beide Flows, welches Tageslimit für Anfragen gilt, und wie viel verbraucht der Governance-Flow schon? Nach dem Modell der Spezifikation (Abschnitt 7.2) überschreitet der Flow ein Tageslimit von 40.000 Anfragen ab 7 aktiven Quellen, der Pilot mit 15 Quellen braucht rund 92.000. Reicht das Limit nicht, zuerst E10 entscheiden (Fallback-Polling, WP-21) oder den Pilot verkleinern. Rechnerisch bleiben bei 40.000 Anfragen pro Tag höchstens 6 Quellen, abzüglich dessen, was der Governance-Flow verbraucht, und damit weniger als die 10–15 Quellen des geplanten Pilots.
 

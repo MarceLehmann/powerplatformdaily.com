@@ -41,7 +41,9 @@ Alles, was diese Seite von der Schwesterseite [Power Platform Governance](https:
 | `tools/seed-mvp-sources.mjs` | Legt Quellen in Dataverse an (Trockenlauf als Standard, `--apply` schreibt, Quellen standardmässig deaktiviert) |
 | `tools/render_card.py`, `tools/send_digest.py` | Karten-Bilder, Digest-Mail |
 | `.github/workflows/` | Build und Deploy, Publisher, IndexNow, Digest |
+| `tools/export-flows.mjs` | Schreibt die erzeugten Flow-Definitionen nach `docs/flows/` (`--check` prüft, ob sie aktuell sind) |
 | `docs/` | Spezifikation und Go-Live-Runbook (nicht Teil der Website) |
+| `docs/flows/` | Die beiden Flows zur Ansicht: Gliederung und vollständige JSON-Definition, abgeleitet aus dem Code und kein Import-Paket |
 
 ## Lokal prüfen
 

@@ -29,12 +29,12 @@ Das Go-Live selbst steht im [Runbook](2026-09-30_go-live-runbook.md).
 ### 2.1 Vorgehen
 
 - **Commit 1** (`d284fd2`) ist ein unveränderter Snapshot von Engine und Site-Skelett (71 Dateien im Baum, davon bestand `README.md` schon im ersten Commit). **Commit 2** enthält die Anpassungen für News, **Commit 3** die erste Fassung dieser Doku. Die folgenden Commits enthalten das Bootstrap-Skript, die korrigierten Seitentexte und die überarbeitete Doku nach den Gegenprüfungen. So zeigt `git diff d284fd2..HEAD` exakt, was sich geändert hat.
-- Von den 71 Dateien des Snapshots blieben **32 unverändert**, 38 wurden angepasst, 1 verschoben (`robots.txt` nach `assets/robots.txt`). Dazu kommen 13 neue Dateien (u. a. Profil, drei Test-Dateien, Bootstrap-Skript, diese Doku). Der Baum hat damit 84 Dateien.
+- Von den 71 Dateien des Snapshots blieben **31 unverändert**, 39 wurden angepasst, 1 verschoben (`robots.txt` nach `assets/robots.txt`). Dazu kommen 20 neue Dateien (u. a. Profil, vier Test-Dateien, Bootstrap- und Export-Skript, diese Doku und der Flow-Export). Der Baum hat damit 91 Dateien.
 - Die generierten Flow-Definitionen wurden gegen das Governance-Original verglichen (beide als JSON mit zwei Leerzeichen Einrückung erzeugt und Zeile für Zeile verglichen). Verarbeitung: 29 von 1.217 Zeilen weichen ab, alles Werte (Tabellen- und Schlüsselnamen, Repository, User-Agent, Prompt-Text) sowie das Feld `today` in den beiden Modellaufrufen. Einreichung: 3 von 291 Zeilen, nur Tabellen- und Schlüsselnamen. Schlüssel und Typen sind in beiden Definitionen identisch.
 
 ### 2.2 Übernommen (Funktionsumfang)
 
-Statische Chirpy-Seite mit DE/EN-Beiträgen und hreflang · Einreichungsformular und Webhook-Flow · Verarbeitungs-Flow (alle 5 Minuten, sequenziell, vier Quellarten: Artikel, RSS, YouTube, Podcast) · KI-Gate für Einreichungen · KI-Extraktion (Relevanz, Kurzfassung DE/EN, Tags, Kartentexte) · Publisher-Workflow mit Validierung, Deduplizierung und Quittungs-Tag · Karten-Bilder · Quellen-, Tag- und Archivseiten · SEO/GEO (JSON-LD, Canonical, hreflang, Sitemap, `llms.txt`) · IndexNow · Consent-Banner mit Google Analytics und Clarity · PWA · Brevo-Digest · MVP-Quellenlisten und Seed-Skript · Deploy-Skripte · Tests und CI. Neu gegenüber dem Bestand: Bootstrap-Skript für die Dataverse-Seite und die Anzeige des Quelldatums (F16).
+Statische Chirpy-Seite mit DE/EN-Beiträgen und hreflang · Einreichungsformular und Webhook-Flow · Verarbeitungs-Flow (alle 5 Minuten, sequenziell, vier Quellarten: Artikel, RSS, YouTube, Podcast) · KI-Gate für Einreichungen · KI-Extraktion (Relevanz, Kurzfassung DE/EN, Tags, Kartentexte) · Publisher-Workflow mit Validierung, Deduplizierung und Quittungs-Tag · Karten-Bilder · Quellen-, Tag- und Archivseiten · SEO/GEO (JSON-LD, Canonical, hreflang, Sitemap, `llms.txt`) · IndexNow · Consent-Banner mit Google Analytics und Clarity · PWA · Brevo-Digest · MVP-Quellenlisten und Seed-Skript · Deploy-Skripte · Tests und CI. Neu gegenüber dem Bestand: Bootstrap-Skript für die Dataverse-Seite, die Anzeige des Quelldatums (F16) und der Export der Flow-Definitionen zur Ansicht (`docs/flows/`).
 
 ### 2.3 Bewusst nicht übernommen
 
@@ -53,6 +53,8 @@ Es gab weder `az`- noch `pac`-Zugriff, und die Sandbox blockiert Dataverse, die 
 - schreibt nur mit `--apply`, legt an und löscht nichts. An Vorhandenem ändert es zwei Dinge: Es bindet eine vorhandene, noch ungebundene Connection Reference der eigenen Lösung, und es ersetzt das automatisch erzeugte Formular einer Tabelle, die es im selben Lauf selbst angelegt hat. Ein schon vorhandenes Formular bleibt unberührt (ausser mit `--replace-form`),
 - liest zuerst alles, was vom Tenant abhängt (Herausgeber, vorhandene Tabelle samt Auswahlwerten, Bindungsquelle), und bricht vor dem ersten Schreiben ab, wenn etwas nicht passt,
 - wurde ausschliesslich gegen einen simulierten Dataverse getestet (19 Tests, darunter der Aufruf ohne Azure-Anmeldung und die Prüfung des Präfixes von `--bind-from`).
+
+Die erzeugten Flow-Definitionen liegen zur Ansicht in `docs/flows/` (Gliederung und vollständige JSON-Definition beider Flows). Sie sind abgeleitet und kein Import-Paket, und ein Test hält sie mit dem Code synchron (`node tools/export-flows.mjs` schreibt sie neu).
 
 Nicht als Code vorhanden und im Tenant wiederzuverwenden: der Custom Connector `AzureAIFoundry-Privat` und die Foundry-Bereitstellungen `model-router` und `whisper`. Die Laufhistorie des Bestands lässt sich nicht klonen. Siehe WP-01 und WP-18.
 
@@ -193,8 +195,9 @@ Nur HTTPS, Port 443, keine Zugangsdaten in URLs, keine IP-Ziele (geprüft wird d
 | Digest (Brevo) | ja | übernommen, **aus** | E8 |
 | Seed-Skript und MVP-Listen | ja, aktiv | übernommen, **Trockenlauf als Standard**, deaktiviert, `--limit`, `--feed-from`, Scope-Filter, YouTube nur per Option | doppelte Kanäle werden entfernt |
 | Bootstrap der Dataverse-Seite | nein (F7) | **neu**, nur Trockenlauf und simulierte Tests | `tools/bootstrap-solution.mjs` |
+| Flow-Definitionen zur Ansicht | nein | **neu** | `docs/flows/`, vom Test synchron gehalten |
 | Deploy-Skripte | ja | übernommen, parametrisiert | nur geparst, nicht gegen einen Tenant ausgeführt |
-| Tests und CI | ja | übernommen, plus 48 neue Tests | 65 Node-Tests, Publisher- und Seitenprüfungen |
+| Tests und CI | ja | übernommen, plus 52 neue Tests | 69 Node-Tests, Publisher- und Seitenprüfungen |
 | Admin-Flows-Seite, Altbeiträge | ja | **nicht übernommen** | siehe 2.3 |
 | Profil, Launch-Schalter, KI-Hinweis je Beitrag | nein | **neu** | |
 
@@ -278,7 +281,7 @@ Aufwand ist eine grobe Schätzung. „M“ = Marcel erforderlich (Tenant, Konten
 
 | WP | Inhalt | Aufwand | Akzeptanzkriterium | Tor |
 |---|---|---|---|---|
-| 00 | Klon, Profil, Launch-Schalter, Bootstrap-Skript, Tests, Doku (**erledigt** in diesem Branch; Tenant-Teile nie gegen einen Tenant gelaufen) | – | 65 Node-Tests, Publisher-Tests, Build in beiden Launch-Zuständen, `check-site`, `htmlproofer` grün | – |
+| 00 | Klon, Profil, Launch-Schalter, Bootstrap-Skript, Tests, Doku (**erledigt** in diesem Branch; Tenant-Teile nie gegen einen Tenant gelaufen) | – | 69 Node-Tests, Publisher-Tests, Build in beiden Launch-Zuständen, `check-site`, `htmlproofer` grün | – |
 | 01 | **Dataverse-Bereitstellung (M):** `node tools/bootstrap-solution.mjs` (Trockenlauf lesen, dann `--apply`), Verbindungen kontrollieren, danach `deploy-intake.ps1` und `deploy-automation.ps1` (beide Flows bleiben aus) | 2–4 h | Ein zweiter Bootstrap-Lauf meldet alles als vorhanden, beide Deploy-Skripte melden `DefinitionVerified = True`, beide Flows existieren und sind aus | 2 |
 | 02 | **Merge und Seite (M):** (a) Branch nach `main` mergen. Das ist vor jedem Flow-Betrieb nötig, weil `repository_dispatch` nur Workflows des Standard-Branches startet (nach GitHub-Verhalten, nicht geprüft). (b) Pages-Quelle „GitHub Actions“, Custom Domain, DNS, HTTPS, Domain-Verifizierung: vor dem Pilot, wenn E12 „früh“ lautet, sonst vor dem Launch | 1–2 h plus DNS-Wartezeit | (a) Branch auf `main`, Build läuft. (b) Seite erreichbar, `robots.txt` = `Disallow: /`, `noindex` auf jeder Seite | 1 (a, und bei E12 „früh“ auch b), sonst (b) bei 5 |
 | 03 | **Quellen:** offizielle Microsoft-Feeds recherchieren und **einzeln verifizieren**, in `tools/extra-sources.json`. Pilot-Set 10–15 festlegen | 2–4 h | Jede URL liefert HTTP 200 und gültiges XML, und die Beitragslinks der Einträge haben denselben Host wie die Feed-Adresse (Host-Regel, F18). Bei abweichendem Host entscheiden, ob die Regel erweitert werden muss | 3 |
@@ -385,9 +388,10 @@ Drei Dinge hängen am Vertrag und sind getestet: Der Test *no identifiers of ano
 | Prüfung | Ergebnis |
 |---|---|
 | Baseline im Governance-Bestand (Kopie): Node-Tests (17), Publisher-Tests, Build, `check-site` (158 Seiten), `htmlproofer` (355 Links) | grün |
-| Node-Tests im Klon | 65 von 65 (17 Bestand, 48 neu) |
+| Node-Tests im Klon | 69 von 69 (17 Bestand, 52 neu) |
 | Publisher-Tests im Klon, inkl. Profil-Vertrag und Quelldatum | grün |
 | Vergleich erzeugter Flow-Definitionen mit Governance | Verarbeitung: 29 von 1.217 Zeilen weichen ab (Werte und das Feld `today`), Einreichung: 3 von 291 (Tabellen- und Schlüsselnamen). Schlüssel und Typen identisch |
+| Export der Flow-Definitionen nach `docs/flows/`: Dateien stimmen mit dem Generator überein, jede Aktion steht in der Gliederung, keine Tenant-Kennungen oder Geheimnisse. Negativkontrolle von Hand: eine veraltete Datei lässt Test und `--check` fehlschlagen | 4 Tests grün |
 | Durchlauf mit dem echten Publisher: 3 erfundene Beispielartikel, je DE/EN, Karten (mit Ersatzschrift), Build, `check-site` (13 Seiten), `htmlproofer`. Die Beispielartikel lagen nur in einer Wegwerfkopie, nicht im Repo | grün, `launch: false` und `launch: true` |
 | Negativkontrollen (von Hand): gestarteter Build besteht die „nicht gestartet“-Prüfung nicht. Datenschutzseite ohne Google Fonts bzw. jsDelivr fällt durch | schlagen wie vorgesehen fehl |
 | Cookie-Banner und Datenschutztext mit gesetzten und ohne Analytics-IDs | verhalten sich wie beschrieben |
