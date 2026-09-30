@@ -32,12 +32,12 @@ If you accept analytics on your first visit, we collect usage information throug
 
 If you decline, none of these services load.
 {% else %}
-This site does not currently use analytics or advertising cookies. Our hosting provider may log technical data such as IP addresses for security and performance purposes (see "GitHub Pages" below).
+This site does not currently use analytics or advertising cookies. Our hosting provider and the font and script providers named below receive technical data such as your IP address when a page loads (see "Third-Party Services" below).
 {% endif %}
 
 ### Information You Provide Voluntarily
 If you use the [content submission form](/submit/) to suggest an article for curation, we collect:
-- **The suggested article, blog or RSS URL** (required)
+- **The suggested URL** (required)
 - **Your name and LinkedIn profile URL** (optional, only if you choose to add them)
 - A hidden anti-spam field that legitimate visitors never fill in; submissions where it is filled in are discarded automatically
 
@@ -84,6 +84,11 @@ We use the following third-party services:
 - Interaction data such as clicks and scrolling, and anonymised session replays, are collected to understand how the site is used
 - The [Microsoft Privacy Statement](https://privacy.microsoft.com/en-us/privacystatement) applies to data processed by Clarity
 {% endif %}
+### Fonts, icons and scripts (Google Fonts, jsDelivr)
+- When a page loads, your browser fetches fonts from Google Fonts (`fonts.googleapis.com`, `fonts.gstatic.com`) and icons and some scripts from the jsDelivr content delivery network (`cdn.jsdelivr.net`)
+- This happens on every page, before and regardless of your analytics choice. These providers receive your IP address and browser details
+- Google's [Privacy Policy](https://policies.google.com/privacy) applies to Google Fonts
+
 ### GitHub Pages
 Our website is hosted on GitHub Pages:
 - GitHub's [Privacy Policy](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement) applies
@@ -120,7 +125,7 @@ Depending on where you live, you may have the following rights regarding your pe
 4. **Right to Object**: Object to processing of your personal data
 5. **Right to Withdraw Consent**: Withdraw your earlier consent to publish your name/LinkedIn credit at any time
 
-To exercise these rights, contact us at: [info@kmupower.com](mailto:info@kmupower.com)
+To exercise these rights, contact us at: [{{ site.data.profile.site.contactEmail }}](mailto:{{ site.data.profile.site.contactEmail }})
 
 ## Children's Privacy
 
@@ -139,7 +144,7 @@ Every summary links to its original source on another website. We are not respon
 If you have questions about this Privacy Policy or our privacy practices, please contact:
 
 **Marcel Lehmann**
-Email: [info@kmupower.com](mailto:info@kmupower.com)
+Email: [{{ site.data.profile.site.contactEmail }}](mailto:{{ site.data.profile.site.contactEmail }})
 Website: [powerplatformnews.com](https://powerplatformnews.com)
 
 ---

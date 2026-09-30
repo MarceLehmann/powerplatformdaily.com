@@ -6,7 +6,7 @@
 launch: false
 
 # Everything that differs between sites (name, domain, tags, scope, palette, ...) lives in _data/profile.json.
-# title, url and description below must stay consistent with it; tools/profile.test.mjs checks this.
+# title and url below must stay consistent with it; tools/profile.test.mjs checks both. The description is written by hand.
 
 # Import the theme
 theme: jekyll-theme-chirpy

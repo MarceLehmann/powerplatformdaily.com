@@ -55,6 +55,8 @@ Dir.mktmpdir do |root|
     check(document.css('head link[rel="alternate"][hreflang]').map { |link| link['hreflang'] }.sort == %w[de en x-default], 'Missing reciprocal hreflang')
     check(document.at_css('a.original-link')['href'] == article['source_url'], 'Original link changed')
     check(document.css('.contributor-credit').empty?, 'Unapproved contributor rendered')
+    expected_date = locale == 'de' ? '30.05.2023' : 'May 30, 2023'
+    check(document.at_css('.curated-attribution .source-dates')&.text.to_s.include?(expected_date), "Original publication date not shown (#{locale})")
     check(document.css('.curated-attribution a[href=""]').empty?, 'Empty author link')
     check(document.at_css('html')['lang'] == locale, 'Incorrect document language')
     check(document.css('li').length >= 2, 'Takeaway did not render as a bulleted list')

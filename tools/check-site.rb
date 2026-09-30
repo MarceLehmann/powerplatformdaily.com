@@ -12,7 +12,7 @@ site_url = "https://#{profile.dig('site', 'domain')}/"
 # JEKYLL_CONFIG mirrors the --config list of the build (comma separated); default is the plain _config.yml.
 configuration = (ENV['JEKYLL_CONFIG'] || '_config.yml').split(',').map { |file| YAML.safe_load(File.read(file), permitted_classes: [Date, Time]) || {} }.reduce({}) { |merged, part| merged.merge(part) }
 launched = configuration['launch'] == true
-required_pages = %w[index.html submit/index.html about/index.html tags/index.html archives/index.html sources/index.html]
+required_pages = %w[index.html submit/index.html about/index.html privacy/index.html tags/index.html archives/index.html sources/index.html]
 required_pages.each do |path|
   raise "Missing page: #{path}" unless File.file?(File.join(site_dir, path))
 end
@@ -103,6 +103,14 @@ raise 'Approved direct callback rejected' unless SubmissionEndpoint.public_endpo
 raise 'Duplicate signature accepted' if SubmissionEndpoint.public_endpoint?(direct_endpoint + '&sig=duplicate', direct_webhook: true)
 raise 'Rendered endpoint is invalid' unless SubmissionEndpoint.public_endpoint?(submit.at_css('form')['action'].to_s, direct_webhook: submit.at_css('form')['data-direct-webhook'] == 'true')
 
+# Third-party hosts that every page loads without asking must be named in the privacy policy.
+privacy_text = Nokogiri::HTML(File.read(File.join(site_dir, 'privacy/index.html'))).text
+home_html = File.read(File.join(site_dir, 'index.html'))
+{ 'fonts.googleapis.com' => 'Google Fonts', 'fonts.gstatic.com' => 'Google Fonts', 'cdn.jsdelivr.net' => 'jsDelivr' }.each do |host, name|
+  next unless home_html.include?(host)
+  raise "The privacy policy must name #{name}: pages load #{host}" unless privacy_text.include?(name)
+end
+
 sources = Nokogiri::HTML(File.read(File.join(site_dir, 'sources/index.html')))
 domains = sources.css('[data-source-domain]').map { |node| node['data-source-domain'] }
 raise 'Duplicate source domains' unless domains.uniq == domains
@@ -143,6 +151,16 @@ attribution = Liquid::Template.parse(File.read('_includes/curated-attribution.ht
   raise 'Credit leaked without explicit permission' unless !credit.nil? == (permission == true)
   raise 'Credit name must be escaped' if credit && credit.at_css('test')
 end
+
+# The source's own dates are shown next to ours, and only when they are known.
+dated = { 'source_url' => 'https://example.org/article', 'source_site_url' => 'https://example.org/', 'source_name' => 'Example' }
+{ 'en' => 'Original published Sep 28, 2026, updated Sep 30, 2026.', 'de' => 'Originalbeitrag vom 28.09.2026, aktualisiert am 30.09.2026.' }.each do |lang, expected|
+  rendered = attribution.render!('page' => dated.merge('lang' => lang, 'source_published_at' => '2026-09-28', 'source_updated_at' => '2026-09-30'))
+  raise "Source dates missing or wrong (#{lang})" unless Nokogiri::HTML.fragment(rendered).text.gsub(/\s+/, ' ').include?(expected)
+end
+unchanged = attribution.render!('page' => dated.merge('lang' => 'en', 'source_published_at' => '2026-09-28', 'source_updated_at' => '2026-09-28'))
+raise 'An unchanged source date must not be presented as an update' if unchanged.include?('updated')
+raise 'Source dates must not appear when unknown' if attribution.render!('page' => dated).match?(/Original published|Originalbeitrag vom/)
 
 Dir.glob('_posts/*.md').each do |path|
   frontmatter = File.read(path).match(/\A---\s*\n(.*?)\n---/m)

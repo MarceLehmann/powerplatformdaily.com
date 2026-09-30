@@ -36,7 +36,7 @@ try {
     $prefix = $config.connectionReferencePrefix
     $references = Invoke-RestMethod -Uri ($root + '/connectionreferences?$select=connectionreferenceid,connectionreferencelogicalname,connectionid&$filter=startswith(connectionreferencelogicalname,''' + $prefix + ''')') -Headers $dataverseHeaders
     $githubReference = $references.value | Where-Object connectionreferencelogicalname -eq ($prefix + 'github')
-    if (!$githubReference) { throw "Connection references with prefix '$prefix' are missing. Create the solution's connection references first (docs/2026-09-30_go-live-runbook.md, step 'Dataverse solution')." }
+    if (!$githubReference) { throw "Connection references with prefix '$prefix' are missing. Create them first with: node tools/bootstrap-solution.mjs --apply (docs/2026-09-30_go-live-runbook.md, stage 2)." }
     $workflowReferences = @{}
     foreach ($property in $manifest.references.PSObject.Properties) {
         $reference = $references.value | Where-Object connectionreferencelogicalname -eq $property.Value.connectionReferenceLogicalName

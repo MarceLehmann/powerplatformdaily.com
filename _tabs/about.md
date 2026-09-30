@@ -18,15 +18,15 @@ Power Platform News brings what is new in Power Apps, Power Automate and Copilot
 
 ## How this site works
 
-We watch a curated list of blogs, community channels and Microsoft sources. New items are checked automatically for relevance, and the short summaries are written with AI assistance. They are our own summaries, never republications or full translations. Because they are generated automatically, a summary can contain mistakes: read the original before you act on it, and tell us when something is wrong.
+We watch a curated list of independent community blogs and, as they are added, official Microsoft channels. New items are checked automatically for relevance, and the short summaries are written with AI assistance. They are our own summaries, never republications or full translations. Because they are generated automatically, a summary can contain mistakes: read the original before you act on it, and tell us when something is wrong.
 
 ## Editorial approach
 
-We help you find worthwhile reading, not replace it. We identify the original blog and author, distinguish the source's publication date from our entry date, and link directly to the original. We do not republish full articles, images or translations.
+We help you find worthwhile reading, not replace it. We identify the original blog and author, show the source's own publication date next to our entry date when the source states one, and link directly to the original. We do not republish full articles, images or translations.
 
 The original author and the person who suggests a link are not necessarily the same person. Contributor names and LinkedIn profiles appear only with permission. A submitted RSS feed is not blanket permission to republish its contents.
 
-Authors can request a correction or removal by emailing [info@kmupower.com](mailto:info@kmupower.com). Listing a source does not imply a partnership or endorsement.
+Authors can request a correction or removal by emailing [{{ site.data.profile.site.contactEmail }}](mailto:{{ site.data.profile.site.contactEmail }}). Listing a source does not imply a partnership or endorsement.
 
 Many capabilities start in preview and change quickly, so verify availability and requirements against current Microsoft documentation before relying on them in production.
 
@@ -42,4 +42,4 @@ Marcel also edits [PowerPlatformTip](https://www.powerplatformtip.com/) and [Pow
 
 ## Contribute
 
-Suggest an article, blog or RSS feed on our [submission page]({{ '/submit/' | relative_url }}). A link is enough; your name and LinkedIn profile are optional. Suggested links are checked automatically for relevance and quality before anything is published.
+{% assign submission_endpoint = site.data.submission.endpoint | default: '' | strip %}{% if submission_endpoint == '' %}Suggestions are not open yet. When they are, you can suggest an article on our [submission page]({{ '/submit/' | relative_url }}).{% else %}Suggest an article on our [submission page]({{ '/submit/' | relative_url }}).{% endif %} A link is enough; your name and LinkedIn profile are optional. Suggested links are checked automatically for relevance and quality, without a person reviewing each one, before anything is published.

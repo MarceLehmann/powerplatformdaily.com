@@ -24,7 +24,7 @@ test('the profile has every field the tooling and templates rely on', () => {
     'site.card.kicker', 'site.card.hashtag', 'site.card.stateIcon', 'site.disclosure.hosts', 'site.disclosure.text.en', 'site.disclosure.text.de',
     'github.owner', 'github.repository', 'github.authorisedPublisher',
     'dataverse.tenant', 'dataverse.environment', 'dataverse.organization', 'dataverse.solution', 'dataverse.table', 'dataverse.entitySet',
-    'dataverse.displayName', 'dataverse.displayCollectionName', 'dataverse.connectionReferencePrefix', 'dataverse.intervalMinutes',
+    'dataverse.displayName', 'dataverse.displayCollectionName', 'dataverse.viewPrefix', 'dataverse.connectionReferencePrefix', 'dataverse.intervalMinutes',
     'dataverse.flows.processing.id', 'dataverse.flows.processing.name', 'dataverse.flows.intake.id', 'dataverse.flows.intake.name',
     'indexNow.key', 'digest.enabled', 'digest.heading', 'digest.subject', 'seed.techPatterns',
     'scope.relevance', 'scope.exclusions', 'scope.connectProducts', 'scope.stakeholders', 'scope.takeawayNote',
@@ -129,6 +129,14 @@ test('_config.yml agrees with the profile and carries the launch switch', () => 
   assert.match(top('launch'), /^(true|false)$/);
 });
 
+test('the contact address comes from the profile and is not typed into the page texts', () => {
+  assert.match(profile.site.contactEmail, /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i);
+  for (const file of readdirSync(join(root, '_tabs')).filter(name => name.endsWith('.md'))) {
+    const text = read(`_tabs/${file}`).replace(/\{\{[^}]*\}\}/g, '');
+    assert.doesNotMatch(text, /[\w.+-]+@[\w-]+\.[a-z]{2,}/i, `${file} contains an e-mail address; use site.data.profile.site.contactEmail`);
+  }
+});
+
 test('the IndexNow key file exists at the site root and the workflow takes domain and key from the profile', () => {
   const file = `${profile.indexNow.key}.txt`;
   assert.match(profile.indexNow.key, /^[0-9a-f]{32}$/);
@@ -180,7 +188,8 @@ test('no identifiers of another site are left in the engine or the site files', 
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
       const path = join(directory, entry.name);
       if (entry.isDirectory()) {
-        if (!skipDirectories.has(entry.name)) walk(path);
+        // built output (_site, or any custom destination such as _site_launch) is not source
+        if (!skipDirectories.has(entry.name) && !entry.name.startsWith('_site')) walk(path);
         continue;
       }
       const name = relative(root, path).split('\\').join('/');

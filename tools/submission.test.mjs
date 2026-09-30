@@ -34,7 +34,7 @@ test('submission sends JSON, omits private credit and confirms only accepted sto
   assert.deepEqual(JSON.parse(request.body), { content_url: 'https://powerplatformtip.com/feed.xml', website: '' });
   assert.equal(request.credentials, 'omit');
   assert.equal(page.resets(), 1);
-  assert.match(page.status.textContent, /submitted for review/);
+  assert.match(page.status.textContent, /has been submitted\. An automatic check/);
   assert.equal(page.button.disabled, false);
 });
 
@@ -83,7 +83,7 @@ test('failed or unconfirmed responses retain entries and never claim acceptance'
     await page.submit();
     assert.equal(page.resets(), 0);
     assert.match(page.status.textContent, /entries are unchanged/);
-    assert.doesNotMatch(page.status.textContent, /submitted for review/);
+    assert.doesNotMatch(page.status.textContent, /has been submitted/);
     assert.equal(page.button.disabled, false);
   }
 });

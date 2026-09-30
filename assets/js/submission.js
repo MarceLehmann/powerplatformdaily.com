@@ -42,7 +42,7 @@
     sending = true;
     button.disabled = true;
     form.setAttribute('aria-busy', 'true');
-    status.textContent = 'Sending for review...';
+    status.textContent = 'Sending...';
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 30000);
     try {
@@ -61,7 +61,7 @@
       const result = await response.json();
       if (!response.ok || result.accepted !== true || result.status !== 'awaiting_review') throw new Error('Unconfirmed submission');
       form.reset();
-      status.textContent = 'Your suggestion has been submitted for review. Nothing has been published.';
+      status.textContent = 'Your suggestion has been submitted. An automatic check decides whether it is used. Nothing has been published yet.';
     } catch {
       status.textContent = 'We could not confirm your submission. Your entries are unchanged. Please try again.';
     } finally {

@@ -44,6 +44,14 @@ try {
     $existing = Invoke-RestMethod -Uri ($root + '/workflows(' + $FlowId + ')?$select=statecode') -Headers $headers
     $initialState = $existing.statecode
     if ($initialState -ne 0) { throw 'Stop the intake flow before running isolated live tests.' }
+    # The processing flow lists every pending record, so a running one would fetch and judge the test records.
+    try {
+        $processingFlow = Invoke-RestMethod -Uri ($root + '/workflows(' + $config.flows.processing.id + ')?$select=statecode') -Headers $headers
+    } catch {
+        if ([int]$_.Exception.Response.StatusCode -ne 404) { throw }
+        $processingFlow = $null
+    }
+    if ($processingFlow -and $processingFlow.statecode -ne 0) { throw 'Stop the processing flow before running isolated live tests; it would pick up the test records.' }
     Invoke-RestMethod -Uri ($root + '/workflows(' + $FlowId + ')') -Headers $headers -Method Patch -ContentType 'application/json' -Body '{"statecode":1,"statuscode":2}' | Out-Null
     $activated = $true
     $callbackResult = Invoke-RestMethod -Uri ($flowRoot + '/triggers/manual/listCallbackUrl?api-version=2016-11-01') -Headers $flowHeaders -Method Post -ContentType 'application/json' -Body '{}'

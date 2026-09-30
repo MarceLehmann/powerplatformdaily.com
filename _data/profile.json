@@ -44,6 +44,7 @@
     "entitySet": "new_newssources",
     "displayName": "News source",
     "displayCollectionName": "News sources",
+    "viewPrefix": "News",
     "connectionReferencePrefix": "new_news_",
     "intervalMinutes": 5,
     "flows": {

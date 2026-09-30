@@ -38,7 +38,9 @@ try {
     $stored = Invoke-RestMethod -Uri ($root + '/workflows(' + $flowId + ')?$select=clientdata,statecode') -Headers $headers
     $actual = ($stored.clientdata | ConvertFrom-Json -Depth 100).properties.definition | ConvertTo-Json -Depth 100 -Compress
     $expected = $manifest.definition | ConvertTo-Json -Depth 100 -Compress
-    if ($actual -ne $expected) { throw 'Stored intake definition differs. Flow was not activated.' }
+    if (![System.Text.Json.Nodes.JsonNode]::DeepEquals([System.Text.Json.Nodes.JsonNode]::Parse($actual), [System.Text.Json.Nodes.JsonNode]::Parse($expected))) {
+        throw 'Stored intake definition differs. Flow was not activated.'
+    }
     if ($Enable) {
         Invoke-RestMethod -Uri ($root + '/workflows(' + $flowId + ')') -Headers $headers -Method Patch -ContentType 'application/json' -Body '{"statecode":1,"statuscode":2}' | Out-Null
     }

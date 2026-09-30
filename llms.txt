@@ -2,7 +2,7 @@
 
 > Independent news on Power Apps, Power Automate and Copilot Studio: short, source-credited summaries with a note on what each item means and a direct link to the original article. Maintained by Marcel Lehmann, Microsoft MVP, from Switzerland.
 
-Power Platform News watches a curated list of blogs, community channels and Microsoft sources, so readers do not have to check dozens of feeds by hand. Each entry offers a short TL;DR, a note on what it means for makers, developers, admins and business owners, and full credit plus a direct link to the original source and author. The summaries are written with AI assistance and are our own short summaries, not republications. Content is published bilingually in English and German.
+Power Platform News watches a curated list of independent community blogs and, as they are added, official Microsoft channels, so readers do not have to check dozens of feeds by hand. Each entry offers a short TL;DR, a note on what it means for makers, developers, admins and business owners, and full credit plus a direct link to the original source and author. The summaries are written with AI assistance and are our own short summaries, not republications. Content is published bilingually in English and German.
 
 Key facts for orientation:
 
@@ -24,7 +24,7 @@ Key facts for orientation:
 - [Sources](https://powerplatformnews.com/sources/): The original blogs and authors behind the summaries, with credit and direct links.
 - [Archives](https://powerplatformnews.com/archives/): All summaries by date.
 - [Tags](https://powerplatformnews.com/tags/): Browse summaries by product and topic.
-- [Submit content](https://powerplatformnews.com/submit/): Suggest a blog, article or feed for curation.
+- [Submit content](https://powerplatformnews.com/submit/): Suggest an article for curation (opens later).
 
 ## Topics covered
 

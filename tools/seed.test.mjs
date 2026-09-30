@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { approval, kind, processing } from './automation.mjs';
-import { buildRecords, matchesScope, parseOptions } from './seed-mvp-sources.mjs';
+import { buildRecords, createApi, matchesScope, parseOptions, seed } from './seed-mvp-sources.mjs';
 
 const read = (name) => JSON.parse(readFileSync(new URL(`./${name}`, import.meta.url), 'utf8'));
 const blogs = read('mvp-blog-sources.json');
@@ -60,4 +60,87 @@ test('the limit option is parsed strictly', () => {
   assert.equal(parseOptions(['--limit', '15']).limit, 15);
   assert.equal(parseOptions([]).limit, Infinity);
   assert.throws(() => parseOptions(['--limit', 'many']), /non-negative number/);
+});
+
+test('the default is a dry run and --apply is the only way to write', () => {
+  assert.equal(parseOptions([]).apply, false);
+  assert.equal(parseOptions(['--dry-run']).apply, false);
+  assert.equal(parseOptions(['--apply']).apply, true);
+  assert.throws(() => parseOptions(['--apply', '--dry-run']), /contradict/);
+});
+
+test('--feed-from is a real past date and is set on the new records only when given', () => {
+  assert.equal(parseOptions(['--feed-from', '2026-09-01']).feedFrom, '2026-09-01T00:00:00.000Z');
+  assert.equal(parseOptions([]).feedFrom, undefined);
+  for (const bad of ['yesterday', '2026-13-01', '2026-02-30', '2999-01-01', '']) assert.throws(() => parseOptions(['--feed-from', bad]), /--feed-from/);
+  assert.throws(() => parseOptions(['--feed-from']), /--feed-from/);
+  const extras = [{ name: 'Official Example', xmlUrl: 'https://example.org/feed/' }];
+  assert.equal(buildRecords({ extras }, parseOptions(['--feed-from', '2026-09-01']))[0].new_feedfrom, '2026-09-01T00:00:00.000Z');
+  assert.equal('new_feedfrom' in buildRecords({ extras }, parseOptions([]))[0], false);
+});
+
+test('--only matches the label, which is the name followed by the technologies', () => {
+  const byProduct = buildRecords({ blogs }, parseOptions(['--only', 'copilot studio']));
+  assert.ok(byProduct.length > 0 && byProduct.length < blogs.length);
+  assert.ok(byProduct.every(record => /copilot studio/i.test(record.new_name)));
+});
+
+function fakeApi({ existing = [], failRead } = {}) {
+  const calls = { created: [] };
+  return {
+    calls,
+    existingUrls: async () => { if (failRead) throw new Error(failRead); return existing; },
+    create: async (record) => { calls.created.push(record); },
+  };
+}
+const extras = [1, 2, 3, 4].map(index => ({ name: `Source ${index}`, xmlUrl: `https://example.org/${index}/feed/` }));
+const quiet = () => {};
+
+test('a dry run reads but never creates; --apply creates only what is missing and respects the limit', async () => {
+  const records = buildRecords({ extras }, parseOptions([]));
+  const dry = fakeApi({ existing: ['https://example.org/2/feed/'] });
+  const planned = await seed({ records, options: parseOptions([]), api: dry, log: quiet });
+  assert.deepEqual(dry.calls.created, []);
+  assert.deepEqual([planned.created, planned.skipped, planned.checked], [3, 1, true]);
+
+  const live = fakeApi({ existing: ['https://example.org/2/feed/'] });
+  const done = await seed({ records, options: parseOptions(['--apply', '--limit', '2']), api: live, log: quiet });
+  assert.deepEqual(live.calls.created.map(record => record.new_contenturl), ['https://example.org/1/feed/', 'https://example.org/3/feed/']);
+  assert.equal(done.created, 2);
+  assert.ok(live.calls.created.every(record => record.new_enabled === false && record.new_approval === approval.approved));
+});
+
+test('without access a dry run still lists the sources, but --apply stops', async () => {
+  const records = buildRecords({ extras }, parseOptions([]));
+  const lines = [];
+  const dry = await seed({ records, options: parseOptions([]), api: fakeApi({ failRead: 'no login' }), log: line => lines.push(line) });
+  assert.deepEqual([dry.created, dry.checked], [4, false]);
+  assert.ok(lines.some(line => line.includes('could not be read (no login)')));
+  assert.ok(lines.some(line => line.includes('(not checked)')));
+  const live = fakeApi({ failRead: 'table not found' });
+  await assert.rejects(seed({ records, options: parseOptions(['--apply']), api: live, log: quiet }), /table not found/);
+  assert.deepEqual(live.calls.created, []);
+});
+
+test('the Web API adapter reads every page and reports a missing table', async () => {
+  const requests = [];
+  const answers = [
+    { status: 200, body: { value: [{ new_contenturl: 'https://a/' }], '@odata.nextLink': 'https://example.crm/api/data/v9.2/tables?$select=new_contenturl&$skiptoken=x' } },
+    { status: 200, body: { value: [{ new_contenturl: 'https://b/' }] } },
+    { status: 404, body: {} },
+  ];
+  const original = globalThis.fetch;
+  globalThis.fetch = async (url, init) => {
+    requests.push({ url: String(url), method: init.method });
+    const answer = answers.shift();
+    return { status: answer.status, ok: answer.status < 300, json: async () => answer.body, text: async () => JSON.stringify(answer.body), headers: new Map() };
+  };
+  try {
+    const api = createApi('token');
+    assert.deepEqual(await api.existingUrls(), ['https://a/', 'https://b/']);
+    assert.ok(requests[1].url.endsWith('/api/data/v9.2/tables?$select=new_contenturl&$skiptoken=x'));
+    await assert.rejects(api.existingUrls(), /bootstrap-solution/);
+  } finally {
+    globalThis.fetch = original;
+  }
 });
