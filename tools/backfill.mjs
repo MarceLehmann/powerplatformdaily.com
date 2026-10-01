@@ -118,6 +118,6 @@ export function backfillDefinition() {
       },
       Summary: compose("@concat('Backfill run: ', string(variables('CheckedCount')), ' checked, ', string(variables('CreatedCount')), ' created for review.')", 'For_each_source'),
     },
-    outputs: { body: { Summary: "@outputs('Summary')" } },
+    outputs: {},
   };
 }
