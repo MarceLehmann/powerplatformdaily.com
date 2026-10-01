@@ -4,7 +4,7 @@ Stand: 30.09.2026. Diese Ausrichtung ist für die Website und die Automatisierun
 
 ## Zweck
 
-Power Platform News ist eine kuratierte Sammlung: relevante Produktneuigkeiten zu Copilot Studio, Power Apps, Power Automate, Power BI und Microsoft Fabric finden, kurz zusammenfassen, ihre praktische Bedeutung einordnen und zum Original weiterleiten. Kein Volltextarchiv, keine vollständigen Übersetzungen fremder Beiträge und keine nachgebauten Anleitungen. Governance-, Security- und Compliance-Inhalte gehören auf die Schwesterseite Power Platform Governance, nicht hierher.
+Power Platform Daily ist eine kuratierte Sammlung: relevante Produktneuigkeiten zu Copilot Studio, Power Apps, Power Automate, Power BI und Microsoft Fabric finden, kurz zusammenfassen, ihre praktische Bedeutung einordnen und zum Original weiterleiten. Kein Volltextarchiv, keine vollständigen Übersetzungen fremder Beiträge und keine nachgebauten Anleitungen. Governance-, Security- und Compliance-Inhalte gehören auf die Schwesterseite Power Platform Governance, nicht hierher.
 
 ## Mindeststandard aus Sicht des Originalautors
 
@@ -45,7 +45,7 @@ Das spätere Backend muss URL-Schema, Host, Redirects und Eingaben serverseitig 
 
 ## SEO und GEO
 
-Konkreter Titel, eigenständige Beschreibung, TL;DR, thematische Tags, nachvollziehbare Quellen und eine kurze zusätzliche Einordnung machen den Eintrag verständlich. Die Seite erhält eine selbstreferenzierende Canonical-URL und korrektes `BlogPosting`-JSON-LD mit Power Platform News als Herausgeber der Zusammenfassung. Originaldaten bleiben sichtbare Quellenangaben, nicht das Veröffentlichungsdatum unseres neuen Textes.
+Konkreter Titel, eigenständige Beschreibung, TL;DR, thematische Tags, nachvollziehbare Quellen und eine kurze zusätzliche Einordnung machen den Eintrag verständlich. Die Seite erhält eine selbstreferenzierende Canonical-URL und korrektes `BlogPosting`-JSON-LD mit Power Platform Daily als Herausgeber der Zusammenfassung. Originaldaten bleiben sichtbare Quellenangaben, nicht das Veröffentlichungsdatum unseres neuen Textes.
 
 Kein künstlicher Langtext für Suchmaschinen, keine erfundenen FAQs, keine Ranking- oder KI-Zitationsgarantien. Reine Duplikate und vollständige Übersetzungen sind nicht das Ziel. `source_url` ist kein externes Canonical. DE/EN wären zwei Fassungen unserer Kurzfassung; automatische Sprachvarianten und `hreflang` sind noch nicht umgesetzt.
 

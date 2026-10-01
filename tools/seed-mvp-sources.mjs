@@ -12,7 +12,7 @@
 // single article page, not a feed URL, and would reject a feed root incorrectly).
 //
 // Usage (needs an active `az login` against the KMUpower tenant that owns the
-// PowerPlatformNews Dataverse environment - see tools/automation.mjs `config`):
+// PowerPlatformDaily Dataverse environment - see tools/automation.mjs `config`):
 //   node tools/seed-mvp-sources.mjs            # creates missing records
 //   node tools/seed-mvp-sources.mjs --dry-run  # prints what would be created, writes nothing
 

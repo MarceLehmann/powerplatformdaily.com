@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render one Power Platform News-style card PNG per pending
+"""Render one Power Platform Daily-style card PNG per pending
 curated article.
 
 Ported from MarceLehmann/Copilot_LinkedIn render/govcard.py + hand.py
@@ -112,14 +112,14 @@ class Card:
     def kicker(self):
         wobbly_line(self.d, [(0, 12), (W, 12)], GOLD, width=10, rng=self.rng, amp=1.6, seg=44)
         f = font(26)
-        t = 'POWER PLATFORM NEWS'
+        t = 'POWER PLATFORM DAILY'
         self.text((70, 62), t, font=f, fill=NAVY)
         wobbly_line(self.d, [(70, 112), (W - 70, 112)], LGRAY, width=2, rng=self.rng)
 
     def footer(self):
         wobbly_line(self.d, [(70, H - 118), (W - 70, H - 118)], LGRAY, width=2, rng=self.rng)
-        self.text((70, H - 92), '#PowerPlatformNews', font=font(24, bold=False), fill=GRAY)
-        t = 'powerplatformnews.com'
+        self.text((70, H - 92), '#PowerPlatformDaily', font=font(24, bold=False), fill=GRAY)
+        t = 'powerplatformdaily.com'
         f = font(24)
         self.text((W - 70 - self.tl(t, f), H - 92), t, font=f, fill=TEAL)
 

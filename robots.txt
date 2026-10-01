@@ -1,4 +1,4 @@
-# Power Platform News – robots.txt
+# Power Platform Daily – robots.txt
 
 User-agent: *
 Allow: /
@@ -41,4 +41,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://powerplatformnews.com/sitemap.xml
+Sitemap: https://powerplatformdaily.com/sitemap.xml

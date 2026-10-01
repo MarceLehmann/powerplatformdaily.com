@@ -25,7 +25,7 @@ pages.each do |path|
   ids = document.css('[id]').map { |node| node['id'] }
   raise "Duplicate IDs: #{path}" unless ids.uniq == ids
   canonical = document.at_css('link[rel="canonical"]')
-  raise "Missing canonical: #{path}" unless canonical && canonical['href'].start_with?('https://powerplatformnews.com/')
+  raise "Missing canonical: #{path}" unless canonical && canonical['href'].start_with?('https://powerplatformdaily.com/')
   raise "Missing description: #{path}" unless document.at_css('meta[name="description"]')
   schema = document.css('script[type="application/ld+json"]')
   raise "Missing structured data: #{path}" if schema.empty?
@@ -36,7 +36,7 @@ pages.each do |path|
   if document.at_css('[data-curated-entry]')
     original = document.at_css('a.original-link')
     raise "Missing direct original link: #{path}" unless original && !original['href'].to_s.empty?
-    raise "Source must be external: #{path}" if original['href'].start_with?('https://powerplatformnews.com/')
+    raise "Source must be external: #{path}" if original['href'].start_with?('https://powerplatformdaily.com/')
     raise "Missing TL;DR: #{path}" unless document.css('h2').any? { |node| node.text.include?('TL;DR') }
     contributor = document.at_css('.contributor-credit')
     if contributor

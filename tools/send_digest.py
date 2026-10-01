@@ -4,7 +4,7 @@
 Reads _posts/*-de.md / *-en.md pairs (matched by curation_id), skips any
 curation_id already recorded in tools/digest-sent.json, builds one digest
 email per new batch (DE + EN TL;DR per article), sends it as a Brevo email
-campaign to the PowerPlatformNews list, then updates the state file.
+campaign to the PowerPlatformDaily list, then updates the state file.
 
 Exits 0 with no API call if there is nothing new to send.
 """
@@ -20,11 +20,11 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 POSTS_DIR = REPO_ROOT / "_posts"
 STATE_FILE = REPO_ROOT / "tools" / "digest-sent.json"
-SITE_URL = "https://powerplatformnews.com"
-# Dedicated Brevo list for Power Platform News subscribers, separate from the
+SITE_URL = "https://powerplatformdaily.com"
+# Dedicated Brevo list for Power Platform Daily subscribers, separate from the
 # governance sibling site's list 22 (different opt-in, different topic).
 LIST_ID = 23
-SENDER_NAME = "Power Platform News"
+SENDER_NAME = "Power Platform Daily"
 SENDER_EMAIL = "news@powerplatformtip.com"
 
 FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n(.*)$", re.DOTALL)
@@ -98,7 +98,7 @@ def build_html(articles):
 <html><body style="margin:0;padding:0;background:#f7f7f7;font-family:Arial,Helvetica,sans-serif;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;margin:0 auto;background:#fff;">
   <tr><td style="padding:32px 24px 16px;">
-    <p style="margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#25c1bf;font-weight:bold;">Power Platform News</p>
+    <p style="margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#25c1bf;font-weight:bold;">Power Platform Daily</p>
     <h1 style="margin:8px 0 0;font-size:22px;color:#0a2050;">Neue Beiträge heute / New posts today</h1>
   </td></tr>
   <tr><td style="padding:0 24px;">
@@ -141,7 +141,7 @@ def main():
     today = datetime.date.today().isoformat()
     payload = {
         "name": f"News Digest {today}",
-        "subject": f"Power Platform News: {len(new_articles)} neue Artikel / new articles ({today})",
+        "subject": f"Power Platform Daily: {len(new_articles)} neue Artikel / new articles ({today})",
         "sender": {"name": SENDER_NAME, "email": SENDER_EMAIL},
         "type": "classic",
         "htmlContent": html,

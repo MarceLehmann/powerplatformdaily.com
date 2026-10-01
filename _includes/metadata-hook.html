@@ -5,7 +5,7 @@
 {% endif %}
 
 {% if page.url == '/' or page.url == '/about/' %}
-<!-- Organization + Person entity schema (GEO: links Marcel Lehmann / Power Platform News
+<!-- Organization + Person entity schema (GEO: links Marcel Lehmann / Power Platform Daily
      to the sameAs profiles already emitted by jekyll-seo-tag on the WebSite object). -->
 <script type="application/ld+json">
 {
@@ -13,9 +13,9 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://powerplatformnews.com/#organization",
-      "name": "Power Platform News",
-      "url": "https://powerplatformnews.com/",
+      "@id": "https://powerplatformdaily.com/#organization",
+      "name": "Power Platform Daily",
+      "url": "https://powerplatformdaily.com/",
       "description": "A curated collection of Microsoft Power Platform product news: short, source-credited summaries of Copilot Studio, Power Apps, Power Automate, Power BI and Microsoft Fabric updates with a direct link to the original article.",
       "sameAs": [
         "https://kmupower.com",
@@ -26,11 +26,11 @@
     },
     {
       "@type": "Person",
-      "@id": "https://powerplatformnews.com/about/#person",
+      "@id": "https://powerplatformdaily.com/about/#person",
       "name": "Marcel Lehmann",
-      "url": "https://powerplatformnews.com/about/",
+      "url": "https://powerplatformdaily.com/about/",
       "jobTitle": "Microsoft MVP",
-      "worksFor": { "@id": "https://powerplatformnews.com/#organization" },
+      "worksFor": { "@id": "https://powerplatformdaily.com/#organization" },
       "sameAs": [
         "https://www.linkedin.com/in/marcelehmann/",
         "http://www.wikidata.org/entity/Q141568800",
@@ -74,8 +74,8 @@
   "image": { "@type": "ImageObject", "url": {{ page.image.path | jsonify }}, "caption": {{ page.image.alt | jsonify }} },
   {%- endif %}
   {% unless is_original %}{% if page.source_url %}"isBasedOn": {{ page.source_url | jsonify }},{% endif %}{% endunless %}
-  "author": { "@id": "https://powerplatformnews.com/{% if is_original %}about/#person{% else %}#organization{% endif %}" },
-  "publisher": { "@id": "https://powerplatformnews.com/#organization" }
+  "author": { "@id": "https://powerplatformdaily.com/{% if is_original %}about/#person{% else %}#organization{% endif %}" },
+  "publisher": { "@id": "https://powerplatformdaily.com/#organization" }
 }
 </script>
 {%- endif -%}

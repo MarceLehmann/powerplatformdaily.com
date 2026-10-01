@@ -16,7 +16,7 @@ import {
   after, compose, condition, connector, set, hostSafetyCheck,
 } from './automation.mjs';
 
-export const backfillName = 'Power Platform News - Backfill to review queue';
+export const backfillName = 'Power Platform Daily - Backfill to review queue';
 
 const BACKFILL_SINCE = '2026-01-01T00:00:00Z';
 const ITEMS_PER_SOURCE = 5; // sample breadth across many sources rather than exhausting one feed
@@ -31,7 +31,7 @@ export function backfillDefinition() {
       Transcript_segments: { type: 'Select', inputs: { from: "@coalesce(body('Fetch_transcript')?['events'], createArray())", select: "@coalesce(item()?['segs'][0]?['utf8'], ' ')" }, runAfter: after('Fetch_transcript') },
       Set_text_youtube: set('ExtractedText', "@join(body('Transcript_segments'), ' ')", 'Transcript_segments'),
     }, {
-      Fetch_article: { type: 'Http', inputs: { method: 'GET', uri: "@outputs('Article_URL')", headers: { Accept: 'text/html', 'User-Agent': 'PowerPlatformNews-Backfill/1.0' }, retryPolicy: { type: 'exponential', count: 2, interval: 'PT10S' } }, runAfter: {}, limit: { timeout: 'PT1M' } },
+      Fetch_article: { type: 'Http', inputs: { method: 'GET', uri: "@outputs('Article_URL')", headers: { Accept: 'text/html', 'User-Agent': 'PowerPlatformDaily-Backfill/1.0' }, retryPolicy: { type: 'exponential', count: 2, interval: 'PT10S' } }, runAfter: {}, limit: { timeout: 'PT1M' } },
       HTML_to_text: connector('conversion', 'HtmlToText', { Content: "@take(string(body('Fetch_article')), 600000)" }, 'Fetch_article'),
       Set_text_article: set('ExtractedText', "@body('HTML_to_text')", 'HTML_to_text'),
     }, 'Video_ID'),

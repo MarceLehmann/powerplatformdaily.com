@@ -6,7 +6,7 @@ title: About
 description: "A curated collection of Power Platform product news: short summaries, clear source credit and links to the originals."
 ---
 
-Power Platform News brings useful Copilot Studio, Power Apps, Power Automate, Power BI and Microsoft Fabric articles from different blogs into one place. Each curated entry offers a short TL;DR, a practical takeaway and a direct link to the detailed original article.
+Power Platform Daily brings useful Copilot Studio, Power Apps, Power Automate, Power BI and Microsoft Fabric articles from different blogs into one place. Each curated entry offers a short TL;DR, a practical takeaway and a direct link to the detailed original article.
 
 ## Why this exists
 

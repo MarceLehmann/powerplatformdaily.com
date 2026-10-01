@@ -153,7 +153,7 @@ Beispiel:
 
 ```yaml
 ---
-title: "Power Platform News – Copilot Studio: neue Agent-Funktion"
+title: "Power Platform Daily – Copilot Studio: neue Agent-Funktion"
 categories:
   - News
 tags:
@@ -162,7 +162,7 @@ tags:
   - roadmap
 image:
   path: /assets/img/curated/<id>.png
-  alt: "Power Platform News"
+  alt: "Power Platform Daily"
 author: Marcel Lehmann
 date: 2026-09-30 09:00:00 +0100
 excerpt: "Kurzfassung eines neuen Copilot-Studio-Features mit direktem Link zum Original."
@@ -170,7 +170,7 @@ source_url: "https://example.com/article"
 source_name: "Example Blog"
 lang: de
 original_language: en
-translation_url: "https://powerplatformnews.com/en/posts/copilot-studio-example-12345678/"
+translation_url: "https://powerplatformdaily.com/en/posts/copilot-studio-example-12345678/"
 permalink: /de/posts/copilot-studio-example-12345678/
 ---
 
@@ -194,7 +194,7 @@ permalink: /de/posts/copilot-studio-example-12345678/
 ### Option A: GitHub REST API direkt
 
 - GitHub PAT oder GitHub App
-- Repository `MarceLehmann/powerplatformnews.com`
+- Repository `MarceLehmann/powerplatformdaily.com`
 - Endpoint: `PUT https://api.github.com/repos/{owner}/{repo}/contents/{path}`
 - Inhalt als Base64 encodieren
 - Commit Message: `Add post: {title}`

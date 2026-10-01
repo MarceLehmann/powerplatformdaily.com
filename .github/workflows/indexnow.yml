@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Sitemap abrufen und Payload vorbereiten
         run: |
-          curl -sS https://powerplatformnews.com/sitemap.xml -o sitemap.xml
+          curl -sS https://powerplatformdaily.com/sitemap.xml -o sitemap.xml
           node -e "
             const fs = require('fs');
             const xml = fs.readFileSync('sitemap.xml', 'utf8');
@@ -44,9 +44,9 @@ jobs:
               process.exit(0);
             }
             fs.writeFileSync('indexnow-payload.json', JSON.stringify({
-              host: 'powerplatformnews.com',
+              host: 'powerplatformdaily.com',
               key: 'bb1542a9a6d9ed9336268f08f4831793',
-              keyLocation: 'https://powerplatformnews.com/bb1542a9a6d9ed9336268f08f4831793.txt',
+              keyLocation: 'https://powerplatformdaily.com/bb1542a9a6d9ed9336268f08f4831793.txt',
               urlList: urls,
             }));
             console.log(urls.length + ' URLs aus sitemap.xml an IndexNow uebermittelt');

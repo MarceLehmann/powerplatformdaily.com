@@ -1,6 +1,6 @@
 import { approval, config, kind, processing } from './automation.mjs';
 
-export const intakeName = 'Power Platform News - Website submissions - Webhook';
+export const intakeName = 'Power Platform Daily - Website submissions - Webhook';
 export const intakeSchema = {
   type: 'object', additionalProperties: false, required: ['content_url'],
   properties: {

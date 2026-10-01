@@ -1,9 +1,9 @@
 news_editorial:
-  name: Power Platform News
+  name: Power Platform Daily
   type: Organization
-  url: https://powerplatformnews.com/about/
+  url: https://powerplatformdaily.com/about/
 
 marcel_lehmann:
   name: Marcel Lehmann
   type: Person
-  url: https://powerplatformnews.com/about/
+  url: https://powerplatformdaily.com/about/

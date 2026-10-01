@@ -1,6 +1,6 @@
 # News-Automation: Betrieb und Freigabe
 
-Stand: 30.09.2026. Dieser Umsetzungsstand beschreibt die Architektur so, wie sie für Power Platform News implementiert ist - analog zur bereits produktiven Schwesterseite Power Platform Governance, mit denselben Mechanismen unter neuem Namen. Die Dataverse-Solution, der Cloud Flow und die Website-Einreichung selbst sind noch nicht deployed/aktiviert; das ist eine spätere Phase (`tools/deploy-automation.ps1`, `tools/deploy-intake.ps1`, jeweils mit `-Enable`).
+Stand: 30.09.2026. Dieser Umsetzungsstand beschreibt die Architektur so, wie sie für Power Platform Daily implementiert ist - analog zur bereits produktiven Schwesterseite Power Platform Governance, mit denselben Mechanismen unter neuem Namen. Die Dataverse-Solution, der Cloud Flow und die Website-Einreichung selbst sind noch nicht deployed/aktiviert; das ist eine spätere Phase (`tools/deploy-automation.ps1`, `tools/deploy-intake.ps1`, jeweils mit `-Enable`).
 
 ## Gewünschter Ablauf
 
@@ -51,7 +51,7 @@ Eine URL-Änderung an einer bereits freigegebenen Quelle nur nach Pausierung und
 
 ## Website-Webhook
 
-- Flow: `Power Platform News - Website submissions - Webhook`, in derselben Solution wie der Five-Minutes-Flow. Erst nach Deployment (`tools/deploy-intake.ps1 -Enable`) für die direkte Website-Einreichung aktiv.
+- Flow: `Power Platform Daily - Website submissions - Webhook`, in derselben Solution wie der Five-Minutes-Flow. Erst nach Deployment (`tools/deploy-intake.ps1 -Enable`) für die direkte Website-Einreichung aktiv.
 - Definition: `tools/intake.mjs`; Bereitstellung: `pwsh -File tools/deploy-intake.ps1`. Ohne `-Enable` bleibt der Flow ausgeschaltet. Keine Abhängigkeit von GitHub oder Foundry.
 - Request: JSON per POST mit den vier Websitefeldern und optional leerem Honeypot-Feld `website`. Nur HTTPS, keine offensichtlichen lokalen/IP-Ziele oder URL-Zugangsdaten; LinkedIn nur persönliches Profil auf `linkedin.com` bzw. `www.linkedin.com`.
 - Keine URL wird beim Intake abgerufen. Keine KI-, GitHub- oder Veröffentlichungsaktion. `Approval = Awaiting approval`, `Processing enabled = No`, `Processing status = Needs review` sind fest verdrahtet.
@@ -87,8 +87,8 @@ Implementierungsgrundlage ist dieselbe wie bei Governance: die Second-Brain-Noti
 
 ## Umsetzungsstand
 
-- Repository-Struktur, Automation-Code (`tools/automation.mjs`, `tools/intake.mjs`), GitHub-Workflows und Website sind aufgebaut - 1:1 dieselbe Architektur wie bei der bereits produktiven Schwesterseite Power Platform Governance, mit neuem Solution-/Tabellen-/Connection-Reference-Namen (`PowerPlatformNews`, `new_newssource`, `new_news_*`) und neuem Themenfokus.
-- **Noch offen (spätere Phase, nicht Teil dieses Repository-Aufbaus):** Dataverse-Solution, Tabelle, Fachformular, Ansichten und Connection References in Dataverse tatsächlich anlegen; Cloud Flow `Power Platform News - RSS and articles - Every 5 minutes` und den Website-Webhook-Flow deployen (`tools/deploy-automation.ps1`, `tools/deploy-intake.ps1`); GitHub-Verbindung herstellen; erste Quellen freigeben; `NEWS_SUBMISSION_ENDPOINT`-Secret setzen; Live-Tests fahren (`tools/test-intake-live.ps1`).
+- Repository-Struktur, Automation-Code (`tools/automation.mjs`, `tools/intake.mjs`), GitHub-Workflows und Website sind aufgebaut - 1:1 dieselbe Architektur wie bei der bereits produktiven Schwesterseite Power Platform Governance, mit neuem Solution-/Tabellen-/Connection-Reference-Namen (`PowerPlatformDaily`, `new_newssource`, `new_news_*`) und neuem Themenfokus.
+- **Noch offen (spätere Phase, nicht Teil dieses Repository-Aufbaus):** Dataverse-Solution, Tabelle, Fachformular, Ansichten und Connection References in Dataverse tatsächlich anlegen; Cloud Flow `Power Platform Daily - RSS and articles - Every 5 minutes` und den Website-Webhook-Flow deployen (`tools/deploy-automation.ps1`, `tools/deploy-intake.ps1`); GitHub-Verbindung herstellen; erste Quellen freigeben; `NEWS_SUBMISSION_ENDPOINT`-Secret setzen; Live-Tests fahren (`tools/test-intake-live.ps1`).
 - Lokale Prüfungen sind bereits jetzt lauffähig, unabhängig vom Dataverse-Deployment: Node-Tests für Gates und Flow-Struktur (`node --test tools/*.test.mjs`), Ruby-Tests für den Publisher (`tools/test-publish-curation.rb`), Jekyll-Build und Websiteprüfungen (`tools/check-site.rb`).
 
 ## Änderungen und Betrieb (nach Deployment)

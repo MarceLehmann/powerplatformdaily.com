@@ -4,7 +4,7 @@ title: Privacy Policy
 icon: fas fa-user-shield
 order: 7
 permalink: /privacy/
-description: "Privacy Policy for Power Platform News - how we collect, use and protect your data."
+description: "Privacy Policy for Power Platform Daily - how we collect, use and protect your data."
 sitemap:
   priority: 0.3
   changefreq: yearly
@@ -14,7 +14,7 @@ sitemap:
 
 ## Introduction
 
-Welcome to Power Platform News ("we," "our," or "us"), a project of Marcel Lehmann / KMUpower. This Privacy Policy explains how we collect, use, disclose and safeguard information when you visit [powerplatformnews.com](https://powerplatformnews.com).
+Welcome to Power Platform Daily ("we," "our," or "us"), a project of Marcel Lehmann / KMUpower. This Privacy Policy explains how we collect, use, disclose and safeguard information when you visit [powerplatformdaily.com](https://powerplatformdaily.com).
 
 ## Information We Collect
 
@@ -118,10 +118,10 @@ Entered in the Swiss UID (business identification number) register since January
 If you have questions about this Privacy Policy, our privacy practices, or this legal notice, please contact:
 
 Email: [info@kmupower.com](mailto:info@kmupower.com)
-Website: [powerplatformnews.com](https://powerplatformnews.com)
+Website: [powerplatformdaily.com](https://powerplatformdaily.com)
 
 *This section is provided as a general business and legal notice for transparency; it does not constitute legal advice and is not a confirmed statement of a specific legal requirement.*
 
 ---
 
-*This Privacy Policy is designed to comply with the GDPR and the Swiss Federal Act on Data Protection (FADP/revDSG). It applies to all visitors of powerplatformnews.com.*
+*This Privacy Policy is designed to comply with the GDPR and the Swiss Federal Act on Data Protection (FADP/revDSG). It applies to all visitors of powerplatformdaily.com.*

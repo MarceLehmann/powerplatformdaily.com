@@ -1,12 +1,12 @@
-# Power Platform News
+# Power Platform Daily
 
 > A curated collection of Microsoft Power Platform product news: short, source-credited summaries of Copilot Studio, Power Apps, Power Automate, Power BI and Microsoft Fabric updates with a direct link to the original article. Maintained by Marcel Lehmann, Microsoft MVP, from Switzerland.
 
-Power Platform News brings useful product-news articles from different blogs into one place, so readers do not have to check a dozen feeds by hand for new features, releases and roadmap changes. Each curated entry offers a short TL;DR, a practical takeaway and full credit plus a direct link to the original source and author. Content is published bilingually in English and German.
+Power Platform Daily brings useful product-news articles from different blogs into one place, so readers do not have to check a dozen feeds by hand for new features, releases and roadmap changes. Each curated entry offers a short TL;DR, a practical takeaway and full credit plus a direct link to the original source and author. Content is published bilingually in English and German.
 
 Key facts for orientation:
 
-- Site: Power Platform News (https://powerplatformnews.com)
+- Site: Power Platform Daily (https://powerplatformdaily.com)
 - Maintainer: Marcel Lehmann, Microsoft MVP (Switzerland)
 - Content type: curated third-party summaries, not original reporting; every entry credits its source author, source site and original URL
 - Language: English and German (bilingual, /en/ and /de/ paths)
@@ -19,11 +19,11 @@ Key facts for orientation:
 
 ## Main pages
 
-- [About](https://powerplatformnews.com/about/): What this site is, why it exists, and what it covers.
-- [Sources](https://powerplatformnews.com/sources/): The original blogs and authors behind the curated summaries, with credit and direct links.
-- [Archives](https://powerplatformnews.com/archives/): All curated posts by date.
-- [Tags](https://powerplatformnews.com/tags/): Browse curated summaries by topic.
-- [Submit content](https://powerplatformnews.com/submit/): Suggest a product-news blog or article for curation.
+- [About](https://powerplatformdaily.com/about/): What this site is, why it exists, and what it covers.
+- [Sources](https://powerplatformdaily.com/sources/): The original blogs and authors behind the curated summaries, with credit and direct links.
+- [Archives](https://powerplatformdaily.com/archives/): All curated posts by date.
+- [Tags](https://powerplatformdaily.com/tags/): Browse curated summaries by topic.
+- [Submit content](https://powerplatformdaily.com/submit/): Suggest a product-news blog or article for curation.
 
 ## Topics covered
 
