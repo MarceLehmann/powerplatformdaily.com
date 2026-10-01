@@ -21,9 +21,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 POSTS_DIR = REPO_ROOT / "_posts"
 STATE_FILE = REPO_ROOT / "tools" / "digest-sent.json"
 SITE_URL = "https://powerplatformnews.com"
-# TODO: replace with the actual Brevo list ID for Power Platform News subscribers once that list
-# exists (0 fails loudly instead of silently emailing the governance sibling site's list 22).
-LIST_ID = 0
+# Dedicated Brevo list for Power Platform News subscribers, separate from the
+# governance sibling site's list 22 (different opt-in, different topic).
+LIST_ID = 23
 SENDER_NAME = "Power Platform News"
 SENDER_EMAIL = "news@powerplatformtip.com"
 
