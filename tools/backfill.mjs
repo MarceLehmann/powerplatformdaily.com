@@ -45,7 +45,11 @@ export function backfillDefinition() {
       content: "@body('Foundry_extract')?['choices']?[0]?['message']?['content']",
       schema: { type: 'object', required: ['publishable', 'reason'], properties: { publishable: { type: 'boolean' }, reason: { type: 'string' } } },
     } },
-    Increment_checked: set('CheckedCount', "@add(variables('CheckedCount'), 1)", 'Parse_assessment'),
+    // SetVariable can't self-reference the variable it writes (Power Automate rejects that at
+    // save time - same constraint documented against Cap_candidates in automation.mjs), so the
+    // incremented value has to be computed in a Compose first.
+    Compose_checked_count: compose("@add(variables('CheckedCount'), 1)", 'Parse_assessment'),
+    Increment_checked: set('CheckedCount', "@outputs('Compose_checked_count')", 'Compose_checked_count'),
     If_publishable: condition("@equals(body('Parse_assessment')?['publishable'], true)", {
       Check_existing: connector('dataverse', 'ListRecords', {
         entityName: config.entitySet, $top: 1,
@@ -63,7 +67,8 @@ export function backfillDefinition() {
           'item/new_processing': processing.ready,
           'item/new_lastmessage': "@take(outputs('Review_note'), 4000)",
         }, 'Review_note'),
-        Increment_created: set('CreatedCount', "@add(variables('CreatedCount'), 1)", 'Create_review_record'),
+        Compose_created_count: compose("@add(variables('CreatedCount'), 1)", 'Create_review_record'),
+        Increment_created: set('CreatedCount', "@outputs('Compose_created_count')", 'Compose_created_count'),
       }, {}, 'Check_existing'),
     }, {}, 'Increment_checked'),
   };
