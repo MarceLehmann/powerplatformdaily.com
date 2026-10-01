@@ -32,14 +32,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Submit alle Sitemap-URLs an IndexNow
+      - name: Sitemap abrufen und Payload vorbereiten
         run: |
           curl -sS https://powerplatformnews.com/sitemap.xml -o sitemap.xml
           node -e "
             const fs = require('fs');
             const xml = fs.readFileSync('sitemap.xml', 'utf8');
             const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
-            if (urls.length === 0) { throw new Error('Keine URLs in sitemap.xml gefunden'); }
+            if (urls.length === 0) {
+              console.log('::notice::Keine URLs in sitemap.xml gefunden (DNS/Go-live vermutlich noch ausstehend) - IndexNow-Meldung wird uebersprungen.');
+              process.exit(0);
+            }
             fs.writeFileSync('indexnow-payload.json', JSON.stringify({
               host: 'powerplatformnews.com',
               key: 'bb1542a9a6d9ed9336268f08f4831793',
@@ -48,6 +51,9 @@ jobs:
             }));
             console.log(urls.length + ' URLs aus sitemap.xml an IndexNow uebermittelt');
           "
+      - name: An IndexNow melden
+        if: hashFiles('indexnow-payload.json') != ''
+        run: |
           curl -sS --fail-with-body -X POST https://api.indexnow.org/indexnow \
             -H 'Content-Type: application/json; charset=utf-8' \
             --data-binary @indexnow-payload.json
