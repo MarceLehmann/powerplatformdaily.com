@@ -5,10 +5,10 @@ export const config = {
   table: 'new_newssource',
   entitySet: 'new_newssources',
   repository: 'MarceLehmann/powerplatformnews.com',
-  intervalMinutes: 5,
+  intervalMinutes: 360,
 };
 
-export const automationName = 'Power Platform News - RSS and articles - Every 5 minutes';
+export const automationName = 'Power Platform News - RSS and articles - Every 6 hours';
 
 export const kind = { article: 100000000, rss: 100000001, youtube: 100000002, podcast: 100000003 };
 export const approval = { pending: 100000000, approved: 100000001, rejected: 100000002 };
@@ -294,7 +294,7 @@ export function flowDefinition() {
   return {
     $schema: 'https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#', contentVersion: '1.0.0.0',
     parameters: { $authentication: { defaultValue: {}, type: 'SecureObject' }, $connections: { defaultValue: {}, type: 'Object' } },
-    triggers: { Every_5_minutes: { type: 'Recurrence', recurrence: { frequency: 'Minute', interval: config.intervalMinutes }, runtimeConfiguration: { concurrency: { runs: 1 } } } },
+    triggers: { Recurring_check: { type: 'Recurrence', recurrence: { frequency: 'Minute', interval: config.intervalMinutes }, runtimeConfiguration: { concurrency: { runs: 1 } } } },
     actions: {
       Initialize_arrays: { type: 'InitializeVariable', runAfter: {}, inputs: { variables: [{ name: 'Candidates', type: 'array', value: [] }, { name: 'Publications', type: 'array', value: [] }, { name: 'SeenIDs', type: 'array', value: [] }, { name: 'ExtractedText', type: 'string', value: '' }] } },
       List_sources: { ...connector('dataverse', 'ListRecords', { entityName: config.entitySet, $filter: `(${eligibleFilter}) or new_processing eq ${processing.queued} or new_approval eq ${approval.pending}`, $orderby: 'createdon asc' }, 'Initialize_arrays'), runtimeConfiguration: { paginationPolicy: { minimumItemCount: 5000 } } },
