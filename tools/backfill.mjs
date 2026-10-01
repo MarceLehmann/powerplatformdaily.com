@@ -50,7 +50,7 @@ export function backfillDefinition() {
       Check_existing: connector('dataverse', 'ListRecords', {
         entityName: config.entitySet, $top: 1,
         $filter: "@concat('new_contenturl eq ', decodeUriComponent('%27'), replace(outputs('Article_URL'), decodeUriComponent('%27'), decodeUriComponent('%27%27')), decodeUriComponent('%27'))",
-      }, 'Increment_checked'),
+      }),
       Create_if_new: condition("@empty(body('Check_existing')?['value'])", {
         Review_note: compose("@concat('Backfill-Fund, zur Freigabe bereit. EN: ', body('Parse_assessment')?['en']?['title'], ' | DE: ', body('Parse_assessment')?['de']?['title'], ' | TL;DR: ', body('Parse_assessment')?['en']?['tldr'], ' | Tags: ', join(body('Parse_assessment')?['tags'], ', '))"),
         Create_review_record: connector('dataverse', 'CreateRecord', {
