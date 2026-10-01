@@ -106,13 +106,21 @@ We may update this Privacy Policy from time to time. Changes will be posted on t
 
 Every curated summary links to its original source on another website. We are not responsible for the privacy practices of those external sites and encourage you to review their own privacy policies.
 
-## Contact Us
+## Site Operator / Contact (Legal Notice)
 
-If you have questions about this Privacy Policy or our privacy practices, please contact:
+This website is operated by:
 
 **Marcel Lehmann**
+Sole proprietorship (Einzelfirma), trading as "KMUpower"
+Weidstrasse 1, 8320 Fehraltorf, Switzerland
+Entered in the Swiss UID (business identification number) register since January 1, 2023, under UID CHE-296.591.945.
+
+If you have questions about this Privacy Policy, our privacy practices, or this legal notice, please contact:
+
 Email: [info@kmupower.com](mailto:info@kmupower.com)
 Website: [powerplatformnews.com](https://powerplatformnews.com)
+
+*This section is provided as a general business and legal notice for transparency; it does not constitute legal advice and is not a confirmed statement of a specific legal requirement.*
 
 ---
 
