@@ -92,9 +92,9 @@ Decide whether this submitted URL should be AUTOMATICALLY approved and enabled f
 Otherwise return meets_criteria=false with a brief reason. When genuinely uncertain, return meets_criteria=false - never guess in favour of automatic approval; this decision is final and is not reviewed by a human.
 Return exactly one JSON object, no Markdown fences: {"meets_criteria": boolean, "reason": string, max 200 characters, plain text, no markdown}. No other keys.`;
 
-const after = (...names) => Object.fromEntries(names.map(name => [name, ['Succeeded']]));
-const compose = (inputs, ...dependencies) => ({ type: 'Compose', inputs, runAfter: after(...dependencies) });
-const condition = (expression, actions, otherwise = {}, ...dependencies) => ({ type: 'If', expression, actions, else: { actions: otherwise }, runAfter: after(...dependencies) });
+export const after = (...names) => Object.fromEntries(names.map(name => [name, ['Succeeded']]));
+export const compose = (inputs, ...dependencies) => ({ type: 'Compose', inputs, runAfter: after(...dependencies) });
+export const condition = (expression, actions, otherwise = {}, ...dependencies) => ({ type: 'If', expression, actions, else: { actions: otherwise }, runAfter: after(...dependencies) });
 const apiIds = {
   dataverse: 'shared_commondataserviceforapps', rss: 'shared_rss', conversion: 'shared_conversionservice',
   foundry: 'shared_new-5fazureaifoundry-2dprivat-5fff421f3a907912f9', github: 'shared_github',
@@ -109,20 +109,20 @@ const apiIds = {
 // server returns a slow Cloudflare 522 (confirmed: ~20s per attempt, no working content ever).
 // Give every connector call that does non-Dataverse I/O a hard ceiling by default.
 const connectorTimeouts = { rss: 'PT2M', conversion: 'PT2M', foundry: 'PT3M' };
-const connector = (name, operationId, parameters, ...dependencies) => ({
+export const connector = (name, operationId, parameters, ...dependencies) => ({
   type: 'OpenApiConnection', runAfter: after(...dependencies),
   inputs: { host: { apiId: `/providers/Microsoft.PowerApps/apis/${apiIds[name]}`, connectionName: name, operationId },
     parameters, authentication: "@parameters('$authentication')" },
   ...(connectorTimeouts[name] ? { limit: { timeout: connectorTimeouts[name] } } : {}),
 });
 // Audio transcription scales with clip length - it legitimately needs longer than the default.
-const withTimeout = (action, timeout) => ({ ...action, limit: { timeout } });
+export const withTimeout = (action, timeout) => ({ ...action, limit: { timeout } });
 const update = (fields, ...dependencies) => connector('dataverse', 'UpdateRecord', {
   entityName: config.entitySet, recordId: "@items('For_each_source')?['new_newssourceid']",
   ...Object.fromEntries(Object.entries(fields).map(([name, value]) => [`item/${name}`, value])),
 }, ...dependencies);
-const set = (name, value, ...dependencies) => ({ type: 'SetVariable', inputs: { name, value }, runAfter: after(...dependencies) });
-const hostSafetyCheck = (urlExpr, ...dependencies) => ({
+export const set = (name, value, ...dependencies) => ({ type: 'SetVariable', inputs: { name, value }, runAfter: after(...dependencies) });
+export const hostSafetyCheck = (urlExpr, ...dependencies) => ({
   type: 'ParseJson', runAfter: after(...dependencies),
   inputs: {
     content: {
