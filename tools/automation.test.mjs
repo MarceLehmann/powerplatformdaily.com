@@ -19,7 +19,7 @@ test('RSS repeats, articles stop after publication, errors can retry', () => {
   assert.equal(isEligible({ ...ready, new_kind: kind.rss }), true);
   assert.equal(isEligible({ ...ready, new_processing: processing.published }), false);
   assert.equal(isEligible({ ...ready, new_processing: processing.error }), true);
-  assert.equal(config.intervalMinutes, 5);
+  assert.equal(config.intervalMinutes, 360);
 });
 
 test('table matches submission fields and defaults to no approval or consent', () => {
@@ -34,8 +34,8 @@ test('table matches submission fields and defaults to no approval or consent', (
 test('flow is sequential, approval-filtered, uses Foundry and confirms GitHub results', () => {
   const flow = flowDefinition();
   assert.equal(JSON.stringify(flow).includes('"pattern"'), false);
-  assert.equal(flow.triggers.Every_5_minutes.recurrence.interval, 5);
-  assert.equal(flow.triggers.Every_5_minutes.runtimeConfiguration.concurrency.runs, 1);
+  assert.equal(flow.triggers.Recurring_check.recurrence.interval, 360);
+  assert.equal(flow.triggers.Recurring_check.runtimeConfiguration.concurrency.runs, 1);
   assert.match(flow.actions.List_sources.inputs.parameters.$filter, /new_enabled eq true and new_approval eq 100000001/);
   const actions = new Map();
   function visit(block) {
@@ -113,7 +113,8 @@ test('pending submissions are autonomously approved or rejected by the AI Foundr
   assert.equal(router.cases.Waiting_for_GitHub.case, 'queued');
   assert.equal(router.cases.Pending_approval.case, 'pending');
   assert.ok(router.cases.Pending_approval.actions.Pending_URL, 'pending branch must exist for pending-approval records');
-  assert.ok(router.default.actions.Reset_candidates, 'ready branch (default case) must still run the normal pipeline');
+  assert.ok(router.default.actions.Inactivity_gate, 'ready branch (default case) must start with the inactivity gate');
+  assert.ok(actions.get('Reset_candidates'), 'ready branch must still run the normal pipeline once past the inactivity gate');
   assert.equal(actions.get('Foundry_gate').inputs.host.operationId, 'ChatCompletion');
   assert.equal(actions.get('Foundry_gate').inputs.parameters.body.messages[0].content.includes('AUTOMATICALLY approved'), true);
   assert.deepEqual(actions.get('Parse_gate').inputs.schema.required, ['meets_criteria', 'reason']);
@@ -309,4 +310,45 @@ test('a feed with more than 30 unseen items is capped and caught up gradually, n
   // the overflow isn't reprocessed forever - it's what lets the source catch up gradually across
   // the next few 5-minute cycles instead of either stalling or looping on the same backlog.
   assert.match(actions.get('Set_feed_IDs').inputs.value, /body\('Current_feed_IDs'\)/);
+});
+
+test('a source with nothing publishable for 90 days is parked, not deleted or blocked from resuming', () => {
+  const flow = flowDefinition();
+  const actions = new Map();
+  function visit(block) {
+    for (const [name, action] of Object.entries(block)) {
+      actions.set(name, action);
+      if (action.actions) visit(action.actions);
+      if (action.else) visit(action.else.actions);
+      if (action.cases) for (const c of Object.values(action.cases)) visit(c.actions);
+      if (action.default) visit(action.default.actions);
+    }
+  }
+  visit(flow.actions);
+
+  // The gate must sit in front of the normal pipeline (Reset_candidates etc.), not instead of
+  // it - a productive source must reach Reset_candidates every cycle exactly as before.
+  const gate = actions.get('Inactivity_gate');
+  assert.equal(gate.type, 'If');
+  assert.match(gate.expression, /addDays\(utcNow\(\), -90\)/);
+  assert.ok(gate.else.actions.Reset_candidates, 'the untouched pipeline must still run when the source is still productive');
+
+  // Falls back to createdon so a brand-new source isn't judged before it has ever had a chance -
+  // only an explicit prior success (new_lastnewitem) should count against it from then on.
+  const check = actions.get('Last_productive_check');
+  assert.match(check.inputs, /coalesce\(items\('For_each_source'\)\?\['new_lastnewitem'\], items\('For_each_source'\)\?\['createdon'\]\)/);
+  assert.deepEqual(gate.runAfter, { Last_productive_check: ['Succeeded'] });
+
+  // Parking must only ever flip enabled off - never touch approval or delete the record - so a
+  // human (or a later resubmission) can always bring it back by flipping enabled on again.
+  const deactivate = actions.get('Deactivate_inactive_source');
+  assert.equal(deactivate.inputs.parameters['item/new_enabled'], false);
+  assert.equal(deactivate.inputs.parameters['item/new_approval'], undefined);
+  assert.equal(deactivate.inputs.parameters['item/new_processing'], undefined);
+
+  // The field is only ever advanced on an actual publish (Mark_queued), never on a bare
+  // no-new-items or nothing-publishable cycle - a source that posts constantly but never on
+  // topic must still get parked eventually, same as a genuinely dead feed.
+  assert.equal(actions.get('Mark_queued').inputs.parameters['item/new_lastnewitem'], '@utcNow()');
+  assert.equal(actions.get('No_relevant_articles').inputs.parameters['item/new_lastnewitem'], undefined);
 });

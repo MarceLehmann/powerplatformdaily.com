@@ -138,8 +138,10 @@ export const hostSafetyCheck = (urlExpr, ...dependencies) => ({
   },
 });
 
+const INACTIVITY_DAYS = 90;
+
 export function flowDefinition() {
-  const readyActions = {
+  const readyActionsInner = {
     Reset_candidates: set('Candidates', []),
     Reset_publications: set('Publications', [], 'Reset_candidates'),
     Reset_feed_IDs: set('SeenIDs', [], 'Reset_publications'),
@@ -232,7 +234,7 @@ export function flowDefinition() {
         Has_publications: condition("@greater(length(variables('Publications')), 0)", {
           Request_id: compose('@guid()'),
           Public_credit: compose("@if(equals(body('Recheck_source')?['new_publishcredit'], true), addProperty(addProperty(addProperty(json('{}'), 'name', coalesce(body('Recheck_source')?['new_submittername'], '')), 'linkedin', coalesce(body('Recheck_source')?['new_submitterlinkedin'], '')), 'publish_credit', true), json('{}'))", 'Request_id'),
-          Mark_queued: update({ new_processing: processing.queued, new_requestid: "@outputs('Request_id')", new_pendingwatermark: "@outputs('Cutoff')", new_pendingseenids: "@string(variables('SeenIDs'))", new_lastchecked: '@utcNow()', new_lastmessage: 'Awaiting confirmed GitHub workflow result.' }, 'Public_credit'),
+          Mark_queued: update({ new_processing: processing.queued, new_requestid: "@outputs('Request_id')", new_pendingwatermark: "@outputs('Cutoff')", new_pendingseenids: "@string(variables('SeenIDs'))", new_lastchecked: '@utcNow()', new_lastnewitem: '@utcNow()', new_lastmessage: 'Awaiting confirmed GitHub workflow result.' }, 'Public_credit'),
           Dispatch_to_GitHub: connector('github', 'CreateRepositoryDispatchEvent', {
             repositoryOwner: 'MarceLehmann', repositoryName: 'powerplatformnews.com', body: { event_type: 'curated-publication',
               client_payload: { request_id: "@outputs('Request_id')", articles: "@variables('Publications')", credit: "@outputs('Public_credit')" },
@@ -244,6 +246,29 @@ export function flowDefinition() {
       }, {
       Changed_during_run: compose('Source changed or approval withdrawn; no publication requested.'),
     }, 'Recheck_source'),
+  };
+  // A source that keeps producing feed items but never anything genuinely publishable (wrong
+  // topic, too thin, wrong language) costs a Foundry call per candidate forever with nothing to
+  // show for it - unlike a source with zero new items, which costs nothing either way. Track the
+  // last time this source actually produced a publishable article (new_lastnewitem, despite the
+  // name - only ever advanced in Mark_queued above, never on a bare "no new items" cycle) and
+  // park the source (enabled: false) once that's been true for INACTIVITY_DAYS running. Falls
+  // back to the source's own createdon so a newly submitted source gets the same grace period
+  // before being judged, not an immediate strike for having no history yet.
+  const readyActions = {
+    Last_productive_check: compose("@coalesce(items('For_each_source')?['new_lastnewitem'], items('For_each_source')?['createdon'])"),
+    Inactivity_gate: condition(
+      `@less(ticks(outputs('Last_productive_check')), ticks(addDays(utcNow(), -${INACTIVITY_DAYS})))`,
+      {
+        Deactivate_inactive_source: update({
+          new_enabled: false,
+          new_lastchecked: '@utcNow()',
+          new_lastmessage: `@concat('Automatisch stillgelegt: seit ', string(${INACTIVITY_DAYS}), ' Tagen kein publizierbarer Artikel gefunden (zuletzt produktiv: ', outputs('Last_productive_check'), '). Durch Setzen von enabled=true wieder aufnehmen.')`,
+        }),
+      },
+      readyActionsInner,
+      'Last_productive_check',
+    ),
   };
   // A submitted URL that's actually a feed (someone pastes their blog's /feed/ URL instead of
   // a single post) reads as "not a real article" to the article-quality gate below and gets
