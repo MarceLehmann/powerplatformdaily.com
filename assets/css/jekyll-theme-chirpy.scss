@@ -11,26 +11,29 @@
 {%- endif -%}
 ';
 
-@mixin governance-light {
-	--link-color: #146c43;
-	--toc-highlight: #146c43;
-	--sidebar-bg: #f1f6f3;
-	--sidebar-active-color: #146c43;
-	--sidebar-hover-bg: #e4eee8;
+// Distinct from powerplatformgovernance's green brand (#146c43/#80cfaa) so the two
+// sites aren't visually interchangeable - same Chirpy base, own accent identity.
+// Both pairs verified >=4.5:1 contrast (WCAG AA, normal text) against their background.
+@mixin daily-light {
+	--link-color: #4F46E5;
+	--toc-highlight: #4F46E5;
+	--sidebar-bg: #f1eefc;
+	--sidebar-active-color: #4F46E5;
+	--sidebar-hover-bg: #e5e0fa;
 }
 
-@mixin governance-dark {
-	--link-color: #80cfaa;
-	--toc-highlight: #80cfaa;
-	--sidebar-bg: #1c2420;
-	--sidebar-active-color: #80cfaa;
-	--sidebar-hover-bg: #28382f;
+@mixin daily-dark {
+	--link-color: #A5B4FC;
+	--toc-highlight: #A5B4FC;
+	--sidebar-bg: #1b1a2e;
+	--sidebar-active-color: #A5B4FC;
+	--sidebar-hover-bg: #262440;
 }
 
-:root:not([data-bs-theme]), :root[data-bs-theme='light'] { @include governance-light; }
-:root[data-bs-theme='dark'] { @include governance-dark; }
+:root:not([data-bs-theme]), :root[data-bs-theme='light'] { @include daily-light; }
+:root[data-bs-theme='dark'] { @include daily-dark; }
 @media (prefers-color-scheme: dark) {
-	:root:not([data-bs-theme]) { @include governance-dark; }
+	:root:not([data-bs-theme]) { @include daily-dark; }
 }
 
 #sidebar #avatar:empty { display: none; }
