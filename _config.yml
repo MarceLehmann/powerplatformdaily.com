@@ -64,7 +64,7 @@ webmaster_verifications:
 # Web Analytics Settings
 analytics:
   google:
-    id: # left blank on purpose: create a new GA4 property for powerplatformdaily.com, do not reuse governance's G-FDJ0NBT92J
+    id: G-M325NC18D3
   clarity:
     id: yrgk3qpmis
   goatcounter:
