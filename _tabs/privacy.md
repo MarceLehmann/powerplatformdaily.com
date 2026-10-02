@@ -19,11 +19,12 @@ Welcome to Power Platform Daily ("we," "our," or "us"), a project of Marcel Lehm
 ## Information We Collect
 
 ### Automatically Collected Information
-When you visit our website, we automatically collect certain information via Google Analytics, including:
+When you visit our website, we automatically collect certain information via Google Analytics and Microsoft Clarity, including:
 - **IP address** (used to derive an approximate, non-precise location; not stored in identifiable form by us)
 - **Browser and device type**
 - **Pages visited, time spent, and navigation patterns**
 - **Referring website or search engine**
+- **Mouse movement, scrolling and click behaviour** (via Microsoft Clarity's session recordings and heatmaps)
 
 ### Information You Provide Voluntarily
 If you use the [content submission form](/submit/) to suggest an article for curation, we collect:
@@ -44,9 +45,9 @@ We use the information we collect to:
 
 ## Cookies and Tracking Technologies
 
-We ask for your consent before loading Google Analytics. On your first visit, a banner lets you **Accept** or **Decline**:
-- **Accept**: Google Analytics loads and sets cookies to distinguish visitors and measure site usage.
-- **Decline**: Google Analytics never loads; only a small first-party cookie remembers your choice for 365 days so we don't ask again.
+We ask for your consent before loading Google Analytics or Microsoft Clarity. On your first visit, a banner lets you **Accept** or **Decline**:
+- **Accept**: Google Analytics and Microsoft Clarity load and set cookies to distinguish visitors and measure/record site usage.
+- **Decline**: Neither service loads; only a small first-party cookie remembers your choice for 365 days so we don't ask again.
 
 You can change your mind at any time by clearing the `cookie_consent` cookie in your browser settings, which will show the banner again on your next visit. You can also opt out of Google Analytics entirely using the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
 
@@ -57,6 +58,11 @@ We use the following third-party services:
 ### Google Analytics
 - Usage data is collected to understand site traffic and popular content
 - Google's [Privacy Policy](https://policies.google.com/privacy) applies to data processed by Google Analytics
+- You can opt out at any time (see "Cookies and Tracking Technologies" above)
+
+### Microsoft Clarity
+- Session recordings and heatmaps are collected to understand how visitors use and navigate the site
+- Microsoft's [Privacy Statement](https://www.microsoft.com/privacy/privacystatement) and [Clarity Terms of Use](https://clarity.microsoft.com/terms) apply to data processed by Clarity
 - You can opt out at any time (see "Cookies and Tracking Technologies" above)
 
 ### GitHub Pages
@@ -73,13 +79,14 @@ We implement reasonable technical and organizational measures to protect informa
 
 - **Encryption**: HTTPS encryption for all website traffic
 - **Minimal collection**: We only ask for what a content suggestion genuinely needs
-- **Third-Party Security**: We only work with reputable, widely-used service providers (Google, GitHub, LinkedIn)
+- **Third-Party Security**: We only work with reputable, widely-used service providers (Google, Microsoft, GitHub, LinkedIn)
 
 However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
 
 ## Data Retention
 
 - **Analytics data**: Retained by Google Analytics per its standard retention settings (currently 14 months)
+- **Session recordings / heatmaps**: Retained by Microsoft Clarity for up to 30 days (recordings) resp. up to 9 months (heatmap aggregates and a sample of favourited recordings)
 - **Content suggestions**: Retained as long as needed to review and, if published, attribute the curated summary; you may request deletion at any time (see "Your Rights" below)
 
 ## Your Rights (GDPR / Swiss FADP)
