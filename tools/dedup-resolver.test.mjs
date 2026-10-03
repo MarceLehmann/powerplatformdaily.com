@@ -64,6 +64,19 @@ test('dispatch uses a dynamic per-item repo/table, not a fixed site', () => {
   assert.match(getOrigin.inputs.parameters.entityName, /if\(equals\(.*new_site.*new_governancesources.*new_newssources/);
 });
 
+test('every dataverse/github/foundry connector call has an explicit timeout', () => {
+  // The resolver's first real run stalled 13+ minutes with zero progress on an untimed call -
+  // every OpenApiConnection action here must set its own limit.timeout, no exceptions.
+  const actions = collectActions(dedupResolverDefinition());
+  let checked = 0;
+  for (const [name, action] of actions) {
+    if (action.type !== 'OpenApiConnection') continue;
+    checked += 1;
+    assert.ok(action.limit && action.limit.timeout, `${name} is missing an explicit connector timeout`);
+  }
+  assert.ok(checked >= 8, `expected to check at least 8 connector actions, only found ${checked}`);
+});
+
 test('request_id and credit are regenerated fresh at dispatch time, not reused from staging', () => {
   const actions = collectActions(dedupResolverDefinition());
   const dispatch = actions.get('Has_conflict').else.actions.Clean_Dispatch_to_GitHub;

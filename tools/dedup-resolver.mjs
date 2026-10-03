@@ -12,7 +12,17 @@
 // GitHub connection every other flow in both repos uses - see T-0135 for confirmation that one
 // connectionId already covers both repos).
 
-import { after, compose, condition, connector } from './automation.mjs';
+import { after, compose, condition, connector, withTimeout } from './automation.mjs';
+
+// automation.mjs's own connector() only applies a default timeout to rss/conversion/foundry
+// calls (see its connectorTimeouts comment: this project already lost 28+ minutes once to an
+// untimed connector call stalling a sequential, concurrency:1 loop). dataverse/github calls get
+// no default there either, and this resolver's first real run stalled on exactly that gap - so
+// every connector call here gets an explicit timeout, deliberately more defensive than the
+// baseline.
+const dataverseCall = (operationId, parameters, ...deps) => withTimeout(connector('dataverse', operationId, parameters, ...deps), 'PT2M');
+const githubCall = (operationId, parameters, ...deps) => withTimeout(connector('github', operationId, parameters, ...deps), 'PT2M');
+const foundryCall = (operationId, parameters, ...deps) => withTimeout(connector('foundry', operationId, parameters, ...deps), 'PT3M');
 import { stagingConfig, site, stagingStatus, WAIT_MINUTES } from './dedup-staging.mjs';
 
 export const dedupResolverName = 'Cross-repo dedup resolver (Governance + PPNews, T-0074)';
@@ -35,14 +45,14 @@ function publishWinnerActions(prefix, afterName) {
   // last step taken before this point - that step is an outer sibling here, not runAfter-able.
   const deps = afterName ? [afterName] : [];
   return {
-    [n('Get_origin')]: connector('dataverse', 'GetItem', { entityName: sourceTableFor(mySite), recordId: `@${mySourceRecordId}` }, ...deps),
+    [n('Get_origin')]: dataverseCall('GetItem', { entityName: sourceTableFor(mySite), recordId: `@${mySourceRecordId}` }, ...deps),
     [n('Request_id')]: compose('@guid()', n('Get_origin')),
     [n('Public_credit')]: compose(`@if(equals(body('${n('Get_origin')}')?['new_publishcredit'], true), addProperty(addProperty(addProperty(json('{}'), 'name', coalesce(body('${n('Get_origin')}')?['new_submittername'], '')), 'linkedin', coalesce(body('${n('Get_origin')}')?['new_submitterlinkedin'], '')), 'publish_credit', true), json('{}'))`, n('Request_id')),
     // entityName is a runtime expression here (either site's table), not a static constant the
     // connector can bind a known schema to at save time - unlike every entityName elsewhere in
     // this codebase. The per-field "item/fieldname" shortcut properties only materialize for a
     // statically-known table; a dynamic entityName needs the generic nested "item" object form.
-    [n('Mark_source_queued')]: connector('dataverse', 'UpdateRecord', {
+    [n('Mark_source_queued')]: dataverseCall('UpdateRecord', {
       entityName: sourceTableFor(mySite),
       recordId: `@${mySourceRecordId}`,
       item: {
@@ -58,7 +68,7 @@ function publishWinnerActions(prefix, afterName) {
         new_lastmessage: 'Cleared by dedup resolver; awaiting confirmed GitHub workflow result.',
       },
     }, n('Public_credit')),
-    [n('Dispatch_to_GitHub')]: connector('github', 'CreateRepositoryDispatchEvent', {
+    [n('Dispatch_to_GitHub')]: githubCall('CreateRepositoryDispatchEvent', {
       repositoryOwner: 'MarceLehmann', repositoryName: repoNameFor(mySite),
       body: { event_type: 'curated-publication', client_payload: {
         request_id: `@outputs('${n('Request_id')}')`,
@@ -66,7 +76,7 @@ function publishWinnerActions(prefix, afterName) {
         credit: `@outputs('${n('Public_credit')}')`,
       } },
     }, n('Mark_source_queued')),
-    [n('Mark_entry_published')]: connector('dataverse', 'UpdateRecord', {
+    [n('Mark_entry_published')]: dataverseCall('UpdateRecord', {
       entityName: stagingConfig.entitySet, recordId: `@${myId}`,
       'item/new_status': stagingStatus.published,
     }, n('Dispatch_to_GitHub')),
@@ -74,7 +84,7 @@ function publishWinnerActions(prefix, afterName) {
 }
 
 function supersede(afterName, targetIdExpr, note) {
-  return connector('dataverse', 'UpdateRecord', {
+  return dataverseCall('UpdateRecord', {
     entityName: stagingConfig.entitySet, recordId: targetIdExpr,
     'item/new_status': stagingStatus.superseded,
     'item/new_decisionnote': note,
@@ -88,7 +98,7 @@ export function dedupResolverDefinition() {
     triggers: { Every_10_minutes: { type: 'Recurrence', recurrence: { frequency: 'Minute', interval: 10 }, runtimeConfiguration: { concurrency: { runs: 1 } } } },
     actions: {
       Cutoff: compose(`@addMinutes(utcNow(), -${WAIT_MINUTES})`),
-      List_ready: { ...connector('dataverse', 'ListRecords', {
+      List_ready: { ...dataverseCall('ListRecords', {
         entityName: stagingConfig.entitySet,
         $filter: `@concat('new_status eq ${stagingStatus.staged} and new_stagedat le ', outputs('Cutoff'))`,
         $orderby: 'new_stagedat asc',
@@ -98,13 +108,13 @@ export function dedupResolverDefinition() {
         runtimeConfiguration: { concurrency: { repetitions: 1 } },
         actions: {
           Title_key: compose("@toLower(trim(items('For_each_ready_entry')?['new_name']))"),
-          Find_title_match: connector('dataverse', 'ListRecords', {
+          Find_title_match: dataverseCall('ListRecords', {
             entityName: stagingConfig.entitySet,
             $filter: `@concat('new_site ne ', ${mySite}, ' and new_status ne ${stagingStatus.superseded} and tolower(new_name) eq ''', replace(outputs('Title_key'), decodeUriComponent('%27'), decodeUriComponent('%27%27')), '''')`,
             $top: 1,
           }, 'Title_key'),
           Has_conflict: condition("@greater(length(body('Find_title_match')?['value']), 0)", {
-            Foundry_compare: connector('foundry', 'ChatCompletion', {
+            Foundry_compare: foundryCall('ChatCompletion', {
               deploymentId: 'model-router', 'api-version': '2024-08-01-preview', body: { messages: [
                 { role: 'system', content: 'You decide which of two near-duplicate Power Platform articles should be published, given they were independently picked up by two sister sites with different topic scopes: Governance (security, compliance, DLP, ALM, CoE, environment strategy, administration) and PPNews/Daily (Copilot Studio, Power Apps, Power Automate, Power BI, Fabric product news and how-to). Pick the site whose scope the content actually fits best. Return exactly one JSON object, no Markdown fences: {"winner": "this" or "other", "reason": string, max 200 characters}. "this" means candidate A keeps it, "other" means candidate B keeps it. No other keys.' },
                 { role: 'user', content: "@string(json(concat('{\"candidate_a_site\":', string(items('For_each_ready_entry')?['new_site']), ',\"candidate_a_title\":', string(items('For_each_ready_entry')?['new_name']), ',\"candidate_a_tags\":', string(items('For_each_ready_entry')?['new_tags']), ',\"candidate_b_site\":', string(body('Find_title_match')?['value'][0]?['new_site']), ',\"candidate_b_title\":', string(body('Find_title_match')?['value'][0]?['new_name']), ',\"candidate_b_tags\":', string(body('Find_title_match')?['value'][0]?['new_tags']), '}')))" },
