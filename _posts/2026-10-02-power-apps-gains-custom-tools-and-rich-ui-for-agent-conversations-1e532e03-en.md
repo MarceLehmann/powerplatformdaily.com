@@ -28,6 +28,17 @@ source_language_name: English
 source_author: Andreas Adner
 source_published_at: '2026-05-03'
 source_type: article
+faq:
+  - question: "What happens to custom tools when I export a Power App as a declarative Copilot agent?"
+    answer: "They become MCP plugin actions inside the exported declarative agent. The custom tools capability in Power Apps is in public preview. A Power App can also expose its own MCP server with custom MCP Apps UI tools, and the whole app can be packaged as a declarative Copilot agent package for deployment in your tenant."
+  - question: "Which kinds of agents can update Dataverse data from inside a Power App?"
+    answer: "The standard Microsoft 365 Copilot agent running in Power Apps can read Dataverse data but cannot change it. Custom agents, meaning declarative agents, Copilot Studio agents or custom engine agents, can update data when they are deployed together with the Dataverse MCP Server. Choose a custom agent whenever the conversation must write back to records."
+  - question: "How do interactive UI widgets reach agent conversations in Microsoft 365 Copilot?"
+    answer: "Microsoft announced support for the OpenAI Apps SDK in Microsoft 365 Copilot on March 9, 2026, with MCP Apps following shortly after. Both work only for declarative agents and are marketed as interactive UI widgets, part of MCP plugin actions. Full MCP Apps support for declarative Copilot agents arrived on April 7, 2026."
+  - question: "What is the main limitation of custom agents inside a Power App?"
+    answer: "A custom agent has no awareness of the Power App it runs in. It cannot tell which form, view or record the user currently has open, so your agent logic cannot rely on that screen context. The author lists this as a current constraint, which matters most when a conversation depends on the record the user is looking at."
+  - question: "How does an exported Power App agent reach my tenant?"
+    answer: "You download the Power App as a declarative Copilot agent package and deploy it to your tenant. The article names no further admin steps. The custom tools capability in Power Apps is in public preview, announced in April 2026, so any scenario that relies on custom tools carries that preview status. Plan the tenant deployment of such packages with this in mind."
 ---
 
 ## TL;DR

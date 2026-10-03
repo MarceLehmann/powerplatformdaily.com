@@ -29,6 +29,17 @@ source_author: Josh Cook
 source_published_at: '2026-09-25'
 source_updated_at: '2026-09-25'
 source_type: article
+faq:
+  - question: "Wann startet die Work-IQ-Preview für Business Applications und was folgt später?"
+    answer: "Die öffentliche Preview von Work IQ für Geschäftsdaten startet am 30. September 2026, der Rollout läuft im Oktober weiter. Die Unterstützung für Finance and Operations ist für Ende Oktober geplant. Work IQ verbindet Daten aus Dynamics 365 und der Power Platform mit Copilot und Agenten, damit diese die Geschäftsdaten besser einordnen können."
+  - question: "Woraus besteht ein Dataverse-Semantikmodell für Work IQ?"
+    answer: "Ein Semantikmodell besteht aus ausgewählten Dataverse-Tabellen und Spalten, deren Beziehungen, Ansichten, Formularen und der Fachterminologie. Zusammen erklären sie einem Agenten, was die Daten bedeuten. Die Modelle liegen in Dataverse, und Maker können den Kontext verfeinern. Wähle die enthaltenen Elemente bewusst, weil sie bestimmen, wie Agenten deine Daten interpretieren."
+  - question: "Wie spart Work IQ wiederholte Erklärungen in den Prompts von Copilot-Studio-Agenten?"
+    answer: "Maker legen den fachlichen Kontext einmal im Semantikmodell fest und nutzen Business Skills über verbundene Agenten hinweg wieder, darunter Copilot-Studio-Agenten. Die Agenten verstehen dann, wie Datensätze zusammenhängen, ohne dass jeder Prompt eine eigene Erklärung mitbringt. Bei eigenen Lösungen kostet das Nachvollziehen dieser Zusammenhänge viel Aufwand, den Work IQ nur einmal anfallen lassen will."
+  - question: "Wer entscheidet, welche Umgebungen und Daten bei Work IQ mitmachen?"
+    answer: "Die Admins entscheiden weiterhin, welche Umgebungen und welche Daten bei Work IQ teilnehmen. Die Semantikmodelle entstehen aus ausgewählten Tabellen, Spalten, Beziehungen, Ansichten, Formularen und Fachterminologie, die enthaltenen Elemente prägen also, wie Agenten die Daten deuten. Dataverse speichert die Modelle und Skills, und Maker können den Kontext verfeinern."
+  - question: "Welche Werkzeuge gehören zu Work IQ für Business Applications?"
+    answer: "Neben den Semantikmodellen nennt die Ankündigung die neue Dataverse Ask API, einen Work-IQ-MCP-Server, eine Kommandozeilenschnittstelle und ein Plugin für Coding-Agenten. Sie bieten Entwicklern mehrere Zugänge zum selben fachlichen Kontext. Alles gehört zur öffentlichen Preview, die am 30. September 2026 beginnt."
 ---
 
 ## TL;DR
