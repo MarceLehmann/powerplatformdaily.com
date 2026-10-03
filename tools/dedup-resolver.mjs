@@ -38,18 +38,25 @@ function publishWinnerActions(prefix, afterName) {
     [n('Get_origin')]: connector('dataverse', 'GetItem', { entityName: sourceTableFor(mySite), recordId: `@${mySourceRecordId}` }, ...deps),
     [n('Request_id')]: compose('@guid()', n('Get_origin')),
     [n('Public_credit')]: compose(`@if(equals(body('${n('Get_origin')}')?['new_publishcredit'], true), addProperty(addProperty(addProperty(json('{}'), 'name', coalesce(body('${n('Get_origin')}')?['new_submittername'], '')), 'linkedin', coalesce(body('${n('Get_origin')}')?['new_submitterlinkedin'], '')), 'publish_credit', true), json('{}'))`, n('Request_id')),
+    // entityName is a runtime expression here (either site's table), not a static constant the
+    // connector can bind a known schema to at save time - unlike every entityName elsewhere in
+    // this codebase. The per-field "item/fieldname" shortcut properties only materialize for a
+    // statically-known table; a dynamic entityName needs the generic nested "item" object form.
     [n('Mark_source_queued')]: connector('dataverse', 'UpdateRecord', {
       entityName: sourceTableFor(mySite),
       recordId: `@${mySourceRecordId}`,
-      'item/new_processing': 100000004, // processing.queued - same numeric value in both site tables
-      'item/new_requestid': `@outputs('${n('Request_id')}')`,
-      // Watermark/seenIDs were already advanced for real when the item was staged (not a
-      // pending copy) - this just satisfies the existing receipt-confirmation flow's expectation
-      // that pendingwatermark/pendingseenids exist, by reconfirming the already-current values.
-      'item/new_pendingwatermark': `@body('${n('Get_origin')}')?['new_watermark']`,
-      'item/new_pendingseenids': `@body('${n('Get_origin')}')?['new_seenids']`,
-      'item/new_lastchecked': '@utcNow()',
-      'item/new_lastmessage': 'Cleared by dedup resolver; awaiting confirmed GitHub workflow result.',
+      item: {
+        new_processing: 100000004, // processing.queued - same numeric value in both site tables
+        new_requestid: `@outputs('${n('Request_id')}')`,
+        // Watermark/seenIDs were already advanced for real when the item was staged (not a
+        // pending copy) - this just satisfies the existing receipt-confirmation flow's
+        // expectation that pendingwatermark/pendingseenids exist, by reconfirming the
+        // already-current values.
+        new_pendingwatermark: `@body('${n('Get_origin')}')?['new_watermark']`,
+        new_pendingseenids: `@body('${n('Get_origin')}')?['new_seenids']`,
+        new_lastchecked: '@utcNow()',
+        new_lastmessage: 'Cleared by dedup resolver; awaiting confirmed GitHub workflow result.',
+      },
     }, n('Public_credit')),
     [n('Dispatch_to_GitHub')]: connector('github', 'CreateRepositoryDispatchEvent', {
       repositoryOwner: 'MarceLehmann', repositoryName: repoNameFor(mySite),
