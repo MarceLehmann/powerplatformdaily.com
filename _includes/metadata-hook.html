@@ -48,6 +48,70 @@
 </script>
 {% endif %}
 
+{% if page.url == '/faq/' %}
+<!-- FAQPage schema (GEO: mirrors the on-page Q&A verbatim so AI answer engines and
+     rich results can surface it directly). Keep in sync with _tabs/faq.md by hand -
+     there is no single source shared between the two. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Power Platform Daily?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A curated collection of Power Platform product news and practical guidance from different blogs, brought into one place. Each entry is a short summary with a clear takeaway and a direct link to the original article." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you republish full articles?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. We write an independent short summary and takeaway, and link directly to the original. We never reproduce or translate a full article." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you choose what to feature?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Every candidate goes through an automated relevance check before it is summarized: it has to be substantially about Microsoft Copilot Studio, Power Apps, Power Automate, Power BI or Microsoft Fabric - new features, product updates, releases, roadmap, integrations, connectors or practical how-to guidance, with enough original content to summarize responsibly. Generic AI news, marketing, and Power Platform governance/security/compliance/DLP/ALM/CoE content do not pass - that's the scope of our sister site, Power Platform Governance." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this affiliated with Microsoft?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. This is an independent project edited by Marcel Lehmann, a Microsoft MVP and founder of KMUpower. It is not an official Microsoft publication." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I suggest a blog or article?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use the submission page. A link is enough; your name and LinkedIn profile are optional. Every suggestion is reviewed before publication." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why isn't a specific blog listed yet?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Either it hasn't been suggested yet, or it didn't pass the relevance check for this site's scope. Suggest it through the submission page and it will be reviewed." }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is behind this site?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Marcel Lehmann, founder of KMUpower, a Swiss Power Platform consultancy and training business. He also edits PowerPlatformTip; that connection is disclosed when featuring it here." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between Power Platform Daily and Power Platform Governance?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Different scope, same curation approach. Daily covers product news and how-to guidance for Copilot Studio, Power Apps, Power Automate, Power BI and Fabric - new features, releases, integrations. Governance covers the administrative side - security, compliance, DLP, ALM, Center of Excellence. The two sites are kept deliberately separate; an article only ever appears on one of them." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need Premium licensing for the features covered here?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on the feature. Many Power Apps and Power Automate capabilities are available on a standard license; others - certain premium connectors, Dataverse, some Copilot Studio and Fabric capacities - require a premium or per-capacity license. We note it in the summary when a feature is premium-only; when in doubt, check the current Microsoft licensing documentation, since terms change over time." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between Copilot Studio and Microsoft 365 Copilot?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Microsoft 365 Copilot is the built-in AI assistant across Word, Excel, Teams and the other Microsoft 365 apps. Copilot Studio is the tool for building and customizing your own conversational agents - with your own data sources, topics and actions - that can run standalone or be published into Microsoft 365 Copilot and other channels." }
+    }
+  ]
+}
+</script>
+{% endif %}
+
 {%- if page.layout == 'post' -%}
 {%- comment -%}
   Replaces jekyll-seo-tag's own BlogPosting block (stripped in head.html for post
