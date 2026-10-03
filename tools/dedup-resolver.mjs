@@ -108,9 +108,15 @@ export function dedupResolverDefinition() {
         runtimeConfiguration: { concurrency: { repetitions: 1 } },
         actions: {
           Title_key: compose("@toLower(trim(items('For_each_ready_entry')?['new_name']))"),
+          // Dataverse's OData implementation does NOT support the tolower() filter function
+          // (confirmed: HTTP 501 "The 'tolower' function isn't supported" - this is what
+          // actually stalled the first real run, not a missing timeout as first suspected; the
+          // connector silently retried the failing call until the timeout cut it off). Plain
+          // 'eq' against new_name already matches case-insensitively under Dataverse's default
+          // collation (verified directly), so compare against the column with no wrapper at all.
           Find_title_match: dataverseCall('ListRecords', {
             entityName: stagingConfig.entitySet,
-            $filter: `@concat('new_site ne ', ${mySite}, ' and new_status ne ${stagingStatus.superseded} and tolower(new_name) eq ''', replace(outputs('Title_key'), decodeUriComponent('%27'), decodeUriComponent('%27%27')), '''')`,
+            $filter: `@concat('new_site ne ', ${mySite}, ' and new_status ne ${stagingStatus.superseded} and new_name eq ''', replace(outputs('Title_key'), decodeUriComponent('%27'), decodeUriComponent('%27%27')), '''')`,
             $top: 1,
           }, 'Title_key'),
           Has_conflict: condition("@greater(length(body('Find_title_match')?['value']), 0)", {
