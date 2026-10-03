@@ -1,3 +1,6 @@
+// T-0074: cross-repo dedup staging (shared table + resolver flow, see dedup-staging.mjs).
+import { stagingConfig, site as dedupSite, stagingStatus } from './dedup-staging.mjs';
+
 export const config = {
   environment: '7bf06bc7-6b19-e10e-ade3-9337f010d45e',
   organization: 'https://kmupower.crm17.dynamics.com',
@@ -232,14 +235,41 @@ export function flowDefinition() {
       Recheck_source: connector('dataverse', 'GetItem', { entityName: config.entitySet, recordId: "@items('For_each_source')?['new_newssourceid']" }, 'For_each_article'),
       Still_approved: condition(`@and(equals(body('Recheck_source')?['new_approval'], ${approval.approved}), equals(body('Recheck_source')?['new_enabled'], true), equals(body('Recheck_source')?['statecode'], 0), equals(body('Recheck_source')?['modifiedon'], items('For_each_source')?['modifiedon']))`, {
         Has_publications: condition("@greater(length(variables('Publications')), 0)", {
-          Request_id: compose('@guid()'),
-          Public_credit: compose("@if(equals(body('Recheck_source')?['new_publishcredit'], true), addProperty(addProperty(addProperty(json('{}'), 'name', coalesce(body('Recheck_source')?['new_submittername'], '')), 'linkedin', coalesce(body('Recheck_source')?['new_submitterlinkedin'], '')), 'publish_credit', true), json('{}'))", 'Request_id'),
-          Mark_queued: update({ new_processing: processing.queued, new_requestid: "@outputs('Request_id')", new_pendingwatermark: "@outputs('Cutoff')", new_pendingseenids: "@string(variables('SeenIDs'))", new_lastchecked: '@utcNow()', new_lastnewitem: '@utcNow()', new_lastmessage: 'Awaiting confirmed GitHub workflow result.' }, 'Public_credit'),
-          Dispatch_to_GitHub: connector('github', 'CreateRepositoryDispatchEvent', {
-            repositoryOwner: 'MarceLehmann', repositoryName: 'powerplatformdaily.com', body: { event_type: 'curated-publication',
-              client_payload: { request_id: "@outputs('Request_id')", articles: "@variables('Publications')", credit: "@outputs('Public_credit')" },
+          // T-0074: stage each publishable item instead of dispatching straight to GitHub. The
+          // shared new_contentstaging table's alternate key (on a capped, normalized URL) makes
+          // "only one site ever claims a given URL" an atomic Dataverse guarantee, not app
+          // logic - whichever site's CreateRecord lands first wins; the other's attempt fails
+          // and is caught below without affecting the rest of the batch. The separate dedup
+          // resolver flow (dedup-staging.mjs) waits out the window, runs the Foundry title
+          // comparison for same-story-different-URL cases, and does the actual
+          // Dispatch_to_GitHub once a staged item is clear to publish.
+          Stage_publications: {
+            type: 'Foreach', foreach: "@variables('Publications')", runAfter: {},
+            runtimeConfiguration: { concurrency: { repetitions: 1 } },
+            actions: {
+              Normalize_base: compose("@toLower(trim(first(split(items('Stage_publications')?['source_url'], '?'))))"),
+              Normalize_url: compose("@if(endsWith(outputs('Normalize_base'), '/'), substring(outputs('Normalize_base'), 0, sub(length(outputs('Normalize_base')), 1)), outputs('Normalize_base'))", 'Normalize_base'),
+              Url_key: compose("@take(outputs('Normalize_url'), 800)", 'Normalize_url'),
+              Try_stage: { type: 'Scope', runAfter: after('Url_key'), actions: {
+                Create_staging_entry: connector('dataverse', 'CreateRecord', {
+                  entityName: stagingConfig.entitySet,
+                  'item/new_name': "@take(coalesce(items('Stage_publications')?['en']?['title'], outputs('Normalize_url')), 100)",
+                  'item/new_normalizedurl': "@outputs('Normalize_url')",
+                  'item/new_urlhash': "@outputs('Url_key')",
+                  'item/new_site': dedupSite.ppnews,
+                  'item/new_sourcerecordid': "@items('For_each_source')?['new_newssourceid']",
+                  'item/new_status': stagingStatus.staged,
+                  'item/new_stagedat': '@utcNow()',
+                  'item/new_tags': "@join(coalesce(items('Stage_publications')?['tags'], createArray()), ',')",
+                  'item/new_payload': "@string(items('Stage_publications'))",
+                }),
+              } },
+              Catch_stage: { type: 'Scope', runAfter: { Try_stage: ['Failed'] }, actions: {
+                Already_staged_elsewhere: compose("@concat('Not staged - normalized URL already claimed: ', outputs('Normalize_url'))"),
+              } },
             },
-          }, 'Mark_queued'),
+          },
+          Mark_staged: update({ new_watermark: "@outputs('Cutoff')", new_seenids: "@string(variables('SeenIDs'))", new_lastchecked: '@utcNow()', new_lastnewitem: '@utcNow()', new_processing: `@if(equals(items('For_each_source')?['new_kind'], ${kind.rss}), ${processing.ready}, ${processing.review})`, new_lastmessage: "@concat(string(length(variables('Publications'))), ' item(s) staged for cross-repo dedup window; resolver publishes after ~20 min if clear.')" }, 'Stage_publications'),
         }, {
           No_relevant_articles: update({ new_watermark: "@outputs('Cutoff')", new_seenids: "@string(variables('SeenIDs'))", new_lastchecked: '@utcNow()', new_processing: `@if(equals(items('For_each_source')?['new_kind'], ${kind.rss}), ${processing.ready}, ${processing.review})`, new_failures: 0, new_lastmessage: 'No new publishable article found. Feed IDs confirmed; individual article requires review.' }),
         }),

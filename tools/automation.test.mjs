@@ -68,8 +68,14 @@ test('flow is sequential, approval-filtered, uses Foundry and confirms GitHub re
   assert.equal(actions.has('GitHub_results'), false);
   assert.deepEqual(actions.get('Validate_source_URL').inputs.schema.properties.scheme.enum, ['https']);
   assert.deepEqual(actions.get('Validate_source_URL').inputs.schema.properties.public_host.enum, [true]);
-  assert.equal(actions.get('Dispatch_to_GitHub').inputs.parameters.body.event_type, 'curated-publication');
-  assert.deepEqual(actions.get('Dispatch_to_GitHub').runAfter, { Mark_queued: ['Succeeded'] });
+  // T-0074: publishable items are staged (shared dedup table, alternate-key race safety) rather
+  // than dispatched to GitHub directly - the resolver flow (dedup-staging.mjs) does that after
+  // the dedup window. See automation.test.mjs's dedup-staging tests for the resolver itself.
+  assert.equal(actions.has('Dispatch_to_GitHub'), false, 'live flow no longer dispatches directly - the resolver does, after staging');
+  assert.equal(actions.get('Create_staging_entry').inputs.parameters.entityName, 'new_contentstagings');
+  assert.deepEqual(actions.get('Catch_stage').runAfter, { Try_stage: ['Failed'] });
+  assert.deepEqual(actions.get('Mark_staged').runAfter, { Stage_publications: ['Succeeded'] });
+  assert.equal(actions.get('Stage_publications').runtimeConfiguration.concurrency.repetitions, 1);
   assert.match(actions.get('Still_approved').expression, /modifiedon/);
   assert.equal(actions.get('Confirm_publication').inputs.parameters['item/new_failures'], 0);
   assert.equal(actions.get('Missing_receipt_review').inputs.parameters['item/new_watermark'], undefined);
@@ -346,9 +352,9 @@ test('a source with nothing publishable for 90 days is parked, not deleted or bl
   assert.equal(deactivate.inputs.parameters['item/new_approval'], undefined);
   assert.equal(deactivate.inputs.parameters['item/new_processing'], undefined);
 
-  // The field is only ever advanced on an actual publish (Mark_queued), never on a bare
-  // no-new-items or nothing-publishable cycle - a source that posts constantly but never on
-  // topic must still get parked eventually, same as a genuinely dead feed.
-  assert.equal(actions.get('Mark_queued').inputs.parameters['item/new_lastnewitem'], '@utcNow()');
+  // The field is only ever advanced when something was actually staged (Mark_staged, T-0074),
+  // never on a bare no-new-items or nothing-publishable cycle - a source that posts constantly
+  // but never on topic must still get parked eventually, same as a genuinely dead feed.
+  assert.equal(actions.get('Mark_staged').inputs.parameters['item/new_lastnewitem'], '@utcNow()');
   assert.equal(actions.get('No_relevant_articles').inputs.parameters['item/new_lastnewitem'], undefined);
 });
