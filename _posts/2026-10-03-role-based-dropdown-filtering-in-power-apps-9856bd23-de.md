@@ -26,6 +26,13 @@ source_language_name: English
 source_author: Anouck
 source_published_at: '2026-07-06'
 source_type: article
+faq:
+  - question: "Wie kann eine Power-Apps-Canvas-App eine eingeschränkte SharePoint-Auswahl vor unberechtigten Personen verstecken?"
+    answer: "Lower(User().Email) mit einer Liste berechtigter Personen abgleichen und den eingeschränkten Wert dann aus der Choices()-Formel des Dropdowns filtern."
+  - question: "Was sollte eine App tun, wenn eine eingeschränkte Auswahl für alle sichtbar bleiben muss?"
+    answer: "Stattdessen die Navigation blockieren, zum Beispiel mit Notify oder einem deaktivierten Weiter-Button, nach Prüfung der gewählten Auswahl."
+  - question: "Reicht eine Canvas-App-Prüfung aus, um rollenbasierten Zugriff auf eine Auswahl wirklich durchzusetzen?"
+    answer: "Nein. Diese Prüfungen sind nur clientseitig; echte Durchsetzung braucht einen Flow oder strengere SharePoint-Berechtigungen an der Datenquelle."
 ---
 
 ## TL;DR

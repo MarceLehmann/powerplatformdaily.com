@@ -24,6 +24,13 @@ source_language_name: English
 source_author: Anouck
 source_published_at: '2026-07-02'
 source_type: article
+faq:
+  - question: "Was ersetzt in diesem mehrseitigen Power-Apps-Formular 25 globale Variablen?"
+    answer: "Ein einziger gblEvent-Datensatz. Jede Weiter-Schaltfläche ergänzt oder aktualisiert dessen Felder mit Patch statt einzelner Variablen."
+  - question: "Wie speichert dieser Ansatz am Ende den SharePoint-Eintrag?"
+    answer: "Ein abschliessender Patch mit Defaults(Events) erstellt den Eintrag, und Errors(Events) kann die konkrete Fehlermeldung zurückgeben."
+  - question: "Was sollten Makers bei SharePoint-Auswahl- und Personenfeldern früh testen?"
+    answer: "Diese Felder früh testen, weil SharePoint-Auswahl- und Personenfelder beim Patch aus Power Apps bestimmte Datensatzformen erwarten."
 ---
 
 ## TL;DR

@@ -25,6 +25,13 @@ source_language_name: English
 source_author: Anouck
 source_published_at: '2026-07-01'
 source_type: article
+faq:
+  - question: "What three controls make up a Power Apps progress bar for multi-screen forms?"
+    answer: "A recTrack rectangle, a recFill rectangle and a text label. recFill's width is recTrack's width multiplied by the current step divided by total steps."
+  - question: "How does each screen update the progress bar in this Power Apps form?"
+    answer: "Each screen sets a global step variable in its OnVisible property, which the fill rectangle then uses to recalculate its width."
+  - question: "How can a progress bar stay accessible instead of relying on colour alone?"
+    answer: "Keep a visible text step label alongside the bar and add an AccessibleLabel, so progress is communicated beyond colour."
 ---
 
 ## TL;DR
