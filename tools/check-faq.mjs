@@ -10,7 +10,8 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const siteDir = process.argv[2] || '_site';
-const expectedCount = 5;
+const expectedCount = 3;
+const maxAnswerWords = 35;
 
 function* walk(dir) {
   for (const name of readdirSync(dir)) {
@@ -84,6 +85,8 @@ for (const file of walk(siteDir)) {
       errors.push(`${label}: FAQPage entry is not a Question with an Answer`);
       break;
     }
+    const wordCount = normalise(entity?.acceptedAnswer?.text).split(/\s+/).filter(Boolean).length;
+    if (wordCount > maxAnswerWords) errors.push(`${label}: FAQ answer has ${wordCount} words, expected at most ${maxAnswerWords}`);
   }
 
   pagesWithFaq += 1;

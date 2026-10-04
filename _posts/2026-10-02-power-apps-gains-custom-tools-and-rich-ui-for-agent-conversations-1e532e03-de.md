@@ -30,15 +30,11 @@ source_published_at: '2026-05-03'
 source_type: article
 faq:
   - question: "Was passiert mit benutzerdefinierten Tools, wenn ich eine Power App als deklarativen Copilot-Agenten exportiere?"
-    answer: "Sie werden im exportierten deklarativen Agenten zu MCP-Plugin-Aktionen. Die Funktion für benutzerdefinierte Tools in Power Apps befindet sich in der öffentlichen Preview. Eine Power App kann ausserdem einen eigenen MCP-Server mit MCP-Apps-Oberflächen bereitstellen, und die ganze App lässt sich als Paket eines deklarativen Copilot-Agenten für die Bereitstellung im Tenant verpacken."
+    answer: "Sie werden im exportierten Agenten zu MCP-Plugin-Aktionen. Sowohl die benutzerdefinierten Tools als auch der Export selbst befinden sich in der öffentlichen Preview."
   - question: "Welche Agenten dürfen innerhalb einer Power App Dataverse-Daten ändern?"
-    answer: "Der Standard-Agent von Microsoft 365 Copilot in Power Apps kann Dataverse-Daten nur lesen. Benutzerdefinierte Agenten, also deklarative Agenten, Copilot-Studio-Agenten oder Custom-Engine-Agenten, können Daten aktualisieren, wenn sie zusammen mit dem Dataverse MCP Server bereitgestellt werden. Wenn eine Unterhaltung Datensätze zurückschreiben soll, brauchst du daher einen benutzerdefinierten Agenten."
-  - question: "Wie gelangen interaktive UI-Widgets in Agent-Unterhaltungen von Microsoft 365 Copilot?"
-    answer: "Am 9. März 2026 kündigte Microsoft die Unterstützung des OpenAI Apps SDK in Microsoft 365 Copilot an, MCP Apps folgten kurz danach. Beides gilt zunächst nur für deklarative Agenten und läuft unter der Bezeichnung interaktive UI-Widgets als Teil der MCP-Plugin-Aktionen. Die volle Unterstützung von MCP Apps für deklarative Copilot-Agenten kam am 7. April 2026."
+    answer: "Der Standard-Agent von Microsoft 365 Copilot kann Dataverse-Daten nur lesen. Benutzerdefinierte Agenten, etwa deklarative oder Copilot-Studio-Agenten, können sie über den Dataverse MCP Server ändern."
   - question: "Welche Einschränkung haben benutzerdefinierte Agenten innerhalb einer Power App?"
-    answer: "Ein benutzerdefinierter Agent weiss nichts über die Power App, in der er läuft. Er kann nicht erkennen, welches Formular, welche Ansicht oder welchen Datensatz die Person gerade geöffnet hat. Plane deine Agentenlogik deshalb nicht auf diesem Bildschirmkontext auf. Der Autor führt das als aktuelle Einschränkung auf, die besonders bei Unterhaltungen zum angezeigten Datensatz zählt."
-  - question: "Wie gelangt ein exportierter Power-Apps-Agent in meinen Tenant?"
-    answer: "Du lädst die Power App als Paket eines deklarativen Copilot-Agenten herunter und stellst es in deinem Tenant bereit. Weitere Admin-Schritte nennt der Artikel nicht. Die Funktion für benutzerdefinierte Tools in Power Apps ist in der öffentlichen Preview, angekündigt im April 2026, deshalb tragen alle Szenarien, die darauf aufbauen, diesen Preview-Status. Plane die Bereitstellung solcher Pakete im Tenant mit diesem Hinweis."
+    answer: "Ein benutzerdefinierter Agent weiss nichts über die Power App, in der er läuft. Er kann nicht erkennen, welches Formular, welche Ansicht oder welchen Datensatz die Person geöffnet hat."
 ---
 
 ## TL;DR

@@ -28,15 +28,11 @@ source_published_at: '2026-06-28'
 source_type: article
 faq:
   - question: "How do I connect Dataverse MCP Server to Claude Code from the command line?"
-    answer: "Use the claude mcp add command with the HTTP transport, your Entra app registration ID as client ID, a name for the server and the Dataverse MCP URL. After you start Claude Code, run the /mcp command and sign in through the browser link it shows. The app registration and its redirect URI must already be in place."
-  - question: "Which redirect URIs does the Entra app need for Claude Desktop, Claude Code and GitHub Copilot?"
-    answer: "Add one redirect URI per client in the app registration. Claude Desktop uses the claude.ai MCP authentication callback address, Claude Code uses http://localhost/callback, and GitHub Copilot, both app and CLI, uses http://127.0.0.1. Register these addresses before anyone signs in, because each client expects its own value during the OAuth2 flow."
-  - question: "Why must public client flows be enabled for the Dataverse MCP Entra app?"
-    answer: "Public client flows allow the OAuth2 PKCE sign-in that desktop and CLI clients use to authenticate against the remote Dataverse MCP endpoint. In the Authentication settings of the app registration you set Allow public client flows to Enabled. The author notes that this Authentication page is still marked Preview in the walkthrough."
+    answer: "Run claude mcp add with HTTP transport, your Entra app's client ID and the Dataverse MCP URL. Then sign in through the browser link that /mcp shows."
   - question: "What permission and allow-list step does the Dataverse environment need for MCP clients?"
-    answer: "Grant the app registration the mcp.tools API permission and note its application ID. Then add that ID to the allowed clients in the MCP Server access controls of your Dataverse environment, so the environment recognises the client. The same application ID is entered later in the configuration of each client."
+    answer: "Grant the app registration the mcp.tools API permission. Then add its application ID to the allowed clients in the Dataverse environment's MCP Server access controls."
   - question: "What replaces the local STDIO proxy when using Dataverse MCP with non-Microsoft clients?"
-    answer: "The remote endpoint with Streamable HTTP transport replaces it. The author calls the local STDIO proxy approach outdated, because it needs tedious configuration. With the remote URL and OAuth2 PKCE, Claude Desktop, Claude Code, the GitHub Copilot app and GitHub Copilot CLI connect directly. In Claude Desktop you create a custom connector with the MCP URL and the app ID."
+    answer: "A remote Streamable HTTP endpoint. The author calls the old local STDIO proxy outdated and tedious to configure; clients now connect directly with OAuth2 PKCE."
 ---
 
 ## TL;DR
