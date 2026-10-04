@@ -26,6 +26,13 @@ source_language_name: English
 source_author: Anouck
 source_published_at: '2026-07-06'
 source_type: article
+faq:
+  - question: "How can a Power Apps canvas app hide a restricted SharePoint choice from unauthorised users?"
+    answer: "Check Lower(User().Email) against an allowed-user list, then filter the restricted value out of the dropdown's Choices() formula."
+  - question: "What should an app do if a restricted choice must stay visible to everyone?"
+    answer: "Block navigation instead, for example with Notify or a disabled Next button, after validating the selected choice."
+  - question: "Is a canvas-app check enough to truly enforce role-based access to a choice?"
+    answer: "No. These checks are client-side only; real enforcement needs a flow or tighter SharePoint permissions at the data source."
 ---
 
 ## TL;DR

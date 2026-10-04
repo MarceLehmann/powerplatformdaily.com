@@ -27,6 +27,13 @@ source_language_name: English
 source_author: Diana Birkelbach
 source_published_at: '2026-10-03'
 source_type: article
+faq:
+  - question: "Wie öffnet man eine Generative Page als Dialog in einer modellgesteuerten App?"
+    answer: "Mit Xrm.Navigation.navigateTo, pageType generative und target 2. Aufrufer übergeben entityName, recordId und eigene Daten als Kontext."
+  - question: "Wie kann ein Generative-Page-Dialog ausgewählte Dataverse-Datensätze an den Aufrufer zurückgeben?"
+    answer: "Über result.returnValue, das Projekt- und Meilenstein-Datensätze zurückgeben kann, um Dataverse-Lookups im aufrufenden Formular zu füllen."
+  - question: "Ist das Muster für Ausgabe und Schliessen von Generative-Page-Dialogen offiziell dokumentiert?"
+    answer: "Nein. Das Muster aus setPageOutput und navigateBack ist nicht dokumentiert, Admins sollten auf Änderungen bei Supportstatus oder Signatur achten."
 ---
 
 ## TL;DR

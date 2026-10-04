@@ -29,6 +29,13 @@ source_language_name: English
 source_author: Josh Cook
 source_published_at: '2026-10-02'
 source_type: article
+faq:
+  - question: "Bei welchen Lebenszyklusereignissen kann ein Copilot-Studio-Hook einen Workflow ausführen?"
+    answer: "Bei sechs Ereignissen, darunter vor und nach einem Tool-Aufruf. Ein Hook vor dem Aufruf kann Argumente prüfen, ändern oder den Aufruf ablehnen."
+  - question: "Wie sollten Makers das Testen eines Vorab-Hooks bei einem Update-Tool beginnen?"
+    answer: "Ein einzelnes Update-Tool mit dem Hook pilotieren und gezielt sowohl eine Ablehnung als auch einen defekten Workflow testen."
+  - question: "Was kann ein Post-Call-Hook nach einem Dataverse-Update-Tool-Aufruf tun?"
+    answer: "Er kann die Aktivität protokollieren oder das zurückgegebene Ergebnis anpassen, was zeigt, was der Agent tatsächlich geändert hat."
 ---
 
 ## TL;DR

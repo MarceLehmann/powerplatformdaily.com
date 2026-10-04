@@ -25,6 +25,13 @@ source_language_name: English
 source_author: Anouck
 source_published_at: '2026-07-01'
 source_type: article
+faq:
+  - question: "Aus welchen drei Steuerelementen besteht ein Power-Apps-Fortschrittsbalken für mehrseitige Formulare?"
+    answer: "Einem recTrack-Rechteck, einem recFill-Rechteck und einem Textlabel. Die Breite von recFill ergibt sich aus recTrack-Breite multipliziert mit dem aktuellen Schritt geteilt durch die Gesamtschritte."
+  - question: "Wie aktualisiert jeder Screen den Fortschrittsbalken in diesem Power-Apps-Formular?"
+    answer: "Jeder Screen setzt eine globale Schrittvariable in seiner OnVisible-Eigenschaft, die das Füll-Rechteck dann zur Neuberechnung seiner Breite nutzt."
+  - question: "Wie bleibt ein Fortschrittsbalken barrierefrei statt sich nur auf Farbe zu verlassen?"
+    answer: "Ein sichtbares Textlabel für den Schritt beibehalten und ein AccessibleLabel ergänzen, damit der Fortschritt nicht nur über Farbe vermittelt wird."
 ---
 
 ## TL;DR

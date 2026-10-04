@@ -24,6 +24,13 @@ source_language_name: English
 source_author: Anouck
 source_published_at: '2026-07-02'
 source_type: article
+faq:
+  - question: "What replaces 25 global variables in this multi-screen Power Apps form?"
+    answer: "One gblEvent record. Each Next button uses Patch to add or update that record's fields instead of separate variables."
+  - question: "How does this approach finally save the SharePoint item?"
+    answer: "A final Patch with Defaults(Events) creates the SharePoint item, and Errors(Events) can return the actual save error message."
+  - question: "What should makers test early when saving to SharePoint choice and person columns?"
+    answer: "Test those columns early, because SharePoint choice and person fields require specific record shapes when patched from Power Apps."
 ---
 
 ## TL;DR

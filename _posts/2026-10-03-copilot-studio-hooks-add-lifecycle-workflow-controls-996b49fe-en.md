@@ -29,6 +29,13 @@ source_language_name: English
 source_author: Josh Cook
 source_published_at: '2026-10-02'
 source_type: article
+faq:
+  - question: "At which lifecycle events can a Copilot Studio hook run a workflow?"
+    answer: "At six events, including before a tool runs and after it completes. A before-tool hook can inspect, modify or deny the call before it executes."
+  - question: "How should makers start testing a before-tool hook on an update tool?"
+    answer: "Pilot one update tool with the hook, then deliberately test both an explicit denial and a broken workflow."
+  - question: "What can a post-call hook do after a Dataverse update tool runs?"
+    answer: "It can log the update activity or adjust the returned result, which is useful for tracking what an agent actually changed."
 ---
 
 ## TL;DR

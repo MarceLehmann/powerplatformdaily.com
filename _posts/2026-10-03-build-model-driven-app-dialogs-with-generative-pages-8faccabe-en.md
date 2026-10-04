@@ -26,6 +26,13 @@ source_language_name: English
 source_author: Diana Birkelbach
 source_published_at: '2026-10-03'
 source_type: article
+faq:
+  - question: "How do you open a Generative Page as a dialog in a model-driven app?"
+    answer: "Call Xrm.Navigation.navigateTo with pageType generative and target 2. Callers pass entityName, recordId and custom data as context."
+  - question: "How can a Generative Page dialog return selected Dataverse records to the caller?"
+    answer: "Through result.returnValue, which can carry back project and milestone records to populate Dataverse lookups in the calling form."
+  - question: "Is the output and closing pattern for Generative Page dialogs officially documented?"
+    answer: "No. The setPageOutput and navigateBack pattern is undocumented, so admins should watch for its support status or signature to change."
 ---
 
 ## TL;DR
