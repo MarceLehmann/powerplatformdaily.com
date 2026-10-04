@@ -359,10 +359,10 @@ test('a source with nothing publishable for 90 days is parked, not deleted or bl
   assert.equal(actions.get('No_relevant_articles').inputs.parameters['item/new_lastnewitem'], undefined);
 });
 
-test('extraction prompt asks for exactly 5 evidence-bound FAQ items per language, placed before the closing rule', () => {
-  assert.match(extractionPrompt, /faq \(exactly 5 objects with question and answer/);
-  assert.ok(extractionPrompt.includes('exactly 5'));
-  assert.ok(extractionPrompt.includes('40-80 words'));
+test('extraction prompt asks for exactly 3 evidence-bound FAQ items per language, placed before the closing rule', () => {
+  assert.match(extractionPrompt, /faq \(exactly 3 objects with question and answer/);
+  assert.ok(extractionPrompt.includes('exactly 3'));
+  assert.ok(extractionPrompt.includes('15-30 words'));
   assert.ok(extractionPrompt.includes('faq not supported'));
   assert.ok(extractionPrompt.includes('Answer ONLY from the supplied evidence'));
   const faqAt = extractionPrompt.indexOf('Write the faq for each language');
