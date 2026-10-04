@@ -29,17 +29,6 @@ source_language_name: English
 source_author: Josh Cook
 source_published_at: '2026-10-02'
 source_type: article
-faq:
-  - question: "At which six moments can a Copilot Studio hook run a workflow?"
-    answer: "Hooks run at session start, when a prompt is submitted, on an agent error, before a tool runs, after a tool completes successfully and after a tool fails. At these events the hook triggers a Power Automate workflow. The feature is in preview and works for agents that use the GitHub Copilot harness."
-  - question: "What can a before-tool hook do with a tool call?"
-    answer: "It can inspect the arguments of the call, change them or deny the call entirely before the tool runs. That makes it useful for checking update requests early. The post advises piloting with a single update tool and testing both an explicit denial and a deliberately broken workflow before you extend the setup."
-  - question: "What happens when a Copilot Studio hook workflow fails or times out?"
-    answer: "The agent simply carries on. A failed workflow, a timeout or a response the agent cannot read does not stop it, so a hook never acts as a hard gate. Test a broken workflow on purpose, because this behaviour decides whether a rule placed in a hook is really enforced."
-  - question: "Where should mandatory authorization rules live if hooks can fail open?"
-    answer: "In the underlying service, not in the hook. Microsoft's guidance says authorization and business rules belong there, because a failing hook does not hold the agent back. Hooks stay useful for inspection, argument changes and logging, but the service itself must still reject requests that break your rules."
-  - question: "How can post-call hooks help with Dataverse update tools?"
-    answer: "After a tool succeeds, a hook can adjust the returned result or log the activity. For Dataverse scenarios the post suggests logging update-tool activity and checking that rejected requests do not violate business rules. This leaves a record of what the agent actually did."
 ---
 
 ## TL;DR
