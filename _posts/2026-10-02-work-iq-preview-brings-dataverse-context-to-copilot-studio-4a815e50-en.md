@@ -29,6 +29,17 @@ source_author: Josh Cook
 source_published_at: '2026-09-25'
 source_updated_at: '2026-09-25'
 source_type: article
+faq:
+  - question: "When does the Work IQ business applications preview start and what follows later?"
+    answer: "The public preview of Work IQ for business data starts on September 30, 2026, and the rollout continues through October. Support for Finance and Operations is scheduled for late October. Work IQ connects Dynamics 365 and Power Platform data to Copilot and agents, so that they can interpret your business data more accurately."
+  - question: "What goes into a Dataverse semantic model for Work IQ?"
+    answer: "A semantic model is built from selected Dataverse tables and columns, their relationships, views, forms and business terminology. Together these explain to an agent what the data means. The models are stored in Dataverse, and makers can refine the context. Choose the included elements deliberately, because they determine how agents read your data."
+  - question: "How does Work IQ reduce repeated prompt explanations across Copilot Studio agents?"
+    answer: "Makers define the business context once in the semantic model and reuse business skills across connected agents, including Copilot Studio agents. The agents then understand how records relate without each prompt carrying its own explanation. For custom solutions, working out how records connect takes real effort, and Work IQ aims to capture that understanding a single time."
+  - question: "Who decides which environments and data take part in Work IQ?"
+    answer: "Admins still decide which environments and which data participate in Work IQ. The semantic models are built from selected tables, columns, relationships, views, forms and business terminology, so the elements included shape how agents interpret the data. Dataverse stores the models and skills, and makers can refine the context."
+  - question: "Which developer tools come with Work IQ for business applications?"
+    answer: "Alongside the semantic models, the announcement lists the new Dataverse Ask API, a Work IQ MCP server, a command-line interface and a coding-agent plugin. They give developers several ways to reach the same business context. All of this belongs to the public preview that begins on September 30, 2026."
 ---
 
 ## TL;DR
