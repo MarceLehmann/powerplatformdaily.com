@@ -1,0 +1,32 @@
+{
+  "dbcfb68bc46722a27a5f6a26": {
+    "gif": true,
+    "reason": "The FAQ names the setup stages in order: SMS channel, Twilio account and number, workstream, connected agent.",
+    "alt": {
+      "en": "Four stages: prepare the Dataverse environment and SMS channel, add the Twilio account and phone number, paste the callback URL, connect the agent through a workstream.",
+      "de": "Vier Stationen: Dataverse-Umgebung und SMS-Kanal vorbereiten, Twilio-Konto und Telefonnummer hinzufügen, Callback-URL einfügen, den Agent über einen Workstream verbinden."
+    },
+    "video": {
+      "en": {
+        "title": "Copilot Studio agent on SMS",
+        "subtitle": "Four setup stages from environment to a working text channel.",
+        "steps": [
+          { "product": "dataverse", "icon": "cloud", "title": "Prepare environment and channel", "actions": ["Dataverse", "SMS channel"], "evidence": "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent." },
+          { "product": "generic", "productLabel": "Twilio", "icon": "phone", "title": "Add account and phone number", "actions": ["Messaging account", "SMS number"], "evidence": "add a Twilio messaging account and phone number" },
+          { "product": "generic", "productLabel": "Contact Center", "icon": "link", "title": "Paste the callback URL", "actions": ["HTTP POST"], "evidence": "Twilio needs the Contact Center callback URL pasted into the purchased phone number" },
+          { "product": "copilotstudio", "icon": "chat", "title": "Connect the agent", "actions": ["Workstream"], "evidence": "configure a workstream, then connect the Copilot Studio agent." }
+        ]
+      },
+      "de": {
+        "title": "Copilot-Studio-Agent per SMS",
+        "subtitle": "Vier Stationen von der Umgebung bis zum SMS-Kanal.",
+        "steps": [
+          { "product": "dataverse", "icon": "cloud", "title": "Umgebung und Kanal vorbereiten", "actions": ["Dataverse", "SMS-Kanal"], "evidence": "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent." },
+          { "product": "generic", "productLabel": "Twilio", "icon": "phone", "title": "Konto und Nummer hinzufügen", "actions": ["Messaging-Konto", "SMS-Nummer"], "evidence": "add a Twilio messaging account and phone number" },
+          { "product": "generic", "productLabel": "Contact Center", "icon": "link", "title": "Callback-URL einfügen", "actions": ["HTTP POST"], "evidence": "Twilio needs the Contact Center callback URL pasted into the purchased phone number" },
+          { "product": "copilotstudio", "icon": "chat", "title": "Agent verbinden", "actions": ["Workstream"], "evidence": "configure a workstream, then connect the Copilot Studio agent." }
+        ]
+      }
+    }
+  }
+}

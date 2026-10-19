@@ -138,4 +138,5 @@ jobs:
             git pull --rebase origin "$BRANCH"
           done
           # Seite nur neu bauen, wenn sich sichtbar etwas geaendert hat (reine Ledger-Eintraege brauchen keinen Deploy)
-          if [ "$visible" != "0" ]; then gh workflow run pages-deploy.yml --ref "$BRANCH"; fi
+          # Deploy nur auf dem Standard-Branch: ein Test auf einem Feature-Branch darf die Seite nie veroeffentlichen
+          if [ "$visible" != "0" ] && [ "$BRANCH" = "main" ]; then gh workflow run pages-deploy.yml --ref "$BRANCH"; fi
