@@ -37,6 +37,12 @@ faq:
   answer: Die Modelle sind derzeit in GCC, GCC High, DoD und souveränen Clouds nicht
     verfügbar. Zudem gelten sie nicht für Zusagen zur Verarbeitung innerhalb eines
     Landes.
+animation:
+  src: /assets/img/animations/7285b906d109233418e24f86-de.gif
+  poster: /assets/img/animations/7285b906d109233418e24f86-de.poster.png
+  width: 800
+  height: 450
+  alt: "Vier Stationen: als Global oder AI Administrator anmelden, Copilot-Einstellungen öffnen, OpenAI unter AI providers aktivieren, danach erscheinen GPT 5.6 Sol und Terra in Copilot Cowork."
 ---
 
 ## TL;DR

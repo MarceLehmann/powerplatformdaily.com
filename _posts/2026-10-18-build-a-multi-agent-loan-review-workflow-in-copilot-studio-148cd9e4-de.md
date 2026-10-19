@@ -38,6 +38,12 @@ faq:
 - question: Wie gleicht ein Copilot-Studio-Agent den Kreditzweck mit SharePoint ab?
   answer: Ein Wissens-Agent durchsucht die SharePoint-Liste Loan Purposes und gibt
     Approved oder Flagged zurück, parallel zu den festen Prüfregeln.
+animation:
+  src: /assets/img/animations/148cd9e4326fc7339b2173d4-de.gif
+  poster: /assets/img/animations/148cd9e4326fc7339b2173d4-de.poster.png
+  width: 800
+  height: 450
+  alt: "Vier Stationen: neues PDF in SharePoint, ein Agent extrahiert Felder, parallele Prüfung von Regeln und Kreditzwecken, ein letzter Agent schreibt die Entscheidungs-E-Mail."
 ---
 
 ## TL;DR

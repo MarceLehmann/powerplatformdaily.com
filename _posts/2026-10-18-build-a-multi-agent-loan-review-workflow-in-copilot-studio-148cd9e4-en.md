@@ -37,6 +37,12 @@ faq:
 - question: How can a Copilot Studio agent check a loan purpose against SharePoint?
   answer: A knowledge agent searches a SharePoint Loan Purposes list and returns Approved
     or Flagged, while running in parallel with hardcoded checks.
+animation:
+  src: /assets/img/animations/148cd9e4326fc7339b2173d4-en.gif
+  poster: /assets/img/animations/148cd9e4326fc7339b2173d4-en.poster.png
+  width: 800
+  height: 450
+  alt: "Four stages: a new PDF in SharePoint starts the workflow, one agent extracts fields, parallel checks validate rules and loan purposes, a final agent writes the decision email."
 ---
 
 ## TL;DR

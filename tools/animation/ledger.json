@@ -1,0 +1,24 @@
+{
+  "7285b906d109233418e24f86": {
+    "gif": true,
+    "reason": "The post names a concrete settings path in the Microsoft 365 admin center with four distinct stages.",
+    "at": "2026-10-19",
+    "evidence": [
+      "A Global Administrator or AI Administrator can change the setting.",
+      "Open Copilot > Settings > View all > AI providers operating as Microsoft subprocessors",
+      "expand OpenAI, and start with a security group to validate access in Cowork.",
+      "The two models should appear after the setting is saved."
+    ]
+  },
+  "148cd9e4326fc7339b2173d4": {
+    "gif": true,
+    "reason": "The post describes a four-stage agent pipeline from SharePoint trigger to decision email.",
+    "at": "2026-10-19",
+    "evidence": [
+      "A Connector trigger uses SharePoint When A File Is Created, followed by Get File Content to pass the uploaded PDF into an agent.",
+      "one agent extracts structured fields",
+      "parallel validation checks rules and loan purposes",
+      "a final agent writes an approval or rejection email"
+    ]
+  }
+}

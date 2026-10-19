@@ -36,6 +36,12 @@ faq:
     tenants?
   answer: In eligible commercial tenants, OpenAI-operated models are scheduled to
     enable for all users from July 24, 2026, unless an admin selects No users.
+animation:
+  src: /assets/img/animations/7285b906d109233418e24f86-en.gif
+  poster: /assets/img/animations/7285b906d109233418e24f86-en.poster.png
+  width: 800
+  height: 450
+  alt: "Four stages: sign in as Global or AI Administrator, open Copilot settings, enable OpenAI under AI providers, then GPT 5.6 Sol and Terra appear in Copilot Cowork."
 ---
 
 ## TL;DR
