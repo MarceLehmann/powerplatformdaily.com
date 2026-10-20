@@ -20,5 +20,148 @@
       "parallel validation checks rules and loan purposes",
       "a final agent writes an approval or rejection email"
     ]
+  },
+  "1bf2f830f960ffbbdc402546": {
+    "gif": false,
+    "reason": "This is a general availability announcement listing features and changes, not a concrete 3 to 5 stage procedure stated in the post.",
+    "at": "2026-10-20"
+  },
+  "d9bb7b715e93d2a9edcc7912": {
+    "gif": false,
+    "reason": "This post is a feature summary and FAQ without a concrete 3 to 5 stage procedure stated in the text.",
+    "at": "2026-10-20"
+  },
+  "38a8a470cda7f7a9eef97173": {
+    "gif": false,
+    "reason": "This is a roadmap announcement about a policy change and monitoring guidance, not a concrete 3 to 5 stage procedure stated in the post.",
+    "at": "2026-10-20"
+  },
+  "62c4819f9ae24b358dc71aba": {
+    "gif": false,
+    "reason": "This is a product update and feature summary without a concrete 3 to 5 stage procedure stated in the text.",
+    "at": "2026-10-20"
+  },
+  "7a6e66adf7ff7bd50599e7ec": {
+    "gif": false,
+    "reason": "The post compares harness options and credit usage but does not state a concrete 3 to 5 stage procedure or ordered sequence.",
+    "at": "2026-10-20"
+  },
+  "26c27f46ec2699bfd7648f86": {
+    "gif": false,
+    "reason": "This is a roadmap and feature status summary without a concrete 3 to 5 stage procedure stated in the text.",
+    "at": "2026-10-20"
+  },
+  "64c724342cc8c3a162622432": {
+    "gif": false,
+    "reason": "The post is a platform comparison and recommendation, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-20"
+  },
+  "e501c7209998ff9bac5adcc3": {
+    "gif": false,
+    "reason": "The post gives selection guidance and examples of patterns, but it does not state one concrete 3 to 5 stage procedure in order.",
+    "at": "2026-10-20"
+  },
+  "e67062f1b57712b6c888e89e": {
+    "gif": false,
+    "reason": "This post explains a single formula behavior and precedence rule, not a concrete 3 to 5 stage sequence stated in order.",
+    "at": "2026-10-20"
+  },
+  "74f331026c7a0e117bea7536": {
+    "gif": false,
+    "reason": "The post compares harness options and guidance, but it does not describe a concrete 3 to 5 stage procedure or ordered flow.",
+    "at": "2026-10-20"
+  },
+  "7af005ad2b78c404627fec10": {
+    "gif": false,
+    "reason": "This post is a feature summary and guidance list, not a concrete 3 to 5 stage procedure stated in the text.",
+    "at": "2026-10-20"
+  },
+  "4d298e172ddb403a5b58b16e": {
+    "gif": false,
+    "reason": "The post is guidance and a best-practice list without one concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-20"
+  },
+  "17f9ca49e53633d36a5caf6f": {
+    "gif": false,
+    "reason": "This post is a feature update and settings summary, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-20"
+  },
+  "6ed9b8ce9ad65b24e76128c3": {
+    "gif": false,
+    "reason": "The post describes a solution and outcomes but does not state a concrete 3 to 5 stage sequence in order.",
+    "at": "2026-10-20"
+  },
+  "0d70251ae7c49d56dac2904e": {
+    "gif": false,
+    "reason": "The post gives selection advice and checks for connectors, custom connectors, HTTP actions and Power BI refresh design, but it does not state a concrete 3 to 5 stage procedure.",
+    "at": "2026-10-20"
+  },
+  "aac4d7ec981863e9801b58e4": {
+    "gif": false,
+    "reason": "The post is a feature and licensing summary without a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-20"
+  },
+  "59d8d18b68755722d52b3e4a": {
+    "gif": false,
+    "reason": "The post is a feature update with separate settings and outcomes, but it does not state one concrete 3 to 5 stage procedure in order.",
+    "at": "2026-10-20"
+  },
+  "e835b13db318ebc9006c4481": {
+    "gif": false,
+    "reason": "This post is a roadmap and licensing change announcement with dated impacts and options, not a single concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-20"
+  },
+  "1863101bc5734d7d27772035": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage build and run sequence: set up the agent, collect details, call a flow, and create or retrieve a SharePoint record.",
+    "at": "2026-10-20",
+    "evidence": [
+      "can build a Project Request Agent with instructions, topics, nodes, variables, and tools.",
+      "Build guided topics with question and condition nodes, then store project details in variables before calling the appropriate flow.",
+      "Two Power Automate flows collect project details, create SharePoint list items, or retrieve a project’s current status.",
+      "calls a flow that creates an item in the SharePoint Project Requests list."
+    ]
+  },
+  "a19bf0b6f1954268c0d27409": {
+    "gif": true,
+    "reason": "The post names a concrete admin sequence: choose billing, set limits and alerts, then scope access to a security group.",
+    "at": "2026-10-20",
+    "evidence": [
+      "choose Capacity Packs or pay-as-you-go before activation.",
+      "Configure monthly and per-user limits, alerts, and a security-group scope so the pilot has measurable boundaries.",
+      "Customize the policy and scope it to a specific security group, then add a small group of trusted users before expanding access."
+    ]
+  },
+  "8678526a2c9576c73d4afd17": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage diagnosis flow: compare runs, separate sync and async work, record a baseline, then use tracing tools to locate delays.",
+    "at": "2026-10-20",
+    "evidence": [
+      "comparing the same operation with and without a step",
+      "separating synchronous wait time from background work",
+      "recording a repeatable baseline",
+      "Plug-in Trace Logs, execution context, and the Plug-in Profiler help locate delays"
+    ]
+  },
+  "76d47838aaa9a21262f2e206": {
+    "gif": true,
+    "reason": "The post gives a concrete 3 step settings path to activate built in MCP tools for a Model-driven App.",
+    "at": "2026-10-20",
+    "evidence": [
+      "Open the app in the maker portal, select App MCP, and choose Set up MCP.",
+      "Open the app in the maker portal, select App MCP, and choose Set up MCP.",
+      "Open the app in the maker portal, select App MCP, and choose Set up MCP."
+    ]
+  },
+  "e4e50b62acd9cbfec3ef9dd2": {
+    "gif": true,
+    "reason": "The post gives a concrete 4 step setup path from sandbox creation to trial start.",
+    "at": "2026-10-20",
+    "evidence": [
+      "Use a personal Microsoft account to join the Microsoft 365 Developer Program, choose Instant Sandbox, and record the new sandbox work account.",
+      "Activate the Power Apps Developer Plan and build in its dedicated Dataverse-backed environment, rather than the shared default environment.",
+      "Check the developer environment name, region and Dataverse provisioning before building, because the region cannot be changed later.",
+      "start the Copilot Studio trial in the dedicated developer environment."
+    ]
   }
 }

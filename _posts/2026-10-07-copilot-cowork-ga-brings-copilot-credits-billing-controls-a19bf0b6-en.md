@@ -38,6 +38,12 @@ faq:
 - question: How can I restrict Copilot Cowork to pilot users?
   answer: Customize the policy and scope it to a specific security group, then add
     a small group of trusted users before expanding access.
+animation:
+  src: /assets/img/animations/a19bf0b6f1954268c0d27409-en.gif
+  poster: /assets/img/animations/a19bf0b6f1954268c0d27409-en.poster.png
+  width: 800
+  height: 450
+  alt: "Flow shows configuring Copilot Cowork rollout in Microsoft 365 admin center by choosing a billing method, setting spending limits and alerts, then restricting access with a security group."
 ---
 
 ## TL;DR

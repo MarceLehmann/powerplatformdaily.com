@@ -40,6 +40,12 @@ faq:
   answer: Die Agenten werden schreibgeschützt und antworten erst wieder, wenn aktive
     Copilot Credits zugewiesen sind. Sie werden nicht gelöscht, können aber nicht
     veröffentlicht oder ausgeführt werden.
+animation:
+  src: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-de.gif
+  poster: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-de.poster.png
+  width: 800
+  height: 450
+  alt: "Eine Abfolge mit vier Schritten zeigt den Beitritt zum Microsoft 365 Developer Program fuer eine Instant Sandbox, die Aktivierung des Power Apps Developer Plan, die Pruefung der Dataverse Entwicklerumgebung und den Start des Copilot Studio Tests."
 ---
 
 ## TL;DR

@@ -39,6 +39,12 @@ faq:
 - question: How can a Copilot Studio agent check an existing project request status?
   answer: A status topic lets users ask about a known request, then calls a flow that
     finds the request and returns its current status.
+animation:
+  src: /assets/img/animations/1863101bc5734d7d27772035-en.gif
+  poster: /assets/img/animations/1863101bc5734d7d27772035-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step flow shows a Copilot Studio agent set up with instructions and topics, collecting project details into variables, then calling Power Automate to create or retrieve a SharePoint record."
 ---
 
 ## TL;DR

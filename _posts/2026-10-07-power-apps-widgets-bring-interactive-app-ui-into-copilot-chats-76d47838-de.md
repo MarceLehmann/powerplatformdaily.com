@@ -35,6 +35,12 @@ faq:
 - question: Welche Inhalte braucht ein eigenes Power Apps UI Widget?
   answer: Es benötigt eigenständiges HTML, das die JSON-Ausgabe des eigenen Tools
     verarbeitet und mit dem MCP Host kommuniziert. Die UI-Definition ist optional.
+animation:
+  src: /assets/img/animations/76d47838aaa9a21262f2e206-de.gif
+  poster: /assets/img/animations/76d47838aaa9a21262f2e206-de.poster.png
+  width: 800
+  height: 450
+  alt: "Drei Schritte zeigen, wie integrierte MCP Tools fuer eine modellgesteuerte App aktiviert werden: App im Maker Portal oeffnen, App MCP waehlen, dann Set up MCP auswaehlen."
 ---
 
 ## TL;DR

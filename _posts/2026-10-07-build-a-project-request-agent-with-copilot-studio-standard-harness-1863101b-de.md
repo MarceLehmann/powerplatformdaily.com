@@ -39,6 +39,12 @@ faq:
     prüfen?
   answer: Ein Statusthema ermöglicht die Abfrage einer bekannten Anfrage und ruft
     einen Flow auf, der die Anfrage findet und ihren aktuellen Status zurückgibt.
+animation:
+  src: /assets/img/animations/1863101bc5734d7d27772035-de.gif
+  poster: /assets/img/animations/1863101bc5734d7d27772035-de.poster.png
+  width: 800
+  height: 450
+  alt: "Ein Ablauf in vier Schritten zeigt einen Copilot Studio-Agenten mit Anweisungen und Themen, der Projektdaten in Variablen sammelt und dann Power Automate aufruft, um einen SharePoint-Eintrag zu erstellen oder abzurufen."
 ---
 
 ## TL;DR

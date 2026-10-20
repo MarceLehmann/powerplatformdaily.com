@@ -39,6 +39,12 @@ faq:
 - question: What happens to Copilot Studio agents after the 30-day trial ends?
   answer: Agents become read-only and stop responding until active Copilot Credits
     are assigned. They are not deleted, but publishing and running are unavailable.
+animation:
+  src: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-en.gif
+  poster: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step setup sequence shows joining the Microsoft 365 Developer Program for an Instant Sandbox, activating the Power Apps Developer Plan, checking the Dataverse developer environment, and starting the Copilot Studio trial."
 ---
 
 ## TL;DR
