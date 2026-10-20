@@ -36,6 +36,12 @@ faq:
 - question: When should Copilot Studio agents involve a human decision maker?
   answer: Human review is useful when an agent encounters an unexpected situation
     or one too risky for autonomous decision making.
+animation:
+  src: /assets/img/animations/388f22cbd836f248cdbe49ea-en.gif
+  poster: /assets/img/animations/388f22cbd836f248cdbe49ea-en.poster.png
+  width: 800
+  height: 450
+  alt: "A Copilot Studio agent sends a decision request through Teams or email, collects the human response, and uses it to decide the next action."
 ---
 
 ## TL;DR

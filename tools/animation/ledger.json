@@ -163,5 +163,59 @@
       "Check the developer environment name, region and Dataverse provisioning before building, because the region cannot be changed later.",
       "start the Copilot Studio trial in the dedicated developer environment."
     ]
+  },
+  "050e6c6e65a19bcec03925fc": {
+    "gif": false,
+    "reason": "The post describes a design pattern and benefits, but it does not state a concrete 3 to 5 stage procedure or ordered workflow steps.",
+    "at": "2026-10-20"
+  },
+  "a33597b80f4749f4f543b294": {
+    "gif": false,
+    "reason": "This post is a comparison of capabilities and use cases, not a concrete 3 to 5 stage procedure or ordered flow.",
+    "at": "2026-10-20"
+  },
+  "388f22cbd836f248cdbe49ea": {
+    "gif": true,
+    "reason": "The post states a clear 3 stage flow: send a decision request, collect the response, then choose the next action.",
+    "at": "2026-10-20",
+    "evidence": [
+      "sends a decision request through Teams or email",
+      "collects the response",
+      "uses it to choose the next action"
+    ]
+  },
+  "dbcfb68bc46722a27a5f6a26": {
+    "gif": true,
+    "reason": "The post gives a clear 4 stage setup sequence: enable SMS, add Twilio account and phone number, configure a workstream, and connect the agent.",
+    "at": "2026-10-20",
+    "evidence": [
+      "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent.",
+      "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent.",
+      "Makers: Connect the agent to an inbound SMS workstream and test replies from the purchased phone number.",
+      "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent."
+    ]
+  },
+  "64dc59db61e6e9019f3984c1": {
+    "gif": true,
+    "reason": "The post states a concrete 4 stage pipeline from Graph notifications through Event Hubs and Power Automate to Execute Agent.",
+    "at": "2026-10-20",
+    "evidence": [
+      "Create a Graph subscription that sends change notifications to Azure Event Hubs.",
+      "Microsoft Graph change notifications can be delivered to Azure Event Hubs",
+      "consumed by the Power Automate Event Hubs trigger, decoded from ContentData,",
+      "and passed to Copilot Studio through Execute Agent."
+    ]
+  },
+  "ae1744b3fba0778a9d18300b": {
+    "gif": true,
+    "reason": "The post gives a concrete 5 stage setup sequence from connector configuration through permission grant, protocol header, shared connection, and credential selection.",
+    "at": "2026-10-20",
+    "evidence": [
+      "Create a Power Platform custom connector with OAuth 2.0 service principal support",
+      "Create an application app role, grant the Copilot client application permission and admin consent",
+      "add x-ms-agentic-protocol: mcp-streamable-1.0",
+      "create the shared connection",
+      "then select Maker provided credentials for the agent tool."
+    ]
   }
 }

@@ -43,6 +43,12 @@ faq:
   answer: Ja, Rich Notifications können verschlüsselte Ressourcendaten direkt in der
     Benachrichtigung liefern. Power Automate benötigt dennoch eine externe Entschlüsselung,
     da keine nativen RSA- oder AES-Aktionen vorhanden sind.
+animation:
+  src: /assets/img/animations/64dc59db61e6e9019f3984c1-de.gif
+  poster: /assets/img/animations/64dc59db61e6e9019f3984c1-de.poster.png
+  width: 800
+  height: 450
+  alt: "Ein Ablauf mit vier Schritten zeigt, wie Microsoft Graph Aenderungsbenachrichtigungen an Azure Event Hubs gesendet, von einem Power Automate Trigger gelesen, aus ContentData dekodiert und mit Execute Agent an Copilot Studio gesendet werden."
 ---
 
 ## TL;DR

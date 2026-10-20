@@ -37,6 +37,12 @@ faq:
 - question: Wann sollten Copilot Studio Agenten einen Menschen entscheiden lassen?
   answer: Eine menschliche Prüfung ist sinnvoll, wenn ein Agent auf eine unerwartete
     oder für eine autonome Entscheidung zu riskante Situation trifft.
+animation:
+  src: /assets/img/animations/388f22cbd836f248cdbe49ea-de.gif
+  poster: /assets/img/animations/388f22cbd836f248cdbe49ea-de.poster.png
+  width: 800
+  height: 450
+  alt: "Ein Copilot Studio Agent sendet eine Entscheidungsanfrage per Teams oder E Mail, sammelt die menschliche Antwort und nutzt sie fuer die naechste Aktion."
 ---
 
 ## TL;DR

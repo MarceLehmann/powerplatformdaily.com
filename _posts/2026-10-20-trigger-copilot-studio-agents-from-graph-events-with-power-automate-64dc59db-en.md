@@ -44,6 +44,12 @@ faq:
   answer: Yes, rich notifications can deliver encrypted resource data inline with
     the notification. Power Automate still needs external decryption because it has
     no native RSA or AES decryption action.
+animation:
+  src: /assets/img/animations/64dc59db61e6e9019f3984c1-en.gif
+  poster: /assets/img/animations/64dc59db61e6e9019f3984c1-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step flow shows Microsoft Graph change notifications sent to Azure Event Hubs, read by a Power Automate trigger, decoded from ContentData, and sent to Copilot Studio with Execute Agent."
 ---
 
 ## TL;DR

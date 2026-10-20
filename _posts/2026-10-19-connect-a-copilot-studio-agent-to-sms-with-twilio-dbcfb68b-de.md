@@ -40,6 +40,12 @@ faq:
 - question: Welche Webhook-Einstellung braucht Twilio für Copilot Studio SMS?
   answer: Bei der gekauften Telefonnummer wird die Callback-URL von Contact Center
     in der Twilio-Nachrichtenkonfiguration mit der HTTP-POST-Methode hinterlegt.
+animation:
+  src: /assets/img/animations/dbcfb68bc46722a27a5f6a26-de.gif
+  poster: /assets/img/animations/dbcfb68bc46722a27a5f6a26-de.poster.png
+  width: 800
+  height: 450
+  alt: "Ein Ablauf mit vier Schritten zeigt das Aktivieren des SMS-Kanals, das Hinzufuegen eines Twilio-Kontos und einer Telefonnummer, das Konfigurieren eines eingehenden SMS-Workstreams und das Verbinden des Copilot Studio Agent."
 ---
 
 ## TL;DR

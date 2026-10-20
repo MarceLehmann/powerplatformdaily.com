@@ -1,0 +1,54 @@
+{
+ "title": "Route Graph events to Copilot Studio",
+ "subtitle": "Send Graph notifications through Event Hubs and invoke a Copilot Studio agent.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "bell",
+   "productLabel": "Microsoft Graph",
+   "title": "Send change notifications",
+   "actions": [
+    "Graph subscription",
+    "change notifications",
+    "Azure Event Hubs"
+   ],
+   "evidence": "Create a Graph subscription that sends change notifications to Azure Event Hubs."
+  },
+  {
+   "product": "generic",
+   "icon": "cloud",
+   "productLabel": "Azure Event Hubs",
+   "title": "Deliver events to Event Hubs",
+   "actions": [
+    "Azure Event Hubs",
+    "Data Sender role"
+   ],
+   "evidence": "Microsoft Graph change notifications can be delivered to Azure Event Hubs"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Consume and decode event data",
+   "actions": [
+    "Event Hubs trigger",
+    "ContentData"
+   ],
+   "evidence": "consumed by the Power Automate Event Hubs trigger, decoded from ContentData,"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Invoke the agent",
+   "actions": [
+    "Execute Agent"
+   ],
+   "evidence": "and passed to Copilot Studio through Execute Agent."
+  }
+ ],
+ "punchline": [
+  "Event to agent",
+  "without user interaction"
+ ]
+}

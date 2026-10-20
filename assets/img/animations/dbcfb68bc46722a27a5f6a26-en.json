@@ -1,0 +1,53 @@
+{
+ "title": "Connect Copilot Studio to Twilio SMS",
+ "subtitle": "Set up SMS in Contact Center, add Twilio, configure routing, then connect the agent.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Dynamics 365",
+   "title": "Enable the SMS channel",
+   "actions": [
+    "Enable SMS",
+    "Dataverse environment"
+   ],
+   "evidence": "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent."
+  },
+  {
+   "product": "generic",
+   "icon": "phone",
+   "productLabel": "Twilio",
+   "title": "Add Twilio account and number",
+   "actions": [
+    "Twilio messaging account",
+    "phone number"
+   ],
+   "evidence": "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent."
+  },
+  {
+   "product": "admin",
+   "icon": "chat",
+   "productLabel": "Contact Center",
+   "title": "Configure an SMS workstream",
+   "actions": [
+    "configure a workstream",
+    "inbound SMS workstream"
+   ],
+   "evidence": "Makers: Connect the agent to an inbound SMS workstream and test replies from the purchased phone number."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Connect the Copilot Studio agent",
+   "actions": [
+    "connect the agent",
+    "test replies"
+   ],
+   "evidence": "Enable the SMS channel, add a Twilio messaging account and phone number, configure a workstream, then connect the Copilot Studio agent."
+  }
+ ],
+ "punchline": [
+  "SMS messages reach the agent"
+ ]
+}

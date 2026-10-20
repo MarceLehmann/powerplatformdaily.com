@@ -1,0 +1,41 @@
+{
+ "title": "Add human review to an agent",
+ "subtitle": "Send a request, collect the reply, then choose what the agent does next.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Send a decision request",
+   "actions": [
+    "Teams",
+    "email"
+   ],
+   "evidence": "sends a decision request through Teams or email"
+  },
+  {
+   "product": "generic",
+   "icon": "mail",
+   "productLabel": "Human reviewer",
+   "title": "Collect the response",
+   "actions": [
+    "collects the response"
+   ],
+   "evidence": "collects the response"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Choose the next action",
+   "actions": [
+    "next action"
+   ],
+   "evidence": "uses it to choose the next action"
+  }
+ ],
+ "punchline": [
+  "Human input steers",
+  "the next action"
+ ]
+}

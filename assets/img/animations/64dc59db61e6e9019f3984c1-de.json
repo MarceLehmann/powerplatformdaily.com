@@ -1,0 +1,50 @@
+{
+ "title": "Graph Ereignisse zu Copilot Studio",
+ "subtitle": "Graph Benachrichtigungen durch Event Hubs senden und einen Copilot Studio Agent ausfuehren.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "bell",
+   "productLabel": "Microsoft Graph",
+   "title": "Aenderungsbenachrichtigungen senden",
+   "actions": [
+    "Graph Abonnement",
+    "Aenderungsbenachrichtigungen",
+    "Azure Event Hubs"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "cloud",
+   "productLabel": "Azure Event Hubs",
+   "title": "Ereignisse an Event Hubs zustellen",
+   "actions": [
+    "Azure Event Hubs",
+    "Data Sender Rolle"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Ereignisdaten lesen und dekodieren",
+   "actions": [
+    "Event Hubs Trigger",
+    "ContentData"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Agent ausfuehren",
+   "actions": [
+    "Execute Agent"
+   ]
+  }
+ ],
+ "punchline": [
+  "Ereignis zu Agent",
+  "ohne Benutzerinteraktion"
+ ]
+}

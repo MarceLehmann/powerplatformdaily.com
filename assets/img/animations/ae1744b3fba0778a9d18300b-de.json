@@ -1,0 +1,60 @@
+{
+ "title": "Service Principal MCP Zugriff einrichten",
+ "subtitle": "Connector konfigurieren, Zugriff erteilen, Header hinzufugen, gemeinsame Verbindung erstellen und Maker provided wahlen.",
+ "steps": [
+  {
+   "product": "powerautomate",
+   "icon": "key",
+   "productLabel": "Power Platform",
+   "title": "Custom Connector mit OAuth erstellen",
+   "actions": [
+    "Custom Connector",
+    "OAuth 2.0",
+    "Service Principal"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Admin",
+   "title": "Copilot-Client-Berechtigung erteilen",
+   "actions": [
+    "Anwendungsrolle",
+    "Admin Consent"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "code",
+   "productLabel": "MCP-Server-API",
+   "title": "MCP-Protokollerweiterung hinzufugen",
+   "actions": [
+    "x-ms-agentic-protocol",
+    "mcp-streamable-1.0"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Gemeinsame Verbindung erstellen",
+   "actions": [
+    "gemeinsame Verbindung"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Maker provided verwenden",
+   "actions": [
+    "Maker provided",
+    "Credentials"
+   ]
+  }
+ ],
+ "punchline": [
+  "Eine gemeinsame Verbindung",
+  "Keine Benutzerabfragen"
+ ]
+}

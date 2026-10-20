@@ -1,0 +1,38 @@
+{
+ "title": "Menschliche Pruefung hinzufuegen",
+ "subtitle": "Anfrage senden, Antwort sammeln und dann die naechste Aktion waehlen.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Entscheidungsanfrage senden",
+   "actions": [
+    "Teams",
+    "E Mail"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "mail",
+   "productLabel": "Menschliche Pruefung",
+   "title": "Antwort sammeln",
+   "actions": [
+    "Antwort sammeln"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Naechste Aktion waehlen",
+   "actions": [
+    "naechste Aktion"
+   ]
+  }
+ ],
+ "punchline": [
+  "Menschliche Eingabe",
+  "steuert den Ablauf"
+ ]
+}

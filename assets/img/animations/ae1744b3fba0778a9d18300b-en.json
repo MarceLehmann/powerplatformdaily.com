@@ -1,0 +1,65 @@
+{
+ "title": "Set up service principal MCP access",
+ "subtitle": "Configure the connector, grant access, add the header, create the shared connection, then pick Maker provided.",
+ "steps": [
+  {
+   "product": "powerautomate",
+   "icon": "key",
+   "productLabel": "Power Platform",
+   "title": "Create custom connector with OAuth",
+   "actions": [
+    "custom connector",
+    "OAuth 2.0",
+    "service principal"
+   ],
+   "evidence": "Create a Power Platform custom connector with OAuth 2.0 service principal support"
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Admin",
+   "title": "Grant Copilot client permission",
+   "actions": [
+    "application app role",
+    "admin consent"
+   ],
+   "evidence": "Create an application app role, grant the Copilot client application permission and admin consent"
+  },
+  {
+   "product": "generic",
+   "icon": "code",
+   "productLabel": "MCP Server API",
+   "title": "Add MCP protocol extension",
+   "actions": [
+    "x-ms-agentic-protocol",
+    "mcp-streamable-1.0"
+   ],
+   "evidence": "add x-ms-agentic-protocol: mcp-streamable-1.0"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Create the shared connection",
+   "actions": [
+    "shared connection"
+   ],
+   "evidence": "create the shared connection"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Use Maker provided credentials",
+   "actions": [
+    "Maker provided",
+    "Credentials"
+   ],
+   "evidence": "then select Maker provided credentials for the agent tool."
+  }
+ ],
+ "punchline": [
+  "One shared connection",
+  "No per user prompts"
+ ]
+}

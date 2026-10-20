@@ -39,6 +39,12 @@ faq:
 - question: What webhook configuration does Twilio need for Copilot Studio SMS?
   answer: Twilio needs the Contact Center callback URL pasted into the purchased phone
     number’s messaging configuration, using the HTTP POST method.
+animation:
+  src: /assets/img/animations/dbcfb68bc46722a27a5f6a26-en.gif
+  poster: /assets/img/animations/dbcfb68bc46722a27a5f6a26-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step flow shows enabling the SMS channel, adding a Twilio messaging account and phone number, configuring an inbound SMS workstream, and connecting the Copilot Studio agent."
 ---
 
 ## TL;DR

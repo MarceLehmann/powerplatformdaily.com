@@ -1,0 +1,49 @@
+{
+ "title": "Copilot Studio mit Twilio SMS verbinden",
+ "subtitle": "SMS in Contact Center einrichten, Twilio hinzufuegen, Routing konfigurieren und den Agent verbinden.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Dynamics 365",
+   "title": "SMS-Kanal aktivieren",
+   "actions": [
+    "SMS aktivieren",
+    "Dataverse-Umgebung"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "phone",
+   "productLabel": "Twilio",
+   "title": "Twilio-Konto und Nummer hinzufuegen",
+   "actions": [
+    "Twilio messaging account",
+    "phone number"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "chat",
+   "productLabel": "Contact Center",
+   "title": "SMS-Workstream konfigurieren",
+   "actions": [
+    "Workstream konfigurieren",
+    "eingehender SMS-Workstream"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Copilot Studio Agent verbinden",
+   "actions": [
+    "Agent verbinden",
+    "Antworten testen"
+   ]
+  }
+ ],
+ "punchline": [
+  "SMS erreicht den Agent"
+ ]
+}

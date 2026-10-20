@@ -37,6 +37,12 @@ faq:
   answer: Select Maker provided under Credentials to use after adding the MCP tool.
     This makes the agent use the same shared connection rather than prompting each
     user.
+animation:
+  src: /assets/img/animations/ae1744b3fba0778a9d18300b-en.gif
+  poster: /assets/img/animations/ae1744b3fba0778a9d18300b-en.poster.png
+  width: 800
+  height: 450
+  alt: "Five steps show configuring a custom connector for service principal auth, granting Copilot client permission and admin consent, adding the MCP header, creating a shared connection, and selecting Maker provided."
 ---
 
 ## TL;DR
