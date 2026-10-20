@@ -44,7 +44,7 @@ animation:
   poster: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-en.poster.png
   width: 800
   height: 450
-  alt: "A four step setup sequence shows joining the Microsoft 365 Developer Program for an Instant Sandbox, activating the Power Apps Developer Plan, checking the Dataverse developer environment, and starting the Copilot Studio trial."
+  alt: "A four step setup sequence shows joining the Microsoft 365 Developer Program for an Instant Sandbox, activating the Power Apps Developer Plan, verifying Dataverse in the developer environment, and starting the Copilot Studio trial."
 ---
 
 ## TL;DR

@@ -44,7 +44,7 @@ animation:
   poster: /assets/img/animations/1863101bc5734d7d27772035-en.poster.png
   width: 800
   height: 450
-  alt: "A four step flow shows a Copilot Studio agent set up with instructions and topics, collecting project details into variables, then calling Power Automate to create or retrieve a SharePoint record."
+  alt: "A four step sequence shows a Copilot Studio agent using topics and nodes to collect project details, store them in variables, call a Power Automate flow, and create or retrieve a SharePoint record."
 ---
 
 ## TL;DR

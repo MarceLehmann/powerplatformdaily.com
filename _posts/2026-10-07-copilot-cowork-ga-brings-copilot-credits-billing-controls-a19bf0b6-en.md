@@ -43,7 +43,7 @@ animation:
   poster: /assets/img/animations/a19bf0b6f1954268c0d27409-en.poster.png
   width: 800
   height: 450
-  alt: "Flow shows configuring Copilot Cowork rollout in Microsoft 365 admin center by choosing a billing method, setting spending limits and alerts, then restricting access with a security group."
+  alt: "A three step sequence shows Copilot Cowork rollout controls in Microsoft 365 admin center: choose billing with Capacity Packs or pay as you go, set monthly and per user limits with alerts, then restrict access to a security group."
 ---
 
 ## TL;DR

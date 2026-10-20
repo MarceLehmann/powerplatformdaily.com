@@ -41,7 +41,7 @@ animation:
   poster: /assets/img/animations/7285b906d109233418e24f86-en.poster.png
   width: 800
   height: 450
-  alt: "Four stages: sign in as Global or AI Administrator, open Copilot settings, enable OpenAI under AI providers, then GPT 5.6 Sol and Terra appear in Copilot Cowork."
+  alt: "A four step sequence shows opening Copilot settings in the Microsoft 365 admin center, viewing all AI provider settings, enabling OpenAI for a chosen audience, and reopening Cowork to see GPT 5.6 Sol and Terra."
 ---
 
 ## TL;DR

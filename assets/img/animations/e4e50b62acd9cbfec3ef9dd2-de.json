@@ -1,0 +1,48 @@
+{
+ "title": "Copilot Studio Dev-Sandbox einrichten",
+ "subtitle": "Von der Instant Sandbox zu Dataverse und einem Copilot Studio Testagenten.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "cloud",
+   "productLabel": "Microsoft 365",
+   "title": "Instant Sandbox erstellen",
+   "actions": [
+    "Entwicklerprogramm",
+    "Instant Sandbox"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "key",
+   "productLabel": "Power Apps",
+   "title": "Developer Plan aktivieren",
+   "actions": [
+    "Power Apps Developer Plan"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Entwicklerumgebung pruefen",
+   "actions": [
+    "Dataverse",
+    "Entwicklerumgebung",
+    "Region"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Testagent starten",
+   "actions": [
+    "Copilot Studio Test"
+   ]
+  }
+ ],
+ "punchline": [
+  "Bereit fuer Testagent"
+ ]
+}

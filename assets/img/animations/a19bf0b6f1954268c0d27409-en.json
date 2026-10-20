@@ -1,0 +1,44 @@
+{
+ "title": "Control Copilot Cowork rollout",
+ "subtitle": "Pick billing, set limits and alerts, then scope access for a pilot.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Microsoft 365 admin",
+   "title": "Choose the billing method",
+   "actions": [
+    "Capacity Packs",
+    "pay-as-you-go"
+   ],
+   "evidence": "choose Capacity Packs or pay-as-you-go before activation."
+  },
+  {
+   "product": "admin",
+   "icon": "bell",
+   "productLabel": "Microsoft 365 admin",
+   "title": "Set limits and alerts",
+   "actions": [
+    "monthly limits",
+    "per-user limits",
+    "alerts"
+   ],
+   "evidence": "Configure monthly and per-user limits, alerts, and a security-group scope so the pilot has measurable boundaries."
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Microsoft 365 admin",
+   "title": "Restrict access to pilot users",
+   "actions": [
+    "Customize the policy",
+    "security group",
+    "add trusted users"
+   ],
+   "evidence": "Customize the policy and scope it to a specific security group, then add a small group of trusted users before expanding access."
+  }
+ ],
+ "punchline": [
+  "Bounded pilot rollout"
+ ]
+}

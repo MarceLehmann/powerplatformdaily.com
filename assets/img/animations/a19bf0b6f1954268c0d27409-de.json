@@ -1,0 +1,41 @@
+{
+ "title": "Copilot Cowork kontrolliert starten",
+ "subtitle": "Abrechnung waehlen, Limits und Warnungen setzen, dann Zugriff fuer den Pilot steuern.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Microsoft 365 Admin",
+   "title": "Abrechnungsmethode waehlen",
+   "actions": [
+    "Capacity Packs",
+    "Pay-as-you-go"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "bell",
+   "productLabel": "Microsoft 365 Admin",
+   "title": "Limits und Warnungen festlegen",
+   "actions": [
+    "Monatslimits",
+    "Benutzerlimits",
+    "Warnungen"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Microsoft 365 Admin",
+   "title": "Zugriff auf Pilotnutzer begrenzen",
+   "actions": [
+    "Richtlinie anpassen",
+    "Sicherheitsgruppe",
+    "vertrauenswuerdige Nutzer"
+   ]
+  }
+ ],
+ "punchline": [
+  "Begrenzter Pilotstart"
+ ]
+}

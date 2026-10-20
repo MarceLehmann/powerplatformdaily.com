@@ -44,7 +44,7 @@ animation:
   poster: /assets/img/animations/8678526a2c9576c73d4afd17-de.poster.png
   width: 800
   height: 450
-  alt: "Ein Ablauf mit vier Schritten zeigt die Diagnose eines langsamen Dataverse-Plug-ins: Speichervorgang vergleichen, Wartearten trennen, Baseline erfassen und Trace-Tools auf Verzoegerungen pruefen."
+  alt: "Ein Ablauf mit vier Schritten zeigt die Diagnose eines langsamen Dataverse-Plug-ins durch Vergleich desselben Speicherns mit und ohne Schritt, Trennung von synchroner Wartezeit und Hintergrundarbeit, Baseline-Erfassung und Nutzung von Trace-Tools."
 ---
 
 ## TL;DR

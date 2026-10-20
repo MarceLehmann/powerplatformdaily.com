@@ -44,7 +44,7 @@ animation:
   poster: /assets/img/animations/1863101bc5734d7d27772035-de.poster.png
   width: 800
   height: 450
-  alt: "Ein Ablauf in vier Schritten zeigt einen Copilot Studio-Agenten mit Anweisungen und Themen, der Projektdaten in Variablen sammelt und dann Power Automate aufruft, um einen SharePoint-Eintrag zu erstellen oder abzurufen."
+  alt: "Eine Abfolge mit vier Schritten zeigt, wie ein Copilot Studio-Agent mit Themen und Knoten Projektdaten sammelt, in Variablen speichert, einen Power Automate-Flow aufruft und einen SharePoint-Eintrag erstellt oder abruft."
 ---
 
 ## TL;DR

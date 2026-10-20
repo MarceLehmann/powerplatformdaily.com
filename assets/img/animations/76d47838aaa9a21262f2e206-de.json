@@ -1,0 +1,38 @@
+{
+ "title": "MCP Tools fuer App aktivieren",
+ "subtitle": "App oeffnen, zu App MCP gehen und dann Set up MCP waehlen.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "file",
+   "productLabel": "Power Apps",
+   "title": "App im Maker Portal oeffnen",
+   "actions": [
+    "Maker Portal",
+    "App oeffnen"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "arrow",
+   "productLabel": "Power Apps",
+   "title": "App MCP auswaehlen",
+   "actions": [
+    "App MCP"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "check",
+   "productLabel": "Power Apps",
+   "title": "Set up MCP waehlen",
+   "actions": [
+    "Set up MCP"
+   ]
+  }
+ ],
+ "punchline": [
+  "Integrierte Record Tools",
+  "und Data Tools erscheinen"
+ ]
+}

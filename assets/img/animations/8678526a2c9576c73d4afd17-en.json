@@ -1,0 +1,55 @@
+{
+ "title": "Diagnose a slow Dataverse plug-in",
+ "subtitle": "Compare saves, separate wait time, record a baseline, then locate delays with trace tools.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "arrow",
+   "productLabel": "Dataverse",
+   "title": "Compare the same save path",
+   "actions": [
+    "same operation",
+    "with and without a step"
+   ],
+   "evidence": "comparing the same operation with and without a step"
+  },
+  {
+   "product": "dataverse",
+   "icon": "filter",
+   "productLabel": "Dataverse",
+   "title": "Separate sync and background work",
+   "actions": [
+    "synchronous wait time",
+    "background work"
+   ],
+   "evidence": "separating synchronous wait time from background work"
+  },
+  {
+   "product": "dataverse",
+   "icon": "check",
+   "productLabel": "Dataverse",
+   "title": "Record a repeatable baseline",
+   "actions": [
+    "record a baseline",
+    "comparable records"
+   ],
+   "evidence": "recording a repeatable baseline"
+  },
+  {
+   "product": "dataverse",
+   "icon": "search",
+   "productLabel": "Dataverse",
+   "title": "Use trace tools to find delays",
+   "actions": [
+    "Plug-in Trace Logs",
+    "execution context",
+    "Plug-in Profiler"
+   ],
+   "evidence": "Plug-in Trace Logs, execution context, and the Plug-in Profiler help locate delays"
+  }
+ ],
+ "punchline": [
+  "Find bottlenecks first",
+  "Change code with evidence"
+ ]
+}

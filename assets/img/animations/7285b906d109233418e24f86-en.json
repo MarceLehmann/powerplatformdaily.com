@@ -1,0 +1,54 @@
+{
+ "title": "Enable GPT 5.6 in Copilot Cowork",
+ "subtitle": "Turn on OpenAI in admin settings, save access, then reopen Cowork's model picker.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Microsoft 365 admin",
+   "title": "Open Copilot settings",
+   "actions": [
+    "Copilot",
+    "Settings"
+   ],
+   "evidence": "Open Copilot > Settings > View all > AI providers operating as Microsoft subprocessors"
+  },
+  {
+   "product": "admin",
+   "icon": "arrow",
+   "productLabel": "Microsoft 365 admin",
+   "title": "View all AI providers",
+   "actions": [
+    "View all",
+    "AI providers"
+   ],
+   "evidence": "Open Copilot > Settings > View all > AI providers operating as Microsoft subprocessors"
+  },
+  {
+   "product": "admin",
+   "icon": "check",
+   "productLabel": "Microsoft 365 admin",
+   "title": "Enable OpenAI and choose access",
+   "actions": [
+    "expand OpenAI",
+    "all users",
+    "specific users and groups"
+   ],
+   "evidence": "expand OpenAI, and start with a security group to validate access in Cowork."
+  },
+  {
+   "product": "generic",
+   "icon": "search",
+   "productLabel": "Copilot Cowork",
+   "title": "Reopen model picker",
+   "actions": [
+    "model picker"
+   ],
+   "evidence": "Enable OpenAI under Microsoft 365 admin center Copilot settings, then reopen Cowork's model picker."
+  }
+ ],
+ "punchline": [
+  "GPT 5.6 Sol and Terra",
+  "appear in Cowork"
+ ]
+}

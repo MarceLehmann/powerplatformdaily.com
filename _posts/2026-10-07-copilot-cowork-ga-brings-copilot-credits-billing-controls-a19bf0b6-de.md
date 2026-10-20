@@ -43,7 +43,7 @@ animation:
   poster: /assets/img/animations/a19bf0b6f1954268c0d27409-de.poster.png
   width: 800
   height: 450
-  alt: "Die Abfolge zeigt die Konfiguration des Copilot-Cowork-Rollouts im Microsoft 365 Admin Center: Abrechnungsart waehlen, Ausgabenlimits und Warnungen festlegen, dann den Zugriff per Sicherheitsgruppe beschraenken."
+  alt: "Drei Schritte zeigen die Steuerung fuer den Copilot-Cowork-Rollout im Microsoft 365 Admin Center: Abrechnung waehlen, Limits und Warnungen festlegen, dann Zugriff auf eine Sicherheitsgruppe beschraenken."
 ---
 
 ## TL;DR

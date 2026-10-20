@@ -1,0 +1,51 @@
+{
+ "title": "Langsames Dataverse-Plug-in prüfen",
+ "subtitle": "Speichern vergleichen, Wartezeit trennen, Baseline erfassen und Verzoegerungen mit Trace-Tools finden.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "arrow",
+   "productLabel": "Dataverse",
+   "title": "Denselben Speicherpfad vergleichen",
+   "actions": [
+    "gleiche Aktion",
+    "mit und ohne Schritt"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "filter",
+   "productLabel": "Dataverse",
+   "title": "Synchron und Hintergrund trennen",
+   "actions": [
+    "synchrone Wartezeit",
+    "Hintergrundarbeit"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "check",
+   "productLabel": "Dataverse",
+   "title": "Wiederholbare Baseline erfassen",
+   "actions": [
+    "Baseline erfassen",
+    "vergleichbare Datensaetze"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "search",
+   "productLabel": "Dataverse",
+   "title": "Trace-Tools auf Verzoegerungen",
+   "actions": [
+    "Plug-in Trace Logs",
+    "Ausfuehrungskontext",
+    "Plug-in Profiler"
+   ]
+  }
+ ],
+ "punchline": [
+  "Engpaesse zuerst finden",
+  "Code mit Belegen aendern"
+ ]
+}

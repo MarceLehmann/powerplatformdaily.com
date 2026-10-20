@@ -43,7 +43,7 @@ animation:
   poster: /assets/img/animations/8678526a2c9576c73d4afd17-en.poster.png
   width: 800
   height: 450
-  alt: "A four step flow shows diagnosing a slow Dataverse plug in by comparing the same save with and without a step, separating synchronous from background work, recording a baseline, and using trace tools to find delays."
+  alt: "A four step flow shows diagnosing a slow Dataverse plug in by comparing the same save with and without a step, separating synchronous wait from background work, recording a baseline, and using trace tools to find delays."
 ---
 
 ## TL;DR

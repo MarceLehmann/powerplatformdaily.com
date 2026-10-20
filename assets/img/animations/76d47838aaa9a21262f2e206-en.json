@@ -1,0 +1,41 @@
+{
+ "title": "Activate MCP tools for an app",
+ "subtitle": "Open the app, go to App MCP, then choose Set up MCP.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "file",
+   "productLabel": "Power Apps",
+   "title": "Open the app in maker portal",
+   "actions": [
+    "maker portal",
+    "Open app"
+   ],
+   "evidence": "Open the app in the maker portal, select App MCP, and choose Set up MCP."
+  },
+  {
+   "product": "powerapps",
+   "icon": "arrow",
+   "productLabel": "Power Apps",
+   "title": "Select App MCP",
+   "actions": [
+    "App MCP"
+   ],
+   "evidence": "Open the app in the maker portal, select App MCP, and choose Set up MCP."
+  },
+  {
+   "product": "powerapps",
+   "icon": "check",
+   "productLabel": "Power Apps",
+   "title": "Choose Set up MCP",
+   "actions": [
+    "Set up MCP"
+   ],
+   "evidence": "Open the app in the maker portal, select App MCP, and choose Set up MCP."
+  }
+ ],
+ "punchline": [
+  "Built in record tools",
+  "and data tools appear"
+ ]
+}

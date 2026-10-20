@@ -39,7 +39,7 @@ animation:
   poster: /assets/img/animations/76d47838aaa9a21262f2e206-en.poster.png
   width: 800
   height: 450
-  alt: "Three steps show how to activate built in MCP tools for a Model-driven App: open the app in the maker portal, select App MCP, then choose Set up MCP."
+  alt: "Three steps show how to activate built-in MCP tools for a Model-driven App: open the app in the maker portal, select App MCP, then choose Set up MCP."
 ---
 
 ## TL;DR

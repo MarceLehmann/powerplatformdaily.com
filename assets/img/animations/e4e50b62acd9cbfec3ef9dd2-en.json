@@ -1,0 +1,52 @@
+{
+ "title": "Set up Copilot Studio dev sandbox",
+ "subtitle": "From Instant Sandbox to Dataverse and a Copilot Studio trial agent.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "cloud",
+   "productLabel": "Microsoft 365",
+   "title": "Create the Instant Sandbox",
+   "actions": [
+    "Developer Program",
+    "Instant Sandbox"
+   ],
+   "evidence": "Use a personal Microsoft account to join the Microsoft 365 Developer Program, choose Instant Sandbox, and record the new sandbox work account."
+  },
+  {
+   "product": "powerapps",
+   "icon": "key",
+   "productLabel": "Power Apps",
+   "title": "Activate Developer Plan",
+   "actions": [
+    "Power Apps Developer Plan"
+   ],
+   "evidence": "Use a Microsoft 365 Instant Sandbox, activate the Power Apps Developer Plan, verify Dataverse and start the Copilot Studio trial in the dedicated developer environment."
+  },
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Verify the developer environment",
+   "actions": [
+    "Dataverse",
+    "developer environment",
+    "region"
+   ],
+   "evidence": "Check the developer environment name, region and Dataverse provisioning before building, because the region cannot be changed later."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Start the trial agent",
+   "actions": [
+    "Copilot Studio trial"
+   ],
+   "evidence": "Use a Microsoft 365 Instant Sandbox, activate the Power Apps Developer Plan, verify Dataverse and start the Copilot Studio trial in the dedicated developer environment."
+  }
+ ],
+ "punchline": [
+  "Ready for trial agent"
+ ]
+}

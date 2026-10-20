@@ -1,0 +1,58 @@
+{
+ "title": "Project Request Agent flow",
+ "subtitle": "Collect details in Copilot Studio, then create or retrieve a SharePoint record via flows.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Build guided topics",
+   "actions": [
+    "instructions",
+    "topics",
+    "nodes"
+   ],
+   "evidence": "Build guided topics with question and condition nodes"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "table",
+   "productLabel": "Copilot Studio",
+   "title": "Store details in variables",
+   "actions": [
+    "variables",
+    "question nodes",
+    "condition nodes"
+   ],
+   "evidence": "store project details in variables before calling the appropriate flow"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Call the appropriate flow",
+   "actions": [
+    "flows",
+    "create",
+    "retrieve status"
+   ],
+   "evidence": "Two Power Automate flows collect project details, create SharePoint list items, or retrieve a project’s current status."
+  },
+  {
+   "product": "sharepoint",
+   "icon": "file",
+   "productLabel": "SharePoint",
+   "title": "Create or retrieve request record",
+   "actions": [
+    "create item",
+    "find request",
+    "current status"
+   ],
+   "evidence": "calls a flow that creates an item in the SharePoint Project Requests list."
+  }
+ ],
+ "punchline": [
+  "Create or check requests",
+  "Business steps stay in flows"
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "title": "GPT 5.6 in Copilot Cowork aktivieren",
+ "subtitle": "OpenAI in den Admin-Einstellungen aktivieren, Zugriff speichern und Cowork erneut oeffnen.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Microsoft 365 Admin",
+   "title": "Copilot-Einstellungen oeffnen",
+   "actions": [
+    "Copilot",
+    "Einstellungen"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "arrow",
+   "productLabel": "Microsoft 365 Admin",
+   "title": "Alle KI-Anbieter anzeigen",
+   "actions": [
+    "Alle anzeigen",
+    "KI-Anbieter"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "check",
+   "productLabel": "Microsoft 365 Admin",
+   "title": "OpenAI aktivieren und Zugriff waehlen",
+   "actions": [
+    "OpenAI erweitern",
+    "alle Benutzer",
+    "bestimmte Benutzer und Gruppen"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "search",
+   "productLabel": "Copilot Cowork",
+   "title": "Modellauswahl erneut oeffnen",
+   "actions": [
+    "Modellauswahl"
+   ]
+  }
+ ],
+ "punchline": [
+  "GPT 5.6 Sol und Terra",
+  "erscheinen in Cowork"
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "title": "Ablauf fuer Projektanfrage-Agent",
+ "subtitle": "Projektdaten in Copilot Studio sammeln und dann per Flows einen SharePoint-Eintrag erstellen oder abrufen.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Gefuehrte Themen erstellen",
+   "actions": [
+    "Anweisungen",
+    "Themen",
+    "Knoten"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "table",
+   "productLabel": "Copilot Studio",
+   "title": "Details in Variablen speichern",
+   "actions": [
+    "Variablen",
+    "Frageknoten",
+    "Bedingungsknoten"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Passenden Flow aufrufen",
+   "actions": [
+    "Flows",
+    "erstellen",
+    "Status abrufen"
+   ]
+  },
+  {
+   "product": "sharepoint",
+   "icon": "file",
+   "productLabel": "SharePoint",
+   "title": "Anfrage erstellen oder abrufen",
+   "actions": [
+    "Eintrag erstellen",
+    "Anfrage finden",
+    "aktueller Status"
+   ]
+  }
+ ],
+ "punchline": [
+  "Anfragen erstellen",
+  "oder Status pruefen"
+ ]
+}
