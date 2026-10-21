@@ -217,5 +217,32 @@
       "create the shared connection",
       "then select Maker provided credentials for the agent tool."
     ]
+  },
+  "b5dfacc31618596dd37bc565": {
+    "gif": false,
+    "reason": "The post is a best-practice summary with accessibility tips, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-21"
+  },
+  "d5427329428d394ff6bf698b": {
+    "gif": true,
+    "reason": "The post states a concrete build sequence from environment setup to solution, data model and sample data.",
+    "at": "2026-10-21",
+    "evidence": [
+      "Claude Code uses Dataverse skills and PAC commands to create the environment after collecting tenant, type and region choices.",
+      "Visual Studio Code, Claude Code and Microsoft Dataverse skills can create a Dataverse environment, authentication profile, solution, publisher, expense data model and sample data",
+      "Visual Studio Code, Claude Code and Microsoft Dataverse skills can create a Dataverse environment, authentication profile, solution, publisher, expense data model and sample data",
+      "Yes, the demonstrated prompt created expense header and line tables, fields, a contact lookup, status reasons and a relationship."
+    ]
+  },
+  "e1fa83f0b6e9ff29b3ace09a": {
+    "gif": true,
+    "reason": "The post gives a clear 4 stage setup sequence for configuring and using managed identity in a custom connector.",
+    "at": "2026-10-21",
+    "evidence": [
+      "Select OAuth 2.0 and Azure Active Directory in the connector Security tab, then choose Managed Identity under Secret Options.",
+      "Supply the application ID, tenant ID, resource URL, and scope.",
+      "The application registration needs the connector redirect URL and a federated credential.",
+      "then create and use the connection in Power Apps or Power Automate."
+    ]
   }
 }

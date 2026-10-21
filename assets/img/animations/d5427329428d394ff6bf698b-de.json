@@ -1,0 +1,51 @@
+{
+ "title": "Dataverse-Objekte per Prompt bauen",
+ "subtitle": "Eine Umgebung, Loesung, ein Modell und Beispieldaten per natuerlicher Sprache erstellen.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "cloud",
+   "productLabel": "Dataverse",
+   "title": "Die Dataverse-Umgebung erstellen",
+   "actions": [
+    "Dataverse-Funktionen",
+    "PAC-Befehle",
+    "Mandant Typ Region"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "key",
+   "productLabel": "Dataverse",
+   "title": "Das Authentifizierungsprofil anlegen",
+   "actions": [
+    "Authentifizierungsprofil"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Loesung und Ausgabenmodell bauen",
+   "actions": [
+    "Loesung",
+    "Publisher",
+    "Ausgaben-Datenmodell"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "table",
+   "productLabel": "Dataverse",
+   "title": "Tabellen, Felder und Beispieldaten",
+   "actions": [
+    "Ausgaben-Kopf",
+    "Positions-Tabellen",
+    "Beispieldaten"
+   ]
+  }
+ ],
+ "punchline": [
+  "Vom Prompt zu Dataverse"
+ ]
+}

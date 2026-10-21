@@ -1,0 +1,53 @@
+{
+ "title": "Managed Identity Connector einrichten",
+ "subtitle": "Connector konfigurieren, in Entra ID vertrauen, dann Verbindung erstellen und nutzen.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "gear",
+   "productLabel": "Power Apps",
+   "title": "Connector Sicherheit konfigurieren",
+   "actions": [
+    "OAuth 2.0",
+    "Azure Active Directory",
+    "Managed Identity"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "key",
+   "productLabel": "Entra ID",
+   "title": "App und Ressourcendaten eingeben",
+   "actions": [
+    "Anwendungs-ID",
+    "Mandanten-ID",
+    "Ressourcen-URL"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Entra ID",
+   "title": "Vertrauen in der App registrieren",
+   "actions": [
+    "Weiterleitungs-URL",
+    "foederierte Anmeldeinfo"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "play",
+   "productLabel": "Power Automate",
+   "title": "Verbindung erstellen und nutzen",
+   "actions": [
+    "Verbindung erstellen",
+    "Power Apps",
+    "Power Automate"
+   ]
+  }
+ ],
+ "punchline": [
+  "Keine Client Secrets",
+  "Geschuetzte APIs aufrufen"
+ ]
+}

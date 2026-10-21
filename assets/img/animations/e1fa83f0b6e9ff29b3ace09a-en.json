@@ -1,0 +1,57 @@
+{
+ "title": "Set up managed identity connector",
+ "subtitle": "Configure the connector, trust it in Entra ID, then create and use the connection.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "gear",
+   "productLabel": "Power Apps",
+   "title": "Configure connector security",
+   "actions": [
+    "OAuth 2.0",
+    "Azure Active Directory",
+    "Managed Identity"
+   ],
+   "evidence": "Select OAuth 2.0 and Azure Active Directory in the connector Security tab, then choose Managed Identity under Secret Options."
+  },
+  {
+   "product": "admin",
+   "icon": "key",
+   "productLabel": "Entra ID",
+   "title": "Enter app and resource details",
+   "actions": [
+    "application ID",
+    "tenant ID",
+    "resource URL"
+   ],
+   "evidence": "Supply the application ID, tenant ID, resource URL, and scope."
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Entra ID",
+   "title": "Register trust in the app",
+   "actions": [
+    "redirect URL",
+    "federated credential"
+   ],
+   "evidence": "The application registration needs the connector redirect URL and a federated credential."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "play",
+   "productLabel": "Power Automate",
+   "title": "Create and use the connection",
+   "actions": [
+    "create a connection",
+    "Power Apps",
+    "Power Automate"
+   ],
+   "evidence": "then create and use the connection in Power Apps or Power Automate."
+  }
+ ],
+ "punchline": [
+  "No client secrets",
+  "Call protected APIs"
+ ]
+}

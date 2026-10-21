@@ -42,6 +42,12 @@ faq:
   answer: Yes, the connector can be used from Power Automate after its connection
     is created. The example defines a GET action for the Microsoft Graph current user
     profile endpoint.
+animation:
+  src: /assets/img/animations/e1fa83f0b6e9ff29b3ace09a-en.gif
+  poster: /assets/img/animations/e1fa83f0b6e9ff29b3ace09a-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step sequence shows configuring OAuth 2.0 with Managed Identity in a custom connector, registering the redirect URL and federated credential in Entra ID, then creating and using the connection in Power Apps or Power Automate."
 ---
 
 ## TL;DR

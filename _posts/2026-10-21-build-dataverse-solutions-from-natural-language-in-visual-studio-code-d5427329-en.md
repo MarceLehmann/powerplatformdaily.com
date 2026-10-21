@@ -37,6 +37,12 @@ faq:
 - question: Can a natural language prompt build an expense app Dataverse data model?
   answer: Yes, the demonstrated prompt created expense header and line tables, fields,
     a contact lookup, status reasons and a relationship.
+animation:
+  src: /assets/img/animations/d5427329428d394ff6bf698b-en.gif
+  poster: /assets/img/animations/d5427329428d394ff6bf698b-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step sequence shows using Visual Studio Code, Claude Code and Dataverse skills to create an environment, add authentication, build a solution and data model, and load sample data."
 ---
 
 ## TL;DR
