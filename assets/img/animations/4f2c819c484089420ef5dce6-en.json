@@ -1,0 +1,45 @@
+{
+ "title": "Forecast revenue from Dataverse",
+ "subtitle": "Load revenue data, train linear regression and save predictions back to Dataverse.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Retrieve revenue records",
+   "actions": [
+    "Dataverse SDK for Python",
+    "queries selected table columns",
+    "Pandas DataFrame"
+   ],
+   "evidence": "The Dataverse SDK for Python queries selected table columns and loads the returned records into a Pandas DataFrame for analysis."
+  },
+  {
+   "product": "generic",
+   "icon": "code",
+   "productLabel": "Scikit-Learn",
+   "title": "Train the regression model",
+   "actions": [
+    "Scikit-Learn",
+    "LinearRegression",
+    "month and revenue columns"
+   ],
+   "evidence": "The example trains Scikit-Learn LinearRegression on month and revenue columns, then predicts revenue for months 6, 7 and 8."
+  },
+  {
+   "product": "dataverse",
+   "icon": "check",
+   "productLabel": "Dataverse",
+   "title": "Write forecast results",
+   "actions": [
+    "creates records",
+    "revenue prediction table",
+    "predicted revenue"
+   ],
+   "evidence": "The Python client creates records in a revenue prediction table, storing each future month and its predicted revenue for downstream experiences."
+  }
+ ],
+ "punchline": [
+  "Forecasts stored in Dataverse"
+ ]
+}

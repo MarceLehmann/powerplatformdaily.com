@@ -244,5 +244,31 @@
       "The application registration needs the connector redirect URL and a federated credential.",
       "then create and use the connection in Power Apps or Power Automate."
     ]
+  },
+  "cc29602e8c6f0f9f0df51a23": {
+    "gif": false,
+    "reason": "The post gives accessibility best practices and test ideas, but it does not state one concrete 3 to 5 stage procedure in order.",
+    "at": "2026-10-23"
+  },
+  "4f2c819c484089420ef5dce6": {
+    "gif": true,
+    "reason": "The post describes a clear 3 stage pipeline: retrieve Dataverse data, train a regression model, then write predictions back to Dataverse.",
+    "at": "2026-10-23",
+    "evidence": [
+      "The Dataverse SDK for Python queries selected table columns and loads the returned records into a Pandas DataFrame for analysis.",
+      "The example trains Scikit-Learn LinearRegression on month and revenue columns, then predicts revenue for months 6, 7 and 8.",
+      "The Python client creates records in a revenue prediction table, storing each future month and its predicted revenue for downstream experiences."
+    ]
+  },
+  "55cd16a7f276c35a314ca5b5": {
+    "gif": true,
+    "reason": "The FAQ states a concrete four step connection sequence for D365 Contact Center.",
+    "at": "2026-10-23",
+    "evidence": [
+      "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream.",
+      "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream.",
+      "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream.",
+      "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream."
+    ]
   }
 }

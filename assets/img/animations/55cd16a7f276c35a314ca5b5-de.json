@@ -1,0 +1,45 @@
+{
+ "title": "Agent mit Contact Center verbinden",
+ "subtitle": "Die Kanalverbindung einrichten und den Agenten einem Workstream zuweisen.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Kanaele verbinden",
+   "actions": [
+    "Kanaele verbinden"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "gear",
+   "productLabel": "D365 Contact Center",
+   "title": "Contact Center fertig konfigurieren",
+   "actions": [
+    "Contact Center konfigurieren"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Agent veroeffentlichen",
+   "actions": [
+    "Agent veroeffentlichen"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "arrow",
+   "productLabel": "Workstream",
+   "title": "Agent zu Workstream hinzufuegen",
+   "actions": [
+    "zu Workstream hinzufuegen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Agent fuer Routing bereit"
+ ]
+}

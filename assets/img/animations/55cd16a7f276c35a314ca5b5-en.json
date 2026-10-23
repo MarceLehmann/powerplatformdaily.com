@@ -1,0 +1,49 @@
+{
+ "title": "Connect agent to Contact Center",
+ "subtitle": "Set up the channel connection and place the agent in a workstream.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Connect engagement channels",
+   "actions": [
+    "connect engagement channels"
+   ],
+   "evidence": "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream."
+  },
+  {
+   "product": "generic",
+   "icon": "gear",
+   "productLabel": "D365 Contact Center",
+   "title": "Complete Contact Center setup",
+   "actions": [
+    "Contact Center configuration"
+   ],
+   "evidence": "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Publish the agent",
+   "actions": [
+    "publish the agent"
+   ],
+   "evidence": "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream."
+  },
+  {
+   "product": "generic",
+   "icon": "arrow",
+   "productLabel": "Workstream",
+   "title": "Add agent to a workstream",
+   "actions": [
+    "add it to a workstream"
+   ],
+   "evidence": "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream."
+  }
+ ],
+ "punchline": [
+  "Agent ready for routing"
+ ]
+}

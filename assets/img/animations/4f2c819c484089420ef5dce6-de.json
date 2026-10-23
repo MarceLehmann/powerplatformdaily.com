@@ -1,0 +1,42 @@
+{
+ "title": "Umsatz aus Dataverse prognostizieren",
+ "subtitle": "Umsatzdaten laden, lineare Regression trainieren und Prognosen in Dataverse speichern.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Umsatzdaten abrufen",
+   "actions": [
+    "Dataverse SDK for Python",
+    "waehlt Tabellenspalten ab",
+    "Pandas DataFrame"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "code",
+   "productLabel": "Scikit-Learn",
+   "title": "Regressionsmodell trainieren",
+   "actions": [
+    "Scikit-Learn",
+    "LinearRegression",
+    "Monat und Umsatzspalten"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "check",
+   "productLabel": "Dataverse",
+   "title": "Prognosen zurueckschreiben",
+   "actions": [
+    "erstellt Datensaetze",
+    "Umsatzprognosetabelle",
+    "prognostizierter Umsatz"
+   ]
+  }
+ ],
+ "punchline": [
+  "Prognosen in Dataverse"
+ ]
+}
