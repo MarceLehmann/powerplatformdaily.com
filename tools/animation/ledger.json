@@ -270,5 +270,27 @@
       "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream.",
       "Makers connect engagement channels, complete the Contact Center configuration, publish the agent, and then add it to a suitable workstream."
     ]
+  },
+  "b0b7aa88363ea445f26c41fa": {
+    "gif": false,
+    "reason": "This post is a calculator overview and FAQ about costs and options, not a concrete 3 to 5 stage procedure named in the text.",
+    "at": "2026-10-23"
+  },
+  "411bc2a7d8e661442cd96557": {
+    "gif": false,
+    "reason": "This is an announcement and concept summary about Power Platform Skills and sandboxing, not a concrete 3 to 5 stage procedure named in the text.",
+    "at": "2026-10-23"
+  },
+  "ecb607d1ce22a265ac920901": {
+    "gif": true,
+    "reason": "The post gives a clear 5 stage capture workflow for using Performance Probe.",
+    "at": "2026-10-23",
+    "evidence": [
+      "Install the unpacked extension",
+      "press Start, reload the Dynamics 365 tab",
+      "reload the Dynamics 365 tab",
+      "work normally for ten minutes",
+      "then open and export the report"
+    ]
   }
 }

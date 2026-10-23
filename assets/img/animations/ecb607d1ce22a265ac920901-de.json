@@ -1,0 +1,59 @@
+{
+ "title": "Performance Probe Bericht erfassen",
+ "subtitle": "Erweiterung installieren, normale Arbeit aufzeichnen und dann den Bericht exportieren.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "clip",
+   "productLabel": "Dynamics 365",
+   "title": "Browser Erweiterung installieren",
+   "actions": [
+    "Erweiterung installieren",
+    "Edge",
+    "Chrome"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "play",
+   "productLabel": "Dynamics 365",
+   "title": "Aufzeichnung starten",
+   "actions": [
+    "Start"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "arrow",
+   "productLabel": "Dynamics 365",
+   "title": "App Registerkarte neu laden",
+   "actions": [
+    "Neu laden",
+    "Dynamics 365 tab"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "user",
+   "productLabel": "Dynamics 365",
+   "title": "Zehn Minuten normal arbeiten",
+   "actions": [
+    "Normal arbeiten",
+    "zehn Minuten"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "doc",
+   "productLabel": "Dynamics 365",
+   "title": "Bericht oeffnen und exportieren",
+   "actions": [
+    "Bericht oeffnen",
+    "Bericht exportieren"
+   ]
+  }
+ ],
+ "punchline": [
+  "Bericht offline bereit"
+ ]
+}

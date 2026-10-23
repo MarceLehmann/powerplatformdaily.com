@@ -1,0 +1,64 @@
+{
+ "title": "Capture a Performance Probe report",
+ "subtitle": "Install the extension, record normal work, then open and export the report.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "clip",
+   "productLabel": "Dynamics 365",
+   "title": "Install the browser extension",
+   "actions": [
+    "Install extension",
+    "Edge",
+    "Chrome"
+   ],
+   "evidence": "Install the unpacked extension"
+  },
+  {
+   "product": "generic",
+   "icon": "play",
+   "productLabel": "Dynamics 365",
+   "title": "Start the recording",
+   "actions": [
+    "Start"
+   ],
+   "evidence": "press Start, reload the Dynamics 365 tab"
+  },
+  {
+   "product": "generic",
+   "icon": "arrow",
+   "productLabel": "Dynamics 365",
+   "title": "Reload the app tab",
+   "actions": [
+    "Reload",
+    "Dynamics 365 tab"
+   ],
+   "evidence": "reload the Dynamics 365 tab"
+  },
+  {
+   "product": "generic",
+   "icon": "user",
+   "productLabel": "Dynamics 365",
+   "title": "Work normally for ten minutes",
+   "actions": [
+    "Work normally",
+    "ten minutes"
+   ],
+   "evidence": "work normally for ten minutes"
+  },
+  {
+   "product": "generic",
+   "icon": "doc",
+   "productLabel": "Dynamics 365",
+   "title": "Open and export the report",
+   "actions": [
+    "Open report",
+    "Export report"
+   ],
+   "evidence": "then open and export the report"
+  }
+ ],
+ "punchline": [
+  "Report ready offline"
+ ]
+}

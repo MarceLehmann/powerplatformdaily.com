@@ -38,6 +38,12 @@ faq:
     Probe?
   answer: Installiert die entpackte Erweiterung, drückt Start, ladet die Dynamics
     365 Registerkarte neu, arbeitet zehn Minuten normal und öffnet danach den Bericht.
+animation:
+  src: /assets/img/animations/ecb607d1ce22a265ac920901-de.gif
+  poster: /assets/img/animations/ecb607d1ce22a265ac920901-de.poster.png
+  width: 800
+  height: 450
+  alt: "Die Animation zeigt den Ablauf mit Performance Probe: Erweiterung installieren, Start druecken, die Dynamics 365 Registerkarte neu laden, zehn Minuten normal arbeiten, dann den Bericht oeffnen und exportieren."
 ---
 
 ## TL;DR
