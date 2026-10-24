@@ -1,0 +1,47 @@
+{
+ "title": "Urlaubsantraege bearbeiten",
+ "subtitle": "Antrag erfassen, Genehmigung leiten, Datensatz aktualisieren und Mitarbeitende benachrichtigen.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "file",
+   "productLabel": "Power Apps",
+   "title": "Urlaubsantrag erfassen",
+   "actions": [
+    "Urlaubsantraege",
+    "Mitarbeiterdaten"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Antrag erkennen und senden",
+   "actions": [
+    "Urlaubsantrag erkennen",
+    "Genehmigung senden"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Datensatz nach Entscheid aktualisieren",
+   "actions": [
+    "Datensatz aktualisieren"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bell",
+   "productLabel": "Power Automate",
+   "title": "Mitarbeitende benachrichtigen",
+   "actions": [
+    "Mitarbeitende benachrichtigen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Verbundener Urlaubsprozess"
+ ]
+}

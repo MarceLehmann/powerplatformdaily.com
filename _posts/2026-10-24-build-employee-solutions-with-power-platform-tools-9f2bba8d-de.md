@@ -41,6 +41,12 @@ faq:
   answer: Ein Copilot-Studio-Agent kann Fragen zu Urlaubsguthaben, Homeoffice-Regeln,
     Gehaltsabrechnungen und Ansprechpartnern beantworten. Mit passenden Verbindungen
     kann er auch konkrete Aktionen unterstützen.
+animation:
+  src: /assets/img/animations/9f2bba8d886ea14923ce4c95-de.gif
+  poster: /assets/img/animations/9f2bba8d886ea14923ce4c95-de.poster.png
+  width: 800
+  height: 450
+  alt: "Ein Ablauf mit vier Schritten zeigt: Power Apps erfasst den Urlaubsantrag, Power Automate erkennt ihn und sendet die Genehmigung, Dataverse aktualisiert den Datensatz, danach folgt die Benachrichtigung."
 ---
 
 ## TL;DR

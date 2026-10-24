@@ -1,0 +1,51 @@
+{
+ "title": "Handle employee leave approvals",
+ "subtitle": "Capture a request, route approval, update the record and notify the employee.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "file",
+   "productLabel": "Power Apps",
+   "title": "Capture the leave request",
+   "actions": [
+    "leave requests",
+    "employee details"
+   ],
+   "evidence": "Power Apps can capture employee details and leave requests"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Detect request and send approval",
+   "actions": [
+    "detect a leave request",
+    "send an approval"
+   ],
+   "evidence": "Power Automate can detect a leave request, send an approval to the manager"
+  },
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Update the record after decision",
+   "actions": [
+    "update the record"
+   ],
+   "evidence": "update the record after a decision"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bell",
+   "productLabel": "Power Automate",
+   "title": "Notify the employee",
+   "actions": [
+    "notify the employee"
+   ],
+   "evidence": "and notify the employee."
+  }
+ ],
+ "punchline": [
+  "Connected leave workflow"
+ ]
+}

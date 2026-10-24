@@ -292,5 +292,21 @@
       "work normally for ten minutes",
       "then open and export the report"
     ]
+  },
+  "e74023335cccf7996f0d9cef": {
+    "gif": false,
+    "reason": "This is a feature announcement describing capabilities and constraints, not a concrete 3 to 5 step procedure stated in the post text.",
+    "at": "2026-10-24"
+  },
+  "9f2bba8d886ea14923ce4c95": {
+    "gif": true,
+    "reason": "The post gives a concrete four stage automation sequence for leave approvals.",
+    "at": "2026-10-24",
+    "evidence": [
+      "Power Apps can capture employee details and leave requests",
+      "Power Automate can detect a leave request, send an approval to the manager",
+      "update the record after a decision",
+      "and notify the employee."
+    ]
   }
 }

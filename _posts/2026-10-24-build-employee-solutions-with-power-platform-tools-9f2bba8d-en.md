@@ -40,6 +40,12 @@ faq:
   answer: A Copilot Studio agent can answer questions about topics such as leave balances,
     work-from-home rules, payslips and salary contacts. Suitable connections can also
     enable specific actions.
+animation:
+  src: /assets/img/animations/9f2bba8d886ea14923ce4c95-en.gif
+  poster: /assets/img/animations/9f2bba8d886ea14923ce4c95-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step flow shows Power Apps capturing a leave request, Power Automate detecting it and sending manager approval, Dataverse updating the record after the decision, and Power Automate notifying the employee."
 ---
 
 ## TL;DR
