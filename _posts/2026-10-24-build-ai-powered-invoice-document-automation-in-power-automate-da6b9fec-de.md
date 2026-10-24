@@ -37,6 +37,12 @@ faq:
 - question: Wie fügt Populate a Microsoft Word template Rechnungspositionen ein?
   answer: Der zweite Flow liest SharePoint-Positionen nach Dokumentnummer aus und
     übergibt die Select-Ausgabe an das wiederholbare Word-Feld myTable.
+animation:
+  src: /assets/img/animations/da6b9fec2b239a6168693a0a-de.gif
+  poster: /assets/img/animations/da6b9fec2b239a6168693a0a-de.poster.png
+  width: 800
+  height: 450
+  alt: "Die Abfolge zeigt, wie Outlook-PDF-Anhaenge in OneDrive gespeichert, Rechnungsdaten mit AI Builder extrahiert, zur Freigabe gesendet, in SharePoint gespeichert und danach ein Word-Dokument mit E-Mail-Bestaetigung erzeugt wird."
 ---
 
 ## TL;DR

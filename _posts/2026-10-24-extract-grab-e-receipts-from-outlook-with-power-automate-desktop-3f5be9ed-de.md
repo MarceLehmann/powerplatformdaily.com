@@ -34,6 +34,12 @@ faq:
 - question: Wie versendet Power Automate Desktop den Grab-Belegbericht?
   answer: Der Ablauf exportiert die organisierten Daten in eine Excel-Datei und versendet
     den Bericht per E-Mail. Outlook Desktop und Microsoft Excel sind Voraussetzungen.
+animation:
+  src: /assets/img/animations/3f5be9ed0558a8ba17fc5fa3-de.gif
+  poster: /assets/img/animations/3f5be9ed0558a8ba17fc5fa3-de.poster.png
+  width: 800
+  height: 450
+  alt: "Ein Ablauf in vier Schritten zeigt, wie Grab E-Belege aus Outlook abgerufen, Kerndaten in einer Datentabelle organisiert, nach Excel exportiert und der fertige Bericht per E-Mail versendet wird."
 ---
 
 ## TL;DR

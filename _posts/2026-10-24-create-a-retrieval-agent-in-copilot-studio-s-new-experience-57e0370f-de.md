@@ -39,6 +39,12 @@ faq:
   answer: Fügen Sie das Tool Office 365 Outlook Send an email (V2) hinzu und authentifizieren
     Sie bei Bedarf den Connector. Erteilen Sie in Preview die Berechtigung und senden
     Sie eine Anfrage mit E-Mail-Versand.
+animation:
+  src: /assets/img/animations/57e0370f54cf7a06759231dc-de.gif
+  poster: /assets/img/animations/57e0370f54cf7a06759231dc-de.poster.png
+  width: 800
+  height: 450
+  alt: "Ein Copilot-Studio-Retrieval-Agent wird erstellt, mit Wissen versorgt, mit einem ausgewaehlten Modell getestet, veroeffentlicht und danach nach Authentifizierung und Freigabe fuer E-Mails ueber Outlook erweitert."
 ---
 
 ## TL;DR

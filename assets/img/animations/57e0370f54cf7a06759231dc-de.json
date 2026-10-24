@@ -1,0 +1,63 @@
+{
+ "title": "Retrieval-Agent erstellen",
+ "subtitle": "In Copilot Studio erstellen, testen, veroeffentlichen und Outlook-E-Mail hinzufuegen.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Neuen Agent erstellen",
+   "actions": [
+    "neues Erlebnis",
+    "Name",
+    "Anweisungen"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "doc",
+   "productLabel": "Copilot Studio",
+   "title": "Wissensquellen hinzufuegen",
+   "actions": [
+    "Wissen hinzufuegen",
+    "oeffentliche Websites",
+    "SharePoint"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Modell waehlen und testen",
+   "actions": [
+    "Modell auswaehlen",
+    "Preview",
+    "Agent testen"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Agent veroeffentlichen",
+   "actions": [
+    "veroeffentlichen"
+   ]
+  },
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "Outlook-E-Mail-Aktion hinzufuegen",
+   "actions": [
+    "Send an email (V2)",
+    "Connector authentifizieren",
+    "Berechtigung erlauben"
+   ]
+  }
+ ],
+ "punchline": [
+  "Agent sendet Antwort",
+  "per E-Mail"
+ ]
+}

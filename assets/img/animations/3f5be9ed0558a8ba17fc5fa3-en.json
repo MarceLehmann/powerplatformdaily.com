@@ -1,0 +1,54 @@
+{
+ "title": "Grab receipts to Excel email report",
+ "subtitle": "Retrieve Grab e-receipts, extract details, export to Excel, and send the report.",
+ "steps": [
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "Retrieve Grab e-receipts",
+   "actions": [
+    "Outlook retrieval step",
+    "Account field"
+   ],
+   "evidence": "Use the Outlook retrieval step and set the Account field to the email account connected to Grab."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "filter",
+   "productLabel": "Power Automate Desktop",
+   "title": "Extract receipt values",
+   "actions": [
+    "extracts the price",
+    "date and time",
+    "shop name"
+   ],
+   "evidence": "The flow extracts the price, date and time, and shop name."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "table",
+   "productLabel": "Power Automate Desktop",
+   "title": "Organize results in a data table",
+   "actions": [
+    "stores these values",
+    "data table"
+   ],
+   "evidence": "It stores these values in lists before organizing them into a data table."
+  },
+  {
+   "product": "generic",
+   "icon": "mail",
+   "productLabel": "Microsoft Excel",
+   "title": "Export and email the report",
+   "actions": [
+    "exported to Excel",
+    "sends the report by email"
+   ],
+   "evidence": "The flow exports the organized data to an Excel file and sends the report by email."
+  }
+ ],
+ "punchline": [
+  "Excel report sent"
+ ]
+}

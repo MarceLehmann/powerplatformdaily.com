@@ -1,0 +1,66 @@
+{
+ "title": "Automate invoice processing",
+ "subtitle": "Save Outlook PDFs, extract fields, approve, store in SharePoint, then generate a Word document.",
+ "steps": [
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "Save PDF attachments to OneDrive",
+   "actions": [
+    "Outlook PDF attachments",
+    "OneDrive"
+   ],
+   "evidence": "saves Outlook PDF attachments to OneDrive"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Extract invoice data with AI Builder",
+   "actions": [
+    "Run a prompt",
+    "AI Builder prompt",
+    "JSON"
+   ],
+   "evidence": "uses an AI Builder prompt to extract invoice fields and line items"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Request approval for the invoice",
+   "actions": [
+    "requests approval"
+   ],
+   "evidence": "requests approval"
+  },
+  {
+   "product": "sharepoint",
+   "icon": "file",
+   "productLabel": "SharePoint",
+   "title": "Store header and item data",
+   "actions": [
+    "SharePoint",
+    "header data",
+    "item data"
+   ],
+   "evidence": "stores header and item data in SharePoint"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "doc",
+   "productLabel": "Power Automate",
+   "title": "Populate Word and email confirmation",
+   "actions": [
+    "Word template",
+    "emails confirmation"
+   ],
+   "evidence": "then populates a Word template and emails confirmation."
+  }
+ ],
+ "punchline": [
+  "Approved invoices become",
+  "Word files by email"
+ ]
+}

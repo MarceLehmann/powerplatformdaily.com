@@ -38,6 +38,12 @@ faq:
 - question: How does Populate a Microsoft Word template add invoice line items?
   answer: The second flow gets SharePoint item records by document number and passes
     Select output into the Word template's repeating myTable field.
+animation:
+  src: /assets/img/animations/da6b9fec2b239a6168693a0a-en.gif
+  poster: /assets/img/animations/da6b9fec2b239a6168693a0a-en.poster.png
+  width: 800
+  height: 450
+  alt: "Sequence shows Outlook PDF attachments saved to OneDrive, invoice data extracted with AI Builder, approval requested, data stored in SharePoint, and a Word document generated with email confirmation."
 ---
 
 ## TL;DR

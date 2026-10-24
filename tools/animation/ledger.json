@@ -308,5 +308,40 @@
       "update the record after a decision",
       "and notify the employee."
     ]
+  },
+  "da6b9fec2b239a6168693a0a": {
+    "gif": true,
+    "reason": "The post describes a concrete five-stage automation pipeline from attachment intake to document generation and email confirmation.",
+    "at": "2026-10-24",
+    "evidence": [
+      "saves Outlook PDF attachments to OneDrive",
+      "uses an AI Builder prompt to extract invoice fields and line items",
+      "requests approval",
+      "stores header and item data in SharePoint",
+      "then populates a Word template and emails confirmation."
+    ]
+  },
+  "57e0370f54cf7a06759231dc": {
+    "gif": true,
+    "reason": "The post gives a clear 5 stage build and extension sequence: create, add knowledge, select and test, publish, then add and approve Outlook email.",
+    "at": "2026-10-24",
+    "evidence": [
+      "Create a new agent in the new experience, then provide its name, image and instructions.",
+      "The agent can use public websites, files, SharePoint, Dataverse and Azure AI Search.",
+      "Add knowledge, select a model and test the agent.",
+      "The agent can be published and extended with the Office 365 Outlook Send an email (V2) tool",
+      "Add the Office 365 Outlook Send an email (V2) tool and authenticate its connector if needed."
+    ]
+  },
+  "3f5be9ed0558a8ba17fc5fa3": {
+    "gif": true,
+    "reason": "The post describes a concrete four stage workflow from retrieving emails to extracting data, exporting to Excel, and emailing the report.",
+    "at": "2026-10-24",
+    "evidence": [
+      "Use the Outlook retrieval step and set the Account field to the email account connected to Grab.",
+      "The flow extracts the price, date and time, and shop name.",
+      "It stores these values in lists before organizing them into a data table.",
+      "The flow exports the organized data to an Excel file and sends the report by email."
+    ]
   }
 }

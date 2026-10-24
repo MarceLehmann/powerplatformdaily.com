@@ -1,0 +1,67 @@
+{
+ "title": "Build a retrieval agent",
+ "subtitle": "Create, test, publish and add Outlook email in Copilot Studio.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Create the new agent",
+   "actions": [
+    "new experience",
+    "name",
+    "instructions"
+   ],
+   "evidence": "Create a new agent in the new experience, then provide its name, image and instructions."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "doc",
+   "productLabel": "Copilot Studio",
+   "title": "Add knowledge sources",
+   "actions": [
+    "Add knowledge",
+    "public websites",
+    "SharePoint"
+   ],
+   "evidence": "The agent can use public websites, files, SharePoint, Dataverse and Azure AI Search."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Select a model and test",
+   "actions": [
+    "select a model",
+    "Preview",
+    "test the agent"
+   ],
+   "evidence": "Add knowledge, select a model and test the agent."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Publish the agent",
+   "actions": [
+    "publish"
+   ],
+   "evidence": "The agent can be published and extended with the Office 365 Outlook Send an email (V2) tool"
+  },
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "Add Outlook email action",
+   "actions": [
+    "Send an email (V2)",
+    "authenticate connector",
+    "allow permission"
+   ],
+   "evidence": "Add the Office 365 Outlook Send an email (V2) tool and authenticate its connector if needed."
+  }
+ ],
+ "punchline": [
+  "Agent emails its answer"
+ ]
+}

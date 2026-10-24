@@ -1,0 +1,50 @@
+{
+ "title": "Grab Belege zu Excel Bericht mailen",
+ "subtitle": "Grab E-Belege abrufen, Daten extrahieren, nach Excel exportieren und den Bericht senden.",
+ "steps": [
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "Grab E-Belege abrufen",
+   "actions": [
+    "Outlook-Abrufschritt",
+    "Feld Account"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "filter",
+   "productLabel": "Power Automate Desktop",
+   "title": "Belegdaten extrahieren",
+   "actions": [
+    "Preis extrahieren",
+    "Datum und Uhrzeit",
+    "Shopname"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "table",
+   "productLabel": "Power Automate Desktop",
+   "title": "Ergebnisse in Datentabelle ordnen",
+   "actions": [
+    "Werte speichern",
+    "Datentabelle"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "mail",
+   "productLabel": "Microsoft Excel",
+   "title": "Exportieren und Bericht senden",
+   "actions": [
+    "nach Excel exportieren",
+    "Bericht per E-Mail senden"
+   ]
+  }
+ ],
+ "punchline": [
+  "Excel-Bericht gesendet"
+ ]
+}

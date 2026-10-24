@@ -1,0 +1,61 @@
+{
+ "title": "Rechnungen automatisieren",
+ "subtitle": "Outlook-PDFs speichern, Felder extrahieren, freigeben, in SharePoint speichern und Word erzeugen.",
+ "steps": [
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "PDF-Anhaenge in OneDrive speichern",
+   "actions": [
+    "Outlook-PDF-Anhaenge",
+    "OneDrive"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Rechnungsdaten mit AI Builder extrahieren",
+   "actions": [
+    "Run a prompt",
+    "AI Builder-Prompt",
+    "JSON"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Freigabe fuer die Rechnung anfordern",
+   "actions": [
+    "Freigabe anfordern"
+   ]
+  },
+  {
+   "product": "sharepoint",
+   "icon": "file",
+   "productLabel": "SharePoint",
+   "title": "Kopf- und Positionsdaten speichern",
+   "actions": [
+    "SharePoint",
+    "Kopfdaten",
+    "Positionsdaten"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "doc",
+   "productLabel": "Power Automate",
+   "title": "Word fuellen und Bestaetigung mailen",
+   "actions": [
+    "Word-Vorlage",
+    "Bestaetigung per E-Mail"
+   ]
+  }
+ ],
+ "punchline": [
+  "Freigegebene Rechnungen",
+  "werden zu Word-Dateien"
+ ]
+}
