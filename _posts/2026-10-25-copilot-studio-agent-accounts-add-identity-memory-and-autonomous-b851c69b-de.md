@@ -42,6 +42,12 @@ faq:
   answer: Ja. Geteilte Dateien oder Chats können in Antworten für Nutzer zusammengefasst
     werden, die keinen Zugriff besitzen, geschützte Dokumente kann der Agent jedoch
     nicht lesen.
+animation:
+  src: /assets/img/animations/b851c69b871c47c796ba51a0-de.gif
+  poster: /assets/img/animations/b851c69b871c47c796ba51a0-de.poster.png
+  width: 800
+  height: 450
+  alt: "Eine Abfolge mit fuenf Schritten zeigt die Tenant-Registrierung fuer Frontier, das Aktivieren der Frontier-Vorlage, eine Umgebung mit fruehem Release, das Aktivieren von Agent-Konten und passende Lizenzen."
 ---
 
 ## TL;DR

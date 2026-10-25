@@ -1,0 +1,61 @@
+{
+ "title": "Enable Agent accounts in Preview",
+ "subtitle": "Set up the preview in the stated order before publishing.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Admin",
+   "title": "Enroll the tenant in Frontier",
+   "actions": [
+    "Enroll tenant",
+    "Frontier"
+   ],
+   "evidence": "Enroll the tenant in Frontier"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Activate the Frontier template",
+   "actions": [
+    "Activate template",
+    "Copilot Studio Frontier"
+   ],
+   "evidence": "activate the Copilot Studio Frontier template"
+  },
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Admin",
+   "title": "Use an early release environment",
+   "actions": [
+    "Early-release environment"
+   ],
+   "evidence": "use an early-release environment"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "key",
+   "productLabel": "Copilot Studio",
+   "title": "Enable Agent accounts",
+   "actions": [
+    "Enable Agent accounts"
+   ],
+   "evidence": "enable Agent accounts"
+  },
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "Licensing",
+   "title": "Provide eligible licenses",
+   "actions": [
+    "Eligible licenses"
+   ],
+   "evidence": "and provide eligible licenses"
+  }
+ ],
+ "punchline": [
+  "Ready to publish"
+ ]
+}

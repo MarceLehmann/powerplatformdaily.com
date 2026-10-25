@@ -1,0 +1,56 @@
+{
+ "title": "Agent-Konten in Preview aktivieren",
+ "subtitle": "Richten Sie die Preview in dieser Reihenfolge vor dem Veroeffentlichen ein.",
+ "steps": [
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Admin",
+   "title": "Tenant fuer Frontier registrieren",
+   "actions": [
+    "Tenant registrieren",
+    "Frontier"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Frontier-Vorlage aktivieren",
+   "actions": [
+    "Vorlage aktivieren",
+    "Copilot Studio Frontier"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "gear",
+   "productLabel": "Admin",
+   "title": "Umgebung mit fruehem Release nutzen",
+   "actions": [
+    "Umgebung mit fruehem Release"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "key",
+   "productLabel": "Copilot Studio",
+   "title": "Agent-Konten aktivieren",
+   "actions": [
+    "Agent-Konten aktivieren"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "Lizenzierung",
+   "title": "Passende Lizenzen bereitstellen",
+   "actions": [
+    "Passende Lizenzen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Bereit zum Veroeffentlichen"
+ ]
+}

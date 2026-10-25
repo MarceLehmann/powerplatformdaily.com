@@ -343,5 +343,32 @@
       "It stores these values in lists before organizing them into a data table.",
       "The flow exports the organized data to an Excel file and sends the report by email."
     ]
+  },
+  "d06997235ead988335d2ee84": {
+    "gif": false,
+    "reason": "This is a release roundup listing features and dates, not a concrete 3 to 5 stage procedure stated in the text.",
+    "at": "2026-10-25"
+  },
+  "64378f539bdf8895208b0066": {
+    "gif": false,
+    "reason": "This post is a feature update summary without a single concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-25"
+  },
+  "01bbd40fa4dbd508bef2275c": {
+    "gif": false,
+    "reason": "This post is a limitation and capability summary with guidance, not a concrete 3 to 5 stage procedure named in the text.",
+    "at": "2026-10-25"
+  },
+  "b851c69b871c47c796ba51a0": {
+    "gif": true,
+    "reason": "The FAQ states a concrete 5 stage enablement sequence for Agent accounts in Copilot Studio Preview.",
+    "at": "2026-10-25",
+    "evidence": [
+      "Enroll the tenant in Frontier",
+      "activate the Copilot Studio Frontier template",
+      "use an early-release environment",
+      "enable Agent accounts",
+      "and provide eligible licenses"
+    ]
   }
 }
