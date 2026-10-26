@@ -9,13 +9,6 @@ name: IndexNow Ping
 # fuer Google bleiben sitemap.xml und interne Verlinkung die massgeblichen Signale.
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
   schedule:
     - cron: '0 3 * * *' # daily at 03:00 UTC, catches auto-published curation posts
   workflow_dispatch: {}
