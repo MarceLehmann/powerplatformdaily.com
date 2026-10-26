@@ -370,5 +370,32 @@
       "enable Agent accounts",
       "and provide eligible licenses"
     ]
+  },
+  "4b3afb80e170777ce98e0a8e": {
+    "gif": false,
+    "reason": "The post is a comparison of four agent creation options, not a concrete 3 to 5 stage procedure or ordered flow.",
+    "at": "2026-10-26"
+  },
+  "24c27c756940b7b47754c0fd": {
+    "gif": true,
+    "reason": "The post gives a clear 4 stage setup sequence: prepare endpoint and agent ID, choose Microsoft Foundry as external agent type, add the trailing slash, then save and test.",
+    "at": "2026-10-26",
+    "evidence": [
+      "using the Foundry project endpoint, a trailing slash, and the target agent ID, then testing the connection.",
+      "add Microsoft Foundry as the external agent type, and test invocation in Copilot Studio.",
+      "The endpoint needs a trailing slash after it is pasted into the connection dialog.",
+      "before the external agent can be saved and tested."
+    ]
+  },
+  "f2102985f501e2dfd61fe8a1": {
+    "gif": true,
+    "reason": "The post states a clear 4 stage setup path: activate credits, make the subscription available, select it in the billing plan, then wait and confirm it is enabled.",
+    "at": "2026-10-26",
+    "evidence": [
+      "Activate the Visual Studio Azure benefit",
+      "make its subscription available in the environment tenant",
+      "select it when creating a billing plan",
+      "The billing plan enters provisioning, then should show as enabled for the environment when setup completes."
+    ]
   }
 }

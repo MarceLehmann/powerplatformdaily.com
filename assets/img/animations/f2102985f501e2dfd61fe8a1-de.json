@@ -1,0 +1,49 @@
+{
+ "title": "Copilot Studio Abrechnung einrichten",
+ "subtitle": "Visual Studio Azure-Guthaben in einem Pay-as-you-go-Abrechnungsplan nutzen.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "Visual Studio Azure",
+   "title": "Azure-Vorteil aktivieren",
+   "actions": [
+    "Vorteil aktivieren"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Microsoft Entra",
+   "title": "Abonnement verfuegbar machen",
+   "actions": [
+    "Umgebungsmandant",
+    "Azure-Abonnement"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Im Abrechnungsplan auswaehlen",
+   "actions": [
+    "Abonnement auswaehlen",
+    "Abrechnungsplan erstellen"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "bell",
+   "productLabel": "Copilot Studio",
+   "title": "Warten und aktiviert pruefen",
+   "actions": [
+    "Bereitstellung",
+    "Aktiviert"
+   ]
+  }
+ ],
+ "punchline": [
+  "Plan aktiviert",
+  "fuer die Umgebung"
+ ]
+}

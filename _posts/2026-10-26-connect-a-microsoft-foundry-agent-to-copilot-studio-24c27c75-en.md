@@ -36,6 +36,12 @@ faq:
 - question: Which Microsoft Foundry agent detail must be entered in Copilot Studio?
   answer: Copilot Studio requires the target agent ID from Microsoft Foundry, along
     with the project endpoint, before the external agent can be saved and tested.
+animation:
+  src: /assets/img/animations/24c27c756940b7b47754c0fd-en.gif
+  poster: /assets/img/animations/24c27c756940b7b47754c0fd-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step flow shows connecting an existing Microsoft Foundry agent in Copilot Studio by preparing the project endpoint and agent ID, selecting Microsoft Foundry, adding the trailing slash, and testing the connection."
 ---
 
 ## TL;DR

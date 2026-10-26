@@ -1,0 +1,53 @@
+{
+ "title": "Set up Copilot Studio billing",
+ "subtitle": "Use Visual Studio Azure credits in a pay as you go billing plan.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "Visual Studio Azure",
+   "title": "Activate the Azure benefit",
+   "actions": [
+    "Activate benefit"
+   ],
+   "evidence": "Activate the Visual Studio Azure benefit"
+  },
+  {
+   "product": "admin",
+   "icon": "shield",
+   "productLabel": "Microsoft Entra",
+   "title": "Make subscription available",
+   "actions": [
+    "Environment tenant",
+    "Azure subscription"
+   ],
+   "evidence": "make its subscription available in the environment tenant"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Select it in billing plan",
+   "actions": [
+    "Select subscription",
+    "Create billing plan"
+   ],
+   "evidence": "select it when creating a billing plan"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "bell",
+   "productLabel": "Copilot Studio",
+   "title": "Wait and confirm enabled",
+   "actions": [
+    "Provisioning",
+    "Enabled"
+   ],
+   "evidence": "The billing plan enters provisioning, then should show as enabled for the environment when setup completes."
+  }
+ ],
+ "punchline": [
+  "Plan enabled",
+  "for the environment"
+ ]
+}

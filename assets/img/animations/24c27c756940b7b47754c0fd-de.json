@@ -1,0 +1,49 @@
+{
+ "title": "Foundry Agent in Copilot Studio verbinden",
+ "subtitle": "Projektendpunkt verwenden, Schraegstrich anhaengen, Agent-ID eingeben und dann die Verbindung testen.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Endpunkt und Agent-ID vorbereiten",
+   "actions": [
+    "Projektendpunkt",
+    "Agent-ID"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "gear",
+   "productLabel": "Copilot Studio",
+   "title": "Microsoft Foundry Typ waehlen",
+   "actions": [
+    "Microsoft Foundry",
+    "externer Agententyp"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Abschliessenden Schraegstrich anhaengen",
+   "actions": [
+    "Schraegstrich",
+    "Verbindungsdialog"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Verbindung speichern und testen",
+   "actions": [
+    "speichern",
+    "Aufruf testen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Externer Agent verbunden"
+ ]
+}

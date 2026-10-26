@@ -1,0 +1,53 @@
+{
+ "title": "Connect Foundry agent in Copilot Studio",
+ "subtitle": "Use the project endpoint, add the trailing slash, enter the agent ID, then test the connection.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Prepare endpoint and agent ID",
+   "actions": [
+    "project endpoint",
+    "agent ID"
+   ],
+   "evidence": "using the Foundry project endpoint, a trailing slash, and the target agent ID, then testing the connection."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "gear",
+   "productLabel": "Copilot Studio",
+   "title": "Choose Microsoft Foundry type",
+   "actions": [
+    "Microsoft Foundry",
+    "external agent type"
+   ],
+   "evidence": "add Microsoft Foundry as the external agent type, and test invocation in Copilot Studio."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Add the trailing slash",
+   "actions": [
+    "trailing slash",
+    "connection dialog"
+   ],
+   "evidence": "The endpoint needs a trailing slash after it is pasted into the connection dialog."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Save and test the connection",
+   "actions": [
+    "save",
+    "test invocation"
+   ],
+   "evidence": "before the external agent can be saved and tested."
+  }
+ ],
+ "punchline": [
+  "External agent connected"
+ ]
+}
