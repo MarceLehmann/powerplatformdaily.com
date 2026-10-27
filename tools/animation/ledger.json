@@ -397,5 +397,20 @@
       "select it when creating a billing plan",
       "The billing plan enters provisioning, then should show as enabled for the environment when setup completes."
     ]
+  },
+  "3a8b499af3ca30c7e466aa7e": {
+    "gif": false,
+    "reason": "The post gives troubleshooting tips, but it does not state a clear 3 to 5 stage sequence to depict without guessing.",
+    "at": "2026-10-27"
+  },
+  "d0b1a70c2c7747772695c469": {
+    "gif": false,
+    "reason": "This post is a release summary listing features and guidance, not a concrete 3 to 5 stage procedure stated in the text.",
+    "at": "2026-10-27"
+  },
+  "29244281317a799351f3174d": {
+    "gif": false,
+    "reason": "This post is a feature announcement describing capabilities, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-10-27"
   }
 }
