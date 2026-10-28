@@ -15,6 +15,9 @@ module CurationPublisher
   YOUTUBE_ID = /\A[A-Za-z0-9_-]{11}\z/
   FAQ_COUNT = 3
   FAQ_FORBIDDEN = /[<>{}`*_\[\]#]/
+  # Sources whose newest date (published or updated) is this many days old or older are not
+  # published. Enforced here, not only in the extraction prompt.
+  MAX_SOURCE_AGE_DAYS = 60
 
   def self.text(value, maximum, optional: false)
     raise ArgumentError, 'Expected plain text' unless value.is_a?(String)
@@ -78,6 +81,15 @@ module CurationPublisher
     raise ArgumentError, 'Invalid URL'
   end
 
+  # The same URL without tracking parameters (utm_*, fbclid, gclid, msclkid). Used for the link
+  # shown to readers; key() applies the same filter for deduplication.
+  def self.clean_url(value)
+    parsed = URI.parse(url(value))
+    query = URI.decode_www_form(parsed.query.to_s).reject { |name, _| name.match?(TRACKING) }
+    parsed.query = query.empty? ? nil : URI.encode_www_form(query)
+    parsed.to_s
+  end
+
   def self.key(value)
     parsed = URI.parse(url(value))
     parsed.host = parsed.host.delete_prefix('www.')
@@ -87,12 +99,28 @@ module CurationPublisher
     parsed.to_s
   end
 
-  def self.source_date(value)
+  def self.source_date(value, today: Date.today)
     return nil if value.nil? || value == ''
     raise ArgumentError, 'Date must be YYYY-MM-DD' unless value.is_a?(String) && value.match?(/\A\d{4}-\d{2}-\d{2}\z/)
     parsed = Date.iso8601(value)
-    raise ArgumentError, 'Future source date' if parsed > Date.today + 1
+    raise ArgumentError, 'Future source date' if parsed > today + 1
     parsed.iso8601
+  rescue Date::Error
+    raise ArgumentError, 'Date must be YYYY-MM-DD'
+  end
+
+  # Consistency and age rules for the two source dates. "Updated" before "published" is
+  # implausible, so the article is skipped instead of shown with contradictory dates. A source
+  # whose newest date is MAX_SOURCE_AGE_DAYS or more days old is not published. Without any
+  # source date the age cannot be judged and the article passes.
+  def self.check_source_dates(published, updated, today)
+    if published && updated && Date.iso8601(updated) < Date.iso8601(published)
+      raise ArgumentError, "Source updated date #{updated} is before published date #{published}"
+    end
+    newest = [published, updated].compact.map { |value| Date.iso8601(value) }.max
+    return unless newest
+    age = (today - newest).to_i
+    raise ArgumentError, "Source is #{age} days old (limit #{MAX_SOURCE_AGE_DAYS}), not published" if age >= MAX_SOURCE_AGE_DAYS
   end
 
   def self.slug(title)
@@ -141,8 +169,9 @@ module CurationPublisher
 
   def self.render(article, credit_data, now, known_questions = {})
     raise ArgumentError, 'Article is not publishable' unless article['publishable'] == true
-    source_url = url(article['source_url'])
+    source_url = clean_url(article['source_url'])
     parsed = URI.parse(source_url)
+    %w[en de].each { |locale| raise ArgumentError, "Missing required field: #{locale}" unless article[locale].is_a?(Hash) }
     tags = article['tags']
     unless tags.is_a?(Array) && tags.length.between?(1, 5) && tags.uniq == tags && (tags - TAGS).empty?
       raise ArgumentError, 'Invalid tags'
@@ -156,10 +185,12 @@ module CurationPublisher
     }
     author = text(article.fetch('source_author', ''), 150, optional: true)
     source['source_author'] = author unless author.empty?
+    today = now.utc.to_date
     %w[source_published_at source_updated_at].each do |field|
-      value = source_date(article[field])
+      value = source_date(article[field], today: today)
       source[field] = value if value
     end
+    check_source_dates(source['source_published_at'], source['source_updated_at'], today)
     source_type = text(article.fetch('source_type', 'article'), 20, optional: true)
     source_type = 'article' if source_type.empty?
     raise ArgumentError, 'Invalid source type' unless SOURCE_TYPES.include?(source_type)
@@ -202,7 +233,9 @@ module CurationPublisher
       frontmatter['publisher_disclosure'] = locale == 'de' ? 'Beide Publikationen werden von Marcel Lehmann herausgegeben.' : 'Both publications are edited by Marcel Lehmann.' if parsed.host.delete_prefix('www.') == 'powerplatformtip.com'
       heading = locale == 'de' ? 'Warum das wichtig ist' : 'Why it matters'
       video_embed = source_type == 'youtube' ? "\n{% include source-video-embed.html %}\n" : ''
-      content = "#{YAML.dump(frontmatter)}---\n\n## TL;DR\n\n#{body_text(summary)}\n\n{% include curated-attribution.html %}\n#{video_embed}\n## #{heading}\n\n#{body_text(takeaway)}\n"
+      # The source line (original title, date, outdated notice) comes from the post layout above
+      # the content, so it sits before the TL;DR. No include in the body any more.
+      content = "#{YAML.dump(frontmatter)}---\n\n## TL;DR\n\n#{body_text(summary)}\n#{video_embed}\n## #{heading}\n\n#{body_text(takeaway)}\n"
       ["#{now.utc.strftime('%Y-%m-%d')}-#{url_slug}-#{locale}.md", content]
     end
     { 'files' => files, 'card' => card_data, 'faq_keys' => faq_keys }
@@ -234,6 +267,9 @@ module CurationPublisher
         result = render(article, payload.fetch('credit', {}), now, known_questions)
       rescue ArgumentError => e
         warn "Skipped one article in the batch, rest continue: #{e.message} (#{article['source_url'].inspect})"
+        next
+      rescue KeyError => e
+        warn "Skipped one article in the batch, rest continue: missing required field #{e.key.inspect} (#{article['source_url'].inspect})"
         next
       end
       identity = key(article['source_url'])

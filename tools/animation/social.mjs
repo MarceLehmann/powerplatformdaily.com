@@ -28,6 +28,8 @@ export function buildInput(entry, siteBase, channelId, mode) {
     schedulingType: "automatic",
     mode: "addToQueue",
   };
+  // Der Link steht im ersten Kommentar, nicht im Beitragstext (Marcel 28.10.2026).
+  if (entry.firstComment) input.metadata = { linkedin: { firstComment: entry.firstComment } };
   if (mode !== "queue") input.saveToDraft = true;
   return input;
 }

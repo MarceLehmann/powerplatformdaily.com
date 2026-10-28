@@ -114,10 +114,15 @@ export function isoWeek(date) {
   return `${d.getUTCFullYear()}-W${String(Math.ceil(((d - yearStart) / 86400000 + 1) / 7)).padStart(2, "0")}`;
 }
 
-/** LinkedIn-Text: Beschreibung des Beitrags, Link, Hashtag. Keine Gedankenstriche. */
-export function linkedinText(meta, siteBase, hashtag) {
+/** LinkedIn-Text: nur die Beschreibung, ohne Link und ohne Hashtags. Keine Gedankenstriche. */
+export function linkedinText(meta) {
   const clean = (t) => String(t).replace(/[–—]/g, ",").replace(/\s+/g, " ").trim();
-  return `${clean(meta.description)}\n\nRead the summary \u{1F447}\n${siteBase}${meta.permalink}\n\n${hashtag}`;
+  return clean(meta.description);
+}
+
+/** Erster Kommentar: der Link zur Zusammenfassung (Buffer: metadata.linkedin.firstComment). */
+export function linkedinFirstComment(meta, siteBase) {
+  return `Read the summary \u{1F447}\n${siteBase}${meta.permalink}`;
 }
 
 /** Traegt den animation-Block ein; ist schon einer da (Re-Render), wird er ersetzt (Breite/Hoehe/Alt koennen sich aendern). */
@@ -242,7 +247,7 @@ export async function main(argv) {
       }
       if (c.social) {
         const siteBase = `https://${endUrl}`;
-        social[c.key] = { week, status: "pending", title: c.title, mp4: `/assets/img/animations/${c.key}-4x5.mp4`, text: linkedinText(c.meta, siteBase, opt.hashtag || "#PowerPlatformGovernanceDaily"), aiAssisted: true, createdAt: new Date().toISOString().slice(0, 10) };
+        social[c.key] = { week, status: "pending", title: c.title, mp4: `/assets/img/animations/${c.key}-4x5.mp4`, text: linkedinText(c.meta), firstComment: linkedinFirstComment(c.meta, siteBase), aiAssisted: true, createdAt: new Date().toISOString().slice(0, 10) };
       }
       if (!c.rerender) ledger[c.key] = { gif: true, reason: c.decision.reason, at: new Date().toISOString().slice(0, 10), evidence };
     }

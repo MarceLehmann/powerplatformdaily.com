@@ -1,11 +1,33 @@
+{%- comment -%}
+  Source line of a curated summary: original title, original date, link, outdated notice.
+  Rendered by _layouts/post.html above the content (include placement="top"), so it stands before
+  the TL;DR for every curated post, old and new. Older posts still carry a bare include in the
+  Markdown body; without the placement argument it renders nothing, so nothing appears twice.
+{%- endcomment -%}
+{%- if include.placement == 'top' -%}
+{%- assign original_date = page.source_published_at | default: page.source_updated_at -%}
+{%- assign newest_date = page.source_published_at | default: page.source_updated_at -%}
+{%- if page.source_updated_at and page.source_updated_at > newest_date -%}{%- assign newest_date = page.source_updated_at -%}{%- endif -%}
+{%- assign source_outdated = false -%}
+{%- if newest_date and site.time -%}
+  {%- assign now_seconds = site.time | date: '%s' | plus: 0 -%}
+  {%- assign source_seconds = newest_date | date: '%s' | plus: 0 -%}
+  {%- assign age_days = now_seconds | minus: source_seconds | divided_by: 86400 -%}
+  {%- if age_days >= 60 -%}{%- assign source_outdated = true -%}{%- endif -%}
+{%- endif -%}
 <div class="curated-attribution" data-curated-entry>
   <p>
-    <strong>{% if page.lang == 'de' %}Original{% if page.source_author %} von {% if page.source_author_url %}<a href="{{ page.source_author_url | escape }}">{{ page.source_author | escape }}</a>{% else %}{{ page.source_author | escape }}{% endif %},{% endif %} auf{% else %}Original{% if page.source_author %} by {% if page.source_author_url %}<a href="{{ page.source_author_url | escape }}">{{ page.source_author | escape }}</a>{% else %}{{ page.source_author | escape }}{% endif %},{% endif %} on{% endif %} <a href="{{ page.source_site_url | escape }}">{{ page.source_name | escape }}</a>.</strong>
+    <strong>{% if page.lang == 'de' %}Originalartikel{% if original_date %} vom {{ original_date | date: '%d.%m.%Y' }}{% endif %}{% else %}Original article{% if original_date %} from {{ original_date | date: '%d.%m.%Y' }}{% endif %}{% endif %}:</strong>
+    <span class="original-title">{{ page.source_title | escape }}</span>{% if page.lang == 'de' %}{% if page.source_author %}, von {% if page.source_author_url %}<a href="{{ page.source_author_url | escape }}">{{ page.source_author | escape }}</a>{% else %}{{ page.source_author | escape }}{% endif %}{% endif %}, auf{% else %}{% if page.source_author %}, by {% if page.source_author_url %}<a href="{{ page.source_author_url | escape }}">{{ page.source_author | escape }}</a>{% else %}{{ page.source_author | escape }}{% endif %}{% endif %}, on{% endif %} <a href="{{ page.source_site_url | escape }}">{{ page.source_name | escape }}</a>.
     <a class="original-link" href="{{ page.source_url | escape }}">{% if page.lang == 'de' %}Artikel lesen{% else %}Read the original{% endif %} <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
     {% if page.submitted_by.publish_credit == true %}
       {% assign contributor_fallback = 'a community contributor' %}{% if page.lang == 'de' %}{% assign contributor_fallback = 'einem Community-Mitglied' %}{% endif %}
       &middot; {% if page.lang == 'de' %}vorgeschlagen von{% else %}suggested by{% endif %} {% if page.submitted_by.linkedin %}<a class="contributor-credit" href="{{ page.submitted_by.linkedin | escape }}" rel="ugc noopener">{{ page.submitted_by.name | default: contributor_fallback | escape }}</a>{% else %}{{ page.submitted_by.name | default: contributor_fallback | escape }}{% endif %}
     {% endif %}
   </p>
+  {% if source_outdated %}
+  <p class="source-outdated"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> <strong>{% if page.lang == 'de' %}Stand der Quelle kann überholt sein.{% else %}Source may be outdated.{% endif %}</strong> {% if page.lang == 'de' %}Der Originalartikel ist älter als 60 Tage. Termine und Verfügbarkeit gelten für den Stand der Quelle.{% else %}The original article is more than 60 days old. Dates and availability refer to the state of the source.{% endif %}</p>
+  {% endif %}
   <p class="text-muted small">{% if page.lang == 'de' %}Dies ist unsere eigene Kurzfassung, keine Wiederveröffentlichung oder vollständige Übersetzung.{% else %}This is our own summary, not a republication or full translation.{% endif %}{% if page.source_license_url %} {% if page.lang == 'de' %}Der Originalartikel steht unter{% else %}The original article is licensed under{% endif %} <a href="{{ page.source_license_url | escape }}">{{ page.source_license_name | escape }}</a>.{% endif %}{% if page.publisher_disclosure %} {{ page.publisher_disclosure | escape }}{% endif %}</p>
 </div>
+{%- endif -%}

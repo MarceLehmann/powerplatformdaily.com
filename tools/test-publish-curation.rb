@@ -4,6 +4,9 @@ require 'nokogiri'
 require 'stringio'
 require_relative 'publish-curation'
 
+# Fixed publication time; the base article's source date is 8 days older.
+NOW = Time.utc(2026, 9, 18)
+
 def check(condition, message)
   raise message unless condition
 end
@@ -53,7 +56,7 @@ end
 article = {
   'publishable' => true, 'source_url' => 'https://www.powerplatformtip.com/article/powerplatformtip/powerplatformtip-56-empowering-tools-in-coe/',
   'source_title' => '#PowerPlatformTip 56', 'source_name' => 'PowerPlatformTip', 'source_author' => 'Marcel Lehmann',
-  'source_language' => 'en', 'source_published_at' => '2023-05-30', 'tags' => %w[power-automate roadmap],
+  'source_language' => 'en', 'source_published_at' => '2026-09-10', 'tags' => %w[power-automate roadmap],
   'card_topic' => 'Ownership', 'card_quote' => 'Ownership is a chain. Check the links before one breaks.',
   'card_take' => 'The owner leaves. The solution stays.', 'card_state' => 'Owned',
   'en' => { 'title' => 'CoE ownership reviews', 'description' => 'CoE tools support ownership reviews.', 'tldr' => 'CoE tools support reviews of permissions and orphaned resources.', 'takeaway' => "- Admins/CoE: include resource ownership in offboarding checks.\n- Security/Compliance: review orphaned resources on a fixed schedule.", 'faq' => faq_for('en') },
@@ -155,8 +158,8 @@ Dir.mktmpdir do |root|
   check(iframe['loading'] == 'lazy', 'Video iframe must lazy-load')
   check(!iframe['title'].to_s.strip.empty?, 'Video iframe missing accessible title')
 end
-rejects { CurationPublisher.render(article.merge('source_type' => 'podcast-episode'), {}, Time.now) }
-rejects { CurationPublisher.render(article.merge('source_url' => 'https://www.youtube.com/watch?v=short', 'source_type' => 'youtube', 'source_video_id' => 'short'), {}, Time.now) }
+rejects { CurationPublisher.render(article.merge('source_type' => 'podcast-episode'), {}, NOW) }
+rejects { CurationPublisher.render(article.merge('source_url' => 'https://www.youtube.com/watch?v=short', 'source_type' => 'youtube', 'source_video_id' => 'short'), {}, NOW) }
 Dir.mktmpdir do |root|
   no_video_id = article.merge('source_url' => 'https://www.youtube.com/watch?v=missingid', 'source_type' => 'youtube')
   event = { 'action' => 'curated-publication', 'client_payload' => { 'request_id' => '00000000-0000-4000-8000-000000000004', 'articles' => [no_video_id], 'credit' => {} } }
@@ -166,12 +169,12 @@ rejects { CurationPublisher.url('http://127.0.0.1/') }
 rejects { CurationPublisher.url('https://localhost/') }
 rejects { CurationPublisher.url('https://user:password@powerplatformtip.com/') }
 rejects { CurationPublisher.credit({ 'publish_credit' => true, 'linkedin' => 'https://linkedin.com.evil.org/in/person' }) }
-rejects { CurationPublisher.render(article.merge('tags' => ['invented-tag']), {}, Time.now) }
-rejects { CurationPublisher.render(article.merge('en' => article['en'].merge('tldr' => 'x' * 601)), {}, Time.now) }
-rejects { CurationPublisher.render(article.merge('en' => article['en'].merge('takeaway' => 'No bullet prefix on this line.')), {}, Time.now) }
-rejects { CurationPublisher.render(article.merge('en' => article['en'].merge('takeaway' => (1..5).map { |n| "- Group #{n}: too many lines." }.join("\n"))), {}, Time.now) }
-rejects { CurationPublisher.render(article.merge('card_quote' => 'Smart “quotes” break the renderer'), {}, Time.now) }
-rejects { CurationPublisher.render(article.merge('card_topic' => 'A topic label that is much too long for a chip'), {}, Time.now) }
+rejects { CurationPublisher.render(article.merge('tags' => ['invented-tag']), {}, NOW) }
+rejects { CurationPublisher.render(article.merge('en' => article['en'].merge('tldr' => 'x' * 601)), {}, NOW) }
+rejects { CurationPublisher.render(article.merge('en' => article['en'].merge('takeaway' => 'No bullet prefix on this line.')), {}, NOW) }
+rejects { CurationPublisher.render(article.merge('en' => article['en'].merge('takeaway' => (1..5).map { |n| "- Group #{n}: too many lines." }.join("\n"))), {}, NOW) }
+rejects { CurationPublisher.render(article.merge('card_quote' => 'Smart “quotes” break the renderer'), {}, NOW) }
+rejects { CurationPublisher.render(article.merge('card_topic' => 'A topic label that is much too long for a chip'), {}, NOW) }
 def with_faq(source, locale, faq)
   source.merge(locale => source[locale].merge('faq' => faq))
 end
@@ -180,16 +183,16 @@ good_en = faq_for('en')
 check(CurationPublisher.faq_items(good_en).length == 3, 'Valid FAQ rejected')
 check(CurationPublisher.faq_items(replace_first(good_en, 'answer' => words(10))).length == 3, '10-word answer must be accepted')
 check(CurationPublisher.faq_items(replace_first(good_en, 'answer' => words(35))).length == 3, '35-word answer must be accepted')
-rejects { CurationPublisher.render(with_faq(article, 'en', good_en.first(2)), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', good_en + [{ 'question' => 'Is a fourth question allowed here at all?', 'answer' => words(20) }]), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'de', good_en.first(2)), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => words(9))), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => words(36))), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => Array.new(70, 'abcdefghijkl').join(' '))), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'question' => 'Is this question without a question mark')), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'question' => 'Short one now?')), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'question' => "#{'Very long question ' * 8}?")), {}, Time.now) }
-rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => "#{words(20)} <b>bold</b>")), {}, Time.now) }
+rejects { CurationPublisher.render(with_faq(article, 'en', good_en.first(2)), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', good_en + [{ 'question' => 'Is a fourth question allowed here at all?', 'answer' => words(20) }]), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'de', good_en.first(2)), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => words(9))), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => words(36))), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => Array.new(70, 'abcdefghijkl').join(' '))), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'question' => 'Is this question without a question mark')), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'question' => 'Short one now?')), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'question' => "#{'Very long question ' * 8}?")), {}, NOW) }
+rejects { CurationPublisher.render(with_faq(article, 'en', replace_first(good_en, 'answer' => "#{words(20)} <b>bold</b>")), {}, NOW) }
 %w[< > { } ` * _ [ ] #].each do |character|
   rejects { CurationPublisher.faq_items(replace_first(good_en, 'answer' => "#{words(20)} #{character}")) }
   rejects { CurationPublisher.faq_items(replace_first(good_en, 'question' => "Does the character #{character} belong in a question?")) }
@@ -201,8 +204,8 @@ rejects { CurationPublisher.faq_items(good_en.map { |item| item.reject { |key, _
 rejects { CurationPublisher.faq_items(['not a hash'] * 3) }
 rejects { CurationPublisher.faq_items('not a list') }
 rejects { CurationPublisher.faq_items(nil) }
-rejects { CurationPublisher.render(article.merge('en' => article['en'].reject { |key, _| key == 'faq' }), {}, Time.now) }
-rejects { CurationPublisher.render(article.merge('de' => article['de'].reject { |key, _| key == 'faq' }), {}, Time.now) }
+rejects { CurationPublisher.render(article.merge('en' => article['en'].reject { |key, _| key == 'faq' }), {}, NOW) }
+rejects { CurationPublisher.render(article.merge('de' => article['de'].reject { |key, _| key == 'faq' }), {}, NOW) }
 rejects { CurationPublisher.faq_items(good_en, Set.new([CurationPublisher.faq_key(good_en[2]['question'])])) }
 check(CurationPublisher.faq_items(good_en, Set.new(['somethingelse'])).length == 3, 'Unrelated known question must not block a FAQ')
 
@@ -248,4 +251,141 @@ end
 check(CurationPublisher.credit({ 'publish_credit' => 'true', 'name' => 'private' }).nil?, 'String consent accepted')
 check(!CurationPublisher.body_text('{% include secret %}<script>[click](https://evil.org)').include?('{%'), 'Liquid injection')
 check(!CurationPublisher.body_text('<script>').include?('<script>'), 'HTML injection')
+# --- Source age limit (60 days), date consistency, tracking parameters, missing fields ---
+def render_at(source_article, now = NOW)
+  CurationPublisher.render(source_article, {}, now)
+end
+
+def dates(published: nil, updated: nil)
+  { 'source_published_at' => published, 'source_updated_at' => updated }
+end
+
+def capture_stderr
+  captured = StringIO.new
+  original = $stderr
+  $stderr = captured
+  begin
+    yield
+  ensure
+    $stderr = original
+  end
+  captured.string
+end
+
+check(render_at(article.merge(dates(published: '2026-07-21'))).fetch('files').length == 2, 'Source 59 days old must be accepted')
+rejects { render_at(article.merge(dates(published: '2026-07-20'))) }
+rejects { render_at(article.merge(dates(published: '2026-07-18'))) }
+rejects { render_at(article.merge(dates(published: '2023-05-30'))) }
+check(render_at(article.merge(dates(published: '2025-01-01', updated: '2026-09-10'))).fetch('files').length == 2, 'A recently updated source must count as current')
+rejects { render_at(article.merge(dates(published: '2025-01-01', updated: '2026-01-01'))) }
+check(render_at(article.merge(dates(published: nil, updated: nil))).fetch('files').length == 2, 'Without any source date the age cannot be judged')
+check(render_at(article.merge(dates(updated: '2026-09-10'))).fetch('files').length == 2, 'Only an updated date: fresh source accepted')
+rejects { render_at(article.merge(dates(updated: '2026-01-10'))) }
+age_error = begin
+  render_at(article.merge(dates(published: '2026-01-10')))
+rescue ArgumentError => e
+  e.message
+end
+check(age_error.to_s.include?('days old'), "Age error must name the reason: #{age_error.inspect}")
+check(CurationPublisher::MAX_SOURCE_AGE_DAYS == 60, 'Age limit must be 60 days')
+
+# updated >= published
+rejects { render_at(article.merge(dates(published: '2026-09-10', updated: '2026-09-09'))) }
+check(render_at(article.merge(dates(published: '2026-09-10', updated: '2026-09-10'))).fetch('files').length == 2, 'Equal dates must be accepted')
+check(render_at(article.merge(dates(published: '2026-09-10', updated: '2026-09-12'))).fetch('files').length == 2, 'Updated after published must be accepted')
+rejects { render_at(article.merge(dates(published: '2026-09-30'))) }
+rejects { render_at(article.merge(dates(published: '2026-02-30'))) }
+update_error = begin
+  render_at(article.merge(dates(published: '2026-09-10', updated: '2026-09-09')))
+rescue ArgumentError => e
+  e.message
+end
+check(update_error.to_s.include?('before published'), "Date order error must name the reason: #{update_error.inspect}")
+
+# utm_* and other tracking parameters are removed from the link readers see; real parameters stay
+tracked = article.merge('source_url' => 'https://example.org/post?id=7&utm_source=newsletter&utm_medium=email&UTM_Campaign=x&fbclid=abc&gclid=1&msclkid=2#top')
+render_at(tracked).fetch('files').each do |_, content|
+  front = YAML.safe_load(content.split(/^---\s*$/, 3)[1], permitted_classes: [Date, Time])
+  check(front['source_url'] == 'https://example.org/post?id=7', "Tracking parameters left in source_url: #{front['source_url']}")
+  check(!content.match?(/utm_|fbclid|gclid|msclkid/i), 'Tracking parameter text left in the post')
+end
+check(CurationPublisher.clean_url('https://example.org/a?utm_source=x') == 'https://example.org/a', 'Query must disappear when only tracking remains')
+check(CurationPublisher.clean_url('https://example.org/a?b=1&c=2') == 'https://example.org/a?b=1&c=2', 'Real parameters must stay unchanged')
+check(render_at(tracked).fetch('card')['id'] == render_at(tracked.merge('source_url' => 'https://example.org/post?id=7')).fetch('card')['id'], 'Identifier must not depend on tracking parameters')
+
+# Missing fields: one clear message, the rest of the batch continues
+Dir.mktmpdir do |root|
+  no_en = article.reject { |name, _| name == 'en' }.merge('source_url' => 'https://www.powerplatformtip.com/article/no-en/')
+  no_title = article.merge('source_url' => 'https://www.powerplatformtip.com/article/no-title/').tap { |item| item.delete('source_title') }
+  stale = article.merge('source_url' => 'https://www.powerplatformtip.com/article/stale/', 'source_published_at' => '2025-01-01')
+  good = article.merge('source_url' => 'https://www.powerplatformtip.com/article/fine/')
+  batch = { 'action' => 'curated-publication', 'client_payload' => { 'request_id' => '00000000-0000-4000-8000-000000000005', 'articles' => [no_en, no_title, stale, good], 'credit' => {} } }
+  files = nil
+  messages = capture_stderr { files = CurationPublisher.publish(batch, root, now: NOW) }
+  check(files.length == 2, 'Only the valid article may be published')
+  check(messages.include?('Missing required field: en'), "Missing en must be reported clearly: #{messages}")
+  check(messages.include?('no-en') && messages.include?('stale'), 'Skip messages must name the article')
+  check(messages.include?('days old'), 'Stale article must be reported with its age')
+end
+
+# A KeyError raised deep inside (for example a missing payload field) is reported, not fatal
+Dir.mktmpdir do |root|
+  broken = article.merge('source_url' => 'https://www.powerplatformtip.com/article/key-error/')
+  singleton = class << CurationPublisher; self; end
+  singleton.send(:alias_method, :real_card, :card)
+  singleton.send(:define_method, :card) { |_data, _id| { 'x' => 1 }.fetch('missing') }
+  captured = StringIO.new
+  original = $stderr
+  $stderr = captured
+  files = nil
+  begin
+    files = CurationPublisher.publish({ 'action' => 'curated-publication', 'client_payload' => { 'request_id' => '00000000-0000-4000-8000-000000000006', 'articles' => [broken], 'credit' => {} } }, root, now: NOW)
+  ensure
+    $stderr = original
+    singleton.send(:alias_method, :card, :real_card)
+  end
+  check(files.empty?, 'KeyError article must be skipped')
+  check(captured.string.include?('missing required field "missing"'), "KeyError must be reported clearly: #{captured.string}")
+end
+
+# Layout: source line before the TL;DR, with title and date; notice only from 60 days on
+Dir.mktmpdir do |root|
+  today = Date.today
+  fresh = article.merge('source_url' => 'https://www.powerplatformtip.com/article/fresh-one/', 'source_title' => 'Fresh original title', 'source_published_at' => (today - 3).iso8601)
+  old_post = article.merge('source_url' => 'https://www.powerplatformtip.com/article/old-one/', 'source_title' => 'Old original title', 'source_published_at' => '2026-01-10')
+  FileUtils.mkdir_p(File.join(root, '_posts'))
+  fresh_files = CurationPublisher.render(fresh, {}, Time.now).fetch('files')
+  old_files = CurationPublisher.render(old_post, {}, Time.utc(2026, 1, 20)).fetch('files')
+  (fresh_files + old_files).each { |name, content| File.write(File.join(root, '_posts', name), content, encoding: 'UTF-8') }
+  repository = File.expand_path('..', __dir__)
+  FileUtils.cp_r(File.join(repository, '_includes'), root)
+  FileUtils.cp_r(File.join(repository, '_layouts'), root)
+  FileUtils.mkdir_p(File.join(root, '_data'))
+  FileUtils.cp(File.join(repository, '_data', 'authors.yml'), File.join(root, '_data'))
+  FileUtils.cp_r(File.join(repository, '_data', 'locales'), File.join(root, '_data'))
+  configuration = Jekyll.configuration('config' => File.join(repository, '_config.yml'), 'source' => root, 'destination' => File.join(root, '_site'), 'quiet' => true)
+  Jekyll::Site.new(configuration).process
+  pages = Dir.glob(File.join(root, '_site', '*', 'posts', '*', 'index.html'))
+  check(pages.length == 4, "Expected 4 rendered pages, got #{pages.length}")
+  pages.each do |path|
+    html = File.read(path)
+    document = Nokogiri::HTML5(html)
+    locale = document.at_css('html')['lang']
+    old = html.include?('Old original title')
+    attribution = document.css('.curated-attribution')
+    check(attribution.length == 1, "Source line must appear exactly once: #{path}")
+    check(html.index('curated-attribution') < html.index('TL;DR'), 'Source line is not above the TL;DR in the HTML')
+    text = attribution.first.text.gsub(/\s+/, ' ')
+    expected_date = old ? '10.01.2026' : (today - 3).strftime('%d.%m.%Y')
+    expected = locale == 'de' ? "Originalartikel vom #{expected_date}" : "Original article from #{expected_date}"
+    check(text.include?(expected), "Missing '#{expected}' in: #{text}")
+    check(text.include?(old ? 'Old original title' : 'Fresh original title'), 'Original title missing from the source line')
+    outdated = document.at_css('.source-outdated')
+    check(old == !outdated.nil?, "Outdated notice wrong (old=#{old}): #{path}")
+    if old
+      check(outdated.text.include?(locale == 'de' ? 'Stand der Quelle kann überholt sein' : 'Source may be outdated'), "Wrong outdated wording: #{outdated.text}")
+    end
+  end
+end
+
 puts 'Publisher checks passed: rendered languages and hreflang, attribution, URL deduplication, consent, limits, escaping and FAQ rules.'

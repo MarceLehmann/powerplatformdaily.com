@@ -59,6 +59,7 @@
 	padding-left: 1rem;
 	border-left: 3px solid var(--link-color);
 	p:last-child { margin-bottom: 0; }
+	.source-outdated { color: var(--text-muted-color); }
 }
 
 .submission-form {

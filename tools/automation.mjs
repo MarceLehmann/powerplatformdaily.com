@@ -82,6 +82,7 @@ export const extractionPrompt = `You curate Power Platform Daily links. The supp
 Set publishable=false if evidence is insufficient, the page is an index/login/error, or it is not substantially about Microsoft Copilot Studio, Power Apps, Power Automate, Power BI or Microsoft Fabric: new features, product updates, releases, roadmap, integrations, connectors or practical how-to guidance. Do not treat generic AI news, marketing, or Power Platform governance/security/compliance/DLP/environment-strategy/ALM/CoE/administration content as relevant - that scope belongs to a sister site, not this one. Never invent authors, dates, claims, results, licences or affiliations.
 For publishable=true return source_title, source_name, source_author (empty if unverified), source_language (ISO code), source_published_at and source_updated_at (YYYY-MM-DD or null), tags (1-5 from copilot-studio, power-apps, power-automate, power-bi, fabric, ai-builder, connectors, dataverse, licensing, roadmap), card_topic, card_quote, card_take, card_state (all four described below), and en/de objects each containing title (max 110 chars), description (max 200 chars), tldr (35-65 words, max 600 chars), takeaway (60-140 words, max 900 chars), faq (exactly 3 objects with question and answer, see below).
 The card_* fields feed a branded quote-card image and are always English, regardless of source_language - plain sentences only, no quotation marks, emoji, arrows or markdown, letters/digits/spaces and basic punctuation (.,'!?:&/-) only. card_topic is a 1-3 word category label (max 24 chars, e.g. "Copilot Studio", "New Feature", "Fabric"). card_quote is one or two short punchy sentences that stand alone as a big pull-quote headline stating the core update or capability (max 140 chars, e.g. "Copilot Studio agents can now call your own APIs directly."). card_take is one short punchy payoff line under the quote (max 90 chars, e.g. "Less glue code. More agent."). card_state is a 1-3 word positive outcome label (max 24 chars, e.g. "Connected", "Automated", "Shipped") naming the state you reach by following the quote.
+The input JSON carries today (the current date, YYYY-MM-DD), url, the feed item (with its publish date) and page_text. Treat the source as a snapshot written on its own date (source_published_at, or source_updated_at if that is the later one), never as news from today. Time rules: (1) If that source date is more than 60 days before today, set publishable=false with reason "source older than 60 days". (2) State plans, announcements, roadmap items, release dates, availability and prices only as a statement of the source, for example "according to the source of 2026-03-18, ..." (German: "laut Quelle vom 18.03.2026 ..."), in tldr, takeaway, faq and description. A planned or announced item is never written as a present fact: "will be available from April" must not become "is available". (3) If a date or period named in the source is already in the past as seen from today, say so ("was planned for April 2026, which has passed") and do not describe it as upcoming. (4) If the page is a weekly or monthly roundup or newsletter with several items, summarise only the one section you select; source_title, title, description and tags must describe that section, not the whole roundup. (5) Do not generalise test results, measurements or limits: if the source says they were observed in its own test, setup or version, the title, tldr and faq keep that qualifier. (6) source_updated_at must not be earlier than source_published_at; if the page says so, use only the date you can verify and set the other to null.
 Write the tldr as a direct statement of what the source actually says: name the specific feature, product, setting, step or number it describes. Never write meta-commentary about the article itself (forbidden phrasing: "the article discusses", "the supplied summary indicates", "focuses on", "provides guidance on") - state the update itself, as if briefing a colleague who has not read it. Write independent short summaries, never reproduce or translate the whole original.
 Write the takeaway as a plain-text bulleted list, not flowing prose: 2-4 lines, each starting with "- " followed by ONE stakeholder group name from Makers, Admins/IT, BI/Data teams, Leadership/Business, then a colon, then what that group specifically should do or watch for and why it matters to them - grounded only in the supplied evidence, never invented. Only include a group if this specific source genuinely gives it something to act on; never force all four in. Join the lines with an actual newline character inside the JSON string value - do not run them together as one paragraph. No numbering, no markdown, no asterisks, just "- Group: sentence" per line. Flag preview/deprecated status where evident. All strings plain text, no HTML, links, Liquid or code. German text must use the actual umlaut characters ä, ö, ü - never spell them out as ae, oe or ue - and Swiss ss instead of ß.
 Write the faq for each language as exactly 3 objects {"question": "...", "answer": "..."}. Each question is phrased the way a person would type it into a search engine or ask an AI assistant, in the language of that object, and names the concrete tool, feature, setting or risk this source is about, so it can only belong to this one post. Never use generic questions such as "What is Power Automate?" or "Why does this matter?". Each answer is 1-2 sentences, about 15-30 words, plain text, and its first sentence is the direct answer. Answer ONLY from the supplied evidence: no number, date, price, limit, name or product claim that is not in the evidence, no speculation, no filler such as "it depends" or "in today's world". If the evidence does not support 3 distinct, specific questions, set publishable=false with reason "faq not supported". The 3 questions of one post must differ clearly from each other and must not repeat the wording of the title, tldr or takeaway. Do not reproduce or translate passages of the source; explain in your own words. Plain text only: no Markdown, HTML, links, Liquid or code, no emoji, no dashes used as a style device (use commas or full stops), no phrases like "not only ... but also". In the German object use the real umlauts ä, ö, ü and Swiss ss instead of ß.
@@ -144,6 +145,8 @@ export const hostSafetyCheck = (urlExpr, ...dependencies) => ({
 });
 
 const INACTIVITY_DAYS = 90;
+// Most unseen feed items processed per source and run; the rest waits for the next run.
+const MAX_BATCH = 30;
 
 export function flowDefinition() {
   const readyActionsInner = {
@@ -160,7 +163,13 @@ export function flowDefinition() {
       Current_feed_IDs: { type: 'Select', inputs: { from: "@body('Read_RSS')", select: "@if(empty(item()?['id']), item()?['primaryLink'], item()?['id'])" }, runAfter: after('Read_RSS') },
       Unseen_RSS_items: { type: 'Query', inputs: { from: "@body('Read_RSS')", where: "@and(not(contains(json(coalesce(items('For_each_source')?['new_seenids'], '[]')), if(empty(item()?['id']), item()?['primaryLink'], item()?['id']))), if(empty(items('For_each_source')?['new_seenids']), greaterOrEquals(ticks(coalesce(item()?['publishDate'], outputs('Cutoff'))), ticks(coalesce(items('For_each_source')?['new_feedfrom'], items('For_each_source')?['createdon']))), true))" }, runAfter: after('Current_feed_IDs') },
       Set_RSS_candidates: set('Candidates', "@body('Unseen_RSS_items')", 'Unseen_RSS_items'),
-      Set_feed_IDs: set('SeenIDs', "@union(json(coalesce(items('For_each_source')?['new_seenids'], '[]')), body('Current_feed_IDs'))", 'Set_RSS_candidates'),
+      // Only the items that are actually processed this run are marked as seen. Unseen items
+      // beyond the first MAX_BATCH (the ones Compose_capped drops below) stay unseen, so the next
+      // run picks them up. Items that were already seen, or excluded by the first-run date
+      // filter, stay in the seen list exactly as before.
+      Deferred_IDs: { type: 'Select', inputs: { from: `@skip(body('Unseen_RSS_items'), ${MAX_BATCH})`, select: "@if(empty(item()?['id']), item()?['primaryLink'], item()?['id'])" }, runAfter: after('Set_RSS_candidates') },
+      Seen_now: { type: 'Query', inputs: { from: "@body('Current_feed_IDs')", where: "@not(contains(body('Deferred_IDs'), item()))" }, runAfter: after('Deferred_IDs') },
+      Set_feed_IDs: set('SeenIDs', "@union(json(coalesce(items('For_each_source')?['new_seenids'], '[]')), body('Seen_now'))", 'Seen_now'),
     }, {
       Set_article_candidate: set('Candidates', "@createArray(addProperty(json('{}'), 'primaryLink', outputs('Source_URL')))"),
     }, 'Validate_source_URL'),
@@ -169,11 +178,11 @@ export function flowDefinition() {
     // it "needs review" until a human manually bounded new_feedfrom or compacted new_seenids -
     // a scaling artifact, not a real problem, and not something this system should ever need a
     // person for. Take the newest 30 (RSS feeds are newest-first by convention) and let the rest
-    // wait for the next few 5-minute cycles - Set_feed_IDs below still records every ID this poll
-    // actually saw, so nothing gets silently reprocessed or lost, it just catches up gradually.
+    // wait for the next few 5-minute cycles - Set_feed_IDs only records the IDs that were
+    // actually processed (not the dropped overflow), so the rest is picked up by the next run.
     // SetVariable can't self-reference the variable it's writing (Power Automate rejects that
     // at save time), so the capped array has to be computed in a Compose first.
-    Compose_capped: compose("@take(variables('Candidates'), 30)", 'Is_RSS'),
+    Compose_capped: compose(`@take(variables('Candidates'), ${MAX_BATCH})`, 'Is_RSS'),
     Cap_candidates: set('Candidates', "@outputs('Compose_capped')", 'Compose_capped'),
     For_each_article: {
       type: 'Foreach', foreach: "@variables('Candidates')", runAfter: after('Cap_candidates'), runtimeConfiguration: { concurrency: { repetitions: 1 } },
@@ -215,7 +224,7 @@ export function flowDefinition() {
               Foundry_extract: connector('foundry', 'ChatCompletion', {
                 deploymentId: 'model-router', 'api-version': '2024-08-01-preview', body: { messages: [
                   { role: 'system', content: extractionPrompt },
-                  { role: 'user', content: "@string(addProperty(addProperty(addProperty(json('{}'), 'url', outputs('Article_URL')), 'feed', items('For_each_article')), 'page_text', take(variables('ExtractedText'), 30000)))" },
+                  { role: 'user', content: "@string(addProperty(addProperty(addProperty(addProperty(json('{}'), 'today', formatDateTime(utcNow(), 'yyyy-MM-dd')), 'url', outputs('Article_URL')), 'feed', items('For_each_article')), 'page_text', take(variables('ExtractedText'), 30000)))" },
                 ], response_format: { type: 'json_object' } },
               }, 'Content_kind_router'),
               Parse_assessment: { type: 'ParseJson', runAfter: after('Foundry_extract'), inputs: {

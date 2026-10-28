@@ -312,10 +312,13 @@ test('a feed with more than 30 unseen items is capped and caught up gradually, n
   assert.deepEqual(cap.runAfter, { Compose_capped: ['Succeeded'] });
   assert.deepEqual(actions.get('For_each_article').runAfter, { Cap_candidates: ['Succeeded'] });
 
-  // Set_feed_IDs must still record every ID this poll actually saw (not just the capped 30), so
-  // the overflow isn't reprocessed forever - it's what lets the source catch up gradually across
-  // the next few 5-minute cycles instead of either stalling or looping on the same backlog.
-  assert.match(actions.get('Set_feed_IDs').inputs.value, /body\('Current_feed_IDs'\)/);
+  // Only the processed items are marked as seen: the dropped overflow (everything after the
+  // first 30 unseen items) must stay unseen so the next run picks it up.
+  assert.match(actions.get('Deferred_IDs').inputs.from, /skip\(body\('Unseen_RSS_items'\), 30\)/);
+  assert.match(actions.get('Seen_now').inputs.where, /not\(contains\(body\('Deferred_IDs'\), item\(\)\)\)/);
+  assert.equal(actions.get('Seen_now').inputs.from, "@body('Current_feed_IDs')");
+  assert.match(actions.get('Set_feed_IDs').inputs.value, /body\('Seen_now'\)/);
+  assert.doesNotMatch(actions.get('Set_feed_IDs').inputs.value, /body\('Current_feed_IDs'\)/);
 });
 
 test('a source with nothing publishable for 90 days is parked, not deleted or blocked from resuming', () => {
@@ -378,4 +381,19 @@ test('the flow sends the extraction prompt including the FAQ rules to Foundry', 
   const text = JSON.stringify(flow);
   assert.ok(text.includes('Write the faq for each language'));
   assert.ok(text.includes('faq not supported'));
+});
+
+test('the extraction prompt carries the time rules and the input carries today', () => {
+  assert.ok(extractionPrompt.includes('(the current date, YYYY-MM-DD)'));
+  assert.ok(extractionPrompt.includes('source older than 60 days'));
+  assert.ok(extractionPrompt.includes('according to the source of'));
+  assert.ok(extractionPrompt.includes('already in the past as seen from today'));
+  assert.ok(extractionPrompt.includes('weekly or monthly roundup'));
+  assert.ok(extractionPrompt.includes('Do not generalise test results'));
+  assert.ok(extractionPrompt.trimEnd().endsWith('No other keys.'));
+  const flow = flowDefinition();
+  const find = block => Object.values(block).flatMap(action => [action, ...find(action.actions ?? {}), ...find(action.else?.actions ?? {}), ...Object.values(action.cases ?? {}).flatMap(c => find(c.actions)), ...find(action.default?.actions ?? {})]);
+  const extract = find(flow.actions).find(action => action.inputs?.parameters?.deploymentId === 'model-router' && JSON.stringify(action).includes('page_text') && JSON.stringify(action).includes('Article_URL'));
+  assert.ok(extract, 'Foundry_extract not found');
+  assert.ok(extract.inputs.parameters.body.messages[1].content.includes("'today', formatDateTime(utcNow(), 'yyyy-MM-dd')"));
 });

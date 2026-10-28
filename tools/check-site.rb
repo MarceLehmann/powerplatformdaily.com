@@ -131,14 +131,14 @@ raise 'HTTPS source origin lost' unless groups.last['url'] == 'https://www.power
 
 attribution = Liquid::Template.parse(File.read('_includes/curated-attribution.html'))
 [true, false, nil, 'false', 'true'].each do |permission|
-  rendered = attribution.render!('page' => {
+  rendered = attribution.render!({ 'include' => { 'placement' => 'top' }, 'page' => {
     'source_url' => 'https://example.org/article', 'source_site_url' => 'https://example.org/', 'source_name' => 'Example',
     'submitted_by' => {
       'name' => 'Contributor <test>',
       'linkedin' => 'https://www.linkedin.com/in/example/',
       'publish_credit' => permission,
     },
-  })
+  } })
   credit = Nokogiri::HTML.fragment(rendered).at_css('.contributor-credit')
   raise 'Credit leaked without explicit permission' unless !credit.nil? == (permission == true)
   raise 'Credit name must be escaped' if credit && credit.at_css('test')
