@@ -412,5 +412,15 @@
     "gif": false,
     "reason": "This post is a feature announcement describing capabilities, not a concrete 3 to 5 stage procedure stated in order.",
     "at": "2026-10-27"
+  },
+  "1c69153f0f697d2061342607": {
+    "gif": false,
+    "reason": "This is a feature announcement and the text does not state a concrete 3 to 5 stage procedure without inventing steps.",
+    "at": "2026-10-29"
+  },
+  "311d3276867d5bc786e8bc6e": {
+    "gif": false,
+    "reason": "This post is a comparison of capabilities and tradeoffs, not a concrete 3 to 5 stage procedure or flow.",
+    "at": "2026-10-29"
   }
 }
