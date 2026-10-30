@@ -1,0 +1,55 @@
+{
+ "title": "Plan a Dataverse solution",
+ "subtitle": "Move from data model to relationships, automation and access design.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "table",
+   "productLabel": "Dataverse",
+   "title": "List the business data needed",
+   "actions": [
+    "List required business data"
+   ],
+   "evidence": "List required business data, group it into focused tables and choose suitable column types before building the app."
+  },
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Group data into tables and columns",
+   "actions": [
+    "Group into tables",
+    "Choose column types"
+   ],
+   "evidence": "group it into focused tables and choose suitable column types before building the app."
+  },
+  {
+   "product": "dataverse",
+   "icon": "link",
+   "productLabel": "Dataverse",
+   "title": "Map record relationships",
+   "actions": [
+    "Map how records connect",
+    "one-to-many",
+    "many-to-many"
+   ],
+   "evidence": "Map how records connect before selecting one-to-many or many-to-many relationships, reducing repeated data."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Plan automation and access",
+   "actions": [
+    "Power Fx",
+    "workflows",
+    "roles and permissions"
+   ],
+   "evidence": "The guidance recommends planning the data model first, using business rules, Power Fx formulas and workflows for clear process needs, and defining roles and permissions as part of solution design."
+  }
+ ],
+ "punchline": [
+  "Model first",
+  "Then automate and secure"
+ ]
+}

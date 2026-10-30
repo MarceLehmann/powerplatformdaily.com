@@ -422,5 +422,16 @@
     "gif": false,
     "reason": "This post is a comparison of capabilities and tradeoffs, not a concrete 3 to 5 stage procedure or flow.",
     "at": "2026-10-29"
+  },
+  "4939ab046c0af345951df3e9": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage planning sequence for data, relationships, automation and access.",
+    "at": "2026-10-30",
+    "evidence": [
+      "List required business data, group it into focused tables and choose suitable column types before building the app.",
+      "group it into focused tables and choose suitable column types before building the app.",
+      "Map how records connect before selecting one-to-many or many-to-many relationships, reducing repeated data.",
+      "The guidance recommends planning the data model first, using business rules, Power Fx formulas and workflows for clear process needs, and defining roles and permissions as part of solution design."
+    ]
   }
 }

@@ -1,0 +1,51 @@
+{
+ "title": "Eine Dataverse-Loesung planen",
+ "subtitle": "Vom Datenmodell zu Beziehungen, Automatisierung und Zugriffsdesign.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "table",
+   "productLabel": "Dataverse",
+   "title": "Noetige Geschaeftsdaten erfassen",
+   "actions": [
+    "Noetige Geschaeftsdaten"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Daten in Tabellen ordnen",
+   "actions": [
+    "In Tabellen gruppieren",
+    "Spaltentypen waehlen"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "link",
+   "productLabel": "Dataverse",
+   "title": "Datensatzbeziehungen abbilden",
+   "actions": [
+    "Verbindungen abbilden",
+    "one-to-many",
+    "many-to-many"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Automatisierung und Zugriff planen",
+   "actions": [
+    "Power Fx",
+    "Workflows",
+    "Rollen und Berechtigungen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Zuerst modellieren",
+  "Dann automatisieren"
+ ]
+}
