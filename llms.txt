@@ -25,6 +25,10 @@ Key facts for orientation:
 - [Tags](https://powerplatformdaily.com/tags/): Browse curated summaries by topic.
 - [Submit content](https://powerplatformdaily.com/submit/): Suggest a product-news blog or article for curation.
 
+## MCP server (read-only)
+
+- [MCP endpoint](https://func-mcp-kmupower.azurewebsites.net/daily/mcp): Remote Model Context Protocol server (Streamable HTTP, no sign-in, read-only) for all curated news entries in English and German, with canonical URL and the original source. Tools: search_news, get_news, latest_news, list_tags. Always cite the canonical URL returned by the tools.
+
 ## Topics covered
 
 - Copilot Studio: new features, agent capabilities, releases
