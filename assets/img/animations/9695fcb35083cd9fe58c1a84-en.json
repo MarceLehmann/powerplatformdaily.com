@@ -1,0 +1,54 @@
+{
+ "title": "Plan a model-driven app",
+ "subtitle": "Start with Dataverse data, then configure user components and navigation.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Define tables and columns",
+   "actions": [
+    "Dataverse tables",
+    "columns"
+   ],
+   "evidence": "Define tables, columns and relationships first"
+  },
+  {
+   "product": "dataverse",
+   "icon": "link",
+   "productLabel": "Dataverse",
+   "title": "Set up relationships",
+   "actions": [
+    "relationships"
+   ],
+   "evidence": "Define tables, columns and relationships first, then configure forms"
+  },
+  {
+   "product": "powerapps",
+   "icon": "doc",
+   "productLabel": "Power Apps",
+   "title": "Configure forms and views",
+   "actions": [
+    "forms",
+    "views"
+   ],
+   "evidence": "then configure forms, views, business rules, charts, dashboards and sitemap navigation"
+  },
+  {
+   "product": "powerapps",
+   "icon": "gear",
+   "productLabel": "Power Apps",
+   "title": "Add rules, charts and navigation",
+   "actions": [
+    "business rules",
+    "charts",
+    "sitemap navigation"
+   ],
+   "evidence": "forms, views, business rules, charts, dashboards and sitemap navigation for users managing connected records"
+  }
+ ],
+ "punchline": [
+  "Data first design",
+  "Supports connected records"
+ ]
+}

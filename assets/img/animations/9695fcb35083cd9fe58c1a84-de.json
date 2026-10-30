@@ -1,0 +1,50 @@
+{
+ "title": "Modellgesteuerte App planen",
+ "subtitle": "Mit Dataverse-Daten beginnen, dann Komponenten und Navigation fuer Nutzende konfigurieren.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Tabellen und Spalten definieren",
+   "actions": [
+    "Dataverse-Tabellen",
+    "Spalten"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "link",
+   "productLabel": "Dataverse",
+   "title": "Beziehungen festlegen",
+   "actions": [
+    "Beziehungen"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "doc",
+   "productLabel": "Power Apps",
+   "title": "Formulare und Ansichten konfigurieren",
+   "actions": [
+    "Formulare",
+    "Ansichten"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "gear",
+   "productLabel": "Power Apps",
+   "title": "Regeln, Diagramme, Navigation",
+   "actions": [
+    "Geschaeftsregeln",
+    "Diagramme",
+    "Sitemap-Navigation"
+   ]
+  }
+ ],
+ "punchline": [
+  "Datenorientierter Entwurf",
+  "Fuer verknuepfte Daten"
+ ]
+}

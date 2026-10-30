@@ -36,6 +36,12 @@ faq:
 - question: When should I choose a model-driven app instead of a canvas app?
   answer: Choose a model-driven app when structured, connected records and repeatable
     processes lead the design. Choose canvas when custom screen control is the priority.
+animation:
+  src: /assets/img/animations/9695fcb35083cd9fe58c1a84-en.gif
+  poster: /assets/img/animations/9695fcb35083cd9fe58c1a84-en.poster.png
+  width: 800
+  height: 450
+  alt: "A four step sequence shows planning a model-driven app by defining Dataverse data, adding forms and views, then configuring rules and analytics, and finally setting sitemap navigation."
 ---
 
 ## TL;DR
