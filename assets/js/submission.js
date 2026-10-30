@@ -3,6 +3,7 @@
   const status = document.querySelector('[data-submission-status]');
   if (!form || !status) return;
 
+  const openedAt = Date.now();
   const button = form.querySelector('button[type="submit"]');
   const endpoint = form.getAttribute('action').trim();
   let configured = false;
@@ -33,7 +34,7 @@
     }
     if (!form.reportValidity()) return;
     const values = new FormData(form);
-    const payload = { content_url: values.get('content_url').trim(), website: values.get('website') || '' };
+    const payload = { content_url: values.get('content_url').trim(), website: values.get('website') || '', form_started: openedAt };
     if (values.get('publish_credit') === 'yes') {
       payload.publish_credit = 'yes';
       payload.submitter_name = (values.get('submitter_name') || '').trim();
