@@ -444,5 +444,10 @@
       "then configure forms, views, business rules, charts, dashboards and sitemap navigation",
       "forms, views, business rules, charts, dashboards and sitemap navigation for users managing connected records"
     ]
+  },
+  "ad34ebc31d97c9bff1b97e98": {
+    "gif": false,
+    "reason": "This post is an announcement of new Copilot Studio capabilities and does not describe a concrete 3 to 5 stage procedure from the text.",
+    "at": "2026-10-31"
   }
 }
