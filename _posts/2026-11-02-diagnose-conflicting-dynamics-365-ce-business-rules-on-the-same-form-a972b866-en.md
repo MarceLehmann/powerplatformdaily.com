@@ -39,6 +39,12 @@ faq:
   answer: Use a test record in a non-production environment and keep the record values,
     form, user context and steps consistent. Change one input or rule at a time and
     retest.
+animation:
+  video: /assets/img/animations/a972b866a42f06588977bcb6-en.mp4
+  poster: /assets/img/animations/a972b866a42f06588977bcb6-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A four step flow shows how to diagnose a Dynamics 365 CE form rule conflict by reproducing it, listing active rules and scripts, testing conditions one by one, and then making the smallest fix and retesting."
 ---
 
 ## TL;DR

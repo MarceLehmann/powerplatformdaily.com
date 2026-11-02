@@ -42,6 +42,12 @@ faq:
   answer: Einen Testdatensatz in einer Nicht-Produktivumgebung verwenden und Werte,
     Formular, Benutzerkontext und Schritte konstant halten. Jeweils nur eine Eingabe
     oder Regel ändern und danach erneut testen.
+animation:
+  video: /assets/img/animations/a972b866a42f06588977bcb6-de.mp4
+  poster: /assets/img/animations/a972b866a42f06588977bcb6-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Ein Ablauf mit vier Schritten zeigt, wie ein Konflikt von Dynamics 365 CE Formularregeln gefunden wird: nachstellen, aktive Regeln und Skripte erfassen, Bedingungen einzeln testen und dann die kleinste Korrektur erneut pruefen."
 ---
 
 ## TL;DR

@@ -1,0 +1,58 @@
+{
+ "title": "Diagnose CE form rule conflicts",
+ "subtitle": "Reproduce the issue, trace rules, test conditions, then apply the smallest fix and retest.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "play",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Reproduce with same context",
+   "actions": [
+    "test record",
+    "non-production environment",
+    "same record and user"
+   ],
+   "evidence": "Reproduce the issue with a consistent record and user"
+  },
+  {
+   "product": "generic",
+   "icon": "search",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Inventory active rules and scripts",
+   "actions": [
+    "active rules",
+    "scope",
+    "form scripts"
+   ],
+   "evidence": "inventory all active rules and related form scripts"
+  },
+  {
+   "product": "generic",
+   "icon": "filter",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Test conditions individually",
+   "actions": [
+    "conditions",
+    "change one input",
+    "retest"
+   ],
+   "evidence": "test conditions individually"
+  },
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Make smallest change and retest",
+   "actions": [
+    "corrective change",
+    "retest",
+    "one rule at a time"
+   ],
+   "evidence": "then make and retest the smallest corrective change."
+  }
+ ],
+ "punchline": [
+  "Isolate conflicting",
+  "field behaviour"
+ ]
+}

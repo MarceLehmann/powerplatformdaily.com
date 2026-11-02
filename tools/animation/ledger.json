@@ -454,5 +454,16 @@
     "gif": false,
     "reason": "This post is a comparison and decision guide without a concrete 3 to 5 stage procedure explicitly named in order.",
     "at": "2026-11-02"
+  },
+  "a972b866a42f06588977bcb6": {
+    "gif": true,
+    "reason": "The post gives a clear 4 stage troubleshooting sequence: reproduce, inventory, test, then make and retest the smallest change.",
+    "at": "2026-11-02",
+    "evidence": [
+      "Reproduce the issue with a consistent record and user",
+      "inventory all active rules and related form scripts",
+      "test conditions individually",
+      "then make and retest the smallest corrective change."
+    ]
   }
 }

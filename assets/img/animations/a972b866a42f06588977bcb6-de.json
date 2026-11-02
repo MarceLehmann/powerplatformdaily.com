@@ -1,0 +1,54 @@
+{
+ "title": "CE Formularregelkonflikte finden",
+ "subtitle": "Fehler nachstellen, Regeln pruefen, Bedingungen testen, kleinste Korrektur machen und erneut pruefen.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "play",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Mit gleichem Kontext nachstellen",
+   "actions": [
+    "Testdatensatz",
+    "Nicht-Produktivumgebung",
+    "gleicher Datensatz"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "search",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Aktive Regeln und Skripte erfassen",
+   "actions": [
+    "aktive Regeln",
+    "Geltungsbereich",
+    "Formularskripte"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "filter",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Bedingungen einzeln testen",
+   "actions": [
+    "Bedingungen",
+    "eine Eingabe aendern",
+    "erneut testen"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "Dynamics 365 CE",
+   "title": "Kleinste Korrektur erneut pruefen",
+   "actions": [
+    "Korrektur",
+    "erneut testen",
+    "eine Regel nach der anderen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Widerspruechliches",
+  "Feldverhalten isolieren"
+ ]
+}
