@@ -38,8 +38,8 @@ faq:
   answer: Power Fx can calculate or set values from other data, while workflows can
     automate repeatable steps after records change.
 animation:
-  src: /assets/img/animations/4939ab046c0af345951df3e9-en.gif
-  poster: /assets/img/animations/4939ab046c0af345951df3e9-en.poster.png
+  video: /assets/img/animations/4939ab046c0af345951df3e9-en.mp4
+  poster: /assets/img/animations/4939ab046c0af345951df3e9-en.poster.webp
   width: 800
   height: 450
   alt: "A four step flow shows planning a Dataverse solution by listing business data, grouping it into tables and columns, mapping relationships, adding Power Fx and workflows, then defining roles and permissions."

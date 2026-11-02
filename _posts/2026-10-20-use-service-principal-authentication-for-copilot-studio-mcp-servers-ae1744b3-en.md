@@ -38,8 +38,8 @@ faq:
     This makes the agent use the same shared connection rather than prompting each
     user.
 animation:
-  src: /assets/img/animations/ae1744b3fba0778a9d18300b-en.gif
-  poster: /assets/img/animations/ae1744b3fba0778a9d18300b-en.poster.png
+  video: /assets/img/animations/ae1744b3fba0778a9d18300b-en.mp4
+  poster: /assets/img/animations/ae1744b3fba0778a9d18300b-en.poster.webp
   width: 800
   height: 450
   alt: "Five steps show configuring a custom connector for service principal auth, granting Copilot client permission and admin consent, adding the MCP header, creating a shared connection, and selecting Maker provided."

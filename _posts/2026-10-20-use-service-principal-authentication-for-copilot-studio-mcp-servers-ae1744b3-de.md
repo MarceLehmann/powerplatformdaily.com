@@ -41,8 +41,8 @@ faq:
     Option Maker provided. Dadurch verwendet der Agent dieselbe gemeinsame Verbindung
     ohne Benutzeranmeldung.
 animation:
-  src: /assets/img/animations/ae1744b3fba0778a9d18300b-de.gif
-  poster: /assets/img/animations/ae1744b3fba0778a9d18300b-de.poster.png
+  video: /assets/img/animations/ae1744b3fba0778a9d18300b-de.mp4
+  poster: /assets/img/animations/ae1744b3fba0778a9d18300b-de.poster.webp
   width: 800
   height: 450
   alt: "Funf Schritte zeigen das Konfigurieren eines Custom Connectors mit Service Principal, das Erteilen von Berechtigung und Admin Consent, das Hinzufugen des MCP-Headers, das Erstellen der gemeinsamen Verbindung und das Wahlen von Maker provided."

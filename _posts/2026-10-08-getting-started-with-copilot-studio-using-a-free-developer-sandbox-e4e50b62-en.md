@@ -40,8 +40,8 @@ faq:
   answer: Agents become read-only and stop responding until active Copilot Credits
     are assigned. They are not deleted, but publishing and running are unavailable.
 animation:
-  src: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-en.gif
-  poster: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-en.poster.png
+  video: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-en.mp4
+  poster: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-en.poster.webp
   width: 800
   height: 450
   alt: "A four step setup sequence shows joining the Microsoft 365 Developer Program for an Instant Sandbox, activating the Power Apps Developer Plan, verifying Dataverse in the developer environment, and starting the Copilot Studio trial."

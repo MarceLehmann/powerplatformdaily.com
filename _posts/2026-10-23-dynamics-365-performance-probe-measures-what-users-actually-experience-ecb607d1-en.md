@@ -36,8 +36,8 @@ faq:
   answer: Install the unpacked extension, press Start, reload the Dynamics 365 tab,
     work normally for ten minutes, then open and export the report.
 animation:
-  src: /assets/img/animations/ecb607d1ce22a265ac920901-en.gif
-  poster: /assets/img/animations/ecb607d1ce22a265ac920901-en.poster.png
+  video: /assets/img/animations/ecb607d1ce22a265ac920901-en.mp4
+  poster: /assets/img/animations/ecb607d1ce22a265ac920901-en.poster.webp
   width: 800
   height: 450
   alt: "The animation shows the Performance Probe workflow: install the extension, press Start, reload the Dynamics 365 tab, work normally for ten minutes, then open and export the report."

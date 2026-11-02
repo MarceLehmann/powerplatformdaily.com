@@ -39,8 +39,8 @@ faq:
     also recommends avoiding duplicate retrievals and limiting returned records to
     those needed.
 animation:
-  src: /assets/img/animations/8678526a2c9576c73d4afd17-en.gif
-  poster: /assets/img/animations/8678526a2c9576c73d4afd17-en.poster.png
+  video: /assets/img/animations/8678526a2c9576c73d4afd17-en.mp4
+  poster: /assets/img/animations/8678526a2c9576c73d4afd17-en.poster.webp
   width: 800
   height: 450
   alt: "A four step flow shows diagnosing a slow Dataverse plug in by comparing the same save with and without a step, separating synchronous wait from background work, recording a baseline, and using trace tools to find delays."

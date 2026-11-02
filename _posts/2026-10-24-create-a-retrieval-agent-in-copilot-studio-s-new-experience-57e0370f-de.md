@@ -40,8 +40,8 @@ faq:
     Sie bei Bedarf den Connector. Erteilen Sie in Preview die Berechtigung und senden
     Sie eine Anfrage mit E-Mail-Versand.
 animation:
-  src: /assets/img/animations/57e0370f54cf7a06759231dc-de.gif
-  poster: /assets/img/animations/57e0370f54cf7a06759231dc-de.poster.png
+  video: /assets/img/animations/57e0370f54cf7a06759231dc-de.mp4
+  poster: /assets/img/animations/57e0370f54cf7a06759231dc-de.poster.webp
   width: 800
   height: 450
   alt: "Ein Copilot-Studio-Retrieval-Agent wird erstellt, mit Wissen versorgt, mit einem ausgewaehlten Modell getestet, veroeffentlicht und danach nach Authentifizierung und Freigabe fuer E-Mails ueber Outlook erweitert."

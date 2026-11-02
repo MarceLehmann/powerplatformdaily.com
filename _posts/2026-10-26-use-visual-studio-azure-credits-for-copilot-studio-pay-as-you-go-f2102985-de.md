@@ -39,8 +39,8 @@ faq:
   answer: Der Abrechnungsplan wird zunächst bereitgestellt und sollte danach für die
     Umgebung als aktiviert angezeigt werden.
 animation:
-  src: /assets/img/animations/f2102985f501e2dfd61fe8a1-de.gif
-  poster: /assets/img/animations/f2102985f501e2dfd61fe8a1-de.poster.png
+  video: /assets/img/animations/f2102985f501e2dfd61fe8a1-de.mp4
+  poster: /assets/img/animations/f2102985f501e2dfd61fe8a1-de.poster.webp
   width: 800
   height: 450
   alt: "Ablauf zur Nutzung von Visual Studio Azure-Guthaben fuer die Copilot Studio-Abrechnung: Guthaben aktivieren, Abonnement im Mandanten verfuegbar machen, im Abrechnungsplan auswaehlen, dann auf Bereitstellung warten und aktiviert pruefen."

@@ -38,8 +38,8 @@ faq:
     verfügbar. Zudem gelten sie nicht für Zusagen zur Verarbeitung innerhalb eines
     Landes.
 animation:
-  src: /assets/img/animations/7285b906d109233418e24f86-de.gif
-  poster: /assets/img/animations/7285b906d109233418e24f86-de.poster.png
+  video: /assets/img/animations/7285b906d109233418e24f86-de.mp4
+  poster: /assets/img/animations/7285b906d109233418e24f86-de.poster.webp
   width: 800
   height: 450
   alt: "Eine Abfolge mit vier Schritten zeigt das Oeffnen der Copilot-Einstellungen im Microsoft 365 Admin Center, das Anzeigen aller KI-Anbieter, das Aktivieren von OpenAI fuer eine Zielgruppe und das erneute Oeffnen von Cowork."

@@ -43,8 +43,8 @@ faq:
   answer: Makers verbinden die Kanäle, schliessen die Contact-Center-Konfiguration
     ab, veröffentlichen den Agenten und fügen ihn einem passenden Workstream hinzu.
 animation:
-  src: /assets/img/animations/55cd16a7f276c35a314ca5b5-de.gif
-  poster: /assets/img/animations/55cd16a7f276c35a314ca5b5-de.poster.png
+  video: /assets/img/animations/55cd16a7f276c35a314ca5b5-de.mp4
+  poster: /assets/img/animations/55cd16a7f276c35a314ca5b5-de.poster.webp
   width: 800
   height: 450
   alt: "Eine Abfolge in vier Schritten zeigt das Verbinden der Kanaele, das Abschliessen der Contact-Center-Konfiguration, das Veroeffentlichen des Agenten und das Hinzufuegen zu einem Workstream."

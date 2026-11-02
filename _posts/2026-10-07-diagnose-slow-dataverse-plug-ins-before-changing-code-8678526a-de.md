@@ -40,8 +40,8 @@ faq:
   answer: Nur benötigte Spalten verringern unnötige Datenarbeit. Zusätzlich sollen
     doppelte Abrufe vermieden und nur erforderliche Datensätze zurückgegeben werden.
 animation:
-  src: /assets/img/animations/8678526a2c9576c73d4afd17-de.gif
-  poster: /assets/img/animations/8678526a2c9576c73d4afd17-de.poster.png
+  video: /assets/img/animations/8678526a2c9576c73d4afd17-de.mp4
+  poster: /assets/img/animations/8678526a2c9576c73d4afd17-de.poster.webp
   width: 800
   height: 450
   alt: "Ein Ablauf mit vier Schritten zeigt die Diagnose eines langsamen Dataverse-Plug-ins durch Vergleich desselben Speicherns mit und ohne Schritt, Trennung von synchroner Wartezeit und Hintergrundarbeit, Baseline-Erfassung und Nutzung von Trace-Tools."

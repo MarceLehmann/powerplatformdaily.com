@@ -37,8 +37,8 @@ faq:
   answer: In eligible commercial tenants, OpenAI-operated models are scheduled to
     enable for all users from July 24, 2026, unless an admin selects No users.
 animation:
-  src: /assets/img/animations/7285b906d109233418e24f86-en.gif
-  poster: /assets/img/animations/7285b906d109233418e24f86-en.poster.png
+  video: /assets/img/animations/7285b906d109233418e24f86-en.mp4
+  poster: /assets/img/animations/7285b906d109233418e24f86-en.poster.webp
   width: 800
   height: 450
   alt: "A four step sequence shows opening Copilot settings in the Microsoft 365 admin center, viewing all AI provider settings, enabling OpenAI for a chosen audience, and reopening Cowork to see GPT 5.6 Sol and Terra."

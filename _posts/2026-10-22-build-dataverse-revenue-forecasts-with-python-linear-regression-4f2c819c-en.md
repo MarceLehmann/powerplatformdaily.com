@@ -38,8 +38,8 @@ faq:
   answer: The Python client creates records in a revenue prediction table, storing
     each future month and its predicted revenue for downstream experiences.
 animation:
-  src: /assets/img/animations/4f2c819c484089420ef5dce6-en.gif
-  poster: /assets/img/animations/4f2c819c484089420ef5dce6-en.poster.png
+  video: /assets/img/animations/4f2c819c484089420ef5dce6-en.mp4
+  poster: /assets/img/animations/4f2c819c484089420ef5dce6-en.poster.webp
   width: 800
   height: 450
   alt: "A three step flow shows Dataverse revenue records loaded into Pandas, a Scikit-Learn linear regression model trained, and forecast records written back to Dataverse."

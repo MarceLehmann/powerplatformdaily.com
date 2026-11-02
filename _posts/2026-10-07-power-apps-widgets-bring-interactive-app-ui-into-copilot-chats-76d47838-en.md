@@ -35,8 +35,8 @@ faq:
   answer: It needs self-contained HTML that consumes the custom tool’s JSON output
     and communicates with the MCP host. The UI definition is optional.
 animation:
-  src: /assets/img/animations/76d47838aaa9a21262f2e206-en.gif
-  poster: /assets/img/animations/76d47838aaa9a21262f2e206-en.poster.png
+  video: /assets/img/animations/76d47838aaa9a21262f2e206-en.mp4
+  poster: /assets/img/animations/76d47838aaa9a21262f2e206-en.poster.webp
   width: 800
   height: 450
   alt: "Three steps show how to activate built-in MCP tools for a Model-driven App: open the app in the maker portal, select App MCP, then choose Set up MCP."

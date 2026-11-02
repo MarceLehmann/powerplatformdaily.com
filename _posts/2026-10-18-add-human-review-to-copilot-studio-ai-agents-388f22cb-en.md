@@ -37,8 +37,8 @@ faq:
   answer: Human review is useful when an agent encounters an unexpected situation
     or one too risky for autonomous decision making.
 animation:
-  src: /assets/img/animations/388f22cbd836f248cdbe49ea-en.gif
-  poster: /assets/img/animations/388f22cbd836f248cdbe49ea-en.poster.png
+  video: /assets/img/animations/388f22cbd836f248cdbe49ea-en.mp4
+  poster: /assets/img/animations/388f22cbd836f248cdbe49ea-en.poster.webp
   width: 800
   height: 450
   alt: "A Copilot Studio agent sends a decision request through Teams or email, collects the human response, and uses it to decide the next action."

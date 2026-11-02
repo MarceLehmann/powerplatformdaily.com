@@ -38,8 +38,8 @@ faq:
   answer: Copilot Studio benoetigt die Ziel-Agent-ID aus Microsoft Foundry sowie den
     Projektendpunkt, bevor der externe Agent gespeichert und getestet werden kann.
 animation:
-  src: /assets/img/animations/24c27c756940b7b47754c0fd-de.gif
-  poster: /assets/img/animations/24c27c756940b7b47754c0fd-de.poster.png
+  video: /assets/img/animations/24c27c756940b7b47754c0fd-de.mp4
+  poster: /assets/img/animations/24c27c756940b7b47754c0fd-de.poster.webp
   width: 800
   height: 450
   alt: "Ein Ablauf mit vier Schritten zeigt, wie ein bestehender Microsoft Foundry Agent in Copilot Studio verbunden wird: Projektendpunkt und Agent-ID vorbereiten, Microsoft Foundry waehlen, Schraegstrich anhaengen und Verbindung testen."
