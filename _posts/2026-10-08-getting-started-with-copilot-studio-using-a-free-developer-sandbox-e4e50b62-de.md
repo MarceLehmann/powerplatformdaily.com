@@ -41,8 +41,8 @@ faq:
     Copilot Credits zugewiesen sind. Sie werden nicht gelöscht, können aber nicht
     veröffentlicht oder ausgeführt werden.
 animation:
-  src: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-de.gif
-  poster: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-de.poster.png
+  video: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-de.mp4
+  poster: /assets/img/animations/e4e50b62acd9cbfec3ef9dd2-de.poster.webp
   width: 800
   height: 450
   alt: "Eine vierstufige Einrichtung zeigt den Beitritt zum Microsoft 365 Entwicklerprogramm fuer eine Instant Sandbox, das Aktivieren des Power Apps Developer Plan, das Pruefen von Dataverse und den Start des Copilot Studio Tests."

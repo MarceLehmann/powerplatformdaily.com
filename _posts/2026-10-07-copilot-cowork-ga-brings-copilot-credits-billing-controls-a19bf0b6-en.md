@@ -39,8 +39,8 @@ faq:
   answer: Customize the policy and scope it to a specific security group, then add
     a small group of trusted users before expanding access.
 animation:
-  src: /assets/img/animations/a19bf0b6f1954268c0d27409-en.gif
-  poster: /assets/img/animations/a19bf0b6f1954268c0d27409-en.poster.png
+  video: /assets/img/animations/a19bf0b6f1954268c0d27409-en.mp4
+  poster: /assets/img/animations/a19bf0b6f1954268c0d27409-en.poster.webp
   width: 800
   height: 450
   alt: "A three step sequence shows Copilot Cowork rollout controls in Microsoft 365 admin center: choose billing with Capacity Packs or pay as you go, set monthly and per user limits with alerts, then restrict access to a security group."

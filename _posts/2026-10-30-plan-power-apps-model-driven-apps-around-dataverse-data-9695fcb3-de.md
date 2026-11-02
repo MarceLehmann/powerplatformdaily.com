@@ -39,8 +39,8 @@ faq:
     und wiederkehrenden Prozessen. Canvas Apps passen besser, wenn individuelles Bildschirmdesign
     Vorrang hat.
 animation:
-  src: /assets/img/animations/9695fcb35083cd9fe58c1a84-de.gif
-  poster: /assets/img/animations/9695fcb35083cd9fe58c1a84-de.poster.png
+  video: /assets/img/animations/9695fcb35083cd9fe58c1a84-de.mp4
+  poster: /assets/img/animations/9695fcb35083cd9fe58c1a84-de.poster.webp
   width: 800
   height: 450
   alt: "Eine Abfolge mit vier Schritten zeigt die Planung einer modellgesteuerten App: zuerst Dataverse-Daten definieren, dann Formulare und Ansichten ergänzen, danach Regeln und Analysen konfigurieren und zuletzt die Sitemap-Navigation festlegen."

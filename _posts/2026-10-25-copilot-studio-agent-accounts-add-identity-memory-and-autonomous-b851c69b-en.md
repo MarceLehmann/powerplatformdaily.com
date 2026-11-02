@@ -42,8 +42,8 @@ faq:
   answer: Yes. Files or chats shared with the agent can be summarized in responses
     to users without access, although the agent cannot read protected documents.
 animation:
-  src: /assets/img/animations/b851c69b871c47c796ba51a0-en.gif
-  poster: /assets/img/animations/b851c69b871c47c796ba51a0-en.poster.png
+  video: /assets/img/animations/b851c69b871c47c796ba51a0-en.mp4
+  poster: /assets/img/animations/b851c69b871c47c796ba51a0-en.poster.webp
   width: 800
   height: 450
   alt: "A five step setup sequence shows enrolling the tenant in Frontier, activating the Frontier template, using an early release environment, enabling Agent accounts, and providing eligible licenses."

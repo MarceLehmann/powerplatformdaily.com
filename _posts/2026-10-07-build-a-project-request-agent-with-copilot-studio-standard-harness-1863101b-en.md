@@ -40,8 +40,8 @@ faq:
   answer: A status topic lets users ask about a known request, then calls a flow that
     finds the request and returns its current status.
 animation:
-  src: /assets/img/animations/1863101bc5734d7d27772035-en.gif
-  poster: /assets/img/animations/1863101bc5734d7d27772035-en.poster.png
+  video: /assets/img/animations/1863101bc5734d7d27772035-en.mp4
+  poster: /assets/img/animations/1863101bc5734d7d27772035-en.poster.webp
   width: 800
   height: 450
   alt: "A four step sequence shows a Copilot Studio agent using topics and nodes to collect project details, store them in variables, call a Power Automate flow, and create or retrieve a SharePoint record."

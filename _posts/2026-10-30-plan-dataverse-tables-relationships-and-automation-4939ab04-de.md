@@ -38,8 +38,8 @@ faq:
   answer: Power Fx kann Werte aus anderen Daten berechnen oder setzen. Workflows können
     wiederkehrende Schritte nach Änderungen an Datensätzen automatisieren.
 animation:
-  src: /assets/img/animations/4939ab046c0af345951df3e9-de.gif
-  poster: /assets/img/animations/4939ab046c0af345951df3e9-de.poster.png
+  video: /assets/img/animations/4939ab046c0af345951df3e9-de.mp4
+  poster: /assets/img/animations/4939ab046c0af345951df3e9-de.poster.webp
   width: 800
   height: 450
   alt: "Ein vierstufiger Ablauf zeigt die Planung einer Dataverse-Loesung: Geschaeftsdaten erfassen, in Tabellen und Spalten ordnen, Beziehungen abbilden, Power Fx und Workflows nutzen und danach Rollen und Berechtigungen festlegen."

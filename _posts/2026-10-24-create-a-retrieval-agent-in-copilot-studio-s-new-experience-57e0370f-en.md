@@ -39,8 +39,8 @@ faq:
     connector if needed. In Preview, allow permission and submit a request that asks
     the agent to email its answer.
 animation:
-  src: /assets/img/animations/57e0370f54cf7a06759231dc-en.gif
-  poster: /assets/img/animations/57e0370f54cf7a06759231dc-en.poster.png
+  video: /assets/img/animations/57e0370f54cf7a06759231dc-en.mp4
+  poster: /assets/img/animations/57e0370f54cf7a06759231dc-en.poster.webp
   width: 800
   height: 450
   alt: "A Copilot Studio retrieval agent is created with basics, grounded with knowledge, tested with a selected model, published, and then extended to send email through Outlook after authentication and approval."

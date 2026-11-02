@@ -35,8 +35,8 @@ faq:
   answer: The flow exports the organized data to an Excel file and sends the report
     by email. Outlook desktop and Microsoft Excel are prerequisites.
 animation:
-  src: /assets/img/animations/3f5be9ed0558a8ba17fc5fa3-en.gif
-  poster: /assets/img/animations/3f5be9ed0558a8ba17fc5fa3-en.poster.png
+  video: /assets/img/animations/3f5be9ed0558a8ba17fc5fa3-en.mp4
+  poster: /assets/img/animations/3f5be9ed0558a8ba17fc5fa3-en.poster.webp
   width: 800
   height: 450
   alt: "A four step flow shows Grab e-receipts retrieved from Outlook, key values extracted into a data table, exported to Excel, and the finished report emailed."

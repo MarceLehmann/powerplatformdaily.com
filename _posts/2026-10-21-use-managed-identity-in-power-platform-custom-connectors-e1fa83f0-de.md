@@ -43,8 +43,8 @@ faq:
     genutzt werden. Das Beispiel definiert eine GET-Aktion für das Profil des aktuellen
     Microsoft Graph Benutzers.
 animation:
-  src: /assets/img/animations/e1fa83f0b6e9ff29b3ace09a-de.gif
-  poster: /assets/img/animations/e1fa83f0b6e9ff29b3ace09a-de.poster.png
+  video: /assets/img/animations/e1fa83f0b6e9ff29b3ace09a-de.mp4
+  poster: /assets/img/animations/e1fa83f0b6e9ff29b3ace09a-de.poster.webp
   width: 800
   height: 450
   alt: "Vier Schritte zeigen OAuth 2.0 mit Managed Identity im Custom Connector, dann Weiterleitungs URL und foederierte Anmeldeinfo in Entra ID sowie Verbindung erstellen und nutzen."

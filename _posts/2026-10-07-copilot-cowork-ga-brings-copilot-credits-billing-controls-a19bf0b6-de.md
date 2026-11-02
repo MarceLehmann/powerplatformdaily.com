@@ -39,8 +39,8 @@ faq:
   answer: Passen Sie die Richtlinie an und weisen Sie sie einer bestimmten Sicherheitsgruppe
     zu, bevor Sie weitere Benutzer für den Dienst freischalten.
 animation:
-  src: /assets/img/animations/a19bf0b6f1954268c0d27409-de.gif
-  poster: /assets/img/animations/a19bf0b6f1954268c0d27409-de.poster.png
+  video: /assets/img/animations/a19bf0b6f1954268c0d27409-de.mp4
+  poster: /assets/img/animations/a19bf0b6f1954268c0d27409-de.poster.webp
   width: 800
   height: 450
   alt: "Drei Schritte zeigen die Steuerung fuer den Copilot-Cowork-Rollout im Microsoft 365 Admin Center: Abrechnung waehlen, Limits und Warnungen festlegen, dann Zugriff auf eine Sicherheitsgruppe beschraenken."

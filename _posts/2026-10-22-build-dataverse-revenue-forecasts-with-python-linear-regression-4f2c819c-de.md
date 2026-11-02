@@ -38,8 +38,8 @@ faq:
   answer: Der Python-Client erstellt Datensätze in einer Umsatzprognosetabelle und
     speichert darin den jeweiligen künftigen Monat sowie den prognostizierten Umsatz.
 animation:
-  src: /assets/img/animations/4f2c819c484089420ef5dce6-de.gif
-  poster: /assets/img/animations/4f2c819c484089420ef5dce6-de.poster.png
+  video: /assets/img/animations/4f2c819c484089420ef5dce6-de.mp4
+  poster: /assets/img/animations/4f2c819c484089420ef5dce6-de.poster.webp
   width: 800
   height: 450
   alt: "Ein Ablauf mit drei Schritten zeigt, wie Dataverse Umsatzdaten in Pandas geladen, ein lineares Regressionsmodell mit Scikit-Learn trainiert und Prognosen zurueck in Dataverse gespeichert werden."

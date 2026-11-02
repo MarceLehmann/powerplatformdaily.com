@@ -41,8 +41,8 @@ faq:
   answer: Makers connect engagement channels, complete the Contact Center configuration,
     publish the agent, and then add it to a suitable workstream.
 animation:
-  src: /assets/img/animations/55cd16a7f276c35a314ca5b5-en.gif
-  poster: /assets/img/animations/55cd16a7f276c35a314ca5b5-en.poster.png
+  video: /assets/img/animations/55cd16a7f276c35a314ca5b5-en.mp4
+  poster: /assets/img/animations/55cd16a7f276c35a314ca5b5-en.poster.webp
   width: 800
   height: 450
   alt: "A four step sequence shows connecting engagement channels, completing Contact Center configuration, publishing the agent, and adding it to a workstream."

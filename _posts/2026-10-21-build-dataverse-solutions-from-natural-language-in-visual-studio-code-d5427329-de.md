@@ -38,8 +38,8 @@ faq:
   answer: Ja, der gezeigte Prompt erstellte Ausgaben-Kopf- und Positions-Tabellen,
     Felder, eine Kontaktverknüpfung, Statusgründe und eine Beziehung.
 animation:
-  src: /assets/img/animations/d5427329428d394ff6bf698b-de.gif
-  poster: /assets/img/animations/d5427329428d394ff6bf698b-de.poster.png
+  video: /assets/img/animations/d5427329428d394ff6bf698b-de.mp4
+  poster: /assets/img/animations/d5427329428d394ff6bf698b-de.poster.webp
   width: 800
   height: 450
   alt: "Eine Abfolge mit vier Schritten zeigt, wie Visual Studio Code, Claude Code und Dataverse-Funktionen eine Umgebung erstellen, die Authentifizierung hinzufügen, eine Loesung und ein Datenmodell bauen und Beispieldaten laden."

@@ -38,8 +38,8 @@ faq:
   answer: The billing plan enters provisioning, then should show as enabled for the
     environment when setup completes.
 animation:
-  src: /assets/img/animations/f2102985f501e2dfd61fe8a1-en.gif
-  poster: /assets/img/animations/f2102985f501e2dfd61fe8a1-en.poster.png
+  video: /assets/img/animations/f2102985f501e2dfd61fe8a1-en.mp4
+  poster: /assets/img/animations/f2102985f501e2dfd61fe8a1-en.poster.webp
   width: 800
   height: 450
   alt: "Sequence showing how to use Visual Studio Azure credits for Copilot Studio billing: activate the benefit, make the subscription available in the tenant, select it in a billing plan, then wait for provisioning and confirm it is enabled."
