@@ -465,5 +465,15 @@
       "test conditions individually",
       "then make and retest the smallest corrective change."
     ]
+  },
+  "d28b756205bcef8a79a30efd": {
+    "gif": false,
+    "reason": "This post is a comparison and best-practice summary without a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-11-03"
+  },
+  "8e46a961ed84c089f3d14062": {
+    "gif": false,
+    "reason": "This is a roadmap change announcement with tracking options, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-11-03"
   }
 }
