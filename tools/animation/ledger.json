@@ -475,5 +475,16 @@
     "gif": false,
     "reason": "This is a roadmap change announcement with tracking options, not a concrete 3 to 5 stage procedure stated in order.",
     "at": "2026-11-03"
+  },
+  "41cc0f4c21e64e129e1c6fbf": {
+    "gif": true,
+    "reason": "The post gives a clear 4 stage build sequence from table creation to form setup, saving, and viewing records.",
+    "at": "2026-11-03",
+    "evidence": [
+      "generating a personal-expenses Dataverse table with Copilot",
+      "then connecting an edit form and a gallery to it.",
+      "Set the form to New, use SubmitForm(frmExpense) on the save button",
+      "Insert a gallery on a separate screen and connect it to the personal expenses table."
+    ]
   }
 }

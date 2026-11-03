@@ -1,0 +1,56 @@
+{
+ "title": "Build an expense tracker app",
+ "subtitle": "Create the table, wire the form, save a record, then view saved expenses.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Generate the expenses table",
+   "actions": [
+    "Copilot",
+    "Dataverse table",
+    "suggested fields"
+   ],
+   "evidence": "generating a personal-expenses Dataverse table with Copilot"
+  },
+  {
+   "product": "powerapps",
+   "icon": "doc",
+   "productLabel": "Power Apps",
+   "title": "Connect the edit form",
+   "actions": [
+    "edit form",
+    "personal expenses table"
+   ],
+   "evidence": "then connecting an edit form and a gallery to it."
+  },
+  {
+   "product": "powerapps",
+   "icon": "bolt",
+   "productLabel": "Power Apps",
+   "title": "Set form and save action",
+   "actions": [
+    "New",
+    "SubmitForm(frmExpense)",
+    "OnSelect"
+   ],
+   "evidence": "Set the form to New, use SubmitForm(frmExpense) on the save button"
+  },
+  {
+   "product": "powerapps",
+   "icon": "table",
+   "productLabel": "Power Apps",
+   "title": "Show saved expenses",
+   "actions": [
+    "gallery",
+    "separate screen",
+    "saved records"
+   ],
+   "evidence": "Insert a gallery on a separate screen and connect it to the personal expenses table."
+  }
+ ],
+ "punchline": [
+  "Saved records in gallery"
+ ]
+}

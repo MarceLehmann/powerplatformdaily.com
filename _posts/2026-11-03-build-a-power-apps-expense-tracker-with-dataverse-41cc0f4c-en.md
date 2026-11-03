@@ -36,6 +36,12 @@ faq:
 - question: How can I show saved Dataverse expenses in a Power Apps gallery?
   answer: Insert a gallery on a separate screen and connect it to the personal expenses
     table. Configure its labels to display the expense name, amount and date.
+animation:
+  video: /assets/img/animations/41cc0f4c21e64e129e1c6fbf-en.mp4
+  poster: /assets/img/animations/41cc0f4c21e64e129e1c6fbf-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A 4 step flow shows creating a Dataverse table with Copilot, connecting a form, setting it to New with SubmitForm(frmExpense), and viewing saved expenses in a gallery."
 ---
 
 ## TL;DR

@@ -41,6 +41,12 @@ faq:
   answer: Fügen Sie auf einem separaten Screen eine Galerie ein und verbinden Sie
     sie mit der Tabelle für persönliche Ausgaben. Konfigurieren Sie Beschriftungen
     für Name, Betrag und Datum.
+animation:
+  video: /assets/img/animations/41cc0f4c21e64e129e1c6fbf-de.mp4
+  poster: /assets/img/animations/41cc0f4c21e64e129e1c6fbf-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Ein Ablauf mit 4 Schritten zeigt das Erstellen einer Dataverse-Tabelle mit Copilot, das Verbinden eines Formulars, das Setzen auf Neu mit SubmitForm(frmExpense) und das Anzeigen gespeicherter Ausgaben in einer Galerie."
 ---
 
 ## TL;DR

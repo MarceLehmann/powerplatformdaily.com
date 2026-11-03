@@ -1,0 +1,53 @@
+{
+ "title": "Ausgaben-Tracker App erstellen",
+ "subtitle": "Tabelle erstellen, Formular verbinden, Datensatz speichern und Ausgaben in der Galerie anzeigen.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Ausgabentabelle erzeugen",
+   "actions": [
+    "Copilot",
+    "Dataverse-Tabelle",
+    "vorgeschlagene Felder"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "doc",
+   "productLabel": "Power Apps",
+   "title": "Bearbeitungsformular verbinden",
+   "actions": [
+    "Bearbeitungsformular",
+    "Tabelle persoenliche Ausgaben"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "bolt",
+   "productLabel": "Power Apps",
+   "title": "Formular und Speichern setzen",
+   "actions": [
+    "Neu",
+    "SubmitForm(frmExpense)",
+    "OnSelect"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "table",
+   "productLabel": "Power Apps",
+   "title": "Gespeicherte Ausgaben anzeigen",
+   "actions": [
+    "Galerie",
+    "separater Screen",
+    "gespeicherte Datensaetze"
+   ]
+  }
+ ],
+ "punchline": [
+  "Gespeicherte Datensaetze",
+  "in der Galerie"
+ ]
+}
