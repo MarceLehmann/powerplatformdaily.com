@@ -1,0 +1,52 @@
+{
+ "title": "Email new Dataverse contacts",
+ "subtitle": "Set the Added trigger, send Outlook mail, personalise it, then test and review run history.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Set Dataverse trigger for Contact",
+   "actions": [
+    "Added",
+    "Contact"
+   ],
+   "evidence": "with a Microsoft Dataverse row trigger set to Added for the Contact table"
+  },
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "Add Outlook email action",
+   "actions": [
+    "Outlook email action"
+   ],
+   "evidence": "then add an Outlook email action."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "user",
+   "productLabel": "Power Automate",
+   "title": "Insert Full Name dynamic content",
+   "actions": [
+    "dynamic content",
+    "Full Name"
+   ],
+   "evidence": "Use dynamic content such as Full Name to personalize the message"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Test and inspect run history",
+   "actions": [
+    "sample contact",
+    "run history"
+   ],
+   "evidence": "test with a sample contact, and review run history for missing data, connection, or trigger issues."
+  }
+ ],
+ "punchline": [
+  "Personalised welcome email"
+ ]
+}

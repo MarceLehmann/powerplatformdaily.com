@@ -1,0 +1,48 @@
+{
+ "title": "E-Mail an neue Dataverse-Kontakte",
+ "subtitle": "Added-Trigger setzen, Outlook-Mail senden, personalisieren und danach testen und Run-History pruefen.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Dataverse-Trigger fuer Contact setzen",
+   "actions": [
+    "Added",
+    "Contact"
+   ]
+  },
+  {
+   "product": "outlook",
+   "icon": "mail",
+   "productLabel": "Outlook",
+   "title": "Outlook-E-Mail-Aktion hinzufuegen",
+   "actions": [
+    "Outlook-E-Mail-Aktion"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "user",
+   "productLabel": "Power Automate",
+   "title": "Full Name aus dynamischen Inhalten",
+   "actions": [
+    "dynamische Inhalte",
+    "Full Name"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Testen und Run-History pruefen",
+   "actions": [
+    "Beispielkontakt",
+    "Run-History"
+   ]
+  }
+ ],
+ "punchline": [
+  "Personalisierte Mail"
+ ]
+}

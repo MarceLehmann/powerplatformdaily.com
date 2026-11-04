@@ -39,6 +39,12 @@ faq:
   answer: Prüfen Sie die Run-Details auf fehlende Daten, Verbindungsprobleme oder
     eine nicht passende Triggereinstellung. Beheben Sie die Ursache und testen Sie
     erneut.
+animation:
+  video: /assets/img/animations/614f33198ee989e6dd498fc4-de.mp4
+  poster: /assets/img/animations/614f33198ee989e6dd498fc4-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Ein 4-Schritt-Ablauf zeigt das Erstellen eines automatisierten Cloud Flow mit Dataverse-Trigger Added fuer Contact, das Hinzufuegen einer Outlook-E-Mail-Aktion, das Einfuegen von Full Name und das Pruefen der Run-History."
 ---
 
 ## TL;DR

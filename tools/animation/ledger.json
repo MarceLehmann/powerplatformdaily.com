@@ -486,5 +486,16 @@
       "Set the form to New, use SubmitForm(frmExpense) on the save button",
       "Insert a gallery on a separate screen and connect it to the personal expenses table."
     ]
+  },
+  "614f33198ee989e6dd498fc4": {
+    "gif": true,
+    "reason": "The post gives a clear 4 stage build and test sequence: configure the Dataverse trigger, add Outlook email, personalize with dynamic content, then test and review run history.",
+    "at": "2026-11-04",
+    "evidence": [
+      "with a Microsoft Dataverse row trigger set to Added for the Contact table",
+      "then add an Outlook email action.",
+      "Use dynamic content such as Full Name to personalize the message",
+      "test with a sample contact, and review run history for missing data, connection, or trigger issues."
+    ]
   }
 }

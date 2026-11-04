@@ -38,6 +38,12 @@ faq:
 - question: What should I check when a Dataverse contact email flow fails?
   answer: Review flow run details for missing data, connection problems, or a trigger
     setting that does not match the test record. Then correct the cause and retest.
+animation:
+  video: /assets/img/animations/614f33198ee989e6dd498fc4-en.mp4
+  poster: /assets/img/animations/614f33198ee989e6dd498fc4-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A 4 step flow shows creating an automated cloud flow with a Dataverse Added trigger for Contact, adding an Outlook email action, inserting Full Name dynamic content, then testing and checking run history."
 ---
 
 ## TL;DR
