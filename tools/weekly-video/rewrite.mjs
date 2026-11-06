@@ -52,7 +52,7 @@ function azToken(subscription) {
 export function providerRequest(messages, env = process.env, getToken = azToken) {
   if (env.REWRITE_DISABLE === '1') return null;
   if (env.ANTHROPIC_API_KEY) {
-    return { name: 'anthropic', url: ANTHROPIC_URL, headers: { 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'Content-Type': 'application/json' }, body: { model: env.REWRITE_MODEL || ANTHROPIC_MODEL, max_tokens: 1200, messages } };
+    return { name: 'anthropic', url: ANTHROPIC_URL, headers: { 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'Content-Type': 'application/json' }, body: { model: env.REWRITE_MODEL || ANTHROPIC_MODEL, max_tokens: 4000, thinking: { type: 'disabled' }, messages } };
   }
   if (env.REWRITE_FOUNDRY_ENDPOINT) {
     const tok = getToken(env.REWRITE_FOUNDRY_SUBSCRIPTION);
