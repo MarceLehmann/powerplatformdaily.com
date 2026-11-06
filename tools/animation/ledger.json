@@ -497,5 +497,10 @@
       "Use dynamic content such as Full Name to personalize the message",
       "test with a sample contact, and review run history for missing data, connection, or trigger issues."
     ]
+  },
+  "404d49e604df7820e732ed86": {
+    "gif": false,
+    "reason": "The post is a feature summary and FAQ without a concrete 3 to 5 stage procedure explicitly stated in order.",
+    "at": "2026-11-06"
   }
 }
