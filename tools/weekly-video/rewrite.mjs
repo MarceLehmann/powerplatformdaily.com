@@ -86,7 +86,8 @@ export async function rewriteRelevance({ items, lang, env = process.env, fetchFn
     }
     const j = await r.json();
     const content = req.name === 'anthropic' ? (j.content || []).filter(c => c.type === 'text').map(c => c.text).join('') : j.choices?.[0]?.message?.content;
-    const arr = parseArray(content);
+    let arr;
+    try { arr = parseArray(content); } catch (e) { throw new Error(`${e.message} (${req.name}, stop_reason=${j.stop_reason}, Bloecke=${(j.content || []).map(c => c.type).join(',')}, Anfang: ${String(content || '').slice(0, 120).replace(/\s+/g, ' ')})`); }
     todo.forEach((x, i) => {
       const t = typeof arr[i] === 'string' ? arr[i].trim() : arr[i];
       const bad = arr.length === todo.length ? validateRewrite(t, lang) : 'Anzahl passt nicht';
