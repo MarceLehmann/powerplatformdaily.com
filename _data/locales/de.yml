@@ -36,7 +36,7 @@ panel:
 copyright:
   # Shown at the bottom of the post
   license:
-    template: Dieser Eintrag ist vom Autor unter :LICENSE_NAME lizensiert.
+    template: Dieser Eintrag ist vom Autor unter :LICENSE_NAME lizenziert.
     name: CC BY 4.0
     link: https://creativecommons.org/licenses/by/4.0/
 
@@ -58,6 +58,7 @@ theme:
   light: Hell
   dark: Dunkel
   system: System
+  toggle: Modus wechseln
 
 # ----- Posts related labels -----
 
