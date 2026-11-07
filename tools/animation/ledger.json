@@ -502,5 +502,10 @@
     "gif": false,
     "reason": "The post is a feature summary and FAQ without a concrete 3 to 5 stage procedure explicitly stated in order.",
     "at": "2026-11-06"
+  },
+  "8f7c4494a8ffe30ff87aaf98": {
+    "gif": false,
+    "reason": "The post gives guidance and best practices for choosing validation approaches, but it does not state a concrete 3 to 5 stage procedure in order.",
+    "at": "2026-11-07"
   }
 }
