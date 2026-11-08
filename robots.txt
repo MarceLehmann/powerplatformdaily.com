@@ -1,4 +1,4 @@
-# Power Platform Daily – robots.txt
+# Power Platform Daily: robots.txt
 
 User-agent: *
 Allow: /
