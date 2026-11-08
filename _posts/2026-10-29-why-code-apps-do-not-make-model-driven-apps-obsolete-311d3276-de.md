@@ -45,5 +45,5 @@ Model-Driven Apps bieten persönliche Ansichten, einheitliches Lookup-Verhalten 
 ## Warum das wichtig ist
 
 - Makers: Prüft vor einer Ablösung, ob persönliche Ansichten, geteilte Filter, Lookup-Verhalten und Datensatzlinks unverzichtbar sind, da Code Apps diese Funktionen möglicherweise individuell nachbilden müssen.
-- Leadership/Business: Vergleicht den Nutzen größerer Flexibilität mit dem Aufwand, ausgereifte Plattformfunktionen zu ersetzen, besonders bei daten- und prozessorientierten Anwendungen.
+- Leadership/Business: Vergleicht den Nutzen grösserer Flexibilität mit dem Aufwand, ausgereifte Plattformfunktionen zu ersetzen, besonders bei daten- und prozessorientierten Anwendungen.
 - Admins/IT: Achtet auf Konsistenz und langfristigen Wartungsaufwand, wenn mehrere Entwickler oder KI-generierter Code standardisiertes Plattformverhalten ersetzen.

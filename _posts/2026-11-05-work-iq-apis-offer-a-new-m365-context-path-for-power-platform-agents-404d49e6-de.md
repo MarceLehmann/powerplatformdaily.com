@@ -1,5 +1,5 @@
 ---
-title: Work IQ APIs erschließen M365-Kontext für Power Platform-Agenten
+title: Work IQ APIs erschliessen M365-Kontext für Power Platform-Agenten
 description: Laut Quelle vom 03.11.2026 stellen Work IQ APIs M365-Kontext, Aktionen
   und Zwischenzustände für Copilot Studio, Power Automate und eigene Konnektoren bereit.
 date: '2026-11-05T19:39:20Z'
