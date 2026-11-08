@@ -70,7 +70,7 @@
     {
       "@type": "Question",
       "name": "How do you choose what to feature?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Every candidate goes through an automated relevance check before it is summarized: it has to be substantially about Microsoft Copilot Studio, Power Apps, Power Automate, Power BI or Microsoft Fabric - new features, product updates, releases, roadmap, integrations, connectors or practical how-to guidance, with enough original content to summarize responsibly. Generic AI news, marketing, and Power Platform governance/security/compliance/DLP/ALM/CoE content do not pass - that's the scope of our sister site, Power Platform Governance." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Every candidate goes through an automated relevance check before it is summarized: it has to be substantially about Microsoft Copilot Studio, Power Apps, Power Automate, Power BI or Microsoft Fabric: new features, product updates, releases, roadmap, integrations, connectors or practical how-to guidance, with enough original content to summarize responsibly. Generic AI news, marketing, and Power Platform governance/security/compliance/DLP/ALM/CoE content do not pass; that's the scope of our sister site, Power Platform Governance." }
     },
     {
       "@type": "Question",
@@ -95,17 +95,17 @@
     {
       "@type": "Question",
       "name": "What's the difference between Power Platform Daily and Power Platform Governance?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Different scope, same curation approach. Daily covers product news and how-to guidance for Copilot Studio, Power Apps, Power Automate, Power BI and Fabric - new features, releases, integrations. Governance covers the administrative side - security, compliance, DLP, ALM, Center of Excellence. The two sites are kept deliberately separate; an article only ever appears on one of them." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Different scope, same curation approach. Daily covers product news and how-to guidance for Copilot Studio, Power Apps, Power Automate, Power BI and Fabric: new features, releases, integrations. Governance covers the administrative side: security, compliance, DLP, ALM, Center of Excellence. The two sites are kept deliberately separate; an article only ever appears on one of them." }
     },
     {
       "@type": "Question",
       "name": "Do I need Premium licensing for the features covered here?",
-      "acceptedAnswer": { "@type": "Answer", "text": "It depends on the feature. Many Power Apps and Power Automate capabilities are available on a standard license; others - certain premium connectors, Dataverse, some Copilot Studio and Fabric capacities - require a premium or per-capacity license. We note it in the summary when a feature is premium-only; when in doubt, check the current Microsoft licensing documentation, since terms change over time." }
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on the feature. Many Power Apps and Power Automate capabilities are available on a standard license; others (certain premium connectors, Dataverse, some Copilot Studio and Fabric capacities) require a premium or per-capacity license. We note it in the summary when a feature is premium-only; when in doubt, check the current Microsoft licensing documentation, since terms change over time." }
     },
     {
       "@type": "Question",
       "name": "What's the difference between Copilot Studio and Microsoft 365 Copilot?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Microsoft 365 Copilot is the built-in AI assistant across Word, Excel, Teams and the other Microsoft 365 apps. Copilot Studio is the tool for building and customizing your own conversational agents - with your own data sources, topics and actions - that can run standalone or be published into Microsoft 365 Copilot and other channels." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Microsoft 365 Copilot is the built-in AI assistant across Word, Excel, Teams and the other Microsoft 365 apps. Copilot Studio is the tool for building and customizing your own conversational agents (with your own data sources, topics and actions) that can run standalone or be published into Microsoft 365 Copilot and other channels." }
     }
   ]
 }
@@ -144,3 +144,22 @@
 </script>
 {%- endif -%}
 
+{%- unless page.url == '/' or page.url == '/about/' or page.layout == 'post' -%}
+{%- comment -%}
+  Tab- und Listenseiten (FAQ, Archiv, Datenschutz, Tags, ...): jekyll-seo-tag gaebe dort
+  BlogPosting ohne author und image aus. Stattdessen eine WebPage mit Verweis auf die
+  Organisation (dieselbe @id wie bei den Beitraegen).
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ page.title | default: site.title | jsonify }},
+  "description": {{ page.description | default: site.description | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "inLanguage": {{ page.lang | default: site.lang | jsonify }},
+  "isPartOf": { "@type": "WebSite", "name": {{ site.title | jsonify }}, "url": "https://powerplatformdaily.com/" },
+  "publisher": { "@id": "https://powerplatformdaily.com/#organization" }
+}
+</script>
+{%- endunless -%}

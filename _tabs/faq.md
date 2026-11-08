@@ -19,7 +19,7 @@ No. We write an independent short summary and takeaway, and link directly to the
 
 ### How do you choose what to feature?
 
-Every candidate goes through an automated relevance check before it is summarized: it has to be substantially about Microsoft Copilot Studio, Power Apps, Power Automate, Power BI or Microsoft Fabric - new features, product updates, releases, roadmap, integrations, connectors or practical how-to guidance, with enough original content to summarize responsibly. Generic AI news, marketing, and Power Platform governance/security/compliance/DLP/ALM/CoE content do not pass - that's the scope of our sister site, [Power Platform Governance](https://powerplatformgovernance.com/).
+Every candidate goes through an automated relevance check before it is summarized: it has to be substantially about Microsoft Copilot Studio, Power Apps, Power Automate, Power BI or Microsoft Fabric: new features, product updates, releases, roadmap, integrations, connectors or practical how-to guidance, with enough original content to summarize responsibly. Generic AI news, marketing, and Power Platform governance/security/compliance/DLP/ALM/CoE content do not pass; that's the scope of our sister site, [Power Platform Governance](https://powerplatformgovernance.com/).
 
 ### Is this affiliated with Microsoft?
 
@@ -41,15 +41,15 @@ Either it hasn't been suggested yet, or it didn't pass the relevance check for t
 
 ### What's the difference between Power Platform Daily and Power Platform Governance?
 
-Different scope, same curation approach. Daily covers product news and how-to guidance for Copilot Studio, Power Apps, Power Automate, Power BI and Fabric - new features, releases, integrations. [Governance](https://powerplatformgovernance.com/) covers the administrative side - security, compliance, DLP, ALM, Center of Excellence. The two sites are kept deliberately separate; an article only ever appears on one of them.
+Different scope, same curation approach. Daily covers product news and how-to guidance for Copilot Studio, Power Apps, Power Automate, Power BI and Fabric: new features, releases, integrations. [Governance](https://powerplatformgovernance.com/) covers the administrative side: security, compliance, DLP, ALM, Center of Excellence. The two sites are kept deliberately separate; an article only ever appears on one of them.
 
 ### Do I need Premium licensing for the features covered here?
 
-It depends on the feature. Many Power Apps and Power Automate capabilities are available on a standard license; others - certain premium connectors, Dataverse, some Copilot Studio and Fabric capacities - require a premium or per-capacity license. We note it in the summary when a feature is premium-only; when in doubt, check the current Microsoft licensing documentation, since terms change over time.
+It depends on the feature. Many Power Apps and Power Automate capabilities are available on a standard license; others (certain premium connectors, Dataverse, some Copilot Studio and Fabric capacities) require a premium or per-capacity license. We note it in the summary when a feature is premium-only; when in doubt, check the current Microsoft licensing documentation, since terms change over time.
 
 ### What's the difference between Copilot Studio and Microsoft 365 Copilot?
 
-Microsoft 365 Copilot is the built-in AI assistant across Word, Excel, Teams and the other Microsoft 365 apps. Copilot Studio is the tool for building and customizing your own conversational agents - with your own data sources, topics and actions - that can run standalone or be published into Microsoft 365 Copilot and other channels.
+Microsoft 365 Copilot is the built-in AI assistant across Word, Excel, Teams and the other Microsoft 365 apps. Copilot Studio is the tool for building and customizing your own conversational agents (with your own data sources, topics and actions) that can run standalone or be published into Microsoft 365 Copilot and other channels.
 
 ## Still have a question?
 
