@@ -376,8 +376,8 @@ Dir.mktmpdir do |root|
     check(attribution.length == 1, "Source line must appear exactly once: #{path}")
     check(html.index('curated-attribution') < html.index('TL;DR'), 'Source line is not above the TL;DR in the HTML')
     text = attribution.first.text.gsub(/\s+/, ' ')
-    expected_date = old ? '10.01.2026' : (today - 3).strftime('%d.%m.%Y')
-    expected = locale == 'de' ? "Originalartikel vom #{expected_date}" : "Original article from #{expected_date}"
+    original = old ? Date.new(2026, 1, 10) : (today - 3)
+    expected = locale == 'de' ? "Originalartikel vom #{original.strftime('%d.%m.%Y')}" : "Original article from #{original.strftime('%B %-d, %Y')}"
     check(text.include?(expected), "Missing '#{expected}' in: #{text}")
     check(text.include?(old ? 'Old original title' : 'Fresh original title'), 'Original title missing from the source line')
     outdated = document.at_css('.source-outdated')
