@@ -17,7 +17,7 @@
 {%- endif -%}
 <div class="curated-attribution" data-curated-entry>
   <p>
-    <strong>{% if page.lang == 'de' %}Originalartikel{% if original_date %} vom {{ original_date | date: '%d.%m.%Y' }}{% endif %}{% else %}Original article{% if original_date %} from {{ original_date | date: '%d.%m.%Y' }}{% endif %}{% endif %}:</strong>
+    <strong>{% if page.lang == 'de' %}Originalartikel{% if original_date %} vom {{ original_date | date: '%d.%m.%Y' }}{% endif %}{% else %}Original article{% if original_date %} from {{ original_date | date: '%B %-d, %Y' }}{% endif %}{% endif %}:</strong>
     <span class="original-title">{{ page.source_title | escape }}</span>{% if page.lang == 'de' %}{% if page.source_author %}, von {% if page.source_author_url %}<a href="{{ page.source_author_url | escape }}">{{ page.source_author | escape }}</a>{% else %}{{ page.source_author | escape }}{% endif %}{% endif %}, auf{% else %}{% if page.source_author %}, by {% if page.source_author_url %}<a href="{{ page.source_author_url | escape }}">{{ page.source_author | escape }}</a>{% else %}{{ page.source_author | escape }}{% endif %}{% endif %}, on{% endif %} <a href="{{ page.source_site_url | escape }}">{{ page.source_name | escape }}</a>.
     <a class="original-link" href="{{ page.source_url | escape }}">{% if page.lang == 'de' %}Artikel lesen{% else %}Read the original{% endif %} <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
     {% if page.submitted_by.publish_credit == true %}
