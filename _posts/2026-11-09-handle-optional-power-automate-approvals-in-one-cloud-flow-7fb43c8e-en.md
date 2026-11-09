@@ -37,6 +37,12 @@ faq:
 - question: How should optional Power Automate approvals handle rejection and no response?
   answer: Check approval outcomes after each approval and define separate handling
     for rejection, timeout or failed actions. Test each case and review the run history.
+animation:
+  video: /assets/img/animations/7fb43c8efde41d32914f112c-en.mp4
+  poster: /assets/img/animations/7fb43c8efde41d32914f112c-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A four step sequence shows one Power Automate flow: initialize Not required, run an approval in a Condition branch when needed, replace it with the approval result, then test approved, rejected, skipped and unanswered paths."
 ---
 
 ## TL;DR

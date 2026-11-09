@@ -1,0 +1,51 @@
+{
+ "title": "Optionale Genehmigungen im Flow",
+ "subtitle": "Nur noetige Genehmigungen ausfuehren, uebersprungene Pfade markieren und alle Ergebnisse testen.",
+ "steps": [
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Uebersprungenes Ergebnis setzen",
+   "actions": [
+    "Variable initialisieren",
+    "Nicht erforderlich"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "filter",
+   "productLabel": "Power Automate",
+   "title": "Genehmigung nur bei Bedarf",
+   "actions": [
+    "Bedingung",
+    "Switch-Aktionen"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Mit Genehmigungsergebnis ersetzen",
+   "actions": [
+    "Genehmigungsergebnis",
+    "Bedingungszweig"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "search",
+   "productLabel": "Power Automate",
+   "title": "Alle Genehmigungspfade testen",
+   "actions": [
+    "Ausfuehrungsverlauf",
+    "genehmigt",
+    "abgelehnt"
+   ]
+  }
+ ],
+ "punchline": [
+  "Ein Flow, optionale Freigaben",
+  "Uebersprungene Pfade klar"
+ ]
+}

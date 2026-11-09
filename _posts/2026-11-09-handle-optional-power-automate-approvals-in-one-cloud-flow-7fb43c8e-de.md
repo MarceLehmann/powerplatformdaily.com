@@ -42,6 +42,12 @@ faq:
   answer: Prüfe die Ergebnisse nach jeder Genehmigung und definiere getrennte Behandlung
     für Ablehnung, Zeitüberschreitung oder fehlgeschlagene Aktionen. Teste jeden Fall
     im Ausführungsverlauf.
+animation:
+  video: /assets/img/animations/7fb43c8efde41d32914f112c-de.mp4
+  poster: /assets/img/animations/7fb43c8efde41d32914f112c-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Eine Abfolge mit vier Schritten zeigt einen Power Automate Flow: Zuerst Nicht erforderlich initialisieren, dann eine Genehmigung bei Bedarf im Bedingungszweig ausfuehren, danach das Ergebnis ersetzen und zuletzt alle Pfade testen."
 ---
 
 ## TL;DR

@@ -1,0 +1,55 @@
+{
+ "title": "Optional approvals in one flow",
+ "subtitle": "Run only needed approvals, track skipped paths, then test every outcome.",
+ "steps": [
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Initialize skipped outcome",
+   "actions": [
+    "Initialize variable",
+    "Not required"
+   ],
+   "evidence": "Initialize outcomes such as Not required before each branch"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "filter",
+   "productLabel": "Power Automate",
+   "title": "Run approval only if needed",
+   "actions": [
+    "Condition",
+    "Switch actions"
+   ],
+   "evidence": "Power Automate can use Conditions or Switch actions to run optional manager and finance approvals in one cloud flow."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Replace with approval result",
+   "actions": [
+    "approval result",
+    "Condition branch"
+   ],
+   "evidence": "then replace it with the approval result when the branch executes."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "search",
+   "productLabel": "Power Automate",
+   "title": "Test all approval paths",
+   "actions": [
+    "run history",
+    "approved",
+    "rejected"
+   ],
+   "evidence": "then test approved, rejected, skipped and unanswered paths before using the flow."
+  }
+ ],
+ "punchline": [
+  "One flow, optional approvals",
+  "Skipped paths stay explicit"
+ ]
+}

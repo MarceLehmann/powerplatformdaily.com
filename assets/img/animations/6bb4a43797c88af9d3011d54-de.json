@@ -1,0 +1,54 @@
+{
+ "title": "Veraltete Daten nach Speichern",
+ "subtitle": "Gespeicherten Datensatz pruefen, Item kontrollieren, dann Aktualisierung und Ablauf verfolgen.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "check",
+   "productLabel": "Power Apps",
+   "title": "Gespeicherten Datensatz per ID pruefen",
+   "actions": [
+    "eindeutige ID",
+    "bearbeitetes Feld",
+    "Quelle"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "search",
+   "productLabel": "Power Apps",
+   "title": "Item und Auswahllogik untersuchen",
+   "actions": [
+    "Item Eigenschaft",
+    "Galerieauswahl",
+    "Lookup"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "arrow",
+   "productLabel": "Power Apps",
+   "title": "Aktualisierung und Neuladen pruefen",
+   "actions": [
+    "Refresh",
+    "neu laden",
+    "ResetForm"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "bolt",
+   "productLabel": "Power Apps",
+   "title": "Aktionen nach Speichern verfolgen",
+   "actions": [
+    "OnSuccess",
+    "Monitor",
+    "Speichern zu Anzeige"
+   ]
+  }
+ ],
+ "punchline": [
+  "Speichern ist korrekt",
+  "Anzeige liest aktuellen Satz"
+ ]
+}

@@ -38,6 +38,12 @@ faq:
   answer: Use Refresh to request current source data, reload the Item record when
     needed, and ResetForm to discard unsaved edits. ResetForm alone does not fetch
     the record again.
+animation:
+  video: /assets/img/animations/6bb4a43797c88af9d3011d54-en.mp4
+  poster: /assets/img/animations/6bb4a43797c88af9d3011d54-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A four step flow shows how to troubleshoot stale Power Apps form data by verifying the saved record by ID, inspecting the Item source, refreshing or reloading data, and tracing post save behaviour with OnSuccess and Monitor."
 ---
 
 ## TL;DR

@@ -507,5 +507,27 @@
     "gif": false,
     "reason": "The post gives guidance and best practices for choosing validation approaches, but it does not state a concrete 3 to 5 stage procedure in order.",
     "at": "2026-11-07"
+  },
+  "6bb4a43797c88af9d3011d54": {
+    "gif": true,
+    "reason": "The post gives a concrete troubleshooting sequence from verifying the saved record to checking Item logic and then refresh and post save tracing.",
+    "at": "2026-11-09",
+    "evidence": [
+      "Verify the stored value by unique ID",
+      "inspect the form's Item property and selection logic",
+      "then check Refresh, collections, variables, and later updates.",
+      "Use OnSuccess for post-save actions and Monitor to trace the save-to-display sequence."
+    ]
+  },
+  "7fb43c8efde41d32914f112c": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage flow for optional approvals: initialize outcome, run approvals conditionally, update result, then test all paths.",
+    "at": "2026-11-09",
+    "evidence": [
+      "Initialize outcomes such as Not required before each branch",
+      "Power Automate can use Conditions or Switch actions to run optional manager and finance approvals in one cloud flow.",
+      "then replace it with the approval result when the branch executes.",
+      "then test approved, rejected, skipped and unanswered paths before using the flow."
+    ]
   }
 }

@@ -1,0 +1,58 @@
+{
+ "title": "Fix stale data after form save",
+ "subtitle": "Check the saved record, inspect Item, then refresh and trace the display path.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "check",
+   "productLabel": "Power Apps",
+   "title": "Verify the saved record by ID",
+   "actions": [
+    "unique ID",
+    "edited field",
+    "source"
+   ],
+   "evidence": "Verify the stored value by unique ID"
+  },
+  {
+   "product": "powerapps",
+   "icon": "search",
+   "productLabel": "Power Apps",
+   "title": "Inspect Item and selection logic",
+   "actions": [
+    "Item property",
+    "gallery selection",
+    "lookup"
+   ],
+   "evidence": "inspect the form's Item property and selection logic"
+  },
+  {
+   "product": "powerapps",
+   "icon": "arrow",
+   "productLabel": "Power Apps",
+   "title": "Check refresh and record reload",
+   "actions": [
+    "Refresh",
+    "reload",
+    "ResetForm"
+   ],
+   "evidence": "then check Refresh, collections, variables, and later updates."
+  },
+  {
+   "product": "powerapps",
+   "icon": "bolt",
+   "productLabel": "Power Apps",
+   "title": "Trace post save actions",
+   "actions": [
+    "OnSuccess",
+    "Monitor",
+    "save-to-display"
+   ],
+   "evidence": "Use OnSuccess for post-save actions and Monitor to trace the save-to-display sequence."
+  }
+ ],
+ "punchline": [
+  "Save is correct",
+  "Display reads current record"
+ ]
+}

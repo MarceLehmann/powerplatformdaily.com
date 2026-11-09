@@ -42,6 +42,12 @@ faq:
   answer: Refresh fordert aktuelle Quelldaten an, erneutes Laden aktualisiert den
     Item Datensatz und ResetForm verwirft ungespeicherte Änderungen. ResetForm ruft
     den Datensatz nicht erneut ab.
+animation:
+  video: /assets/img/animations/6bb4a43797c88af9d3011d54-de.mp4
+  poster: /assets/img/animations/6bb4a43797c88af9d3011d54-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Ein Ablauf mit vier Schritten zeigt die Pruefung veralteter Power Apps Formulardaten: Datensatz per ID pruefen, Item Quelle kontrollieren, Daten aktualisieren oder neu laden und Verhalten mit OnSuccess und Monitor verfolgen."
 ---
 
 ## TL;DR
