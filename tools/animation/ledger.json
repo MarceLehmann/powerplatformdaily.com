@@ -529,5 +529,10 @@
       "then replace it with the approval result when the branch executes.",
       "then test approved, rejected, skipped and unanswered paths before using the flow."
     ]
+  },
+  "7a9881ae3292a95bad65e35b": {
+    "gif": false,
+    "reason": "The post is a comparison and best practice summary about choosing between collections and direct queries, not a concrete 3 to 5 stage procedure.",
+    "at": "2026-11-12"
   }
 }
