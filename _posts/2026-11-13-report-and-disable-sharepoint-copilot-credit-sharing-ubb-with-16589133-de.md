@@ -39,6 +39,12 @@ faq:
     über UBB?
   answer: Laut Quelle gehören erweitertes Autofill und schnellere Dokumentverarbeitung
     dazu; ohne Credits fällt Autofill auf Standardverarbeitung zurück.
+animation:
+  video: /assets/img/animations/165891330c04af764e3f9c0d-de.mp4
+  poster: /assets/img/animations/165891330c04af764e3f9c0d-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Vier Schritte zeigen einen PowerShell-Adminablauf fuer SharePoint-Websites: mit dem Admin Center verbinden, den UBB-Status je Website lesen, die Copilot-Credit-Freigabe deaktivieren und Ergebnisse als CSV-Bericht schreiben."
 ---
 
 ## TL;DR

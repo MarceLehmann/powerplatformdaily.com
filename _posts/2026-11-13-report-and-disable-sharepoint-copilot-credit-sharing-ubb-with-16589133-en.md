@@ -38,6 +38,12 @@ faq:
   answer: Per the source, supported AI features include advanced autofill and faster
     document processing, and autofill falls back to standard processing when credits
     are unavailable.
+animation:
+  video: /assets/img/animations/165891330c04af764e3f9c0d-en.mp4
+  poster: /assets/img/animations/165891330c04af764e3f9c0d-en.poster.webp
+  width: 800
+  height: 450
+  alt: "Four steps show a PowerShell admin flow for SharePoint sites: connect to the admin center, read each site's UBB status, disable Copilot Credit sharing, and write results to a CSV report."
 ---
 
 ## TL;DR

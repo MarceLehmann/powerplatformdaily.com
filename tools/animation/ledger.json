@@ -534,5 +534,16 @@
     "gif": false,
     "reason": "The post is a comparison and best practice summary about choosing between collections and direct queries, not a concrete 3 to 5 stage procedure.",
     "at": "2026-11-12"
+  },
+  "165891330c04af764e3f9c0d": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage admin script flow: connect, read UBB status, disable sharing, and export a CSV report.",
+    "at": "2026-11-14",
+    "evidence": [
+      "Connect to your SharePoint admin center with PnP PowerShell",
+      "call the SP.UBB.GetUBB endpoint per site, and export IsUBB, EnabledDate and credit status to CSV.",
+      "the source's script posts to SP.UBB.SetUBB(isUBB=false) per site; it only disables sharing",
+      "can turn off Copilot Credit sharing, logging results to a CSV report."
+    ]
   }
 }

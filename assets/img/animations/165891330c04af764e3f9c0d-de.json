@@ -1,0 +1,51 @@
+{
+ "title": "UBB mit PowerShell pruefen und beenden",
+ "subtitle": "Verbinden, UBB-Status lesen, Freigabe deaktivieren und CSV-Bericht schreiben.",
+ "steps": [
+  {
+   "product": "sharepoint",
+   "icon": "link",
+   "productLabel": "SharePoint",
+   "title": "Mit dem Admin Center verbinden",
+   "actions": [
+    "PnP PowerShell",
+    "SharePoint admin center"
+   ]
+  },
+  {
+   "product": "sharepoint",
+   "icon": "search",
+   "productLabel": "SharePoint",
+   "title": "UBB-Status je Website lesen",
+   "actions": [
+    "SP.UBB.GetUBB",
+    "IsUBB",
+    "EnabledDate"
+   ]
+  },
+  {
+   "product": "sharepoint",
+   "icon": "bolt",
+   "productLabel": "SharePoint",
+   "title": "Copilot-Credit-Freigabe beenden",
+   "actions": [
+    "SP.UBB.SetUBB(isUBB=false)",
+    "Freigabe deaktivieren"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "file",
+   "productLabel": "PowerShell",
+   "title": "Ergebnisse als CSV-Bericht schreiben",
+   "actions": [
+    "CSV-Bericht",
+    "Ergebnisse protokollieren"
+   ]
+  }
+ ],
+ "punchline": [
+  "UBB-Status berichtet",
+  "Freigabe deaktivierbar"
+ ]
+}

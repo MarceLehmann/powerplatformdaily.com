@@ -1,0 +1,55 @@
+{
+ "title": "Report and disable UBB with PowerShell",
+ "subtitle": "Connect, read UBB status, disable sharing, then write a CSV report.",
+ "steps": [
+  {
+   "product": "sharepoint",
+   "icon": "link",
+   "productLabel": "SharePoint",
+   "title": "Connect to the admin center",
+   "actions": [
+    "PnP PowerShell",
+    "SharePoint admin center"
+   ],
+   "evidence": "Connect to your SharePoint admin center with PnP PowerShell"
+  },
+  {
+   "product": "sharepoint",
+   "icon": "search",
+   "productLabel": "SharePoint",
+   "title": "Read each site's UBB status",
+   "actions": [
+    "SP.UBB.GetUBB",
+    "IsUBB",
+    "EnabledDate"
+   ],
+   "evidence": "call the SP.UBB.GetUBB endpoint per site, and export IsUBB, EnabledDate and credit status to CSV."
+  },
+  {
+   "product": "sharepoint",
+   "icon": "bolt",
+   "productLabel": "SharePoint",
+   "title": "Turn off Copilot Credit sharing",
+   "actions": [
+    "SP.UBB.SetUBB(isUBB=false)",
+    "disable sharing"
+   ],
+   "evidence": "the source's script posts to SP.UBB.SetUBB(isUBB=false) per site; it only disables sharing"
+  },
+  {
+   "product": "generic",
+   "icon": "file",
+   "productLabel": "PowerShell",
+   "title": "Write results to a CSV report",
+   "actions": [
+    "CSV report",
+    "logging results"
+   ],
+   "evidence": "can turn off Copilot Credit sharing, logging results to a CSV report."
+  }
+ ],
+ "punchline": [
+  "UBB status reported",
+  "Sharing can be disabled"
+ ]
+}
