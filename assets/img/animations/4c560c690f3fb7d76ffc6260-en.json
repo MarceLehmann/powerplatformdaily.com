@@ -1,0 +1,52 @@
+{
+ "title": "How the harness continues",
+ "subtitle": "After a failed tool call, the harness checks the result and may continue within limits.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Take a step",
+   "actions": [
+    "takes a step"
+   ],
+   "evidence": "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "search",
+   "productLabel": "Copilot Studio",
+   "title": "Inspect the result",
+   "actions": [
+    "inspects the result"
+   ],
+   "evidence": "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Decide what to do next",
+   "actions": [
+    "decides what to do next"
+   ],
+   "evidence": "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Repeat within limits",
+   "actions": [
+    "time limits",
+    "step limits",
+    "token limits"
+   ],
+   "evidence": "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits."
+  }
+ ],
+ "punchline": [
+  "Continuation needs checks",
+  "It does not prove completion"
+ ]
+}

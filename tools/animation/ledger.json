@@ -545,5 +545,37 @@
       "the source's script posts to SP.UBB.SetUBB(isUBB=false) per site; it only disables sharing",
       "can turn off Copilot Credit sharing, logging results to a CSV report."
     ]
+  },
+  "4c560c690f3fb7d76ffc6260": {
+    "gif": true,
+    "reason": "The post states a concrete 4 stage loop for how the harness proceeds after a failed tool call.",
+    "at": "2026-11-14",
+    "evidence": [
+      "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits.",
+      "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits.",
+      "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits.",
+      "Copilot Studio’s harness takes a step, inspects the result, decides what to do next, and repeats within time, step and token limits."
+    ]
+  },
+  "dd8b92314f5be61382184acf": {
+    "gif": true,
+    "reason": "The post describes a concrete three stage decision sequence for a refund agent: delegated authority, evidence outcome, and enforcement at the write service.",
+    "at": "2026-11-14",
+    "evidence": [
+      "what the agent may do (an illustrative $100 autonomous limit per order)",
+      "whether the evidence suffices (PROCEED, ASK, REVIEW outcomes)",
+      "checks at the API or service that performs the write"
+    ]
+  },
+  "6e48733fee123fcfb684147a": {
+    "gif": true,
+    "reason": "The post gives a clear 4 step diagnostic sequence for troubleshooting missing search results.",
+    "at": "2026-11-14",
+    "evidence": [
+      "Compare the missing record with a working one",
+      "check which fields the formula searches",
+      "test filter logic",
+      "then retest under the affected user's account"
+    ]
   }
 }

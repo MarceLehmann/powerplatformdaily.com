@@ -1,0 +1,52 @@
+{
+ "title": "Diagnose missing search results",
+ "subtitle": "Trace one missing record through fields, filters, and user access.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "search",
+   "productLabel": "Power Apps",
+   "title": "Compare missing and found records",
+   "actions": [
+    "missing record",
+    "working one"
+   ],
+   "evidence": "Compare the missing record with a working one"
+  },
+  {
+   "product": "powerapps",
+   "icon": "file",
+   "productLabel": "Power Apps",
+   "title": "Check which fields are searched",
+   "actions": [
+    "fields",
+    "formula searches"
+   ],
+   "evidence": "check which fields the formula searches"
+  },
+  {
+   "product": "powerapps",
+   "icon": "filter",
+   "productLabel": "Power Apps",
+   "title": "Test the filter logic",
+   "actions": [
+    "filter logic"
+   ],
+   "evidence": "test filter logic"
+  },
+  {
+   "product": "powerapps",
+   "icon": "user",
+   "productLabel": "Power Apps",
+   "title": "Retest as the affected user",
+   "actions": [
+    "affected user's account"
+   ],
+   "evidence": "then retest under the affected user's account"
+  }
+ ],
+ "punchline": [
+  "Find why records",
+  "are being skipped"
+ ]
+}

@@ -38,6 +38,12 @@ faq:
     Daten?
   answer: Verwendet eine Arbeitsmappe ohne erwartete Tabelle und einen nicht zugänglichen
     Datensatz. Prüft danach, ob der Agent beide Einschränkungen klar meldet.
+animation:
+  video: /assets/img/animations/4c560c690f3fb7d76ffc6260-de.mp4
+  poster: /assets/img/animations/4c560c690f3fb7d76ffc6260-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Eine Vier-Schritt-Abfolge zeigt, wie der Copilot-Studio-Harness einen Schritt ausfuehrt, das Ergebnis prueft, den naechsten Schritt festlegt und innerhalb von Grenzen wiederholt."
 ---
 
 ## TL;DR

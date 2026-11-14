@@ -38,6 +38,12 @@ faq:
   answer: 'Two separate routes: a Foundry analyst with advisory-only analysis and
     a deterministic flow using fictional fixtures; no combined end-to-end execution
     path was verified.'
+animation:
+  video: /assets/img/animations/dd8b92314f5be61382184acf-en.mp4
+  poster: /assets/img/animations/dd8b92314f5be61382184acf-en.poster.webp
+  width: 800
+  height: 450
+  alt: "Three steps show the refund agent design: set delegated authority, evaluate evidence into PROCEED ASK or REVIEW, then enforce checks in the service that performs the write."
 ---
 
 ## TL;DR

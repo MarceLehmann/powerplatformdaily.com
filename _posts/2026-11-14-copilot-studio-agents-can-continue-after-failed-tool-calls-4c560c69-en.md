@@ -35,6 +35,12 @@ faq:
 - question: How can I test a Copilot Studio agent with missing or restricted data?
   answer: Use a workbook without the expected table and a record the user cannot access,
     then check whether the agent identifies each limitation clearly.
+animation:
+  video: /assets/img/animations/4c560c690f3fb7d76ffc6260-en.mp4
+  poster: /assets/img/animations/4c560c690f3fb7d76ffc6260-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A four step sequence shows the Copilot Studio harness taking a step, inspecting the result, deciding the next action, and repeating within limits."
 ---
 
 ## TL;DR

@@ -1,0 +1,44 @@
+{
+ "title": "Design a bounded refund agent",
+ "subtitle": "Set authority, assess evidence, then enforce checks where the write happens.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "shield",
+   "productLabel": "Copilot Studio",
+   "title": "Set delegated authority",
+   "actions": [
+    "delegated cap",
+    "$100 per order"
+   ],
+   "evidence": "what the agent may do (an illustrative $100 autonomous limit per order)"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "search",
+   "productLabel": "Copilot Studio",
+   "title": "Assess evidence",
+   "actions": [
+    "PROCEED",
+    "ASK",
+    "REVIEW"
+   ],
+   "evidence": "whether the evidence suffices (PROCEED, ASK, REVIEW outcomes)"
+  },
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "API or service",
+   "title": "Enforce at the write service",
+   "actions": [
+    "API",
+    "service",
+    "performs the write"
+   ],
+   "evidence": "checks at the API or service that performs the write"
+  }
+ ],
+ "punchline": [
+  "Block at the write point"
+ ]
+}

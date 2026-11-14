@@ -1,0 +1,48 @@
+{
+ "title": "Wie der Harness fortfaehrt",
+ "subtitle": "Nach einem fehlgeschlagenen Tool-Aufruf prueft der Harness das Ergebnis und kann innerhalb von Grenzen fortfahren.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "play",
+   "productLabel": "Copilot Studio",
+   "title": "Einen Schritt ausfuehren",
+   "actions": [
+    "fuehrt einen Schritt aus"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "search",
+   "productLabel": "Copilot Studio",
+   "title": "Ergebnis pruefen",
+   "actions": [
+    "prueft das Ergebnis"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Naechsten Schritt entscheiden",
+   "actions": [
+    "naechsten Schritt festlegen"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "check",
+   "productLabel": "Copilot Studio",
+   "title": "Innerhalb von Grenzen",
+   "actions": [
+    "Zeitgrenzen",
+    "Schrittgrenzen",
+    "Token-Grenzen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Fortsetzung braucht Pruefung",
+  "Kein Beleg fuer Abschluss"
+ ]
+}

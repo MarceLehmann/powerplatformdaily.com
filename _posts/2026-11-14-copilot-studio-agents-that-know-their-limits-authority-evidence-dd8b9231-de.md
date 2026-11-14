@@ -39,6 +39,12 @@ faq:
     tatsächlich getestet?
   answer: 'Zwei getrennte Routen: eine Foundry-Analyse nur beratend und ein deterministischer
     Ablauf mit fiktiven Testdaten; ein durchgehender Ausführungspfad wurde nicht verifiziert.'
+animation:
+  video: /assets/img/animations/dd8b92314f5be61382184acf-de.mp4
+  poster: /assets/img/animations/dd8b92314f5be61382184acf-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Drei Schritte zeigen das Design des Rueckerstattungsagenten: delegierte Befugnis festlegen, Evidenz zu PROCEED ASK oder REVIEW bewerten und dann die Pruefung im Dienst mit Schreibzugriff erzwingen."
 ---
 
 ## TL;DR

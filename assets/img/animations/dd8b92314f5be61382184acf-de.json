@@ -1,0 +1,41 @@
+{
+ "title": "Begrenzten Rueckerstattungsagenten",
+ "subtitle": "Befugnis festlegen, Evidenz pruefen und die Pruefung am Schreibpunkt erzwingen.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "shield",
+   "productLabel": "Copilot Studio",
+   "title": "Delegierte Befugnis festlegen",
+   "actions": [
+    "delegierte Grenze",
+    "100 Dollar pro Auftrag"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "search",
+   "productLabel": "Copilot Studio",
+   "title": "Evidenz beurteilen",
+   "actions": [
+    "PROCEED",
+    "ASK",
+    "REVIEW"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "check",
+   "productLabel": "API oder Dienst",
+   "title": "Im Schreibdienst erzwingen",
+   "actions": [
+    "API",
+    "Dienst",
+    "fuehrt Schreibzugriff aus"
+   ]
+  }
+ ],
+ "punchline": [
+  "Am Schreibpunkt blockieren"
+ ]
+}

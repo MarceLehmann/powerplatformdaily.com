@@ -42,6 +42,12 @@ faq:
   answer: Laut der zitierten Microsoft-Dokumentation unterstützt SharePoint bei Textfeldern
     StartsWith, SQL Server bei Text sowohl Search als auch StartsWith. Prüfen Sie
     die Delegationstabelle Ihres Connectors.
+animation:
+  video: /assets/img/animations/6e48733fee123fcfb684147a-de.mp4
+  poster: /assets/img/animations/6e48733fee123fcfb684147a-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Eine Abfolge mit vier Schritten zeigt, wie fehlende Power Apps Suchergebnisse diagnostiziert werden: Datensaetze vergleichen, durchsuchte Felder pruefen, Filterlogik testen und mit dem Konto des betroffenen Benutzers erneut testen."
 ---
 
 ## TL;DR

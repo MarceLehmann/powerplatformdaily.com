@@ -40,6 +40,12 @@ faq:
   answer: Microsoft guidance cited in the post lists StartsWith for SharePoint text
     fields and both Search and StartsWith for SQL Server text, so check the delegation
     table per connector.
+animation:
+  video: /assets/img/animations/6e48733fee123fcfb684147a-en.mp4
+  poster: /assets/img/animations/6e48733fee123fcfb684147a-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A four step sequence shows how to diagnose missing Power Apps search results by comparing records, checking searched fields, testing filter logic, and retesting as the affected user."
 ---
 
 ## TL;DR

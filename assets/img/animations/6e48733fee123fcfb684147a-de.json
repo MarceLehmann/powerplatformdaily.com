@@ -1,0 +1,48 @@
+{
+ "title": "Fehlende Suchtreffer pruefen",
+ "subtitle": "Einen fehlenden Datensatz ueber Felder, Filter und Benutzerzugriff verfolgen.",
+ "steps": [
+  {
+   "product": "powerapps",
+   "icon": "search",
+   "productLabel": "Power Apps",
+   "title": "Fehlenden und gefundenen Satz",
+   "actions": [
+    "fehlender Datensatz",
+    "gefundener Datensatz"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "file",
+   "productLabel": "Power Apps",
+   "title": "Durchsuchte Felder pruefen",
+   "actions": [
+    "Felder",
+    "Formelsuche"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "filter",
+   "productLabel": "Power Apps",
+   "title": "Filterlogik testen",
+   "actions": [
+    "Filterlogik"
+   ]
+  },
+  {
+   "product": "powerapps",
+   "icon": "user",
+   "productLabel": "Power Apps",
+   "title": "Mit Benutzerkonto erneut testen",
+   "actions": [
+    "Konto des Benutzers"
+   ]
+  }
+ ],
+ "punchline": [
+  "Finden, warum Saetze",
+  "uebersprungen werden"
+ ]
+}
