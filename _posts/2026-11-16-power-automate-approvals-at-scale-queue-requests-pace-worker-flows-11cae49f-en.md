@@ -45,6 +45,12 @@ faq:
   answer: A rerun can create a second approval or duplicate a transaction unless updates
     are idempotent; save the approval ID before moving the queue item to its next
     state.
+animation:
+  video: /assets/img/animations/11cae49fc69f8b441690d4dc-en.mp4
+  poster: /assets/img/animations/11cae49fc69f8b441690d4dc-en.poster.webp
+  width: 800
+  height: 450
+  alt: "Sequence shows approval requests buffered in Dataverse or SharePoint, worker flows claiming items with controlled concurrency, updates made idempotent with logged errors, and long running approvals split with Dataverse storage."
 ---
 
 ## TL;DR

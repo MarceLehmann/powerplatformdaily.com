@@ -1,0 +1,58 @@
+{
+ "title": "Scale approval flows safely",
+ "subtitle": "Buffer requests, pace workers, and keep retries and long runs safe.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Buffer requests in a durable queue",
+   "actions": [
+    "Dataverse",
+    "SharePoint list",
+    "durable queue"
+   ],
+   "evidence": "buffer approval requests in a durable Dataverse or SharePoint queue"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Let worker flows claim records",
+   "actions": [
+    "worker flows",
+    "claim records",
+    "controlled concurrency"
+   ],
+   "evidence": "let worker flows claim records at a controlled concurrency"
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Make updates safe for reruns",
+   "actions": [
+    "idempotent updates",
+    "logged errors",
+    "retries"
+   ],
+   "evidence": "Updates must be idempotent, retries need logged errors"
+  },
+  {
+   "product": "dataverse",
+   "icon": "arrow",
+   "productLabel": "Dataverse",
+   "title": "Split approvals over 30 days",
+   "actions": [
+    "Dataverse storage",
+    "separate flows",
+    "create the request"
+   ],
+   "evidence": "storing approval data in Dataverse and using separate flows to create the request and act on its response."
+  }
+ ],
+ "punchline": [
+  "Protect downstream systems",
+  "Safe retries and long runs"
+ ]
+}

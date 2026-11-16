@@ -1,0 +1,54 @@
+{
+ "title": "Genehmigungsflows sicher skalieren",
+ "subtitle": "Anfragen puffern, Worker dosieren und Wiederholungen sicher machen.",
+ "steps": [
+  {
+   "product": "dataverse",
+   "icon": "db",
+   "productLabel": "Dataverse",
+   "title": "Anfragen in Warteschlange puffern",
+   "actions": [
+    "Dataverse",
+    "SharePoint Liste",
+    "dauerhafte Warteschlange"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "bolt",
+   "productLabel": "Power Automate",
+   "title": "Worker Flows lassen Eintraege holen",
+   "actions": [
+    "Worker Flows",
+    "Eintraege holen",
+    "begrenzte Nebenlaeufigkeit"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "check",
+   "productLabel": "Power Automate",
+   "title": "Updates fuer Wiederholungen absichern",
+   "actions": [
+    "idempotente Updates",
+    "protokollierte Fehler",
+    "Wiederholungen"
+   ]
+  },
+  {
+   "product": "dataverse",
+   "icon": "arrow",
+   "productLabel": "Dataverse",
+   "title": "Genehmigungen ueber 30 Tage trennen",
+   "actions": [
+    "Dataverse Speicherung",
+    "separate Flows",
+    "Anfrage erstellen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Systeme schuetzen",
+  "Sichere Wiederholungen"
+ ]
+}

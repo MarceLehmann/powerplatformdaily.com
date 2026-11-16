@@ -46,6 +46,12 @@ faq:
   answer: Ohne idempotente Updates kann ein erneuter Lauf eine zweite Genehmigung
     erzeugen; speichern Sie die Genehmigungs ID, bevor der Warteschlangeneintrag in
     den nächsten Status wechselt.
+animation:
+  video: /assets/img/animations/11cae49fc69f8b441690d4dc-de.mp4
+  poster: /assets/img/animations/11cae49fc69f8b441690d4dc-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Die Abfolge zeigt Genehmigungsanfragen in Dataverse oder SharePoint als Puffer, Worker Flows mit begrenzter Nebenlaeufigkeit, idempotente Updates mit protokollierten Fehlern und ein geteiltes Muster mit Dataverse fuer lange Laufzeiten."
 ---
 
 ## TL;DR

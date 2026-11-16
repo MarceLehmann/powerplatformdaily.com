@@ -577,5 +577,16 @@
       "test filter logic",
       "then retest under the affected user's account"
     ]
+  },
+  "11cae49fc69f8b441690d4dc": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage pattern for handling approval requests at scale.",
+    "at": "2026-11-16",
+    "evidence": [
+      "buffer approval requests in a durable Dataverse or SharePoint queue",
+      "let worker flows claim records at a controlled concurrency",
+      "Updates must be idempotent, retries need logged errors",
+      "storing approval data in Dataverse and using separate flows to create the request and act on its response."
+    ]
   }
 }
