@@ -599,5 +599,10 @@
       "The demo also fetched workshop prerequisites from Dataverse during the call with a Power Automate agent flow.",
       "Contact Center runs the conversation through a Copilot Studio voice agent, a representative, or both."
     ]
+  },
+  "293e4cf82937bb6e84fcd6a2": {
+    "gif": false,
+    "reason": "This post is a preview announcement with feature and billing details, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-11-17"
   }
 }
