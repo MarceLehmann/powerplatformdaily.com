@@ -19,18 +19,11 @@ Der Blog wird nicht manuell gepflegt, sondern durch einen Power-Automate-Flow mi
 
 - Frontend: Jekyll + Chirpy
 - Quellen: Dataverse
-- Orchestrierung: Power Automate (`tools/automation.mjs`, `tools/intake.mjs`, Deploy via `tools/deploy-automation.ps1` / `tools/deploy-intake.ps1`)
+- Orchestrierung: Power Automate (`tools/automation.mjs`, `tools/intake.mjs`)
 - KI-Bewertung/Kurzfassung: Azure AI Foundry (Custom Connector)
 - GitHub-Publishing: `repository_dispatch` + `tools/publish-curation.rb`
 - Karten-Rendering: `tools/render_card.py`
 
-## Doku
-
-- Betrieb/Automation: [2026-09-30_architektur_automation_betrieb.md](2026-09-30_architektur_automation_betrieb.md)
-- Kuration und Quellen: [2026-09-30_architektur_kuration_und_quellen.md](2026-09-30_architektur_kuration_und_quellen.md)
-- RSS-Blog-Architektur: [2026-09-30_architektur_rss_blog.md](2026-09-30_architektur_rss_blog.md)
-- Einreichung und Moderation: [2026-09-30_architektur_submission_moderation.md](2026-09-30_architektur_submission_moderation.md)
-
 ## Status
 
-Repository-Struktur, Automation-Code und Website sind aufgebaut, analog zur bereits produktiven Schwesterseite Power Platform Governance. Die Dataverse-Solution, der Cloud Flow und die Website-Einreichung selbst sind noch nicht deployed/aktiviert - das ist eine spätere Phase (`tools/deploy-automation.ps1`, `tools/deploy-intake.ps1`, jeweils mit `-Enable`). `_posts/` ist bewusst leer.
+Repository-Struktur, Automation-Code und Website sind aufgebaut, analog zur Schwesterseite Power Platform Governance.
