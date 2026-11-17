@@ -1,0 +1,49 @@
+{
+ "title": "Ablauf fuer proaktive Sprachanrufe",
+ "subtitle": "Von der Journey-Ausloesung bis zu Kontext, Datenabruf und ausgehendem Sprachdialog.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "play",
+   "productLabel": "Customer Insights",
+   "title": "Journey bestimmt den Ausloeser",
+   "actions": [
+    "Customer Insights - Journeys"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "link",
+   "productLabel": "D365 Contact Center",
+   "title": "Journey-Attribute an Agent geben",
+   "actions": [
+    "Kontextvariablen",
+    "Journey-Attribute"
+   ]
+  },
+  {
+   "product": "powerautomate",
+   "icon": "db",
+   "productLabel": "Power Automate",
+   "title": "Workshop-Daten aus Dataverse holen",
+   "actions": [
+    "Agent Flow",
+    "Dataverse"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "phone",
+   "productLabel": "Copilot Studio",
+   "title": "Ausgehendes Gespraech fuehren",
+   "actions": [
+    "Preview-Modus",
+    "Copilot-Modus"
+   ]
+  }
+ ],
+ "punchline": [
+  "Proaktive Sprache oder SMS",
+  "Agent mit Live-Kontext"
+ ]
+}

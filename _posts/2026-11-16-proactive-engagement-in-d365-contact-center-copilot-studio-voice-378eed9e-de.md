@@ -45,6 +45,12 @@ faq:
   answer: Preview verbindet zuerst eine Person, die Details prüfen kann, bevor der
     Kunde angerufen wird. Copilot lässt einen Voice-Agenten das Gespräch führen, mit
     Grenzen für Gleichzeitigkeit und Fehlerquote.
+animation:
+  video: /assets/img/animations/378eed9ead759fdc6566a163-de.mp4
+  poster: /assets/img/animations/378eed9ead759fdc6566a163-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Eine Journey loest die Ansprache aus, Kontextvariablen geben Kundendaten an den Agenten weiter, ein Power Automate Agent Flow liest Daten aus Dataverse, und Contact Center fuehrt den Anruf mit einem Copilot Studio Voice-Agenten oder einer Person aus."
 ---
 
 ## TL;DR

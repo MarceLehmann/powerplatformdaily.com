@@ -588,5 +588,16 @@
       "Updates must be idempotent, retries need logged errors",
       "storing approval data in Dataverse and using separate flows to create the request and act on its response."
     ]
+  },
+  "378eed9ead759fdc6566a163": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage orchestration from journey trigger to context handoff, Dataverse lookup, and voice handling.",
+    "at": "2026-11-17",
+    "evidence": [
+      "Customer Insights - Journeys decides when outreach fires",
+      "Context variables on the outbound workstream carry journey attributes to the agent.",
+      "The demo also fetched workshop prerequisites from Dataverse during the call with a Power Automate agent flow.",
+      "Contact Center runs the conversation through a Copilot Studio voice agent, a representative, or both."
+    ]
   }
 }

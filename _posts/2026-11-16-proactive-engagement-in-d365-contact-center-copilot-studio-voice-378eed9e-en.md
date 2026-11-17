@@ -45,6 +45,12 @@ faq:
   answer: Preview mode connects a representative first to review details before the
     customer is called. Copilot mode lets a Copilot Studio voice agent run the conversation,
     with concurrency and failure-rate limits.
+animation:
+  video: /assets/img/animations/378eed9ead759fdc6566a163-en.mp4
+  poster: /assets/img/animations/378eed9ead759fdc6566a163-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A journey triggers proactive outreach, context variables pass customer data to the agent, a Power Automate flow reads workshop data from Dataverse, and Contact Center runs the call with a Copilot Studio voice agent or representative."
 ---
 
 ## TL;DR

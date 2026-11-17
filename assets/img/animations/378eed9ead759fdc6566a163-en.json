@@ -1,0 +1,53 @@
+{
+ "title": "Proactive voice journey flow",
+ "subtitle": "From journey trigger to agent context, data lookup, and outbound voice handling.",
+ "steps": [
+  {
+   "product": "generic",
+   "icon": "play",
+   "productLabel": "Customer Insights",
+   "title": "Journey decides when outreach fires",
+   "actions": [
+    "Customer Insights - Journeys"
+   ],
+   "evidence": "Customer Insights - Journeys decides when outreach fires"
+  },
+  {
+   "product": "generic",
+   "icon": "link",
+   "productLabel": "D365 Contact Center",
+   "title": "Pass journey attributes to agent",
+   "actions": [
+    "context variables",
+    "journey attributes"
+   ],
+   "evidence": "Context variables on the outbound workstream carry journey attributes to the agent."
+  },
+  {
+   "product": "powerautomate",
+   "icon": "db",
+   "productLabel": "Power Automate",
+   "title": "Fetch workshop data from Dataverse",
+   "actions": [
+    "agent flow",
+    "Dataverse"
+   ],
+   "evidence": "The demo also fetched workshop prerequisites from Dataverse during the call with a Power Automate agent flow."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "phone",
+   "productLabel": "Copilot Studio",
+   "title": "Run the outbound conversation",
+   "actions": [
+    "Preview mode",
+    "Copilot mode"
+   ],
+   "evidence": "Contact Center runs the conversation through a Copilot Studio voice agent, a representative, or both."
+  }
+ ],
+ "punchline": [
+  "Proactive voice or SMS",
+  "Agent with live context"
+ ]
+}
