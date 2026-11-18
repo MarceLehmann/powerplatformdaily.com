@@ -604,5 +604,15 @@
     "gif": false,
     "reason": "This post is a preview announcement with feature and billing details, not a concrete 3 to 5 stage procedure stated in order.",
     "at": "2026-11-17"
+  },
+  "cb450b98ae4ed80a914818e4": {
+    "gif": false,
+    "reason": "This post is a roadmap style summary of current and planned availability, not a concrete 3 to 5 stage procedure named in order.",
+    "at": "2026-11-18"
+  },
+  "e41325f9ecbfa9b242b3a44e": {
+    "gif": false,
+    "reason": "This is a troubleshooting checklist with more than five checks and not a single concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-11-18"
   }
 }
