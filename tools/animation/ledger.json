@@ -619,5 +619,20 @@
     "gif": false,
     "reason": "This post is a roadmap and availability update with feature and billing facts, not a concrete 3 to 5 stage procedure stated in order.",
     "at": "2026-11-20"
+  },
+  "315290aaa7016fc83527c5d5": {
+    "gif": false,
+    "reason": "This post is mainly a general availability announcement and feature summary, and the only build path mentioned is incomplete and not stated as a concrete 3 to 5 stage sequence.",
+    "at": "2026-11-20"
+  },
+  "9f853ae709f2be3d574cc2eb": {
+    "gif": false,
+    "reason": "The post is a checklist of validation areas, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-11-20"
+  },
+  "5363915ca6467e5505822bba": {
+    "gif": false,
+    "reason": "The post explains a cause and two alternative mitigations, not a single concrete 3 to 5 stage procedure.",
+    "at": "2026-11-20"
   }
 }
