@@ -16,6 +16,7 @@
       "@id": "https://powerplatformdaily.com/#organization",
       "name": "Power Platform Daily",
       "url": "https://powerplatformdaily.com/",
+      "logo": { "@type": "ImageObject", "url": "https://powerplatformdaily.com/assets/img/social-preview.jpg", "width": 1200, "height": 630 },
       "description": "A curated collection of Microsoft Power Platform product news: short, source-credited summaries of Copilot Studio, Power Apps, Power Automate, Power BI and Microsoft Fabric updates with a direct link to the original article.",
       "sameAs": [
         "https://kmupower.com",
@@ -136,7 +137,7 @@
   "inLanguage": {{ page.lang | jsonify }},
   "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }} },
   {% if page.image -%}
-  "image": { "@type": "ImageObject", "url": {{ page.image.path | jsonify }}, "caption": {{ page.image.alt | jsonify }} },
+  "image": { "@type": "ImageObject", "url": {{ page.image.path | absolute_url | jsonify }}, "caption": {{ page.image.alt | jsonify }} },
   {%- endif %}
   {% unless is_original %}{% if page.source_url %}"isBasedOn": {{ page.source_url | jsonify }},{% endif %}{% endunless %}
   "author": { "@id": "https://powerplatformdaily.com/{% if is_original %}about/#person{% else %}#organization{% endif %}" },
