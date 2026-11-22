@@ -16,6 +16,7 @@
       "@id": "https://powerplatformdaily.com/#organization",
       "name": "Power Platform Daily",
       "url": "https://powerplatformdaily.com/",
+      "logo": { "@type": "ImageObject", "url": "https://powerplatformdaily.com/assets/img/logo-512.png", "width": 512, "height": 512 },
       "description": "A curated collection of Microsoft Power Platform product news: short, source-credited summaries of Copilot Studio, Power Apps, Power Automate, Power BI and Microsoft Fabric updates with a direct link to the original article.",
       "sameAs": [
         "https://kmupower.com",
@@ -140,7 +141,7 @@
   {%- endif %}
   {% unless is_original %}{% if page.source_url %}"isBasedOn": {{ page.source_url | jsonify }},{% endif %}{% endunless %}
   "author": { "@id": "https://powerplatformdaily.com/{% if is_original %}about/#person{% else %}#organization{% endif %}" },
-  "publisher": { "@id": "https://powerplatformdaily.com/#organization" }
+  "publisher": { "@type": "Organization", "@id": "https://powerplatformdaily.com/#organization", "name": "Power Platform Daily", "logo": { "@type": "ImageObject", "url": "https://powerplatformdaily.com/assets/img/logo-512.png", "width": 512, "height": 512 } }
 }
 </script>
 {%- endif -%}
@@ -160,7 +161,7 @@
   "url": {{ page.url | absolute_url | jsonify }},
   "inLanguage": {{ page.lang | default: site.lang | jsonify }},
   "isPartOf": { "@type": "WebSite", "name": {{ site.title | jsonify }}, "url": "https://powerplatformdaily.com/" },
-  "publisher": { "@id": "https://powerplatformdaily.com/#organization" }
+  "publisher": { "@type": "Organization", "@id": "https://powerplatformdaily.com/#organization", "name": "Power Platform Daily", "logo": { "@type": "ImageObject", "url": "https://powerplatformdaily.com/assets/img/logo-512.png", "width": 512, "height": 512 } }
 }
 </script>
 {%- endunless -%}
