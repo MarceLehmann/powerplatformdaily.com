@@ -639,5 +639,36 @@
     "gif": false,
     "reason": "This post is a general availability announcement with feature context and checks, but it does not state a concrete 3 to 5 stage procedure.",
     "at": "2026-11-21"
+  },
+  "87614a4efcad2899778f9eba": {
+    "gif": false,
+    "reason": "The post is a recap and explanation of concepts, capacity basics and fit criteria, not a concrete 3 to 5 stage procedure named in the text.",
+    "at": "2026-11-23"
+  },
+  "fe636a85243da65f2bf0bf14": {
+    "gif": false,
+    "reason": "This is a news and guidance summary about results, availability and best practices, not a concrete 3 to 5 stage procedure stated in order.",
+    "at": "2026-11-23"
+  },
+  "7a923c3eacc1c0d172d719c1": {
+    "gif": true,
+    "reason": "The post states a concrete 3 stage connection flow from building a Fabric data agent to publishing it and using it in Copilot Studio.",
+    "at": "2026-11-23",
+    "evidence": [
+      "Build a first Fabric data agent on a real dataset in a dev workspace",
+      "Publish it and it becomes an MCP server exposing a single tool",
+      "it was connected in Copilot Studio, where the data was simply available."
+    ]
+  },
+  "e4cc917964a691a5f9098845": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage nightly flow: read entitlement, read thresholds, store rows, then show usage against the cap.",
+    "at": "2026-11-23",
+    "evidence": [
+      "A nightly Power Automate flow reads each environment's MCSMessages entitlement",
+      "reads each environment's MCSMessages entitlement",
+      "Get All Resource Thresholds, the same data the admin center's Manage Agents page uses",
+      "stores rows in a SharePoint list and shows makers their environment's credits against its cap"
+    ]
   }
 }

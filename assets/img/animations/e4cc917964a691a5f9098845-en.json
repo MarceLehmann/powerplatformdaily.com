@@ -1,0 +1,52 @@
+{
+ "title": "Show environment credit usage",
+ "subtitle": "Nightly flow collects environment data and shows usage against the cap.",
+ "steps": [
+  {
+   "product": "powerautomate",
+   "icon": "calendar",
+   "productLabel": "Power Automate",
+   "title": "Run a nightly flow",
+   "actions": [
+    "nightly Power Automate flow"
+   ],
+   "evidence": "A nightly Power Automate flow reads each environment's MCSMessages entitlement"
+  },
+  {
+   "product": "generic",
+   "icon": "key",
+   "productLabel": "Licensing API",
+   "title": "Read MCSMessages entitlement",
+   "actions": [
+    "licensing API",
+    "MCSMessages entitlement"
+   ],
+   "evidence": "reads each environment's MCSMessages entitlement"
+  },
+  {
+   "product": "admin",
+   "icon": "table",
+   "productLabel": "Admin Center",
+   "title": "Get resource thresholds",
+   "actions": [
+    "Get All Resource Thresholds",
+    "Manage Agents page"
+   ],
+   "evidence": "Get All Resource Thresholds, the same data the admin center's Manage Agents page uses"
+  },
+  {
+   "product": "sharepoint",
+   "icon": "db",
+   "productLabel": "SharePoint",
+   "title": "Store and show usage vs cap",
+   "actions": [
+    "SharePoint list",
+    "shows makers"
+   ],
+   "evidence": "stores rows in a SharePoint list and shows makers their environment's credits against its cap"
+  }
+ ],
+ "punchline": [
+  "Usage vs environment cap"
+ ]
+}

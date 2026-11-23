@@ -1,0 +1,42 @@
+{
+ "title": "Fabric Agent mit Copilot Studio verbinden",
+ "subtitle": "Einen Fabric Data Agent bauen, veroeffentlichen und dann sein MCP-Tool in Copilot Studio nutzen.",
+ "steps": [
+  {
+   "product": "fabric",
+   "icon": "db",
+   "productLabel": "Fabric",
+   "title": "Ersten Fabric Data Agent bauen",
+   "actions": [
+    "Fabric data agent",
+    "echtes Dataset",
+    "Dev-Workspace"
+   ]
+  },
+  {
+   "product": "fabric",
+   "icon": "cloud",
+   "productLabel": "Fabric",
+   "title": "Als MCP-Server veroeffentlichen",
+   "actions": [
+    "Veroeffentlichen",
+    "MCP-Server",
+    "einzelnes Tool"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "In Copilot Studio verbinden",
+   "actions": [
+    "Copilot Studio",
+    "Daten als Tool",
+    "MCP-Integration testen"
+   ]
+  }
+ ],
+ "punchline": [
+  "Daten erscheinen als Tool"
+ ]
+}

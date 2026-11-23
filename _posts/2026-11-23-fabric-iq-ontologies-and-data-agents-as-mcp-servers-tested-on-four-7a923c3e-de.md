@@ -41,6 +41,12 @@ faq:
 - question: Ist Fabric IQ bereit für den Produktiveinsatz?
   answer: Nein, laut Quelle vom 18.10.2026 ist Fabric IQ weiterhin in der Vorschau;
     die Referentin empfahl Erkunden und Beobachten statt produktivem Einsatz.
+animation:
+  video: /assets/img/animations/7a923c3eacc1c0d172d719c1-de.mp4
+  poster: /assets/img/animations/7a923c3eacc1c0d172d719c1-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Drei Schritte zeigen einen Fabric Data Agent auf einem echten Dataset, dann die Veroeffentlichung als MCP-Server mit einem Tool und danach die Verbindung in Copilot Studio, wo die Daten als Tool erscheinen."
 ---
 
 ## TL;DR

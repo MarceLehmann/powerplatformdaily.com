@@ -40,6 +40,12 @@ faq:
 - question: Is Fabric IQ production ready yet?
   answer: 'Not in the speaker''s view: as of the 2026-10-18 source it is still in
     preview, so her advice was to discover it and keep watching.'
+animation:
+  video: /assets/img/animations/7a923c3eacc1c0d172d719c1-en.mp4
+  poster: /assets/img/animations/7a923c3eacc1c0d172d719c1-en.poster.webp
+  width: 800
+  height: 450
+  alt: "Three steps show a Fabric data agent built on a real dataset, published as an MCP server with one tool, then connected in Copilot Studio where the data appears as a tool."
 ---
 
 ## TL;DR

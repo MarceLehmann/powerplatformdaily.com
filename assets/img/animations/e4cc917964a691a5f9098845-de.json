@@ -1,0 +1,48 @@
+{
+ "title": "Umgebungs-Creditnutzung zeigen",
+ "subtitle": "Naechtlicher Flow sammelt Umgebungsdaten und zeigt Verbrauch gegen das Limit.",
+ "steps": [
+  {
+   "product": "powerautomate",
+   "icon": "calendar",
+   "productLabel": "Power Automate",
+   "title": "Naechtlichen Flow ausfuehren",
+   "actions": [
+    "naechtlicher Flow"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "key",
+   "productLabel": "Licensing API",
+   "title": "MCSMessages-Berechtigung lesen",
+   "actions": [
+    "Licensing API",
+    "MCSMessages-Berechtigung"
+   ]
+  },
+  {
+   "product": "admin",
+   "icon": "table",
+   "productLabel": "Admin Center",
+   "title": "Resource Thresholds abrufen",
+   "actions": [
+    "\"Get All Resource Thresholds\"",
+    "Seite \"Manage Agents\""
+   ]
+  },
+  {
+   "product": "sharepoint",
+   "icon": "db",
+   "productLabel": "SharePoint",
+   "title": "Speichern und gegen Limit zeigen",
+   "actions": [
+    "SharePoint-Liste",
+    "zeigt Makern"
+   ]
+  }
+ ],
+ "punchline": [
+  "Verbrauch vs Umgebungsgrenze"
+ ]
+}

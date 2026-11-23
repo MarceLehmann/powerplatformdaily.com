@@ -44,6 +44,12 @@ faq:
 - question: Does pay-as-you-go billing work for developer environments in Power Platform?
   answer: According to the source, pay-as-you-go works only for production and sandbox
     environments, not developer ones.
+animation:
+  video: /assets/img/animations/e4cc917964a691a5f9098845-en.mp4
+  poster: /assets/img/animations/e4cc917964a691a5f9098845-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A nightly Power Automate flow reads each environment's MCSMessages entitlement and resource thresholds, stores rows in a SharePoint list, and shows makers credit usage against the environment cap."
 ---
 
 ## TL;DR

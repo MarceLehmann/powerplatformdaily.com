@@ -44,6 +44,12 @@ faq:
 - question: Gilt Power Platform Pay-as-you-go auch für Developer-Umgebungen?
   answer: Laut Quelle funktioniert Pay-as-you-go nur in Produktions- und Sandbox-Umgebungen,
     Developer-Umgebungen sind von dieser Abrechnung ausgeschlossen.
+animation:
+  video: /assets/img/animations/e4cc917964a691a5f9098845-de.mp4
+  poster: /assets/img/animations/e4cc917964a691a5f9098845-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Ein naechtlicher Power Automate Flow liest pro Umgebung die MCSMessages-Berechtigung und Resource Thresholds, speichert Zeilen in einer SharePoint-Liste und zeigt Makern den Verbrauch gegen das Umgebungslimit."
 ---
 
 ## TL;DR
