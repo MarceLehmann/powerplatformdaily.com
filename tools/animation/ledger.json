@@ -681,5 +681,15 @@
       "It can separate the requests into different topic paths in classic orchestration or plan across multiple capabilities in generative orchestration.",
       "The backend checks order existence, ownership and eligibility before any change."
     ]
+  },
+  "45ec2c637722c470aa0a45ee": {
+    "gif": false,
+    "reason": "This is a preview announcement with features and guidance, not a concrete 3 to 5 stage procedure stated in the post text.",
+    "at": "2026-11-24"
+  },
+  "55eed672bf19fcf45323cf58": {
+    "gif": false,
+    "reason": "This is a naming and licensing clarification post, not a concrete 3 to 5 stage procedure described in order.",
+    "at": "2026-11-24"
   }
 }
