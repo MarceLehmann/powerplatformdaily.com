@@ -670,5 +670,16 @@
       "Get All Resource Thresholds, the same data the admin center's Manage Agents page uses",
       "stores rows in a SharePoint list and shows makers their environment's credits against its cap"
     ]
+  },
+  "ebab1aa720abab251316a818": {
+    "gif": true,
+    "reason": "The post describes a concrete 4 stage flow: split requests into focused topics, pass inputs, route by orchestration, and keep validation in the backend.",
+    "at": "2026-11-24",
+    "evidence": [
+      "split order status, address updates and refund policy into focused topics",
+      "The example passes OrderId into status lookup, and OrderId plus NewDeliveryAddress and CustomerVerified into address update.",
+      "It can separate the requests into different topic paths in classic orchestration or plan across multiple capabilities in generative orchestration.",
+      "The backend checks order existence, ownership and eligibility before any change."
+    ]
   }
 }

@@ -41,6 +41,12 @@ faq:
   answer: Das Backend prüft zuerst Existenz, Besitz und Berechtigung des Auftrags,
     bevor etwas geändert wird. So bleiben Geschäftsregeln wiederverwendbar und doppelte
     Logik in Themen wird vermieden.
+animation:
+  video: /assets/img/animations/ebab1aa720abab251316a818-de.mp4
+  poster: /assets/img/animations/ebab1aa720abab251316a818-de.poster.webp
+  width: 800
+  height: 450
+  alt: "Ein Ablauf mit vier Schritten zeigt eine Nachricht, die in fokussierte Topics aufgeteilt wird, Inputs an Faehigkeiten uebergibt, per Orchestrierung weiterleitet und im Backend validiert."
 ---
 
 ## TL;DR

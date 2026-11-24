@@ -42,6 +42,12 @@ faq:
   answer: The backend checks order existence, ownership and eligibility before any
     change. That keeps business rules reusable and avoids duplicating logic across
     topics.
+animation:
+  video: /assets/img/animations/ebab1aa720abab251316a818-en.mp4
+  poster: /assets/img/animations/ebab1aa720abab251316a818-en.poster.webp
+  width: 800
+  height: 450
+  alt: "A four step flow shows one message split into focused topics, inputs passed to each capability, orchestration choosing paths, and backend validation handling business rules."
 ---
 
 ## TL;DR

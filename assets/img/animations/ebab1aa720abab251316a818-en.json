@@ -1,0 +1,55 @@
+{
+ "title": "Route multi question chats",
+ "subtitle": "Split one message into topics, pass inputs, orchestrate, and validate changes in the backend.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Split one message into topics",
+   "actions": [
+    "focused topics"
+   ],
+   "evidence": "split order status, address updates and refund policy into focused topics"
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Define inputs and outputs",
+   "actions": [
+    "OrderId",
+    "NewDeliveryAddress",
+    "CustomerVerified"
+   ],
+   "evidence": "The example passes OrderId into status lookup, and OrderId plus NewDeliveryAddress and CustomerVerified into address update."
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Route with orchestration",
+   "actions": [
+    "classic orchestration",
+    "generative orchestration"
+   ],
+   "evidence": "It can separate the requests into different topic paths in classic orchestration or plan across multiple capabilities in generative orchestration."
+  },
+  {
+   "product": "generic",
+   "icon": "shield",
+   "productLabel": "Backend",
+   "title": "Validate business rules outside",
+   "actions": [
+    "order existence",
+    "ownership",
+    "eligibility"
+   ],
+   "evidence": "The backend checks order existence, ownership and eligibility before any change."
+  }
+ ],
+ "punchline": [
+  "Predictable topic routing",
+  "Business rules stay reusable"
+ ]
+}

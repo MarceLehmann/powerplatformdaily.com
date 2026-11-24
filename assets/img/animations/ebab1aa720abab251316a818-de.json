@@ -1,0 +1,51 @@
+{
+ "title": "Chats mit mehreren Fragen routen",
+ "subtitle": "Eine Nachricht in Topics aufteilen, Inputs uebergeben, orchestrieren und Aenderungen im Backend pruefen.",
+ "steps": [
+  {
+   "product": "copilotstudio",
+   "icon": "chat",
+   "productLabel": "Copilot Studio",
+   "title": "Eine Nachricht in Topics aufteilen",
+   "actions": [
+    "fokussierte Topics"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "arrow",
+   "productLabel": "Copilot Studio",
+   "title": "Inputs und Outputs definieren",
+   "actions": [
+    "OrderId",
+    "NewDeliveryAddress",
+    "CustomerVerified"
+   ]
+  },
+  {
+   "product": "copilotstudio",
+   "icon": "link",
+   "productLabel": "Copilot Studio",
+   "title": "Mit Orchestrierung weiterleiten",
+   "actions": [
+    "klassische Orchestrierung",
+    "generative Orchestrierung"
+   ]
+  },
+  {
+   "product": "generic",
+   "icon": "shield",
+   "productLabel": "Backend",
+   "title": "Geschaeftsregeln extern pruefen",
+   "actions": [
+    "Auftrag existiert",
+    "Besitz",
+    "Berechtigung"
+   ]
+  }
+ ],
+ "punchline": [
+  "Vorhersehbares Topic Routing",
+  "Regeln bleiben nutzbar"
+ ]
+}
